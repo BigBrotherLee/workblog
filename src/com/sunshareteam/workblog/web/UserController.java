@@ -1,6 +1,8 @@
 package com.sunshareteam.workblog.web;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +35,9 @@ public class UserController {
 			throw new LeeException("获取验证码出错");
 		}
 		VerifyCode code=new VerifyCode();
-		session.setAttribute("validateCode", verify);
+		code.setCode(verify.toString());
+		code.setExdate(15*60);
+		session.setAttribute("validateCode", code);
 	}
 	
 	@GetMapping("/getemailcode")
@@ -54,7 +59,20 @@ public class UserController {
 	@GetMapping("/validate/{code}")
 	public ResponseResult<String> validate(@PathVariable String code,HttpSession session){
 		ResponseResult<String> result=new ResponseResult<String>();
-		
+		VerifyCode realcode=(VerifyCode) session.getAttribute("validateCode");
+		if(realcode==null) {
+			throw new LeeException("验证码不存在");
+		}
+		boolean isPast=LocalDateTime.now().isAfter(realcode.getExdate());
+		if(isPast) {
+			session.removeAttribute("validateCode");
+			throw new LeeException("验证码过期");
+		}
+		boolean notEquel=ObjectUtils.nullSafeEquals(realcode.getCode(), code);
+		if(notEquel) {
+			session.removeAttribute("validateCode");
+			throw new LeeException("");
+		}
 		
 		return result;
 	}
