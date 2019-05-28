@@ -15,7 +15,7 @@ public class Article {
     private Integer categoty;
     private String title;
     private String summary;
-    private Blob state;
+	private Boolean state;
 	      public Integer getArticleid() {
 		return articleid;
 	}
@@ -82,13 +82,14 @@ public class Article {
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
-	public Blob getState() {
+    public Boolean getState() {
 		return state;
 	}
-	public void setState(Blob state) {
+	public void setState(Boolean state) {
 		this.state = state;
 	}
-		@Override
+
+	@Override
 	public String toString() {
 		return "Article [articleid=" + articleid + ", createdate=" + createdate + ", modifydate=" + modifydate
 				+ ", modifyuser=" + modifyuser + ", img=" + img + ", content=" + content + ", author=" + author

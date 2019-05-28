@@ -14,7 +14,7 @@ public class User {
     private String email;
     private String pic;
     private String autograph;
-    private Blob deleted;
+	private Boolean deleted;
     private String salt;
     
       public Integer getUserid() {
@@ -71,12 +71,6 @@ public class User {
 	public void setAutograph(String autograph) {
 		this.autograph = autograph;
 	}
-	public Blob getDeleted() {
-		return deleted;
-	}
-	public void setDeleted(Blob deleted) {
-		this.deleted = deleted;
-	}
     public String getPassword() {
 		return password;
 	}
@@ -88,6 +82,12 @@ public class User {
 	}
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+    public Boolean getDeleted() {
+		return deleted;
+	}
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
 	}
 	@Override
 	public String toString() {
