@@ -17,6 +17,7 @@ public interface UserMapper {
 	public List<promission> findPromission(String adminid);
 	
 	
+	
 	@Select("select r.*  from role r ,admin_role ar, admin a  where ar.role=r.id and ar.userid=a.id and a.usercode=#{adminid}")
 	public List<role> findRole(String adminid);
 	
