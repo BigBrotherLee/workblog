@@ -1,15 +1,10 @@
 package com.sunshareteam.workblog.entity;
 
 public class RolePermission {
-    private Integer rolepermissionid;
+    private Integer role_permission_id;
 	private Integer permissionid;
 	private Integer roleid;
-	public Integer getRolepermissionid() {
-		return rolepermissionid;
-	}
-	public void setRolepermissionid(Integer rolepermissionid) {
-		this.rolepermissionid = rolepermissionid;
-	}
+
 	public Integer getPermissionid() {
 		return permissionid;
 	}
@@ -22,9 +17,15 @@ public class RolePermission {
 	public void setRoleid(Integer roleid) {
 		this.roleid = roleid;
 	}
-	@Override
-	public String toString() {
-		return "RolePermission [rolepermissionid=" + rolepermissionid + ", permissionid=" + permissionid + ", roleid="
-				+ roleid + "]";
-	}
+	   public Integer getRole_permission_id() {
+			return role_permission_id;
+		}
+		public void setRole_permission_id(Integer role_permission_id) {
+			this.role_permission_id = role_permission_id;
+		}
+		@Override
+		public String toString() {
+			return "RolePermission [role_permission_id=" + role_permission_id + ", permissionid=" + permissionid
+					+ ", roleid=" + roleid + "]";
+		}
 }

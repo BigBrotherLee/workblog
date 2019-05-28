@@ -1,14 +1,14 @@
 package com.sunshareteam.workblog.entity;
 
 public class ArticleTag {
-	private Integer articletagid;
+	private Integer article_tag_id;
 	private Integer articleid;
 	private Integer tagid;
-	public Integer getArticletagid() {
-		return articletagid;
+	public Integer getArticle_tag_id() {
+		return article_tag_id;
 	}
-	public void setArticletagid(Integer articletagid) {
-		this.articletagid = articletagid;
+	public void setArticle_tag_id(Integer article_tag_id) {
+		this.article_tag_id = article_tag_id;
 	}
 	public Integer getArticleid() {
 		return articleid;
@@ -24,6 +24,6 @@ public class ArticleTag {
 	}
 	@Override
 	public String toString() {
-		return "ArticleTag [articletagid=" + articletagid + ", articleid=" + articleid + ", tagid=" + tagid + "]";
+		return "ArticleTag [article_tag_id=" + article_tag_id + ", articleid=" + articleid + ", tagid=" + tagid + "]";
 	}
 }

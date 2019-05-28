@@ -3,32 +3,33 @@ package com.sunshareteam.workblog.entity;
 import java.util.Date;
 
 public class Permission {
-	private Integer Permissionid;
-    private String Permissionname;
-    private String Permissiondetail;
+
+	private Integer permissionid;
+	private String permissionname;
+    private String permissiondetail;
     private Date createdate;
     private Date modifydate;
     private Integer modifyuser;
     private String Permissioncode;
     private String resource;
     private String menu;
-	 public Integer getPermissionid() {
-		return Permissionid;
+	public Integer getPermissionid() {
+		return permissionid;
 	}
 	public void setPermissionid(Integer permissionid) {
-		Permissionid = permissionid;
+		this.permissionid = permissionid;
 	}
 	public String getPermissionname() {
-		return Permissionname;
+		return permissionname;
 	}
 	public void setPermissionname(String permissionname) {
-		Permissionname = permissionname;
+		this.permissionname = permissionname;
 	}
 	public String getPermissiondetail() {
-		return Permissiondetail;
+		return permissiondetail;
 	}
 	public void setPermissiondetail(String permissiondetail) {
-		Permissiondetail = permissiondetail;
+		this.permissiondetail = permissiondetail;
 	}
 	public Date getCreatedate() {
 		return createdate;
@@ -66,10 +67,11 @@ public class Permission {
 	public void setMenu(String menu) {
 		this.menu = menu;
 	}
-	@Override
+    @Override
 	public String toString() {
-		return "Permission [Permissionid=" + Permissionid + ", Permissionname=" + Permissionname + ", Permissiondetail="
-				+ Permissiondetail + ", createdate=" + createdate + ", modifydate=" + modifydate + ", modifyuser="
+		return "Permission [permissionid=" + permissionid + ", permissionname=" + permissionname + ", permissiondetail="
+				+ permissiondetail + ", createdate=" + createdate + ", modifydate=" + modifydate + ", modifyuser="
 				+ modifyuser + ", Permissioncode=" + Permissioncode + ", resource=" + resource + ", menu=" + menu + "]";
 	}
+
 }

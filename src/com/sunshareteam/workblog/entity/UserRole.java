@@ -1,15 +1,10 @@
 package com.sunshareteam.workblog.entity;
 
 public class UserRole {
-	private Integer userroleid;
+	private Integer user_role_id;
 	private Integer roleid;
 	private Integer userid;
-	public Integer getUserroleid() {
-		return userroleid;
-	}
-	public void setUserroleid(Integer userroleid) {
-		this.userroleid = userroleid;
-	}
+	
 	public Integer getRoleid() {
 		return roleid;
 	}
@@ -22,8 +17,14 @@ public class UserRole {
 	public void setUserid(Integer userid) {
 		this.userid = userid;
 	}
+	public Integer getUser_role_id() {
+		return user_role_id;
+	}
+	public void setUser_role_id(Integer user_role_id) {
+		this.user_role_id = user_role_id;
+	}
 	@Override
 	public String toString() {
-		return "UserRole [userroleid=" + userroleid + ", roleid=" + roleid + ", userid=" + userid + "]";
+		return "UserRole [user_role_id=" + user_role_id + ", roleid=" + roleid + ", userid=" + userid + "]";
 	}
 }
