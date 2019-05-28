@@ -1,4 +1,4 @@
-package com.bigbrotherlee.example.service;
+package com.sunshareteam.workblog.service;
 
 import java.io.InputStream;
 import java.util.List;
@@ -10,19 +10,20 @@ import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.bigbrotherlee.example.dao.ExampleMapper;
-import com.bigbrotherlee.example.entity.admin;
-import com.bigbrotherlee.example.entity.promission;
-import com.bigbrotherlee.example.entity.role;
-import com.bigbrotherlee.example.manager.ExampleManager;
 
-@Service("exampleService")
-public class ExampleServiceImpl implements ExampleService {
+import com.sunshareteam.workblog.dao.UserMapper;
+import com.sunshareteam.workblog.entity.admin;
+import com.sunshareteam.workblog.entity.promission;
+import com.sunshareteam.workblog.entity.role;
+import com.sunshareteam.workblog.manager.ProcessManager;
+
+@Service("userService")
+public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	private ExampleMapper  exampleMapper;
+	private UserMapper  exampleMapper;
 	@Autowired
-	private ExampleManager exampleManager;
+	private ProcessManager exampleManager;
 	
 	@Override
 	public admin getAdmin(String name) {

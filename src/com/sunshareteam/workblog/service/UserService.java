@@ -1,4 +1,4 @@
-package com.bigbrotherlee.example.service;
+package com.sunshareteam.workblog.service;
 
 import java.io.InputStream;
 import java.util.List;
@@ -12,11 +12,11 @@ import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Task;
 
-import com.bigbrotherlee.example.entity.admin;
-import com.bigbrotherlee.example.entity.promission;
-import com.bigbrotherlee.example.entity.role;
+import com.sunshareteam.workblog.entity.admin;
+import com.sunshareteam.workblog.entity.promission;
+import com.sunshareteam.workblog.entity.role;
 
-public interface ExampleService {
+public interface UserService {
 	admin getAdmin(String name);
 	List<role> getRole(String name);
 	List<promission> getPromission(String name);

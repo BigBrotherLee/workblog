@@ -1,12 +1,13 @@
-package com.bigbrotherlee.example.dao;
+package com.sunshareteam.workblog.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Select;
-import com.bigbrotherlee.example.entity.admin;
-import com.bigbrotherlee.example.entity.promission;
-import com.bigbrotherlee.example.entity.role;
 
-public interface ExampleMapper {
+import com.sunshareteam.workblog.entity.admin;
+import com.sunshareteam.workblog.entity.promission;
+import com.sunshareteam.workblog.entity.role;
+
+public interface UserMapper {
 	
 	@Select("select * from admin where usercode=#{adminid}")
 	public admin findAdmin(String adminid);

@@ -1,4 +1,4 @@
-package com.bigbrotherlee.example.manager;
+package com.sunshareteam.workblog.manager;
 
 import java.io.InputStream;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ExampleManager {
+public class ProcessManager {
 	@Autowired
 	private RepositoryService repositoryService;
 	@Autowired
