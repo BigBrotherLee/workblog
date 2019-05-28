@@ -3,8 +3,6 @@ package com.sunshareteam.workblog.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import org.activiti.engine.impl.persistence.entity.DeploymentEntity;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 
