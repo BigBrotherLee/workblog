@@ -16,7 +16,7 @@ import com.sunshareteam.workblog.entity.admin;
 import com.sunshareteam.workblog.entity.promission;
 import com.sunshareteam.workblog.entity.role;
 
-public interface ExampleService {
+public interface UserService {
 	admin getAdmin(String name);
 	List<role> getRole(String name);
 	List<promission> getPromission(String name);

@@ -1,5 +1,5 @@
 package com.sunshareteam.workblog.utils;
 
-public class ExampleUtils {
+public class WorkBlogUtils {
 
 }

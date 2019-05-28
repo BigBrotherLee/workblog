@@ -7,7 +7,7 @@ import com.sunshareteam.workblog.entity.admin;
 import com.sunshareteam.workblog.entity.promission;
 import com.sunshareteam.workblog.entity.role;
 
-public interface ExampleMapper {
+public interface UserMapper {
 	
 	@Select("select * from admin where usercode=#{adminid}")
 	public admin findAdmin(String adminid);

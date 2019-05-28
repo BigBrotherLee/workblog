@@ -11,19 +11,19 @@ import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sunshareteam.workblog.dao.ExampleMapper;
+import com.sunshareteam.workblog.dao.UserMapper;
 import com.sunshareteam.workblog.entity.admin;
 import com.sunshareteam.workblog.entity.promission;
 import com.sunshareteam.workblog.entity.role;
-import com.sunshareteam.workblog.manager.ExampleManager;
+import com.sunshareteam.workblog.manager.ProcessManager;
 
-@Service("exampleService")
-public class ExampleServiceImpl implements ExampleService {
+@Service("userService")
+public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	private ExampleMapper  exampleMapper;
+	private UserMapper  exampleMapper;
 	@Autowired
-	private ExampleManager exampleManager;
+	private ProcessManager exampleManager;
 	
 	@Override
 	public admin getAdmin(String name) {

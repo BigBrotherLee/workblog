@@ -32,13 +32,13 @@ import com.bigbrotherlee.utils.LeeException;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.bigbrotherlee.utils.VerificationCode;
 import com.sunshareteam.workblog.entity.ProcessDTO;
-import com.sunshareteam.workblog.service.ExampleService;
+import com.sunshareteam.workblog.service.UserService;
 
 @RestController
-public class ExampleController {
+public class UserController {
 	
 	@Autowired
-	private ExampleService exampleService;
+	private UserService userService;
 	
 	@GetMapping("/validate")
 	public void validate(HttpSession session,HttpServletResponse response) {
@@ -54,14 +54,14 @@ public class ExampleController {
 	@RequiresRoles({"组长","经理"})
 	@PostMapping("/uploadprocess")
 	public void uploadProcess(String name,MultipartFile file) throws Exception {
-		exampleService.deploy(name,file.getInputStream());
+		userService.deploy(name,file.getInputStream());
 	}
 	
 	@RequiresPermissions("process:query:*")
 	@GetMapping("/querydeploy")
 	public ResponseResult<ProcessDTO> queryDeploy(String key) {
 		ProcessDTO dto=new ProcessDTO();
-		List<ProcessDefinition> definitions=exampleService.queryProcessDefinition();
+		List<ProcessDefinition> definitions=userService.queryProcessDefinition();
 		dto.setProcessDefinitions(null);
 		ResponseResult<ProcessDTO> result=new ResponseResult<>();
 		result.setData(dto);
@@ -76,7 +76,7 @@ public class ExampleController {
 		ResponseResult<String> result=new ResponseResult<String>();
 		Map<String,Object> variables=new HashMap<>();
 		variables.put("inputuser", user);
-		exampleService.startProcess(process, variables);
+		userService.startProcess(process, variables);
 		result.setData("启动成功");
 		return result;
 	}
@@ -87,7 +87,7 @@ public class ExampleController {
 		ResponseResult<List<Task>> result=new ResponseResult<>();
 		result.setMessage("SUCCESS");
 		result.setState(LeeConstant.STATE_SUCCESS);
-		List<Task> tasks=exampleService.queryTask(assignee);
+		List<Task> tasks=userService.queryTask(assignee);
 		System.out.println(tasks.get(0).getId()+"---------------------queryProcess------------------"+tasks.get(0).getAssignee());
 		result.setData(tasks);
 		return result;
@@ -101,7 +101,7 @@ public class ExampleController {
 		result.setMessage("SUCCESS");
 		Map<String,Object> variables=new HashMap<>();
 		variables.put(key, value);
-		exampleService.complete(id, variables);
+		userService.complete(id, variables);
 		return result;
 	}
 	
@@ -113,7 +113,7 @@ public class ExampleController {
 		result.setMessage("SUCCESS");
 		Map<String,Object> variables=new HashMap<>();
 		variables.put(key, value);
-		exampleService.complete(id, variables);
+		userService.complete(id, variables);
 		return result;
 	}
 	

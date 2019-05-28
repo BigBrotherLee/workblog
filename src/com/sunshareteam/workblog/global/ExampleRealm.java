@@ -16,13 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.sunshareteam.workblog.entity.admin;
 import com.sunshareteam.workblog.entity.promission;
 import com.sunshareteam.workblog.entity.role;
-import com.sunshareteam.workblog.service.ExampleService;
+import com.sunshareteam.workblog.service.UserService;
 
 
 public class ExampleRealm extends  AuthorizingRealm{
 	
 	@Autowired
-	private ExampleService exampleService;
+	private UserService exampleService;
 	
 	/* 
 	 * 授权
