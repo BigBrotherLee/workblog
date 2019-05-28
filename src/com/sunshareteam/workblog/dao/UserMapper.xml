@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunshareteam.workblog.dao.UserMapper">
-	<select id="findUserById" resultType="">
+	
+	<select id="findUserById" resultType="com.sunshareteam.workblog.entity.User">
 		select userid,username,password,phone,email,pic,autograph from tb_user where userid=#{userid}
 	</select>
-	<select id="findRoleByUserId" resultType="">
+	
+	<select id="findRoleByUserId" resultType="com.sunshareteam.workblog.entity.Role">
 		select r.*  from tb_role r ,tb_user_role ur, user u  where ur.roleid=r.roleid and ur.userid=u.userid and u.userid=#{userid}
 	</select>
-	<select id="findPromissionByUserId" resultType="">
+	
+	<select id="findPromissionByUserId" resultType="com.sunshareteam.workblog.entity.Permission">
 		select p.* from tb_user_role ur, tb_user u ,tb_permission p , tb_role_permission rp where rp.roleid=ur.roleid and rp.permissionid=p.permissionid and ur.userid=u.userid and u.userid=#{userid}
 	</select>
 	
+	<insert id="addUser" parameterType="com.sunshareteam.workblog.entity.User">
+		insert into tb_user(username,passeword,createdate,phone,email,pic,autograph,deleted) 
+			values(#{username},#{password},#{createdate},#{phone},#{email},#{pic},#{autograph},0)
+	</insert>
+	
+	<insert id="addRole" parameterType="com.sunshareteam.workblog.entity.Role">
+		insert into tb_role(rolename,roledetail,createdate,modifyuser)
+			values(#{rolename},#{roledetail},#{createdate},#{modifyuser})
+	</insert>
+	
+	<insert id="addPermission" parameterType="com.sunshareteam.workblog.entity.Permission">
+		insert into tb_permission(permissionname,permissiondetail,createdate,modifyuser,permissioncode,resource,menu)
+			values(#{permissionname},#{permissiondetail},#{createdate},#{modifyuser},#{permissioncode},#{resource},#{menu})
+		</insert>
+	
+	<insert id="addRoleToUser">
+		insert into tb_user_role(userid,roleid)
+			values(#{userid},#{roleid}) 
+		</insert>
+	
+	<insert id="addPermissionToRole">
+		insert into tb_role_permission(roleid,permissionid)
+			values(#{roleid},#{permissionid})
+		</insert>
+	
+	<update id="updateUser">
+		update tb_user 
+			<set>
+				<if test="username!=null">username=#{username},</if>
+				<if test="password!=null">password=#{password},</if>
+				<if test="phone!=null">phone=#{phone},</if>
+				<if test="email!=null">email=#{email},</if>
+				<if test="modifydate!=null">modifydate=#{modifydate},</if>
+				<if test="modifyuser!=null">modifyuser=#{modifyuser},</if>
+				<if test="pic!=null">pic=#{pic},</if>
+				<if test="autograph!=null">autograph=#{autograph},</if>
+			</set>
+			where userid=#{userid}
+	</update>
+	
+	<delete id="deleteUser">
+		delete tb_user where userid=#{userid} 
+	</delete>
 </mapper>  

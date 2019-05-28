@@ -4,14 +4,29 @@ import java.util.List;
 
 import com.sunshareteam.workblog.entity.Permission;
 import com.sunshareteam.workblog.entity.Role;
+import com.sunshareteam.workblog.entity.RolePermission;
 import com.sunshareteam.workblog.entity.User;
+import com.sunshareteam.workblog.entity.UserRole;
 
 public interface UserMapper {
 	
-	public User findAdmin(String adminid);
+	User findUserById(int id);
 	
-	public List<Permission> findPromission(String adminid);
+	List<Permission> findPromission(int userId);
 	
-	public List<Role> findRole(String adminid);
+	List<Role> findRole(int userId);
 	
+	void addUser(User user); 
+	
+	void addRole(Role role);
+	
+	void addPermission(Permission permission);
+	
+	void addRoleToUser(UserRole ur);
+	
+	void addPermissionToRole(RolePermission rp);
+	
+	void updateUser(User user);
+	
+	void deleteUser(int id);
 }
