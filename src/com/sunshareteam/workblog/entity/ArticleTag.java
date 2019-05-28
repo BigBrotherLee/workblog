@@ -16,7 +16,7 @@ public class ArticleTag {
 	public void setArticleid(Integer articleid) {
 		this.articleid = articleid;
 	}
-	public Integer getTagid() {
+	public Integer getTagid() {  
 		return tagid;
 	}
 	public void setTagid(Integer tagid) {
