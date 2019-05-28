@@ -4,8 +4,10 @@ import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.TaskListener;
 import org.apache.shiro.SecurityUtils;
 
+import com.sunshareteam.workblog.entity.User;
 
-import com.sunshareteam.workblog.entity.admin;
+
+
 
 public class ManagerTaskHandler implements TaskListener {
 
@@ -16,7 +18,7 @@ public class ManagerTaskHandler implements TaskListener {
 
 	@Override
 	public void notify(DelegateTask delegateTask) {
-		admin a=(admin)SecurityUtils.getSubject().getPrincipal();
+		User a=(User)SecurityUtils.getSubject().getPrincipal();
 		
 		
 	}

@@ -4,22 +4,19 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-import org.activiti.engine.impl.persistence.entity.DeploymentEntity;
-import org.activiti.engine.impl.persistence.entity.DeploymentEntityImpl;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntityImpl;
+
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Task;
 
-import com.sunshareteam.workblog.entity.admin;
-import com.sunshareteam.workblog.entity.promission;
-import com.sunshareteam.workblog.entity.role;
+import com.sunshareteam.workblog.entity.Permission;
+import com.sunshareteam.workblog.entity.Role;
+import com.sunshareteam.workblog.entity.User;
 
 public interface UserService {
-	admin getAdmin(String name);
-	List<role> getRole(String name);
-	List<promission> getPromission(String name);
+	User getAdmin(String name);
+	List<Role> getRole(String name);
+	List<Permission> getPromission(String name);
 	void deploy(String deployName,InputStream zipInput);
 	List<Deployment> queryDepoly(String key);
 	List<ProcessDefinition> queryProcessDefinition(); 

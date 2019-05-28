@@ -13,9 +13,9 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sunshareteam.workblog.entity.admin;
-import com.sunshareteam.workblog.entity.promission;
-import com.sunshareteam.workblog.entity.role;
+import com.sunshareteam.workblog.entity.User;
+import com.sunshareteam.workblog.entity.Permission;
+import com.sunshareteam.workblog.entity.;
 import com.sunshareteam.workblog.service.UserService;
 
 
@@ -30,17 +30,17 @@ public class ExampleRealm extends  AuthorizingRealm{
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
-		admin a=(admin) principal.getPrimaryPrincipal();
-		List<promission> promissions=exampleService.getPromission(a.getUsercode());
-		List<role> roles=exampleService.getRole(a.getUsercode());
+		User a=(User) principal.getPrimaryPrincipal();
+		List<Permission> Permissions=exampleService.getPermission(a.getUsercode());
+		List<> s=exampleService.get(a.());
 		SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-		for(role r:roles) {
-			info.addRole(r.getName());
+		for( r:s) {
+			info.add(r.getName());
 			System.out.println("----------------realm-----------------"+r.getName());
 		}
-		for(promission p: promissions) {
-			System.out.println("----------------realm-----------------"+p.getPercode());
-			info.addStringPermission(p.getPercode());
+		for(Permission p: Permissions) {
+			System.out.println("----------------realm-----------------"+p.getPermissioncode());
+			info.addStringPermission(p.getPermissioncode());
 		}
 		return info;
 	}
@@ -53,7 +53,7 @@ public class ExampleRealm extends  AuthorizingRealm{
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		// 使用get方式会直接登录失败
 		String name=(String)token.getPrincipal();
-		admin a=exampleService.getAdmin(name);
+		User a=exampleService.getUser(name);
 		AuthenticationInfo info=new SimpleAuthenticationInfo(a, a.getPassword(), ByteSource.Util.bytes(a.getSalt()), "com.bigbrotherlee.example.global.ExampleRealm");
 		return info;
 	}

@@ -31,7 +31,6 @@ import com.bigbrotherlee.utils.LeeConstant;
 import com.bigbrotherlee.utils.LeeException;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.bigbrotherlee.utils.VerificationCode;
-import com.sunshareteam.workblog.entity.ProcessDTO;
 import com.sunshareteam.workblog.service.UserService;
 
 @RestController
@@ -57,18 +56,7 @@ public class UserController {
 		userService.deploy(name,file.getInputStream());
 	}
 	
-	@RequiresPermissions("process:query:*")
-	@GetMapping("/querydeploy")
-	public ResponseResult<ProcessDTO> queryDeploy(String key) {
-		ProcessDTO dto=new ProcessDTO();
-		List<ProcessDefinition> definitions=userService.queryProcessDefinition();
-		dto.setProcessDefinitions(null);
-		ResponseResult<ProcessDTO> result=new ResponseResult<>();
-		result.setData(dto);
-		result.setState(LeeConstant.STATE_SUCCESS);
-		result.setMessage(definitions.get(0).getKey());
-		return result;
-	}
+
 	
 	@RequiresPermissions("process:update:*")
 	@GetMapping("/start")
