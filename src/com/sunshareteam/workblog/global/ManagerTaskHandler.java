@@ -1,4 +1,4 @@
-package com.bigbrotherlee.example.global;
+package com.sunshareteam.workblog.global;
 
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.TaskListener;
@@ -6,7 +6,7 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.orm.hibernate5.SessionFactoryUtils;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.bigbrotherlee.example.entity.admin;
+import com.sunshareteam.workblog.entity.admin;
 
 public class ManagerTaskHandler implements TaskListener {
 

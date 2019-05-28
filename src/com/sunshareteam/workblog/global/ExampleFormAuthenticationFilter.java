@@ -1,4 +1,4 @@
-package com.bigbrotherlee.example.global;
+package com.sunshareteam.workblog.global;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;

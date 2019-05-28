@@ -1,4 +1,4 @@
-package com.bigbrotherlee.example.web;
+package com.sunshareteam.workblog.web;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,12 +27,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.bigbrotherlee.example.entity.ProcessDTO;
-import com.bigbrotherlee.example.service.ExampleService;
 import com.bigbrotherlee.utils.LeeConstant;
 import com.bigbrotherlee.utils.LeeException;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.bigbrotherlee.utils.VerificationCode;
+import com.sunshareteam.workblog.entity.ProcessDTO;
+import com.sunshareteam.workblog.service.ExampleService;
 
 @RestController
 public class ExampleController {

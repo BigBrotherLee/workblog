@@ -24,7 +24,6 @@
 		<!-- 自定义filter配置 -->
 		<property name="filters">
 			<map>
-				<!-- 将自定义 的FormAuthenticationFilter注入shiroFilter中 -->
 				<entry key="authc" value-ref="formAuthenticationFilter" />
 			</map>
 		</property>
@@ -63,7 +62,7 @@
 	
 	<!-- 自定义form认证过虑器 -->
 	<!-- 基于Form表单的身份验证过滤器，不配置将也会注册此过虑器，表单中的用户账号、密码及loginurl将采用默认值，建议配置 -->
-	<bean id="formAuthenticationFilter"	class="com.bigbrotherlee.example.global.ExampleFormAuthenticationFilter " >
+	<bean id="formAuthenticationFilter"	class="com.sunshareteam.workblog.global.ExampleFormAuthenticationFilter " >
 		<!-- 表单中账号的input名称 -->
 		<property name="usernameParam" value="username" />
 		<!-- 表单中密码的input名称 -->
@@ -73,7 +72,7 @@
 	</bean>
 
 	<!-- realm -->
-	<bean id="customRealm" class="com.bigbrotherlee.example.global.ExampleRealm">
+	<bean id="customRealm" class="com.sunshareteam.workblog.global.ExampleRealm">
 		<!-- 将凭证匹配器设置到realm中，realm按照凭证匹配器的要求进行散列 -->
 		<property name="credentialsMatcher" ref="credentialsMatcher" />
 	</bean>

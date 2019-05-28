@@ -1,4 +1,4 @@
-package com.bigbrotherlee.example.entity;
+package com.sunshareteam.workblog.entity;
 
 import java.io.Serializable;
 import java.util.List;

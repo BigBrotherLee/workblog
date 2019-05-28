@@ -1,4 +1,4 @@
-package com.bigbrotherlee.example.global;
+package com.sunshareteam.workblog.global;
 
 import java.util.List;
 
@@ -13,10 +13,10 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.bigbrotherlee.example.entity.admin;
-import com.bigbrotherlee.example.entity.promission;
-import com.bigbrotherlee.example.entity.role;
-import com.bigbrotherlee.example.service.ExampleService;
+import com.sunshareteam.workblog.entity.admin;
+import com.sunshareteam.workblog.entity.promission;
+import com.sunshareteam.workblog.entity.role;
+import com.sunshareteam.workblog.service.ExampleService;
 
 
 public class ExampleRealm extends  AuthorizingRealm{

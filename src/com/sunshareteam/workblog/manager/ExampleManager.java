@@ -1,4 +1,4 @@
-package com.bigbrotherlee.example.manager;
+package com.sunshareteam.workblog.manager;
 
 import java.io.InputStream;
 import java.util.List;
