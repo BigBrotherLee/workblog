@@ -3,7 +3,7 @@ package com.sunshareteam.workblog.entity;
 import java.util.Date;
 
 public class CommentOne {
-	private Integer commentoneid;
+	private Integer comment_one_id;
     private Integer author;
     private String content;
     private Date createdate;
@@ -11,12 +11,7 @@ public class CommentOne {
     private Date modifydate;
     private Integer modifyuser;
     private Integer articleid;
-	public Integer getCommentoneid() {
-		return commentoneid;
-	}
-	public void setCommentoneid(Integer commentoneid) {
-		this.commentoneid = commentoneid;
-	}
+
 	public Integer getAuthor() {
 		return author;
 	}
@@ -59,9 +54,15 @@ public class CommentOne {
 	public void setArticleid(Integer articleid) {
 		this.articleid = articleid;
 	}
+	public Integer getComment_one_id() {
+		return comment_one_id;
+	}
+	public void setComment_one_id(Integer comment_one_id) {
+		this.comment_one_id = comment_one_id;
+	}
 	@Override
 	public String toString() {
-		return "CommentOne [commentoneid=" + commentoneid + ", author=" + author + ", content=" + content
+		return "CommentOne [comment_one_id=" + comment_one_id + ", author=" + author + ", content=" + content
 				+ ", createdate=" + createdate + ", createuser=" + createuser + ", modifydate=" + modifydate
 				+ ", modifyuser=" + modifyuser + ", articleid=" + articleid + "]";
 	}
