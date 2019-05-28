@@ -9,29 +9,55 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.bigbrotherlee.utils.LeeException;
+import com.bigbrotherlee.utils.ResponseResult;
 import com.bigbrotherlee.utils.VerificationCode;
 import com.sunshareteam.workblog.service.UserService;
 
-@RestController
+@RestController("/user")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/validate")
-	public void validate(HttpSession session,HttpServletResponse response) {
+	@GetMapping("/verify")
+	public void getVerifyCode(HttpSession session,HttpServletResponse response) {
 		Integer verify=null;
 		try {
 			verify=VerificationCode.calculateToOutputstream(response.getOutputStream());
 		} catch (IOException e) {
 			throw new LeeException("获取验证码出错");
 		}
+		VerifyCode code=new VerifyCode();
 		session.setAttribute("validateCode", verify);
 	}
 	
+	@GetMapping("/getemailcode")
+	public ResponseResult<String> getEmailCode(HttpSession session){
+		ResponseResult<String> result=new ResponseResult<String>();
+		
+		
+		return result;
+	}
+	
+	@GetMapping("/getsmscode")
+	public ResponseResult<String> getSmsCode(HttpSession session){
+		ResponseResult<String> result=new ResponseResult<String>();
+		
+		
+		return result;
+	}
+	
+	@GetMapping("/validate/{code}")
+	public ResponseResult<String> validate(@PathVariable String code,HttpSession session){
+		ResponseResult<String> result=new ResponseResult<String>();
+		
+		
+		return result;
+	}
 	
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
