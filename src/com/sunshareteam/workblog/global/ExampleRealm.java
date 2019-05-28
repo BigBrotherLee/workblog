@@ -15,14 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sunshareteam.workblog.entity.User;
 import com.sunshareteam.workblog.entity.Permission;
-import com.sunshareteam.workblog.entity.;
+import com.sunshareteam.workblog.entity.Role;
 import com.sunshareteam.workblog.service.UserService;
 
 
 public class ExampleRealm extends  AuthorizingRealm{
 	
 	@Autowired
-	private UserService exampleService;
+	private UserService userService;
 	
 	/* 
 	 * 授权
@@ -30,16 +30,14 @@ public class ExampleRealm extends  AuthorizingRealm{
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
-		User a=(User) principal.getPrimaryPrincipal();
-		List<Permission> Permissions=exampleService.getPermission(a.getUsercode());
-		List<> s=exampleService.get(a.());
+		User user=(User) principal.getPrimaryPrincipal();
+		List<Permission> Permissions=userService.getPermissionByUserId(user.getUserid());
+		List<Role> roles=userService.getRoleByUserId(user.getUserid());
 		SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-		for( r:s) {
-			info.add(r.getName());
-			System.out.println("----------------realm-----------------"+r.getName());
+		for(Role r:roles) {
+			info.addRole(r.getRolename());
 		}
 		for(Permission p: Permissions) {
-			System.out.println("----------------realm-----------------"+p.getPermissioncode());
 			info.addStringPermission(p.getPermissioncode());
 		}
 		return info;
@@ -52,9 +50,9 @@ public class ExampleRealm extends  AuthorizingRealm{
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		// 使用get方式会直接登录失败
-		String name=(String)token.getPrincipal();
-		User a=exampleService.getUser(name);
-		AuthenticationInfo info=new SimpleAuthenticationInfo(a, a.getPassword(), ByteSource.Util.bytes(a.getSalt()), "com.bigbrotherlee.example.global.ExampleRealm");
+		Integer name=(Integer)token.getPrincipal();
+		User a=userService.getUserById(name);
+		AuthenticationInfo info=new SimpleAuthenticationInfo(a, a.getPassword(), ByteSource.Util.bytes(a.getSalt()), "com.sunshareteam.workblog.global.ExampleRealm");
 		return info;
 	}
 	
