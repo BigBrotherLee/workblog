@@ -7,10 +7,8 @@ public class VerifyCode {
 	private String code;
 	private LocalDateTime exdate;
 	
-	public VerifyCode(String code, LocalDateTime exdate) {
+	public VerifyCode() {
 		super();
-		this.code = code;
-		this.exdate = exdate;
 	}
 	
 	public VerifyCode(String code, LocalDateTime exdate) {
