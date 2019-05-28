@@ -1,6 +1,5 @@
 package com.sunshareteam.workblog.entity;
 
-import java.sql.Blob;
 import java.util.Date;
 
 public class User {
