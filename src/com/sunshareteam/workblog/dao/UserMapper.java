@@ -8,10 +8,19 @@ import com.sunshareteam.workblog.entity.User;
 
 public interface UserMapper {
 	
-	public User findAdmin(String adminid);
+	User findAdmin(int id);
 	
-	public List<Permission> findPromission(String adminid);
+	List<Permission> findPromission(int userId);
 	
-	public List<Role> findRole(String adminid);
+	List<Role> findRole(int userId);
 	
+	void addUser(User user); 
+	
+	void addRole(Role role);
+	
+	void addPermission(Permission permission);
+	
+	void addRoleToUser(int userid,int roleid);
+	
+	void addPermissionToRole(int promissionId,int roleId);
 }
