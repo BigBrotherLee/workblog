@@ -4,11 +4,13 @@ import java.util.List;
 
 import com.sunshareteam.workblog.entity.Permission;
 import com.sunshareteam.workblog.entity.Role;
+import com.sunshareteam.workblog.entity.RolePermission;
 import com.sunshareteam.workblog.entity.User;
+import com.sunshareteam.workblog.entity.UserRole;
 
 public interface UserMapper {
 	
-	User findAdmin(int id);
+	User findUserById(int id);
 	
 	List<Permission> findPromission(int userId);
 	
@@ -20,7 +22,11 @@ public interface UserMapper {
 	
 	void addPermission(Permission permission);
 	
-	void addRoleToUser(int userid,int roleid);
+	void addRoleToUser(UserRole ur);
 	
-	void addPermissionToRole(int promissionId,int roleId);
+	void addPermissionToRole(RolePermission rp);
+	
+	void updateUser(User user);
+	
+	void deleteUser(int id);
 }

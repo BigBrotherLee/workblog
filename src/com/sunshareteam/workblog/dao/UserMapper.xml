@@ -15,6 +15,46 @@
 	</select>
 	
 	<insert id="addUser" parameterType="com.sunshareteam.workblog.entity.User">
-		
+		insert into tb_user(username,passeword,createdate,phone,email,pic,autograph,deleted) 
+			values(#{username},#{password},#{createdate},#{phone},#{email},#{pic},#{autograph},0)
 	</insert>
+	
+	<insert id="addRole" parameterType="com.sunshareteam.workblog.entity.Role">
+		insert into tb_role(rolename,roledetail,createdate,modifyuser)
+			values(#{rolename},#{roledetail},#{createdate},#{modifyuser})
+	</insert>
+	
+	<insert id="addPermission" parameterType="com.sunshareteam.workblog.entity.Permission">
+		insert into tb_permission(permissionname,permissiondetail,createdate,modifyuser,permissioncode,resource,menu)
+			values(#{permissionname},#{permissiondetail},#{createdate},#{modifyuser},#{permissioncode},#{resource},#{menu})
+		</insert>
+	
+	<insert id="addRoleToUser">
+		insert into tb_user_role(userid,roleid)
+			values(#{userid},#{roleid}) 
+		</insert>
+	
+	<insert id="addPermissionToRole">
+		insert into tb_role_permission(roleid,permissionid)
+			values(#{roleid},#{permissionid})
+		</insert>
+	
+	<update id="updateUser">
+		update tb_user 
+			<set>
+				<if test="username!=null">username=#{username},</if>
+				<if test="password!=null">password=#{password},</if>
+				<if test="phone!=null">phone=#{phone},</if>
+				<if test="email!=null">email=#{email},</if>
+				<if test="modifydate!=null">modifydate=#{modifydate},</if>
+				<if test="modifyuser!=null">modifyuser=#{modifyuser},</if>
+				<if test="pic!=null">pic=#{pic},</if>
+				<if test="autograph!=null">autograph=#{autograph},</if>
+			</set>
+			where userid=#{userid}
+	</update>
+	
+	<delete id="deleteUser">
+		delete tb_user where userid=#{userid} 
+	</delete>
 </mapper>  

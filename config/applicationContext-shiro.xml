@@ -33,6 +33,7 @@
 			<value>
 				<!-- 对静态资源设置匿名访问 -->
 				/static/** = anon
+				
 				<!-- 验证码，可匿名访问 -->
 				/index.* = anon
 				/validate = anon
