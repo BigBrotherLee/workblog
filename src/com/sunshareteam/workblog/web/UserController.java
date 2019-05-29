@@ -25,7 +25,7 @@ import com.sunshareteam.workblog.service.UserService;
 @RestController("/user")
 public class UserController {
 	
-	@Autowired
+//	@Autowired
 	private UserService userService;
 	
 	@GetMapping("/verify")
@@ -100,5 +100,4 @@ public class UserController {
 				}
 				return "login";
 	}
-	
 }
