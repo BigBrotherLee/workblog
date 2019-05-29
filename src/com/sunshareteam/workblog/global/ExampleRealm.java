@@ -21,7 +21,7 @@ import com.sunshareteam.workblog.service.UserService;
 
 public class ExampleRealm extends  AuthorizingRealm{
 	
-	@Autowired
+//	@Autowired
 	private UserService userService;
 	
 	/* 

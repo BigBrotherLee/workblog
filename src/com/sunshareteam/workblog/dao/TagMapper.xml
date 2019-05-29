@@ -5,7 +5,7 @@
 		select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag where tagid=#{tagid}
 	</select>
 	<insert id="addTag">
-	    insert into tb_tag{createuser,createdate,modifydate,modifyuser,tagtitle} 
+	    insert into tb_tag(createuser,createdate,modifydate,modifyuser,tagtitle)
 	    values(#{createuser},#{createdate},#{modifydate},#{modifyuser},#{tagtitle})
 	</insert>
 	<update id="updateTag">

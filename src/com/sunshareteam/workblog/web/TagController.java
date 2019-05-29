@@ -8,7 +8,7 @@ import com.sunshareteam.workblog.service.UserService;
 
 @RestController
 public class TagController {
-	@Autowired
+//	@Autowired
 	private TagService tagService;
 	
 	
