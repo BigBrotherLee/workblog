@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bigbrotherlee.utils.LeeConstant;
 import com.bigbrotherlee.utils.LeeException;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.bigbrotherlee.utils.VerificationCode;
@@ -69,11 +71,12 @@ public class UserController {
 			throw new LeeException("验证码过期");
 		}
 		boolean notEquel=ObjectUtils.nullSafeEquals(realcode.getCode(), code);
-		if(notEquel) {
+		if(!notEquel) {
 			session.removeAttribute("validateCode");
-			throw new LeeException("");
+			throw new LeeException("验证码错误，请重新获取");
 		}
-		
+		result.setState(LeeConstant.STATE_SUCCESS);
+		result.setMessage("验证成功");
 		return result;
 	}
 	
