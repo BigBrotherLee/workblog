@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.bigbrotherlee.utils.LeeConstant;
 import com.sunshareteam.workblog.dao.UserMapper;
 import com.sunshareteam.workblog.entity.User;
 
@@ -20,6 +21,11 @@ import com.sunshareteam.workblog.entity.User;
 public class TestMapper {
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Test
+	public void testMe() {
+		System.out.println(LeeConstant.STATE_SUCCESS);
+	}
 	
 	@Test
 	public void testUserInsert() {
@@ -36,4 +42,5 @@ public class TestMapper {
 		user.setSalt(salt);
 		userMapper.addUser(user);
 	}
+
 }
