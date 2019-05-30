@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,18 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
-import com.sunshareteam.workblog.entity.Categoty;
 import com.sunshareteam.workblog.entity.Tag;
-import com.sunshareteam.workblog.service.TagService;
 
 @RestController
 @RequestMapping("/tag")
 public class TagController {
-	@Autowired
-	private TagService tagService;
+//	@Autowired
+//	private TagService tagService;
 	
 	/**
 	 * 查询标签

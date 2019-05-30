@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
-import com.sunshareteam.workblog.entity.CommentOne;
 import com.sunshareteam.workblog.entity.CommentTwo;
 
 
@@ -23,7 +21,20 @@ public class CommentTwoController {
 //	@Autowired
 //	private CommentTwoService commenttwoService;
 
-
+	/**
+	 * 查询二级评论
+	 * @param index 第几页
+	 * @param length 一页几条
+	 * @param key 关键字
+	 * @return 查询成功返回ResponseResult<PageInfo<CommentTwo>>分页数据，失败抛出异常LeeException
+	 */
+	@RequiresPermissions("commenttwo:select:*")
+	@GetMapping("/getcommenttwo/{index}/{length}")
+	public ResponseResult<PageInfo<CommentTwo>> getAdmin(@PathVariable int index,@PathVariable int length,String key) {
+		ResponseResult<PageInfo<CommentTwo>> result=new ResponseResult<PageInfo<CommentTwo>>();
+		
+		return result;
+	}
 	/**
 	 * 得到指定id的二级评论
 	 * @param commenttwoid 二级评论id

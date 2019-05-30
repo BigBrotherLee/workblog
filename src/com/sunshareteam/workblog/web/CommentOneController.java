@@ -3,7 +3,6 @@ package com.sunshareteam.workblog.web;
 import java.util.List;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +26,7 @@ public class CommentOneController {
 	 * @param index 第几页
 	 * @param length 一页几条
 	 * @param key 关键字
-	 * @return 查询成功返回ResponseResult<PageInfo<User>>分页数据，失败抛出异常LeeException
+	 * @return 查询成功返回ResponseResult<PageInfo<CommentOne>>分页数据，失败抛出异常LeeException
 	 */
 	@RequiresPermissions("commentone:select:*")
 	@GetMapping("/getcommentone/{index}/{length}")
