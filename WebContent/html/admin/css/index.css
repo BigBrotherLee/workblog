@@ -1,0 +1,64 @@
+/* .navbar-default .navbar-brand,.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color: #eead31;
+		font-size: 40px;
+		line-height: -10px;
+		padding: 0;
+		float: none;
+} */
+.navbar-brand span {
+    color:#fff;
+}
+.brand{
+	text-align: center;
+	width: 263px;
+	height: 50px;
+	/* margin: 23px 0; */
+	padding: 0px!important;
+}
+.navclass{
+	background:url(../img/banner.jpg);
+	height: 79px;
+	/* background-image: ../url(../img/banner.jpg); */
+}
+.arrowButton{
+	margin: 29px 0 20px -6px;
+}
+.sidebarclass{
+	background: url(../img/banner.jpg);
+}
+.btnclass{
+	width: 35px;
+	margin: 0 2px;
+	padding: 6px 0px;
+	
+}
+.tableclass{
+	text-align: center;
+	
+}
+	
+.tabletheadclass th{
+	text-align: center;
+}
+#tdid>tr>td{
+	line-height: 34px!important;
+}
+.tbicon{
+	color: black;
+	font-size: 15px;
+	width: 35px;
+}
+.tbiconTrash{
+	color: white;
+	font-size: 15px;
+	width: 35px;
+}
+.tablediv .pagination-container{
+	text-align: center;
+}
+.spanclass{
+	color: white;
+}
+.dropdown .open> .dropdown-toggle{
+	color: #000000;
+}
