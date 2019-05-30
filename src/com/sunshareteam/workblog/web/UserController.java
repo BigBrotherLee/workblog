@@ -92,7 +92,8 @@ public class UserController {
 	 * @param session
 	 * @return 成功则无返回ResponseResult<String>,state:1,message:验证成功，失败则抛出异常LeeException
 	 */
-	public ResponseResult<String> validate(String code,HttpSession session){
+	@GetMapping("/validate/{code}")
+	public ResponseResult<String> validate(@PathVariable String code,HttpSession session){
 		ResponseResult<String> result=new ResponseResult<String>();
 		VerifyCode realcode=(VerifyCode) session.getAttribute("validateCode");
 		if(realcode==null) {
@@ -115,6 +116,13 @@ public class UserController {
 	}
 	
 	
+	/**
+	 * 注册接口
+	 * @param user 注册用户信息
+	 * @param code 验证码
+	 * @param session
+	 * @return 成功则返回ResponseResult<User> state：1，message：查询成功，data注册的user
+	 */
 	@PostMapping("/register")
 	public ResponseResult<User> register(User user,String code,HttpSession session){
 		ResponseResult<User> result=new ResponseResult<User>();
