@@ -32,7 +32,8 @@ import com.sunshareteam.workblog.entity.Role;
 import com.sunshareteam.workblog.entity.User;
 import com.sunshareteam.workblog.service.UserService;
 
-@RestController("/user")
+@RestController
+@RequestMapping("/user")
 public class UserController {
 	
 	//注意：responseresult属性分别有：state：状态码，message：消息，data：数据
@@ -127,7 +128,7 @@ public class UserController {
 	 * @param request
 	 * @return 登录成功则继续访问，登录失败则抛出异常
 	 */
-	@RequestMapping("/login")
+	@PostMapping("/login")
 	public String login(HttpServletRequest request) {
 		//如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
 		String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
