@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bigbrotherlee.utils.ResponseResult;
+import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.Categoty;
 import com.sunshareteam.workblog.service.CategotyService;
 
@@ -93,6 +94,19 @@ public class CategotyController {
 	@GetMapping("/getall")
 	public ResponseResult<List<Categoty>> getAll(){
 		ResponseResult<List<Categoty>> result=new ResponseResult<List<Categoty>>();
+		return result;
+	}
+	
+	/**
+	 * 得到分类分页
+	 * @param index 第几页
+	 * @param length 每页几条
+	 * @param key 搜索关键字
+	 * @return 成功则返回ResponseResultPageInfo<Categoty>> state：1，message：查询成功 ，data：分页分类的列表json
+	 */
+	@GetMapping("/getpage/{index}/{length}")
+	public ResponseResult<PageInfo<Categoty>> getPage(@PathVariable int index,@PathVariable int length,String key){
+		ResponseResult<PageInfo<Categoty>> result=new ResponseResult<>();
 		return result;
 	}
 	
