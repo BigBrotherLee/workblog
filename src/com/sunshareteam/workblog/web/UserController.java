@@ -89,10 +89,9 @@ public class UserController {
 	 * 验证验证码是否正确，验证码有效期为15分钟
 	 * @param code 用户提交的验证码
 	 * @param session
-	 * @return 成功则返回ResponseResult的json，state属性为1，失败则抛出异常LeeException
+	 * @return 成功则无返回ResponseResult<String>,state:1,message:验证成功，失败则抛出异常LeeException
 	 */
-	@GetMapping("/validate/{code}")
-	public ResponseResult<String> validate(@PathVariable String code,HttpSession session){
+	public ResponseResult<String> validate(String code,HttpSession session){
 		ResponseResult<String> result=new ResponseResult<String>();
 		VerifyCode realcode=(VerifyCode) session.getAttribute("validateCode");
 		if(realcode==null) {
@@ -110,6 +109,16 @@ public class UserController {
 		}
 		result.setState(LeeConstant.STATE_SUCCESS);
 		result.setMessage("验证成功");
+		return result;
+		
+	}
+	
+	
+	@PostMapping("/register")
+	public ResponseResult<User> register(User user,String code,HttpSession session){
+		ResponseResult<User> result=new ResponseResult<User>();
+		validate(code,session);
+		
 		return result;
 	}
 	
@@ -147,6 +156,21 @@ public class UserController {
 	@GetMapping("/get/{id}")
 	public ResponseResult<User> getUserInfoById(@PathVariable Integer id){
 		ResponseResult<User> result=new ResponseResult<User>();
+		
+		return result;
+	}
+	
+	/**
+	 * 查询管理员
+	 * @param index 第几页
+	 * @param length 一页几条
+	 * @param key 关键字
+	 * @return 查询成功返回ResponseResult<PageInfo<User>>分页数据，失败抛出异常LeeException
+	 */
+	@RequiresPermissions("admin:select:*")
+	@GetMapping("/getadmin/{index}/{length}")
+	public ResponseResult<PageInfo<User>> getAdmin(@PathVariable int index,@PathVariable int length,String key) {
+		ResponseResult<PageInfo<User>> result=new ResponseResult<PageInfo<User>>();
 		
 		return result;
 	}

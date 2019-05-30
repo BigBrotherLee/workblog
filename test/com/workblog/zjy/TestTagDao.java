@@ -13,7 +13,6 @@ import com.sunshareteam.workblog.entity.Tag;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:applicationContext.xml","classpath:springmvc.xml",
-	                   "classpath:applicationContext-activiti.xml",
 		"classpath:applicationContext-shiro.xml","classpath:shiro-ehcache.xml"})
 public class TestTagDao {
 	@Autowired

@@ -16,7 +16,6 @@ import com.sunshareteam.workblog.entity.User;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:applicationContext.xml","classpath:springmvc.xml",
-    "classpath:applicationContext-activiti.xml",
 "classpath:applicationContext-shiro.xml"})
 public class TestMapper {
 	@Autowired
