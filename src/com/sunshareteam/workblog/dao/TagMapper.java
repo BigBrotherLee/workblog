@@ -8,4 +8,5 @@ public interface TagMapper {
    void addTag(Tag tag);
    void updateTag(Tag tag);
    void deleteTag(int id);
+   
 }
