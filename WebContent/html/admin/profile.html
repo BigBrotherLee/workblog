@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<title>WokeBlog-个人信息</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<!-- VENDOR CSS -->
+		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="vendor/linearicons/style.css">
+		<link rel="stylesheet" href="vendor/chartist/css/chartist-custom.css">
+		<!-- MAIN CSS -->
+		<link rel="stylesheet" href="css/main.css">
+		<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+		<link rel="stylesheet" href="css/demo.css">
+		<!-- GOOGLE FONTS -->
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+		<!-- ICONS -->
+		<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
+		<link rel="stylesheet" href="css/index.css">
+	</head>
+
+	<body>
+		<!-- WRAPPER -->
+		<div id="wrapper">
+			<!-- NAVBAR -->
+			<nav class="navbar navbar-default navbar-fixed-top navclass">
+				<div class="navbar-btn">
+					<h1><a class="navbar-brand" href="index.html">Work <span>Blog </span></a></h1>
+				</div>
+				<div class="container-fluid">
+					<div class="navbar-btn arrowButton">
+						<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+					</div>
+					<form class="navbar-form navbar-left">
+						<div class="input-group">
+							<input type="text" value="" class="form-control" placeholder="Search dashboard...">
+							<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+						</div>
+					</form>
+					<!-- <div class="navbar-btn navbar-btn-right">
+				<a class="btn btn-success update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+			</div> -->
+					<div id="navbar-menu">
+						<ul class="nav navbar-nav navbar-right">
+							<!-- <li class="dropdown">
+							<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+								<i class="lnr lnr-alarm"></i>
+								<span class="badge bg-danger">5</span>
+							</a>
+							<ul class="dropdown-menu notifications">
+								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
+								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
+								<li><a href="#" class="more">See all notifications</a></li>
+							</ul>
+						</li> -->
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
+									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">关于</a></li>
+									<li><a href="#">友链</a></li>
+									<!-- <li><a href="#">Security</a></li>
+								<li><a href="#">Troubleshooting</a></li> -->
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
+									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
+									<li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li>
+									<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+									<!-- <li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li> -->
+								</ul>
+							</li>
+							<!-- <li>
+						<a class="update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+					</li> -->
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<!-- END NAVBAR -->
+			<!-- LEFT SIDEBAR -->
+			<div id="sidebar-nav" class="sidebar sidebarclass">
+				<div class="sidebar-scroll">
+					<nav>
+						<ul class="nav">
+							<li>
+								<a href="#subPages" data-toggle="collapse" class="active"><i class="lnr lnr-user"></i> <span>个人</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+								<div id="subPages" class="collapse in">
+									<ul class="nav">
+										<li><a href="page-profile.html" class="active">修改个人信息</a></li>
+										<li><a href="page-login.html" class="">修改密码</a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="elements.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
+							<li><a href="charts.html" class=""><i class="lnr lnr-book"></i> <span>我的文章</span></a></li>
+							<li><a href="panels.html" class=""><i class="lnr lnr-keyboard"></i> <span>我的评论</span></a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<!-- END LEFT SIDEBAR -->
+			<!-- MAIN -->
+			<div class="main">
+				<!-- MAIN CONTENT -->
+				<div class="main-content profilediv">
+					<div class="">
+						<!-- PROFILE HEADER -->
+						<div class="profile-header profileleft">
+							<div class="overlay"></div>
+							<div class="profile-main">
+								<div class="profileimgdiv">
+									<img src="img/user-medium.png" class="img-circle profileimg" alt="" id="cropedBigImg"/>
+								</div><!-- :src="list1.userPicture" -->
+								<h3 class="name">Samuel Gold</h3>
+								<span class="status-available">边走边唱，如诗如歌如理想</span>
+							</div>
+							<div class="profile-stat">
+								<div class="row">
+									<div class="col-md-4 stat-item">
+										45 <span>文章数量</span>
+									</div>
+									<div class="col-md-4 stat-item">
+										15 <span>评论数量</span>
+									</div>
+									<div class="col-md-4 stat-item">
+										2174 <span>使用年限</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- END PROFILE HEADER -->
+						<!-- PROFILE DETAIL -->
+						<div class="profile-detail profileright">
+							<div class="profileinfo">
+								<form class="form-horizontal profileForm">
+									<div class="form-group formgroupdiv">
+										<label for="exampleInputName2">用户名</label>
+										<input type="text" class="form-control" id="exampleInputName2" placeholder="Samuel Gold">
+									</div>
+
+									<div class="form-group formgroupdiv">
+										<label class="control-label">邮箱</label>
+										<div class="">
+											<input type="text" class="form-control" id="email" placeholder="请输入你的邮箱地址~">
+										</div>
+									</div>
+									<div class="form-group formgroupdiv">
+										<label class="control-label">手机号码</label>
+										<div class="">
+											<input type="text" class="form-control" id="phone" placeholder="请输入你的电话号码~">
+										</div>
+									</div>
+									<div class="form-group formgroupdiv">
+										<label class="control-label">个性签名</label>
+										<div class="">
+											<input type="text" class="form-control" id="summry" placeholder="请输入你的个签~">
+										</div>
+									</div>
+									<!-- <div class="form-group formgroupdiv">
+										<label for="inputPassword" class="control-label">Password</label>
+										<div class="">
+											<input type="password" class="form-control" id="inputPassword" placeholder="请输入你的密码~">
+										</div>
+									</div> -->
+									
+									<div class="text-center profilesubmit btn btn-primary fileinput-button">
+										<input type="file" name="" id="file" class="fileinput"><span class="filefont">修改头像</span>
+									</div>
+									<div class="text-center profilesubmit"><a href="#" class="btn btn-primary">确认修改</a></div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+
+			</div>
+			<footer>
+				<div class="container-fluid">
+					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WOrkBlog <a href="http://www.cssmoban.com/"
+						 target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+
+				</div>
+			</footer>
+			</div>
+			<!-- END WRAPPER -->
+			<!-- Javascript -->
+			<script type="text/javascript">
+				
+			  document.getElementById("file").onchange=function(){
+			   var file=event.target.files[0];
+			   var reader=new FileReader();
+			   reader.readAsDataURL(file);//会读成url数据（base64）
+			   console.log(reader);
+			 	reader.onload = function (e) {
+			 		
+			     // 直接写入图片
+			       var img = document.getElementById("cropedBigImg");
+			 			console.log(img);
+			       img.src = e.target.result;
+			   }
+			 }
+			</script>
+			<script src="vendor/jquery/jquery.min.js"></script>
+			<script src="../static/js/bootstrap.min.js"></script>
+			<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+			<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+			<script src="vendor/chartist/js/chartist.min.js"></script>
+			<script src="js/klorofil-common.js"></script>
+			<!-- <script>
+				$(function() {
+					var data, options;
+
+					// headline charts
+					data = {
+						labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+						series: [
+							[23, 29, 24, 40, 25, 24, 35],
+							[14, 25, 18, 34, 29, 38, 44],
+						]
+					};
+
+					options = {
+						height: 300,
+						showArea: true,
+						showLine: false,
+						showPoint: false,
+						fullWidth: true,
+						axisX: {
+							showGrid: false
+						},
+						lineSmooth: false,
+					};
+
+					new Chartist.Line('#headline-chart', data, options);
+
+
+					// visits trend charts
+					data = {
+						labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+						series: [{
+							name: 'series-real',
+							data: [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
+						}, {
+							name: 'series-projection',
+							data: [240, 350, 360, 380, 400, 450, 480, 523, 555, 600, 700, 800],
+						}]
+					};
+
+					options = {
+						fullWidth: true,
+						lineSmooth: false,
+						height: "270px",
+						low: 0,
+						high: 'auto',
+						series: {
+							'series-projection': {
+								showArea: true,
+								showPoint: false,
+								showLine: false
+							},
+						},
+						axisX: {
+							showGrid: false,
+
+						},
+						axisY: {
+							showGrid: false,
+							onlyInteger: true,
+							offset: 0,
+						},
+						chartPadding: {
+							left: 20,
+							right: 20
+						}
+					};
+
+					new Chartist.Line('#visits-trends-chart', data, options);
+
+
+					// visits chart
+					data = {
+						labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+						series: [
+							[6384, 6342, 5437, 2764, 3958, 5068, 7654]
+						]
+					};
+
+					options = {
+						height: 300,
+						axisX: {
+							showGrid: false
+						},
+					};
+
+					new Chartist.Bar('#visits-chart', data, options);
+
+
+					// real-time pie chart
+					var sysLoad = $('#system-load').easyPieChart({
+						size: 130,
+						barColor: function(percent) {
+							return "rgb(" + Math.round(200 * percent / 100) + ", " + Math.round(200 * (1.1 - percent / 100)) + ", 0)";
+						},
+						trackColor: 'rgba(245, 245, 245, 0.8)',
+						scaleColor: false,
+						lineWidth: 5,
+						lineCap: "square",
+						animate: 800
+					});
+
+					var updateInterval = 3000; // in milliseconds
+
+					setInterval(function() {
+						var randomVal;
+						randomVal = getRandomInt(0, 100);
+
+						sysLoad.data('easyPieChart').update(randomVal);
+						sysLoad.find('.percent').text(randomVal);
+					}, updateInterval);
+
+					function getRandomInt(min, max) {
+						return Math.floor(Math.random() * (max - min + 1)) + min;
+					}
+
+				});
+			</script>
+			 -->
+			<script type="text/javascript" src="js/paginathing.js"></script>
+			
+			<script type="text/javascript">
+				jQuery(document).ready(function($) {
+					/* for (var i = 1; i <= 150; i++) {
+						$('.list-group').append('<li class="list-group-item"> Item ' + i + '</li>');
+					} */
+
+					// $('.list-group').paginathing({
+					// 	perPage: 5,
+					// 	limitPagination: 9,
+					// 	containerClass: 'panel-footer',
+					// 	pageNumbers: true
+					// })
+
+					$('.table tbody').paginathing({
+						perPage: 5,
+						limitPagination: 9,
+						insertAfter: '.table',
+						pageNumbers: true
+					});
+				});
+			</script>
+	</body>
+
+</html>
