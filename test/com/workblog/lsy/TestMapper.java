@@ -32,8 +32,8 @@ public class TestMapper {
 		user.setCreatedate(new Date());
 		user.setAutograph("你好，世界人");
 		user.setEmail("123@qq.com");
-		String salt=new String(RandomUtils.nextBytes(16));
-		String pwd=new SimpleHash("Md5", "123456",salt, 2).toBase64();
+		String salt=Integer.toString(RandomUtils.nextInt(1000, 9999));
+		String pwd=new SimpleHash("Md5", "123456",salt.getBytes(), 2).toString();
 		user.setPassword(pwd);
 		user.setPhone("1786132477");
 		user.setPic("ghasdjhfg");

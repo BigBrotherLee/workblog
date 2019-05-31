@@ -56,7 +56,7 @@ public class CategotyController {
 	 * @return  成功返回ResponseResult<String> state：1，message：添加成功,data:你添加的分类dejson
 	 */
 	@RequiresPermissions("categoty:insert:*")
-	@PostMapping
+	@PostMapping("/add")
 	public ResponseResult<Categoty> addCategoty(Categoty categoty){
 		ResponseResult<Categoty> result =new ResponseResult<Categoty>();
 		return result;

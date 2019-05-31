@@ -22,7 +22,7 @@ public class LogController {
 	 * 查看日志分页数据
 	 * @param index 第几页
 	 * @param length 一页几条
-	 * @return
+	 * @return ResponseResult<PageInfo<Log>> 分页数
 	 */
 	@RequiresPermissions("log:select:*")
 	@GetMapping("/getpage/{index}/{length}")
@@ -35,7 +35,7 @@ public class LogController {
 	/**
 	 * 查看日志
 	 * @param id 日志id
-	 * @return
+	 * @return Log详情
 	 */
 	@RequiresPermissions("log:select:*")
 	@GetMapping("/get/{id}")

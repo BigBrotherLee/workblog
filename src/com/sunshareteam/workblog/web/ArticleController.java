@@ -32,6 +32,11 @@ public class ArticleController {
 		return result;
 	}
 	
+	/**
+	 * 删除文章
+	 * @param id 要删除的文章id
+	 * @return 成功则返回 ResponseResult<String> state：1，，message：删除成功  
+	 */
 	@RequiresPermissions("article:delete:*")
 	@DeleteMapping("/delete/{id}")
 	public ResponseResult<String> delete(@PathVariable int id) {
