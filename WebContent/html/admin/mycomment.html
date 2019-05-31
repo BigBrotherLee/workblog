@@ -2,7 +2,7 @@
 <html lang="en">
 
 	<head>
-		<title>WokeBlog-个人信息</title>
+		<title>WokeBlog-修改密码</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -95,17 +95,17 @@
 					<nav>
 						<ul class="nav">
 							<li>
-								<a href="#subPages" data-toggle="collapse" class="active"><i class="lnr lnr-user"></i> <span>个人</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-								<div id="subPages" class="collapse in">
+								<a href="#subPages" data-toggle="collapse" class=""><i class="lnr lnr-user"></i> <span>个人</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+								<div id="subPages" class="collapse">
 									<ul class="nav">
-										<li><a href="page-profile.html" class="active">修改个人信息</a></li>
+										<li><a href="page-profile.html" class="">修改个人信息</a></li>
 										<li><a href="page-login.html" class="">修改密码</a></li>
 									</ul>
 								</div>
 							</li>
 							<li><a href="elements.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
 							<li><a href="charts.html" class=""><i class="lnr lnr-book"></i> <span>我的文章</span></a></li>
-							<li><a href="panels.html" class=""><i class="lnr lnr-keyboard"></i> <span>我的评论</span></a></li>
+							<li><a href="panels.html" class="active"><i class="lnr lnr-keyboard"></i> <span>我的评论</span></a></li>
 						</ul>
 					</nav>
 				</div>
@@ -113,79 +113,130 @@
 			<!-- END LEFT SIDEBAR -->
 			<!-- MAIN -->
 			<div class="main">
-				<!-- MAIN CONTENT -->
-				<div class="main-content profilediv">
-					<div class="">
-						<!-- PROFILE HEADER -->
-						<div class="profile-header profileleft">
-							<div class="overlay"></div>
-							<div class="profile-main">
-								<div class="profileimgdiv">
-									<img src="img/user-medium.png" class="img-circle profileimg" alt="" id="cropedBigImg"/>
-								</div><!-- :src="list1.userPicture" -->
-								<h3 class="name">Samuel Gold</h3>
-								<span class="status-available">边走边唱，如诗如歌如理想</span>
+				<div class="commentdiv">
+					<div class="tdiv">
+						<div class="panel-heading">
+							<h3 class="panel-title">我的评论</h3>
+							<img src="img/user.png" alt="" style="width: 20px;height: 20px;border-radius: 50%;">
+							
+						</div>
+						<div class="titlediv">
+							<div class="panel panel-default ">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion" href="#1">
+											<img src="img/user.png" alt="" style="width: 35px;height: 35px;border-radius: 50%;margin-right: 10px;">
+											<span style="margin-right: 20px;">Samuel</span>
+											<span></span>
+											<br><br>
+											<p>
+												点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分
+											</p>
+										</a>
+									</h4>
+								</div>
+								<div id="1" class="panel-collapse collapse">
+									<div class="panel-body">
+										<div class="panel panel-default ">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+													<a data-toggle="collapse" data-parent="#accordion" href="#second1">
+														<img src="img/user.png" alt="" style="width: 35px;height: 35px;border-radius: 50%;margin-right: 10px;">
+														<span style="margin-right: 20px;">Samuel</span>
+														<span></span>
+														<br><br>
+														<p>
+															点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分
+														</p>
+													</a>
+												</h4>
+											</div>
+											<div id="second1" class="panel-collapse collapse">
+												<div class="panel-body">
+													Nihil anim keffiyeh helvetica, craft beer labore wes anderson
+													cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+													vice lomo.
+												</div>
+											</div>
+										</div>
+										<div class="panel panel-default ">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+													<a data-toggle="collapse" data-parent="#accordion" href="#second2">
+														<img src="img/user.png" alt="" style="width: 35px;height: 35px;border-radius: 50%;margin-right: 10px;">
+														<span style="margin-right: 20px;">Samuel</span>
+														<span></span>
+														<br><br>
+														<p>
+															点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分
+														</p>
+													</a>
+												</h4>
+											</div>
+											<div id="second2" class="panel-collapse collapse">
+												<div class="panel-body">
+													Nihil anim keffiyeh helvetica, craft beer labore wes anderson
+													cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+													vice lomo.
+												</div>
+											</div>
+										</div>
+										
+									</div>
+								</div>
 							</div>
-							<div class="profile-stat">
-								<div class="row">
-									<div class="col-md-4 stat-item">
-										45 <span>文章数量</span>
+							<div class="panel panel-default ">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion" href="#2">
+											点击我进行展开，再次点击我进行折叠。第 2 部分
+										</a>
+									</h4>
+								</div>
+								<div id="2" class="panel-collapse collapse">
+									<div class="panel-body">
+										Nihil anim keffiyeh helvetica, craft beer labore wes anderson
+										cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+										vice lomo.
 									</div>
-									<div class="col-md-4 stat-item">
-										15 <span>评论数量</span>
+								</div>
+							</div>
+							<div class="panel panel-default ">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion" href="#3">
+											点击我进行展开，再次点击我进行折叠。第 2 部分
+										</a>
+									</h4>
+								</div>
+								<div id="3" class="panel-collapse collapse">
+									<div class="panel-body">
+										Nihil anim keffiyeh helvetica, craft beer labore wes anderson
+										cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+										vice lomo.
 									</div>
-									<div class="col-md-4 stat-item">
-										2174 <span>使用年限</span>
+								</div>
+							</div>
+
+							<div class="panel panel-default ">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordion" href="#4">
+											点击我进行展开，再次点击我进行折叠。第 2 部分
+										</a>
+									</h4>
+								</div>
+								<div id="4" class="panel-collapse collapse">
+									<div class="panel-body">
+										Nihil anim keffiyeh helvetica, craft beer labore wes anderson
+										cred nesciunt sapiente ea proident. Ad vegan excepteur butcher
+										vice lomo.
 									</div>
 								</div>
 							</div>
 						</div>
-						
-						<!-- END PROFILE HEADER -->
-						<!-- PROFILE DETAIL -->
-						<div class="profile-detail profileright">
-							<div class="profileinfo">
-								<form class="form-horizontal profileForm">
-									<div class="form-group formgroupdiv">
-										<label for="exampleInputName2">用户名</label>
-										<input type="text" class="form-control" id="exampleInputName2" placeholder="Samuel Gold">
-									</div>
-
-									<div class="form-group formgroupdiv">
-										<label class="control-label">邮箱</label>
-										<div class="">
-											<input type="text" class="form-control" id="email" placeholder="请输入你的邮箱地址~">
-										</div>
-									</div>
-									<div class="form-group formgroupdiv">
-										<label class="control-label">手机号码</label>
-										<div class="">
-											<input type="text" class="form-control" id="phone" placeholder="请输入你的电话号码~">
-										</div>
-									</div>
-									<div class="form-group formgroupdiv">
-										<label class="control-label">个性签名</label>
-										<div class="">
-											<input type="text" class="form-control" id="summry" placeholder="请输入你的个签~">
-										</div>
-									</div>
-									<!-- <div class="form-group formgroupdiv">
-										<label for="inputPassword" class="control-label">Password</label>
-										<div class="">
-											<input type="password" class="form-control" id="inputPassword" placeholder="请输入你的密码~">
-										</div>
-									</div> -->
-									
-									<div class="text-center profilesubmit btn btn-primary fileinput-button">
-										<input type="file" name="" id="file" class="fileinput"><span class="filefont">修改头像</span>
-									</div>
-									<div class="text-center profilesubmit"><a href="#" class="btn btn-primary">确认修改</a></div>
-								</form>
-							</div>
-						</div>
 					</div>
 				</div>
-				<div class="clearfix"></div>
 
 			</div>
 			<footer>
@@ -195,32 +246,15 @@
 
 				</div>
 			</footer>
-			</div>
 			<!-- END WRAPPER -->
 			<!-- Javascript -->
-			<script type="text/javascript">
-				
-			  document.getElementById("file").onchange=function(){
-			   var file=event.target.files[0];
-			   var reader=new FileReader();
-			   reader.readAsDataURL(file);//会读成url数据（base64）
-			   console.log(reader);
-			 	reader.onload = function (e) {
-			 		
-			     // 直接写入图片
-			       var img = document.getElementById("cropedBigImg");
-			 			console.log(img);
-			       img.src = e.target.result;
-			   }
-			 }
-			</script>
 			<script src="vendor/jquery/jquery.min.js"></script>
 			<script src="../static/js/bootstrap.min.js"></script>
 			<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 			<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 			<script src="vendor/chartist/js/chartist.min.js"></script>
 			<script src="js/klorofil-common.js"></script>
-			<!-- <script>
+			<script>
 				$(function() {
 					var data, options;
 
@@ -338,9 +372,7 @@
 
 				});
 			</script>
-			 -->
 			<script type="text/javascript" src="js/paginathing.js"></script>
-			
 			<script type="text/javascript">
 				jQuery(document).ready(function($) {
 					/* for (var i = 1; i <= 150; i++) {
@@ -362,6 +394,7 @@
 					});
 				});
 			</script>
+		</div>
 	</body>
 
 </html>

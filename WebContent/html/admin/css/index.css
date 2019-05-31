@@ -1,64 +1,196 @@
-/* .navbar-default .navbar-brand,.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-    color: #eead31;
-		font-size: 40px;
-		line-height: -10px;
-		padding: 0;
-		float: none;
-} */
+/* 
+=======================================
+index.html
+======================================= 
+*/
+
+
 .navbar-brand span {
-    color:#fff;
+	color: #fff;
 }
-.brand{
+
+.brand {
 	text-align: center;
 	width: 263px;
 	height: 50px;
 	/* margin: 23px 0; */
-	padding: 0px!important;
+	padding: 0px !important;
 }
-.navclass{
-	background:url(../img/banner.jpg);
+
+.navclass {
+	background: url(../img/banner.jpg);
 	height: 79px;
 	/* background-image: ../url(../img/banner.jpg); */
 }
-.arrowButton{
+
+.arrowButton {
 	margin: 29px 0 20px -6px;
 }
-.sidebarclass{
+
+.sidebarclass {
 	background: url(../img/banner.jpg);
 }
-.btnclass{
+
+.btnclass {
 	width: 35px;
 	margin: 0 2px;
 	padding: 6px 0px;
-	
+
 }
-.tableclass{
+
+.tableclass {
 	text-align: center;
-	
+
 }
-	
-.tabletheadclass th{
+
+.tabletheadclass th {
 	text-align: center;
 }
-#tdid>tr>td{
-	line-height: 34px!important;
+
+#tdid>tr>td {
+	line-height: 34px !important;
 }
-.tbicon{
+
+.tbicon {
 	color: black;
 	font-size: 15px;
 	width: 35px;
 }
-.tbiconTrash{
+
+.tbiconTrash {
 	color: white;
 	font-size: 15px;
 	width: 35px;
 }
-.tablediv .pagination-container{
+
+.tablediv .pagination-container {
 	text-align: center;
 }
-.spanclass{
+
+.spanclass {
 	color: white;
 }
-.dropdown .open> .dropdown-toggle{
+
+.dropdown .open>.dropdown-toggle {
 	color: #000000;
+}
+
+
+
+
+/* 
+=======================================
+profile.html
+======================================= 
+*/
+
+
+
+.profileleft {
+	width: 300px;
+	height: auto;
+	float: left;
+	margin-left: 50px;
+}
+
+.profileright {
+	width: 350px;
+	margin: auto;
+	float: right;
+	border: 1px solid #c4c4c8;
+	padding: 0;
+}
+
+.profilediv {
+	width: 800px;
+	height: 500px;
+
+}
+
+.profileForm {
+	padding: 20px 0;
+	width: 300px;
+	margin: auto;
+}
+
+.profilesubmit {
+	margin-top: 10px;
+	margin-left: 30px;
+	margin-bottom: 10px;
+	float: left;
+	padding: 0;
+}
+
+
+.profileimgdiv {
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	margin: auto;
+	overflow: hidden;
+}
+
+.profileimg {
+	width: 90px;
+	height: 90px;
+}
+
+#wrapper .main {
+	/* background: url(../img/banner.jpg); */
+}
+
+.fileinput {
+	width: 102px;
+	height: 34px;
+	opacity: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.filefont {
+	margin-top: -36px;
+	display: block;
+	line-height: 34px;
+}
+
+/* 
+=======================================
+modifypassword.html
+======================================= 
+*/
+
+
+.modfiypswleft {
+	margin-top: 30px;
+	margin-left: 60px;
+}
+
+.note {
+	float: left;
+	padding: 120px;
+}
+
+
+/* 
+=======================================
+modifypassword.html
+======================================= 
+*/
+
+.tdiv {
+	border: 1px solid white;
+	padding: 10px;
+	background-color: white;
+}
+
+.titlediv {
+	width: 800px;
+	margin: auto;
+	margin-top: 20px;
+}
+
+.commentdiv {
+	padding: 40px;
+	font-size: 18px;
+	font-weight: 300;
 }
