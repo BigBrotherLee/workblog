@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunshareteam.workblog.dao.LinkMapper">
+    <select id="findLinkId" resultType="com.sunshareteam.workblog.entity.Link">
+		select linkid,linktitle,linkimg,linkaddress,modifydate,modifyuser from tb_link where linkid=#{linkid}
+	</select>
+	<insert id="addLink">
+	    insert into tb_link(linktitle,linkimg,linkaddress,modifydate,modifyuser)
+	    values(#{linktitle},#{linkimg},#{linkaddress},#{modifydate},#{modifyuser})
+	</insert>
+	<update id="updateLink">
+	    update tb_link
+	    <set>
+	       <if test="linktitle!=null">linktitle=#{linktitle},</if>
+	       <if test="linkimg!=null">linkimg=#{linkimg},</if>
+	       <if test="linkaddress!=null">linkaddress=#{linkaddress},</if>
+	       <if test="modifydate!=null">modifydate=#{modifydate},</if>
+	       <if test="modifyuser!=null">modifyuser=#{modifyuser},</if>
+	    </set>
+	    where linkid=#{linkid}
+	</update>
+	<delete id="deleteLink">
+	   delete from tb_link where linkid=#{linkid}
+	</delete>
+</mapper>
