@@ -4,6 +4,9 @@
     <select id="findTagId" resultType="com.sunshareteam.workblog.entity.Tag">
 		select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag where tagid=#{tagid}
 	</select>
+	<select id="findAll" resultType="com.sunshareteam.workblog.entity.Tag">    
+         select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag   
+       </select>
 	<insert id="addTag">
 	    insert into tb_tag(createuser,createdate,modifydate,modifyuser,tagtitle)
 	    values(#{createuser},#{createdate},#{modifydate},#{modifyuser},#{tagtitle})

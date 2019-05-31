@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunshareteam.workblog.dao.CommentTwoMapper">
+	  <select id="findCommentTwoId" resultType="com.sunshareteam.workblog.entity.CommentTwo">
+		select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two where comment_two_id=#{comment_two_id}
+	</select>
+	<select id="findAll" resultType="com.sunshareteam.workblog.entity.CommentTwo">    
+         select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two   
+       </select>
+	<insert id="addCommentTwo">
+	    insert into tb_comment_two(author,content,createuser,createdate,modifydate,modifyuser,oneid)
+	    values(#{author},#{content},#{createuser},#{createdate},#{modifydate},#{modifyuser},#{oneid})
+	</insert>
+	<delete id="deleteCommentTwo">
+	   delete from tb_comment_two where comment_two_id=#{comment_two_id}
+	</delete>
 	
 </mapper> 

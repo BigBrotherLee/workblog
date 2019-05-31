@@ -55,7 +55,7 @@ public class LinkController {
 	
 	/**
 	 * 添加友链
-	 * @param tag 你要添加的友链信息
+	 * @param link 你要添加的友链信息
 	 * @return  成功返回ResponseResult<String> state：1，message：添加成功,data:你添加的友链的json
 	 */
 	@RequiresPermissions("link:insert:*")
@@ -66,7 +66,7 @@ public class LinkController {
 	}
 	/**
 	 * 更新友链信息
-	 * @param tag 你更改后的友链信息
+	 * @param link 你更改后的友链信息
 	 * @return 成功则返回ResponseResult<Link> state：1，message：更新成功，data：你改后的友链信息
 	 */
 	@RequiresPermissions("link:update:*")

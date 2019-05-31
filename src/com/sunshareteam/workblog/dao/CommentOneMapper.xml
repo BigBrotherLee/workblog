@@ -4,6 +4,9 @@
     <select id="findCommentOneId" resultType="com.sunshareteam.workblog.entity.CommentOne">
 		select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one where comment_one_id=#{comment_one_id}
 	</select>
+	<select id="findAll" resultType="com.sunshareteam.workblog.entity.CommentOne">    
+         select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one   
+       </select>
 	<insert id="addCommentOne">
 	    insert into tb_comment_one(author,content,createuser,createdate,modifydate,modifyuser,articleid)
 	    values(#{author},#{content},#{createuser},#{createdate},#{modifydate},#{modifyuser},#{articleid})

@@ -4,6 +4,9 @@
     <select id="findLinkId" resultType="com.sunshareteam.workblog.entity.Link">
 		select linkid,linktitle,linkimg,linkaddress,modifydate,modifyuser from tb_link where linkid=#{linkid}
 	</select>
+	<select id="findAll" resultType="com.sunshareteam.workblog.entity.Link">    
+         select linkid,linktitle,linkimg,linkaddress,modifydate,modifyuser from tb_link   
+       </select>
 	<insert id="addLink">
 	    insert into tb_link(linktitle,linkimg,linkaddress,modifydate,modifyuser)
 	    values(#{linktitle},#{linkimg},#{linkaddress},#{modifydate},#{modifyuser})
