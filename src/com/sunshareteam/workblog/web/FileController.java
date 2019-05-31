@@ -5,10 +5,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.UUID; 
-import javax.servlet.http.HttpSession;
-
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +18,7 @@ import com.bigbrotherlee.utils.LeeConstant;
 import com.bigbrotherlee.utils.ResponseResult;
 
 
-/*
+/**
  * 文件上传和视频播放用
  */
 @RestController
