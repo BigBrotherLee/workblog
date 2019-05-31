@@ -3,6 +3,7 @@ package com.sunshareteam.workblog.web;
 import java.util.List;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,13 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
+import com.sunshareteam.workblog.entity.Categoty;
 import com.sunshareteam.workblog.entity.CommentOne;
+import com.sunshareteam.workblog.entity.Tag;
+import com.sunshareteam.workblog.service.CommentOneService;
 
 @RestController
 @RequestMapping("/commentone")
 public class CommentOneController {
-//	@Autowired
-//	private CommentOneService commentoneService;
+	@Autowired
+	private CommentOneService commentoneService;
 	
 	/**
 	 * 查询一级评论
@@ -36,72 +40,47 @@ public class CommentOneController {
 		return result;
 	}
 	/**
-	 * 得到指定id的一级评论
-	 * @param commentoneid 一级评论id
-	 * @return 成功返回ResponseResult<CommentOne> state：1，message：查询成功,data:Categoty的json
-	 */
-	@GetMapping("/get/{comment_one_id}")
-	public ResponseResult<CommentOne> getByCommentOneId(@PathVariable Integer commentoneid) {
-		ResponseResult<CommentOne> result=new ResponseResult<CommentOne>();
-		return result;
-	}
-	
-	/**
 	 * 删除指定id的一级评论
-	 * @param commentoneid 一级评论id
+	 * @param id 一级评论id
 	 * @return 成功返回ResponseResult<String> state：1，message：删除成功,data:null
 	 */
 	@RequiresPermissions("commentone:delete:*")
-	@DeleteMapping("/delete/{comment_one_id}")
-	public ResponseResult<String> DeleteCommentOne(@PathVariable String commentoneid) {
+	@DeleteMapping("/delete/{id}")
+	public ResponseResult<String> DeleteCommentOne(@PathVariable String id) {
 		ResponseResult<String> result=new ResponseResult<String>();
 		
 		return result;
 	}
+	
 	/**
-	 * 一级评论内容
-	 * @param commentone 你要一级评论的内容
-	 * @return  成功返回ResponseResult<String> state：1，message：评论成功,data:你添加的评论的json
+	 * 添加一级评论
+	 * @param commentone 你要添加的一级评论信息
+	 * @return  成功返回ResponseResult<String> state：1，message：添加成功,data:你添加的一级评论dejson
 	 */
 	@RequiresPermissions("commentone:insert:*")
-	@PostMapping
-	public ResponseResult<CommentOne> addCommentOne(CommentOne commentone){
+	@PostMapping("/add")
+	public ResponseResult<CommentOne> addCategoty(CommentOne commentone){
 		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
 		return result;
 	}
-	
-	/**
-	 * 更新一级评论信息
-	 * @param commentone 你更改后的一级评论信息
-	 * @return 成功则返回ResponseResult<CommentOne> state：1，message：更新成功，data：你改后的二级评论信息
-	 */
-	@RequiresPermissions("commentone:update:*")
-	@PutMapping("/update")
-	public ResponseResult<CommentOne> updateCommentOne(CommentOne commentone){
-		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
-		return result;
-	}
-	/**
-	 * 得到一级评论的用户id
-	 * @param articleid 一级评论的用户id
-	 * @return 成功则返回ResponseResult<CommentOne> state：1，message：查询成功，data：一级评论的用户信息
-	 */
-	@GetMapping("/getbyarticle/{id}")
-	public ResponseResult<CommentOne> getCommentOneByArticle(@PathVariable int articleid){
-		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
-		
-		return result;
-	}
-	
 	/**
 	 * 得到全部一级评论
-	 * @return 成功则返回ResponseResult<List<CommentOne>> state：1，message：查询成功 ，data：所有一级评论的列表json
+	 * @return 成功则返回ResponseResult<List<Categoty>> state：1，message：查询成功 ，data：所有一级评论的列表json
 	 */
 	@GetMapping("/getall")
 	public ResponseResult<List<CommentOne>> getAll(){
 		ResponseResult<List<CommentOne>> result=new ResponseResult<List<CommentOne>>();
 		return result;
 	}
-	
-
+	/**
+	 * 得到一级评论角色信息
+	 * @param roleid 角色id
+	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：得到一级评论角色信息
+	 */
+	@GetMapping("/getbyrole/{id}")
+	public ResponseResult<CommentOne> getTagByRole(@PathVariable int roleid){
+		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
+		
+		return result;
+	}
 }

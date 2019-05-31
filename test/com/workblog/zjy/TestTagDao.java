@@ -9,18 +9,20 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.sunshareteam.workblog.dao.CategotyMapper;
+import com.sunshareteam.workblog.dao.CommentOneMapper;
 import com.sunshareteam.workblog.dao.LinkMapper;
 import com.sunshareteam.workblog.dao.TagMapper;
 import com.sunshareteam.workblog.entity.Categoty;
+import com.sunshareteam.workblog.entity.CommentOne;
 import com.sunshareteam.workblog.entity.Link;
 import com.sunshareteam.workblog.entity.Tag;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:applicationContext.xml","classpath:springmvc.xml",
-		"classpath:applicationContext-shiro.xml","classpath:shiro-ehcache.xml"})
+		"classpath:applicationContext-shiro.xml"})
 public class TestTagDao {
 	@Autowired
-	private TagMapper tagMapper;
+	private CommentOneMapper commentoneMapper;
 	
 //   测试标签
  /*  @Test
@@ -44,17 +46,19 @@ public class TestTagDao {
 		tag.setTagtitle("2222");
 		tagMapper.updateTag(tag);
 	}*/
-	//测试友链
-/*    @Test
-public void test1() {
-	Link link=new Link();
-    link.setLinktitle("11");
-    link.setLinkimg("11");
-    link.setLinkaddress("11");
-    link.setModifydate(new Date());
-    link.setModifyuser(new Integer(10));
-    linkMapper.addLink(link);
-    }*/
+	//测试一级评论
+    @Test
+ public void test1() {
+	CommentOne commentone=new CommentOne();
+	commentone.setAuthor(new Integer(10));
+	commentone.setArticleid(new Integer(10));
+	commentone.setContent("11");
+	commentone.setCreatedate(new Date());
+	commentone.setCreateuser(new Integer(10));
+	commentone.setModifydate(new Date());
+	commentone.setModifyuser(new Integer(10));
+	commentoneMapper.addCommentOne(commentone);
+    }
 /*@Test
 public void test2() {
 	linkMapper.deleteLink(1);
