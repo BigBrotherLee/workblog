@@ -34,7 +34,7 @@ public class CommentOneController {
 	 */
 	@RequiresPermissions("commentone:select:*")
 	@GetMapping("/getcommentone/{index}/{length}")
-	public ResponseResult<PageInfo<CommentOne>> getAdmin(@PathVariable int index,@PathVariable int length,String key) {
+	public ResponseResult<PageInfo<CommentOne>> getUser(@PathVariable int index,@PathVariable int length,String key) {
 		ResponseResult<PageInfo<CommentOne>> result=new ResponseResult<PageInfo<CommentOne>>();
 		
 		return result;
@@ -73,12 +73,12 @@ public class CommentOneController {
 		return result;
 	}
 	/**
-	 * 得到一级评论角色信息
-	 * @param roleid 角色id
+	 * 得到一级评论信息用户
+	 * @param userid 用户id
 	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：得到一级评论角色信息
 	 */
-	@GetMapping("/getbyrole/{id}")
-	public ResponseResult<CommentOne> getTagByRole(@PathVariable int roleid){
+	@GetMapping("/getbyuser/{id}")
+	public ResponseResult<CommentOne> getTagByUser(@PathVariable int userid){
 		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
 		
 		return result;

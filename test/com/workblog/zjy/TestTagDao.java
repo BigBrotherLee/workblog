@@ -22,10 +22,11 @@ import com.sunshareteam.workblog.entity.Tag;
 		"classpath:applicationContext-shiro.xml"})
 public class TestTagDao {
 	@Autowired
-	private CommentOneMapper commentoneMapper;
+	private TagMapper tagMapper;
+//	private CommentOneMapper commentoneMapper;
 	
 //   测试标签
- /*  @Test
+   @Test
 	public void test1() {
 		Tag tag=new Tag();
 		tag.setTagtitle("1111");
@@ -34,7 +35,7 @@ public class TestTagDao {
 		tag.setModifydate(new Date());
         tag.setModifyuser(new Integer(10));
 		tagMapper.addTag(tag);
-	}*/
+	}    
 //	@Test
 //	public void test2() {
 //		tagMapper.deleteTag(6);
@@ -47,7 +48,7 @@ public class TestTagDao {
 		tagMapper.updateTag(tag);
 	}*/
 	//测试一级评论
-    @Test
+	/*    @Test
  public void test1() {
 	CommentOne commentone=new CommentOne();
 	commentone.setAuthor(new Integer(10));
@@ -58,7 +59,7 @@ public class TestTagDao {
 	commentone.setModifydate(new Date());
 	commentone.setModifyuser(new Integer(10));
 	commentoneMapper.addCommentOne(commentone);
-    }
+    }*/
 /*@Test
 public void test2() {
 	linkMapper.deleteLink(1);

@@ -33,7 +33,7 @@ public class CommentTwoController {
 	 */
 	@RequiresPermissions("commenttwo:select:*")
 	@GetMapping("/getcommenttwo/{index}/{length}")
-	public ResponseResult<PageInfo<CommentTwo>> getAdmin(@PathVariable int index,@PathVariable int length,String key) {
+	public ResponseResult<PageInfo<CommentTwo>> getUser(@PathVariable int index,@PathVariable int length,String key) {
 		ResponseResult<PageInfo<CommentTwo>> result=new ResponseResult<PageInfo<CommentTwo>>();
 		
 		return result;
@@ -71,12 +71,12 @@ public class CommentTwoController {
 		return result;
 	}
 	/**
-	 * 得到二级评论角色信息
-	 * @param roleid 角色id
+	 * 得到二级评论用户
+	 * @param user户
 	 * @return 成功则返回ResponseResult<CommentTwo> state：1，message：查询成功，data：得到二级评论角色信息
 	 */
-	@GetMapping("/getbyrole/{id}")
-	public ResponseResult<CommentTwo> getTagByRole(@PathVariable int roleid){
+	@GetMapping("/getbyUser/{id}")
+	public ResponseResult<CommentTwo> getTagByUser(@PathVariable int userid){
 		ResponseResult<CommentTwo> result =new ResponseResult<CommentTwo>();
 		
 		return result;

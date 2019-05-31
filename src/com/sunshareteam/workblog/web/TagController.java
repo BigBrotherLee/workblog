@@ -86,13 +86,13 @@ public class TagController {
 		return result;
 	}
 	/**
-	 * 得到文章所属标签
+	 * 得到文章所有标签
 	 * @param articleid 文章id
 	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：该文章所属标签信息
 	 */
-	@GetMapping("/getbyarticle/{id}")
-	public ResponseResult<Tag> getTagByArticle(@PathVariable int articleid){
-		ResponseResult<Tag> result =new ResponseResult<Tag>();
+	@GetMapping("/getTagbyarticle/{id}")
+	public ResponseResult<List<Tag>> getTagByArticle(@PathVariable int articleid){
+		ResponseResult<List<Tag>> result =new ResponseResult<List<Tag>>();
 		
 		return result;
 	}
