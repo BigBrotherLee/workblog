@@ -63,10 +63,11 @@ public class UserController {
 	/**
 	 * 得到邮箱验证码，验证码有效期为15分钟
 	 * @param session
+	 * @param eamil 接受邮件的email地址
 	 * @return 成功则返回 ResponseResult的json，state为1，message发送成功，data为空
 	 */
-	@GetMapping("/getemailcode")
-	public ResponseResult<String> getEmailCode(HttpSession session){
+	@GetMapping("/getemailcode/{email}")
+	public ResponseResult<String> getEmailCode(HttpSession session,@PathVariable String email){
 		ResponseResult<String> result=new ResponseResult<String>();
 		
 		
@@ -76,10 +77,11 @@ public class UserController {
 	/**
 	 * 发送短信验证码，验证码有效期为15分钟
 	 * @param session
+	 * @param phone 用户电话号码
 	 * @return 成功则返回 ResponseResult的json，state为1，message发送成功，data为空
 	 */
-	@GetMapping("/getsmscode")
-	public ResponseResult<String> getSmsCode(HttpSession session){
+	@GetMapping("/getsmscode/{phone}")
+	public ResponseResult<String> getSmsCode(HttpSession session,@PathVariable String phone){
 		ResponseResult<String> result=new ResponseResult<String>();
 		
 		
@@ -121,11 +123,26 @@ public class UserController {
 	 * @param user 注册用户信息
 	 * @param code 验证码
 	 * @param session
-	 * @return 成功则返回ResponseResult<User> state：1，message：查询成功，data注册的user
+	 * @return 成功则返回ResponseResult<User> state：1，message：注册成功，data注册的user
 	 */
 	@PostMapping("/register")
 	public ResponseResult<User> register(User user,String code,HttpSession session){
 		ResponseResult<User> result=new ResponseResult<User>();
+		validate(code,session);
+		
+		return result;
+	}
+	
+	/**
+	 * 重置密码接口
+	 * @param password 新密码
+	 * @param code 验证码
+	 * @param session
+	 * @return 成功则返回ResponseResult<String> state：1，message：重置成功
+	 */
+	@PostMapping("/resetpassword")
+	public ResponseResult<String> register(String password,String code,HttpSession session){
+		ResponseResult<String> result=new ResponseResult<>();
 		validate(code,session);
 		
 		return result;

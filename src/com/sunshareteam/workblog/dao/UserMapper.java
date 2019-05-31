@@ -29,4 +29,10 @@ public interface UserMapper {
 	void updateUser(User user);
 	
 	void deleteUser(int id);
+//	-------------------------
+	List<User> findUserByKey(String key);
+	
+	List<User> findAdmin();
+	
+	
 }

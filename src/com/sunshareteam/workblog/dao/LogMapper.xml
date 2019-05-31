@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunshareteam.workblog.dao.LogMapper">
+	<insert id="insertLog" parameterType="com.sunshareteam.workblog.entity.Log">
+		insert  into tb_log(createdate,logcontent) values(#{createdate},#{logcontent})
+	</insert>
 	
+	<select id="findLogById" resultType="com.sunshareteam.workblog.entity.Log">
+		select * from tb_log where logid=#{logid}
+	</select>
+	
+	<select id="findLog" resultType="com.sunshareteam.workblog.entity.Log">
+		select * from tb_log order by createdate desc
+	</select>
 </mapper>  
