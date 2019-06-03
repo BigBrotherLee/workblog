@@ -1,11 +1,11 @@
 package com.sunshareteam.workblog.service;
 
-import java.util.List;
+import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.Link;
 public interface LinkService {
-	Link getLinkById(Integer id);
-	List<Link> findAll();
-	boolean addLink(Link link);
-	boolean updateLink(Link link);
-	boolean deleteLink(int id);
+	Link getById(Integer id);
+	PageInfo<Link> getAll(int start,int size);
+	void insertLink(Link link);
+	void updateLink(Link link);
+	void deleteLink(Integer id);
 }

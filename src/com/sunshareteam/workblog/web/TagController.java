@@ -36,10 +36,6 @@ public class TagController {
 	@GetMapping("/get/{id}")
 	public ResponseResult<Tag> getById(@PathVariable Integer id) {
 		ResponseResult<Tag> result=new ResponseResult<Tag>();
-		if(id!=null) {
-		    tagService.getTagById(id);
-		    return result;
-		}
 		return result;
 	}
 	
@@ -52,9 +48,6 @@ public class TagController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseResult<String> DeleteTag(@PathVariable String id) {
 		ResponseResult<String> result=new ResponseResult<String>();
-		if(id!=null) {
-		    tagService.deleteTag(new Integer(10));
-		}
 		return result;
 	}
 	
@@ -67,9 +60,6 @@ public class TagController {
 	@PostMapping("/add")
 	public ResponseResult<Tag> addTag(Tag tag){
 		ResponseResult<Tag> result =new ResponseResult<Tag>();
-		if(tag!=null) {		
-		tagService.addTag(tag);
-		}
 		return result;
 	}
     /**
@@ -92,9 +82,7 @@ public class TagController {
 	@PutMapping("/update")
 	public ResponseResult<Tag> updateTag(Tag tag){
 		ResponseResult<Tag> result =new ResponseResult<Tag>();
-		if(tagService.updateTag(tag)) {
-		tag=tagService.getTagById(new Integer(10));
-		}
+		
 		return result;
 	}
 	/**
@@ -116,7 +104,6 @@ public class TagController {
 	@GetMapping("/getall")
 	public ResponseResult<List<Tag>> getAll(){
 		ResponseResult<List<Tag>> result=new ResponseResult<List<Tag>>();
-		List<Tag> tag=tagService.findAll();
 		return result;
 	}
 	
@@ -130,7 +117,6 @@ public class TagController {
 	@GetMapping("/getpage/{index}/{length}")
 	public ResponseResult<PageInfo<Tag>> getPage(@PathVariable int index,@PathVariable int length,String key){
 		ResponseResult<PageInfo<Tag>> result=new ResponseResult<PageInfo<Tag>>();
-		tagService.findAll();
 		return result;
 	}
 }

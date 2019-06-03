@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
+import com.sunshareteam.workblog.dao.CommentOneMapper;
 import com.sunshareteam.workblog.entity.CommentOne;
 import com.sunshareteam.workblog.entity.CommentTwo;
 import com.sunshareteam.workblog.service.CommentTwoService;
@@ -28,12 +29,11 @@ public class CommentTwoController {
 	 * 查询二级评论
 	 * @param index 第几页
 	 * @param length 一页几条
-	 * @param key 关键字
 	 * @return 查询成功返回ResponseResult<PageInfo<CommentTwo>>分页数据，失败抛出异常LeeException
 	 */
 	@RequiresPermissions("commenttwo:select:*")
 	@GetMapping("/getcommenttwo/{index}/{length}")
-	public ResponseResult<PageInfo<CommentTwo>> getUser(@PathVariable int index,@PathVariable int length,String key) {
+	public ResponseResult<PageInfo<CommentTwo>> getUser(@PathVariable int index,@PathVariable int length) {
 		ResponseResult<PageInfo<CommentTwo>> result=new ResponseResult<PageInfo<CommentTwo>>();
 		
 		return result;
@@ -47,7 +47,6 @@ public class CommentTwoController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseResult<String> DeleteCommentTwo(@PathVariable String id) {
 		ResponseResult<String> result=new ResponseResult<String>();
-		
 		return result;
 	}
 	/**
@@ -79,15 +78,6 @@ public class CommentTwoController {
 	public ResponseResult<CommentTwo> getTagByUser(@PathVariable int userid){
 		ResponseResult<CommentTwo> result =new ResponseResult<CommentTwo>();
 		
-		return result;
-	}
-	/**
-	 * 得到个人的全部二级评论
-	 * @return 成功则返回ResponseResult<List<CommentTwo>> state：1，message：查询成功 ，data：所有二级评论的列表json
-	 */
-	@GetMapping("/getpersonalall")
-	public ResponseResult<List<CommentTwo>> getPersonalAll(){
-		ResponseResult<List<CommentTwo>> result=new ResponseResult<List<CommentTwo>>();
 		return result;
 	}
 }

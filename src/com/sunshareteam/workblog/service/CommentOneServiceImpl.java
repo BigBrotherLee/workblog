@@ -1,9 +1,12 @@
 package com.sunshareteam.workblog.service;
 
-import java.util.List;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.dao.CommentOneMapper;
 import com.sunshareteam.workblog.entity.CommentOne;
 
@@ -13,34 +16,28 @@ public class CommentOneServiceImpl implements CommentOneService{
 	private CommentOneMapper commentoneMapper;
 
 	@Override
-	public CommentOne getCommentOneById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public CommentOne getById(Integer id) {
+		return commentoneMapper.findById(id);
 	}
 
 	@Override
-	public List<CommentOne> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public void delete(Integer id) {
+		commentoneMapper.deleteCommentOne(id);
+		commentoneMapper.deleteCommentTwo(id);	//删除一级评论下的二级评论
 	}
 
 	@Override
-	public boolean addCommentOne(CommentOne commentone) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteCommentOne(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public List<CommentOne> findPersonalAll() {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public void insertCommentOne(CommentOne commentone) {
+		commentone.setCreatedate(new Date());
+		commentone.setModifydate(new Date());
+		commentoneMapper.insertCommentOne(commentone);	
 	}
 	
-
+	@Override
+	public PageInfo<CommentOne> getAll(int start, int size) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

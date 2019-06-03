@@ -1,13 +1,13 @@
 package com.sunshareteam.workblog.service;
 
-import java.util.List;
-
+import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.Tag;
 
 public interface TagService {
-	Tag getTagById(Integer id);
-	List<Tag> findAll();
-	boolean addTag(Tag tag);
-	boolean updateTag(Tag tag);
-	boolean deleteTag(int id);
+	Tag getById(Integer id);
+	void insertTag(Tag tag);
+	void updateTag(Tag tag);
+	void deleteTag(Integer id);
+	PageInfo<Tag> getAll(int start,int size);
+	PageInfo<Tag> getByKey(String key,int start,int size);
 }

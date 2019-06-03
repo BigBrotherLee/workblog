@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunshareteam.workblog.dao.TagMapper">
-    <select id="findTagId" resultType="com.sunshareteam.workblog.entity.Tag">
-		select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag where tagid=#{tagid}
+    <select id="findById" resultType="com.sunshareteam.workblog.entity.Tag">
+		select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag where tagid=#{id}
 	</select>
 	<select id="findAll" resultType="com.sunshareteam.workblog.entity.Tag">    
          select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag   
@@ -23,6 +23,9 @@
 	    where tagid=#{tagid}
 	</update>
 	<delete id="deleteTag">
-	   delete from tb_tag where tagid=#{tagid}
+	   delete from tb_tag where tagid=#{id}
 	</delete>
+	<select id="findTagByKey" resultType="com.sunshareteam.workblog.entity.Tag">
+		select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag where tagtitle like #{key}
+	</select>
 </mapper>

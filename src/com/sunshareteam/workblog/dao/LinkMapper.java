@@ -6,9 +6,9 @@ import com.sunshareteam.workblog.entity.Link;
 
 public interface LinkMapper {
 	
-	   Link findLinkId(int link); //根据ID查询
-	   List<Link> fingAll();
-	   void addLink(Link link);
+	   Link findById(Integer link); //根据ID查询
+	   List<Link> findAll();
+	   void insertLink(Link link);
 	   void updateLink(Link link);
-	   void deleteLink(int id);
+	   void deleteLink(Integer id);
 }

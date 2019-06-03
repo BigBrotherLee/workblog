@@ -29,12 +29,11 @@ public class CommentOneController {
 	 * 查询一级评论
 	 * @param index 第几页
 	 * @param length 一页几条
-	 * @param key 关键字
 	 * @return 查询成功返回ResponseResult<PageInfo<CommentOne>>分页数据，失败抛出异常LeeException
 	 */
 	@RequiresPermissions("commentone:select:*")
 	@GetMapping("/getcommentone/{index}/{length}")
-	public ResponseResult<PageInfo<CommentOne>> getUser(@PathVariable int index,@PathVariable int length,String key) {
+	public ResponseResult<PageInfo<CommentOne>> getUser(@PathVariable int index,@PathVariable int length) {
 		ResponseResult<PageInfo<CommentOne>> result=new ResponseResult<PageInfo<CommentOne>>();
 		
 		return result;
@@ -48,7 +47,7 @@ public class CommentOneController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseResult<String> DeleteCommentOne(@PathVariable String id) {
 		ResponseResult<String> result=new ResponseResult<String>();
-		
+		commentoneService.delete(1);
 		return result;
 	}
 	
@@ -61,6 +60,7 @@ public class CommentOneController {
 	@PostMapping("/add")
 	public ResponseResult<CommentOne> addCategoty(CommentOne commentone){
 		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
+		commentoneService.insertCommentOne(commentone);
 		return result;
 	}
 	/**
@@ -81,16 +81,6 @@ public class CommentOneController {
 	public ResponseResult<CommentOne> getTagByUser(@PathVariable int userid){
 		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
 		
-		return result;
-	}
-	
-	/**
-	 * 得到用户个人的全部一级评论
-	 * @return 成功则返回ResponseResult<List<Categoty>> state：1，message：查询成功 ，data：所有一级评论的列表json
-	 */
-	@GetMapping("/getpersonalall")
-	public ResponseResult<List<CommentOne>> getPersonalAll(){
-		ResponseResult<List<CommentOne>> result=new ResponseResult<List<CommentOne>>();
 		return result;
 	}
 }

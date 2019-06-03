@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunshareteam.workblog.dao.LinkMapper">
-    <select id="findLinkId" resultType="com.sunshareteam.workblog.entity.Link">
-		select linkid,linktitle,linkimg,linkaddress,modifydate,modifyuser from tb_link where linkid=#{linkid}
+    <select id="findById" resultType="com.sunshareteam.workblog.entity.Link">
+		select linkid,linktitle,linkimg,linkaddress,modifydate,modifyuser from tb_link where linkid=#{id}
 	</select>
 	<select id="findAll" resultType="com.sunshareteam.workblog.entity.Link">    
          select linkid,linktitle,linkimg,linkaddress,modifydate,modifyuser from tb_link   
@@ -23,6 +23,6 @@
 	    where linkid=#{linkid}
 	</update>
 	<delete id="deleteLink">
-	   delete from tb_link where linkid=#{linkid}
+	   delete from tb_link where linkid=#{id}
 	</delete>
 </mapper>

@@ -6,9 +6,9 @@ import com.sunshareteam.workblog.entity.CommentOne;
 
 public interface CommentOneMapper {
 
-	   CommentOne findCommentOneId(int commentone); //根据ID查询
-	   List<CommentOne> fingAll();
-	   List<CommentOne> fingPersonalAll();
-	   void addCommentOne(CommentOne commentone);
-	   void deleteCommentOne(int id);
+	   CommentOne findById(Integer commentone); //根据ID查询
+	   List<CommentOne> findAll();
+	   void insertCommentOne(CommentOne commentone);
+	   void deleteCommentOne(Integer id);
+	   void deleteCommentTwo(Integer articleid);
 }

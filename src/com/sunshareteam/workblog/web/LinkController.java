@@ -26,12 +26,11 @@ public class LinkController {
 	 * 查询友链
 	 * @param index 第几页
 	 * @param length 一页几条
-	 * @param key 关键字
 	 * @return 查询成功返回ResponseResult<PageInfo<CommentOne>>分页数据，失败抛出异常LeeException
 	 */
 	@RequiresPermissions("link:select:*")
 	@GetMapping("/getlink/{index}/{length}")
-	public ResponseResult<PageInfo<Link>> getUser(@PathVariable int index,@PathVariable int length,String key) {
+	public ResponseResult<PageInfo<Link>> getUser(@PathVariable int index,@PathVariable int length) {
 		ResponseResult<PageInfo<Link>> result=new ResponseResult<PageInfo<Link>>();
 		
 		return result;

@@ -1,13 +1,11 @@
 package com.sunshareteam.workblog.service;
 
-import java.util.List;
-
+import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.CommentTwo;
 
 public interface CommentTwoService {
-	CommentTwo getCommentTwoById(Integer id);
-	List<CommentTwo> findAll();
-	List<CommentTwo> findPersonalAll();
-	boolean addCommentTwo(CommentTwo commenttwo);
-	boolean deleteCommentTwo(int id);
+	CommentTwo getById(Integer id);
+	PageInfo<CommentTwo> getAll(int start,int size);
+	void insertCommentTwo(CommentTwo commenttwo);
+	void deleteCommentTwo(Integer id);
 }
