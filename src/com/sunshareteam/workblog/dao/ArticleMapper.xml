@@ -39,41 +39,38 @@
 	</insert>
 	
 	<select id="findByKey" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=1 and title like #{title}
+		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=1 and title like #{title}
 	</select>
-	
-	<select id="findByKey" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=1 and title like #{title}
-	</select>
+
 	
 	<select id="findHot" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=1 and order by commentnum desc
+		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=1 and order by commentnum desc
 	</select>
 	
 	<select id="findNew" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=1 and order by createdate desc
+		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=1 and order by createdate desc
 	</select>
 	
 	<select id="findByCategoty" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=1 and categoty=#{categotyid}
+		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=1 and categoty=#{categotyid}
 	</select>
 	
 	<select id="findByTag" resultType="com.sunshareteam.workblog.entity.Article">
-		select a.articleid,a.createdate,a.author,a.modifydate,a.img,content,a.commentnum,a.categoty,a.title 
+		select a.articleid,a.createdate,a.author,a.modifydate,a.img,a.commentnum,a.categoty,a.title 
 			from tb_article a,tb_article_tag ag where a.state=1 and ag.tagid=#{tagid} and ag.articleid=a.aticleid
 	</select>
 	
 	<select id="findByAuthor" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title 
+		select articleid,createdate,author,modifydate,img,commentnum,categoty,title 
 			from tb_article  where state=1 and author=#{authorid}
 	</select>
 	
 	<select id="findByKeyAll" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where title like #{title}
+		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where title like #{title}
 	</select>
 	
 	<select id="findByAuthorAll" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title 
+		select articleid,createdate,author,modifydate,img,commentnum,categoty,title 
 			from tb_article  where author=#{authorid}
 	</select>
 </mapper>  
