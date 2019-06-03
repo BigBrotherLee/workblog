@@ -81,5 +81,13 @@ public class CommentTwoController {
 		
 		return result;
 	}
-
+	/**
+	 * 得到个人的全部二级评论
+	 * @return 成功则返回ResponseResult<List<CommentTwo>> state：1，message：查询成功 ，data：所有二级评论的列表json
+	 */
+	@GetMapping("/getpersonalall")
+	public ResponseResult<List<CommentTwo>> getPersonalAll(){
+		ResponseResult<List<CommentTwo>> result=new ResponseResult<List<CommentTwo>>();
+		return result;
+	}
 }

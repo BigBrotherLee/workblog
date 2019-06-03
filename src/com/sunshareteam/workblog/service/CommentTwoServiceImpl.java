@@ -35,4 +35,10 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public List<CommentTwo> findPersonalAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

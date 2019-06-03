@@ -8,6 +8,7 @@ public interface CommentOneMapper {
 
 	   CommentOne findCommentOneId(int commentone); //根据ID查询
 	   List<CommentOne> fingAll();
+	   List<CommentOne> fingPersonalAll();
 	   void addCommentOne(CommentOne commentone);
 	   void deleteCommentOne(int id);
 }

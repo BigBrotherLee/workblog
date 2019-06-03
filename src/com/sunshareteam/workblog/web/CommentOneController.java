@@ -73,14 +73,24 @@ public class CommentOneController {
 		return result;
 	}
 	/**
-	 * 得到一级评论信息用户
+	 * 得到一级评论用户信息
 	 * @param userid 用户id
-	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：得到一级评论角色信息
+	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：得到一级评论用户信息
 	 */
 	@GetMapping("/getbyuser/{id}")
 	public ResponseResult<CommentOne> getTagByUser(@PathVariable int userid){
 		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
 		
+		return result;
+	}
+	
+	/**
+	 * 得到用户个人的全部一级评论
+	 * @return 成功则返回ResponseResult<List<Categoty>> state：1，message：查询成功 ，data：所有一级评论的列表json
+	 */
+	@GetMapping("/getpersonalall")
+	public ResponseResult<List<CommentOne>> getPersonalAll(){
+		ResponseResult<List<CommentOne>> result=new ResponseResult<List<CommentOne>>();
 		return result;
 	}
 }

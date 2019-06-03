@@ -7,6 +7,7 @@ import com.sunshareteam.workblog.entity.CommentTwo;
 public interface CommentTwoService {
 	CommentTwo getCommentTwoById(Integer id);
 	List<CommentTwo> findAll();
+	List<CommentTwo> findPersonalAll();
 	boolean addCommentTwo(CommentTwo commenttwo);
 	boolean deleteCommentTwo(int id);
 }

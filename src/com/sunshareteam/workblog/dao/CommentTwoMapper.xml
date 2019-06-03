@@ -7,6 +7,9 @@
 	<select id="findAll" resultType="com.sunshareteam.workblog.entity.CommentTwo">    
          select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two   
        </select>
+       <select id="findPersonalAll" resultType="com.sunshareteam.workblog.entity.CommentTwo">    
+         select author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two where author=#{author}  
+       </select>
 	<insert id="addCommentTwo">
 	    insert into tb_comment_two(author,content,createuser,createdate,modifydate,modifyuser,oneid)
 	    values(#{author},#{content},#{createuser},#{createdate},#{modifydate},#{modifyuser},#{oneid})

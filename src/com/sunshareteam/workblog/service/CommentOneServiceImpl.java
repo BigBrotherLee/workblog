@@ -35,6 +35,12 @@ public class CommentOneServiceImpl implements CommentOneService{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public List<CommentOne> findPersonalAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }
