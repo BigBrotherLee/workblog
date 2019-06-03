@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunshareteam.workblog.dao.CategotyMapper">
+
+	<select id="findById" resultType="com.sunshareteam.workblog.entity.Categoty">
+		select categotyid,createdate,categotytitle,categotydetail,img from tb_categoty where categotyid=#{id}
+	</select>
 	
+	<delete id="delete">
+		delete from tb_categoty where categotyid=#{id}
+	</delete>	
+	
+	<update id="updateCategoty" parameterType="com.sunshareteam.workblog.entity.Categoty">
+		update tb_categoty 
+			<set>
+				<if test="modifydate!=null">modifydate=#{modifydate},</if>
+				<if test="modifyuser!=null">modifyuser=#{modifyuser},</if>
+				<if test="categotytitle!=null">categotytitle=#{categotytitle},</if>
+				<if test="categotydetail!=null">categotydetail=#{categotydetail},</if>
+				<if test="img!=null">img=#{img}</if>
+			</set>
+			where categotyid=#{categotyid}
+	</update>
+	
+	<insert id="insertCategoty" parameterType="com.sunshareteam.workblog.entity.Categoty">
+		insert into tb_categoty(createdate,modifyuser,categotytitle,categotydetail,img)
+			values(#{createdate},#{modifyuser},#{categotytitle},#{categotydetail},#{img})
+	</insert>
+	
+	<select id="findAll" resultType="com.sunshareteam.workblog.entity.Categoty">
+		select categotyid,createdate,categotytitle,categotydetail,img from tb_categoty 
+	</select>
+	
+	<select id="findCategotyByKey" resultType="com.sunshareteam.workblog.entity.Categoty">
+		select categotyid,createdate,categotytitle,categotydetail,img from tb_categoty where categotytitle like #{key}
+	</select>
+	
+	<select id="getCategotyByArticle" resultType="com.sunshareteam.workblog.entity.Categoty">
+		select c.categotyid,c.createdate,c.categotytitle,.c.categotydetail,c.img from tb_categoty c,tb_article a where a.categoty=c.categityid and a.articleid=#{articleId}
+	</select>
+	
+	<update id="updateArticleCategity" parameterType="com.sunshareteam.workblog.entity.Article">
+		update tb_article set categoty=#{categoty} where articleid=#{articleid}
+	</update>
+	
+	<delete id="deleteArticleByCategoty">
+		delete from tb_article where categoty=#{categotyid}
+	</delete>	
 </mapper>  
