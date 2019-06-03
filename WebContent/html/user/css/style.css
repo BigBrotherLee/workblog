@@ -68,7 +68,7 @@ nav.navbar.navbar-default {
     border: none;
 }
 .navbar {
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
 }
 .navbar-collapse {
     padding: 0;
