@@ -19,7 +19,7 @@ public interface UserService {
 	void updateUser(User user);
 	void disableUser(Integer userid);
 	PageInfo<User> getByKey(String key,int start,int size);
-	PageInfo<User> getAdmin(int start,int size);
+	PageInfo<User> getAdmin(int start,int size,String key);
 	User getByName(String name);
 	User getByEmail(String eamil);
 }

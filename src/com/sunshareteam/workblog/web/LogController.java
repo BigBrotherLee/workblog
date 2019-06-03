@@ -1,5 +1,6 @@
 package com.sunshareteam.workblog.web;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bigbrotherlee.utils.LeeConstant;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.Log;
@@ -28,7 +30,15 @@ public class LogController {
 	@GetMapping("/getpage/{index}/{length}")
 	public ResponseResult<PageInfo<Log>> getPage(@PathVariable int index,@PathVariable int length) {
 		ResponseResult<PageInfo<Log>> result=new ResponseResult<PageInfo<Log>>();
-		
+		PageInfo<Log> data=logService.getAll(index, length);
+		if(data.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(data);
+		result.setMessage("查询成功");
+		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}
 	
@@ -41,6 +51,15 @@ public class LogController {
 	@GetMapping("/get/{id}")
 	public ResponseResult<Log> get(@PathVariable int id){
 		ResponseResult<Log> result=new ResponseResult<Log>();
+		Log log=logService.getById(id);
+		if(ObjectUtils.allNotNull(log)) {
+			result.setMessage("查询成功");
+			result.setState(LeeConstant.STATE_SUCCESS);
+			result.setData(log);
+			return result;
+		}
+		result.setMessage("查询为空");
+		result.setState(LeeConstant.STATE_FAIL);
 		return result;
 	}
 }

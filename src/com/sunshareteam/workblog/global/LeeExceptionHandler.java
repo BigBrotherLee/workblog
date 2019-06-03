@@ -1,21 +1,27 @@
 package com.sunshareteam.workblog.global;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.bigbrotherlee.utils.LeeException;
+import com.sunshareteam.workblog.entity.Log;
+import com.sunshareteam.workblog.service.LogService;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Slf4j
 @RestControllerAdvice
 public class LeeExceptionHandler {
-	
+	@Autowired
+	private LogService logService;
 	/**
 	 * 拦截自定义异常
 	 */
@@ -27,6 +33,10 @@ public class LeeExceptionHandler {
         map.put("url", req.getRequestURL());
         map.put("params", req.getParameterMap());
         log.error("抛出自定义异常：---------",ex.getMessage(),ex);
+        Log l=new Log();
+        l.setCreatedate(new Date());
+        l.setLogcontent(StringUtils.join(map, ","));
+        logService.addLog(l);
         return map;
     }
 	 

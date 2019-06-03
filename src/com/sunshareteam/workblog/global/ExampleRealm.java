@@ -11,11 +11,11 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.sunshareteam.workblog.entity.User;
+import com.bigbrotherlee.utils.LeeException;
 import com.sunshareteam.workblog.entity.Permission;
 import com.sunshareteam.workblog.entity.Role;
+import com.sunshareteam.workblog.entity.User;
 import com.sunshareteam.workblog.service.UserService;
 
 
@@ -50,8 +50,15 @@ public class ExampleRealm extends  AuthorizingRealm{
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		// 使用get方式会直接登录失败
-		Integer name=(Integer)token.getPrincipal();
-		User a=userService.getUserById(name);
+		String name=(String)token.getPrincipal();
+		
+		User a=userService.getByName(name);
+		if(a==null) {
+			a=userService.getByEmail(name);
+			if(a==null) {
+				throw new LeeException("用户不存在");
+			}
+		}
 		AuthenticationInfo info=new SimpleAuthenticationInfo(a, a.getPassword(), ByteSource.Util.bytes(a.getSalt()), "com.sunshareteam.workblog.global.ExampleRealm");
 		return info;
 	}
