@@ -1,5 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunshareteam.workblog.dao.ArticleMapper">
+	<select id="findById" resultType="com.sunshareteam.workblog.entity.Article">
+		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=1 and articleid=#{id}
+	</select>
 	
+	<update id="updateArticle" parameterType="com.sunshareteam.workblog.entity.Article">
+		update tb_article 
+			<set>
+				<if test="modifydate!=null">modifydate=#{modifydate},</if>
+				<if test="modifyuser!=null">modifyuser=#{modifyuser},</if>
+				<if test="img!=null">img=#{img},</if>
+				<if test="content!=null">content=#{content},</if>
+				<if test="commentnum!=null">commentnum=#{commentnum},</if>
+				<if test="categoty!=null">categoty=#{categoty},</if>
+				<if test="title!=null">title=#{title},</if>
+				<if test="summary!=null">summary=#{summary}</if>
+				<if test="state!=null">state=#{state}</if>
+			</set>
+			where articleid=#{articleid}
+	</update>
+	
+	<delete id="deleteArticle">
+		delete from tb_article where articleid=#{id}
+	</delete>
+	
+	<delete id="deleteCommentOne">
+		delete from tb_comment_one where articleid=#{articleid}
+	</delete>
+	
+	<delete id="deleteCommentTwo">
+		delete from tb_comment_two where oneid in (select comment_one_id from tb_comment_one where articleid=#{articleid})
+	</delete>
+	
+	<insert id="insertArticle" parameterType="com.sunshareteam.workblog.entity.Article">
+			insert into tb_article(createdate,img,content,author,commentnum,categoty,title,summary,state)
+				values(#{createdate},#{img},#{content},#{author},#{commentnum},#{categoty},#{title},#{summary},0)
+	</insert>
+	
+	<select id="findByKey" resultType="com.sunshareteam.workblog.entity.Article">
+		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=1 and title like #{title}
+	</select>
+	
+	<select id="findByKey" resultType="com.sunshareteam.workblog.entity.Article">
+		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=1 and title like #{title}
+	</select>
+	
+	<select id="findHot" resultType="com.sunshareteam.workblog.entity.Article">
+		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=1 and order by commentnum desc
+	</select>
+	
+	<select id="findNew" resultType="com.sunshareteam.workblog.entity.Article">
+		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=1 and order by createdate desc
+	</select>
+	
+	<select id="findByCategoty" resultType="com.sunshareteam.workblog.entity.Article">
+		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=1 and categoty=#{categotyid}
+	</select>
+	
+	<select id="findByTag" resultType="com.sunshareteam.workblog.entity.Article">
+		select a.articleid,a.createdate,a.author,a.modifydate,a.img,content,a.commentnum,a.categoty,a.title 
+			from tb_article a,tb_article_tag ag where a.state=1 and ag.tagid=#{tagid} and ag.articleid=a.aticleid
+	</select>
+	
+	<select id="findByAuthor" resultType="com.sunshareteam.workblog.entity.Article">
+		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title 
+			from tb_article  where state=1 and author=#{authorid}
+	</select>
+	
+	<select id="findByKeyAll" resultType="com.sunshareteam.workblog.entity.Article">
+		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where title like #{title}
+	</select>
+	
+	<select id="findByAuthorAll" resultType="com.sunshareteam.workblog.entity.Article">
+		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title 
+			from tb_article  where author=#{authorid}
+	</select>
 </mapper>  

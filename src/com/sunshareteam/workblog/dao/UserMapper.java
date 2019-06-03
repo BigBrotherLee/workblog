@@ -34,5 +34,7 @@ public interface UserMapper {
 	
 	List<User> findAdmin();
 	
+	User findUserByName(String name);
 	
+	User findUserByEmail(String email);	
 }
