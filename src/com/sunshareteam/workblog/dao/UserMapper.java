@@ -32,7 +32,7 @@ public interface UserMapper {
 //	-------------------------
 	List<User> findUserByKey(String key);
 	
-	List<User> findAdmin();
+	List<User> findAdmin(String key);
 	
 	User findUserByName(String name);
 	

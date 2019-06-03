@@ -97,9 +97,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public PageInfo<User> getAdmin(int start, int size) {
+	public PageInfo<User> getAdmin(int start, int size,String key) {
 		PageHelper.startPage(start, size);
-		List<User> list=userMapper.findAdmin();
+		List<User> list=userMapper.findAdmin("%"+key+"%");
 		return new PageInfo<User>(list);
 	}
 
