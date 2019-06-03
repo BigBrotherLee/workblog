@@ -1,5 +1,7 @@
 package com.sunshareteam.workblog.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.sunshareteam.workblog.entity.Tag;
@@ -29,6 +31,12 @@ public class TagServiceImpl implements TagService {
 	public boolean deleteTag(int id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Tag> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
