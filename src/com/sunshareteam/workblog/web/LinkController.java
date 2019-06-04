@@ -26,6 +26,7 @@ import com.sunshareteam.workblog.service.LinkService;
 public class LinkController {
 	@Autowired
 	private LinkService linkService;
+	
 	/**
 	 * 查询友链
 	 * @param index 第几页
