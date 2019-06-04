@@ -2,11 +2,9 @@ package com.sunshareteam.workblog.web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.bigbrotherlee.utils.LeeConstant;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.Tag;
-import com.sunshareteam.workblog.service.ArticleService;
+import com.sunshareteam.workblog.entity.User;
 import com.sunshareteam.workblog.service.TagService;
 
 @RestController
@@ -26,7 +25,6 @@ import com.sunshareteam.workblog.service.TagService;
 public class TagController {
 	@Autowired
 	private TagService tagService;
-	private ArticleService articleService;
 	
 	/**
 	 * 得到指定id的标签
@@ -36,6 +34,15 @@ public class TagController {
 	@GetMapping("/get/{id}")
 	public ResponseResult<Tag> getById(@PathVariable Integer id) {
 		ResponseResult<Tag> result=new ResponseResult<Tag>();
+		Tag tag=tagService.getById(id);
+		if(ObjectUtils.allNotNull(tag)) {
+			result.setData(tag);
+			result.setMessage("查询成功");
+			result.setState(LeeConstant.STATE_SUCCESS);
+			return result;
+		}
+		result.setMessage("查询为空");
+		result.setState(LeeConstant.STATE_FAIL);
 		return result;
 	}
 	
@@ -46,8 +53,18 @@ public class TagController {
 	 */
 	@RequiresPermissions("tag:delete:*")
 	@DeleteMapping("/delete/{id}")
-	public ResponseResult<String> DeleteTag(@PathVariable String id) {
+	public ResponseResult<String> DeleteTag(@PathVariable Integer id) {
 		ResponseResult<String> result=new ResponseResult<String>();
+		try {
+			tagService.deleteTag(id);
+			result.setData(id.toString());
+			result.setMessage("删除成功");
+			result.setState(LeeConstant.STATE_SUCCESS);
+		}catch (Exception e) {
+			result.setData(id.toString());
+			result.setMessage("删除失败");
+			result.setState(LeeConstant.STATE_FAIL);
+		}
 		return result;
 	}
 	
@@ -60,6 +77,18 @@ public class TagController {
 	@PostMapping("/add")
 	public ResponseResult<Tag> addTag(Tag tag){
 		ResponseResult<Tag> result =new ResponseResult<Tag>();
+		User user =(User) SecurityUtils.getSubject().getPrincipal();
+		tag.setCreateuser(user.getUserid());
+		try {
+			tagService.insertTag(tag);
+			result.setData(tag);
+			result.setMessage("添加成功");
+			result.setState(LeeConstant.STATE_SUCCESS);
+		} catch (Exception e) {
+			result.setData(tag);
+			result.setMessage("添加失败");
+			result.setState(LeeConstant.STATE_FAIL);
+		}
 		return result;
 	}
     /**
@@ -69,8 +98,16 @@ public class TagController {
 	 */
 	@RequiresPermissions("tag:insert:*")
 	@GetMapping("/add/{articleid}/{tagid}")
-	public ResponseResult<String> addTagArticled(int articleid,int tagid){
+	public ResponseResult<String> addTagArticled(Integer articleid,Integer tagid){
 		ResponseResult<String> result =new ResponseResult<String>();
+		try {
+			tagService.insertArticleTag(articleid, tagid);
+			result.setMessage("添加成功");
+			result.setState(LeeConstant.STATE_SUCCESS);
+		} catch (Exception e) {
+			result.setMessage("添加失败");
+			result.setState(LeeConstant.STATE_FAIL);
+		}
 		return result;
 	}
 	/**
@@ -82,7 +119,18 @@ public class TagController {
 	@PutMapping("/update")
 	public ResponseResult<Tag> updateTag(Tag tag){
 		ResponseResult<Tag> result =new ResponseResult<Tag>();
-		
+		User user =(User) SecurityUtils.getSubject().getPrincipal();
+		tag.setModifyuser(user.getUserid());
+		try {
+			tagService.updateTag(tag);
+			result.setData(tag);
+			result.setMessage("更新成功");
+			result.setState(LeeConstant.STATE_SUCCESS);
+		}catch (Exception e) {
+			result.setData(tag);
+			result.setMessage("更新失败");
+			result.setState(LeeConstant.STATE_FAIL);
+		}
 		return result;
 	}
 	/**
@@ -93,7 +141,14 @@ public class TagController {
 	@GetMapping("/getTagbyarticle/{id}")
 	public ResponseResult<List<Tag>> getTagByArticle(@PathVariable int articleid){
 		ResponseResult<List<Tag>> result =new ResponseResult<List<Tag>>();
-		
+		Tag tag=tagService.getByArticle(articleid);
+		if(ObjectUtils.allNotNull(tag)) {
+			result.setMessage("查询成功");
+			result.setState(LeeConstant.STATE_SUCCESS);
+			return result;
+		}
+		result.setMessage("查询为空");
+		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}
 	
@@ -104,6 +159,15 @@ public class TagController {
 	@GetMapping("/getall")
 	public ResponseResult<List<Tag>> getAll(){
 		ResponseResult<List<Tag>> result=new ResponseResult<List<Tag>>();
+		PageInfo<Tag> info=tagService.getAll(0, 1000);
+		if(info.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(info.getList());
+		result.setMessage("查询成功");
+		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}
 	
@@ -117,6 +181,15 @@ public class TagController {
 	@GetMapping("/getpage/{index}/{length}")
 	public ResponseResult<PageInfo<Tag>> getPage(@PathVariable int index,@PathVariable int length,String key){
 		ResponseResult<PageInfo<Tag>> result=new ResponseResult<PageInfo<Tag>>();
+		PageInfo<Tag> data=tagService.getByKey(key, index, length);
+		if(data.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(data);
+		result.setMessage("查询成功");
+		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}
 }

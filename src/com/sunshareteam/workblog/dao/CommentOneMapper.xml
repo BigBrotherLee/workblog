@@ -7,14 +7,20 @@
 	<select id="findAll" resultType="com.sunshareteam.workblog.entity.CommentOne">    
          select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one   
        </select>
+       <select id="findByKey" resultType="com.sunshareteam.workblog.entity.CommentOne">
+		select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one where state=1 and content like #{content}
+	</select>
 	<insert id="addCommentOne">
 	    insert into tb_comment_one(author,content,createuser,createdate,modifydate,modifyuser,articleid)
 	    values(#{author},#{content},#{createuser},#{createdate},#{modifydate},#{modifyuser},#{articleid})
 	</insert>
-	<delete id="deleteCommentOne">
+	<delete id="delete">
 	   delete from tb_comment_one where comment_one_id=#{id}
 	</delete>
-	<delete id="deleteCommentTwo">
-		delete from tb_comment_two where oneid in (select comment_one_id from tb_comment_one where articleid=#{articleid})
+	<delete id="deleteCommentTwoByCommentOne">
+		delete from tb_comment_two where oneid=#{comment_one_id}
 	</delete>
+	<select id="getCommentOneByUser" resultType="com.sunshareteam.workblog.entity.CommentOne">
+		select o.comment_one_id,o.author,o.content,o.createuser,o.createdate,o.modifydate,o.modifyuser,o.articleid from tb_comment_one o,tb_user u where o.createuser=u.userid and u.userid=#{userId}
+	</select>
 </mapper>

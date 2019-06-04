@@ -33,6 +33,13 @@ public class TagServiceImpl implements TagService {
 	}
 
 	@Override
+	@Transactional	
+	public void insertArticleTag(Integer articleid, Integer tagid) {
+		// TODO Auto-generated method stub
+		tagMapper.insertArticleTag(articleid, tagid);	
+	}
+	
+	@Override
 	@Transactional
 	public void updateTag(Tag tag) {
 		// TODO Auto-generated method stub
@@ -56,12 +63,14 @@ public class TagServiceImpl implements TagService {
 
 	@Override
 	public PageInfo<Tag> getByKey(String key, int start, int size) {
-		// TODO Auto-generated method stub
 		PageHelper.startPage(start, size);
-		List<Tag> list=tagMapper.findTagByKey("%"+key+"%");
+		List<Tag> list=tagMapper.findByKey("%"+key+"%");
 		return new PageInfo<Tag>(list);
 	}
 
-
-
+	@Override
+	public Tag getByArticle(Integer articleid) {
+		// TODO Auto-generated method stub
+		return tagMapper.getTagByArticle(articleid);
+	}
 }
