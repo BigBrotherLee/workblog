@@ -30,7 +30,7 @@ public class TestMapper {
 	@Test
 	public void testUserInsert() {
 		User user=new User();
-		user.setCreatedate(new Date());
+		user.setCreatedate(new Date()); 
 		user.setAutograph("你好，世界人");
 		user.setEmail("123@qq.com");
 		String salt=Integer.toString(RandomUtils.nextInt(1000, 9999));
