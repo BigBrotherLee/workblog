@@ -176,7 +176,7 @@ public class TagController {
 	 * @param index 第几页
 	 * @param length 每页几条
 	 * @param key 搜索关键字
-	 * @return 成功则返回ResponseResultPageInfo<Categoty>> state：1，message：查询成功 ，data：分页标签的列表json
+	 * @return 成功则返回ResponseResultPageInfo<Tag>> state：1，message：查询成功 ，data：分页标签的列表json
 	 */
 	@GetMapping("/getpage/{index}/{length}")
 	public ResponseResult<PageInfo<Tag>> getPage(@PathVariable int index,@PathVariable int length,String key){

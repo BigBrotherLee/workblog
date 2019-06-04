@@ -92,7 +92,7 @@ public class CommentTwoController {
 	}
 	/**
 	 * 添加二级评论
-	 * @param categoty 你要添加的二级评论信息
+	 * @param commenttwo 你要添加的二级评论信息
 	 * @return  成功返回ResponseResult<String> state：1，message：添加成功,data:你添加的二级评论dejson
 	 */
 	@RequiresPermissions("commenttwo:insert:*")
@@ -133,7 +133,7 @@ public class CommentTwoController {
 	}
 	/**
 	 * 得到二级评论用户
-	 * @param user户
+	 * @param userid 用户id
 	 * @return 成功则返回ResponseResult<CommentTwo> state：1，message：查询成功，data：得到二级评论角色信息
 	 */
 	@GetMapping("/getbyUser/{id}")
