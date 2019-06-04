@@ -7,7 +7,7 @@
 	</select>
 	
 	<select id="findRoleByUserId" resultType="com.sunshareteam.workblog.entity.Role">
-		select r.*  from tb_role r ,tb_user_role ur, user u  where ur.roleid=r.roleid and ur.userid=u.userid and u.userid=#{userid}
+		select r.*  from tb_role r ,tb_user_role ur, tb_user u  where ur.roleid=r.roleid and ur.userid=u.userid and u.userid=#{userid}
 	</select>
 	
 	<select id="findPromissionByUserId" resultType="com.sunshareteam.workblog.entity.Permission">

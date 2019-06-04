@@ -12,9 +12,9 @@ public interface UserMapper {
 	
 	User findUserById(int id);
 	
-	List<Permission> findPromission(int userId);
+	List<Permission> findPromissionByUserId(int userId);
 	
-	List<Role> findRole(int userId);
+	List<Role> findRoleByUserId(int userId);
 	
 	void addUser(User user); 
 	
