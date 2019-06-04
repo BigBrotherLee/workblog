@@ -1,10 +1,16 @@
 package com.sunshareteam.workblog.dao;
 
+import java.util.List;
+
 import com.sunshareteam.workblog.entity.CommentOne;
 
 public interface CommentOneMapper {
 
-	   CommentOne findCommentOneId(int commentone); //根据ID查询
-	   void addCommentOne(CommentOne commentone);
-	   void deleteCommentOne(int id);
+	   CommentOne findById(Integer commentone); //根据ID查询
+	   List<CommentOne> findAll();
+	   List<CommentOne> findByKey(String key);
+	   void insertCommentOne(CommentOne commentone);
+	   void delete(Integer id);
+	   void deleteCommentTwoByCommentOne(Integer comment_one_id);
+	   CommentOne getCommentOneByUser(Integer userId);
 }

@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunshareteam.workblog.dao.TagMapper">
-    <select id="findTagId" resultType="com.sunshareteam.workblog.entity.Tag">
-		select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag where tagid=#{tagid}
+    <select id="findById" resultType="com.sunshareteam.workblog.entity.Tag">
+		select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag where tagid=#{id}
+	</select>
+	<select id="findAll" resultType="com.sunshareteam.workblog.entity.Tag">    
+         select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag   
+       </select>
+        <select id="findByKey" resultType="com.sunshareteam.workblog.entity.Tag">
+		select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag where state=1 and tagtitle like #{tagtitle}
 	</select>
 	<insert id="addTag">
 	    insert into tb_tag(createuser,createdate,modifydate,modifyuser,tagtitle)
 	    values(#{createuser},#{createdate},#{modifydate},#{modifyuser},#{tagtitle})
+	</insert>
+	<insert id="addArticleTag">
+	    insert into tb_article_tag(article_id,tag_id)
+	    values(#{article_id},#{tag_id})
 	</insert>
 	<update id="updateTag">
 	    update tb_tag
@@ -20,6 +30,9 @@
 	    where tagid=#{tagid}
 	</update>
 	<delete id="deleteTag">
-	   delete from tb_tag where tagid=#{tagid}
+	   delete from tb_tag where tagid=#{id}
 	</delete>
+	<select id="getTagByArticle" resultType="com.sunshareteam.workblog.entity.Tag">
+		select t.tagid,t.createuser,t.createdate,t.modifydate,t.modifyuser,t.tagtitle from tb_tag t,tb_article_tag a where a.tagid=t.tagid and a.articleid=#{articleId}
+	</select>
 </mapper>
