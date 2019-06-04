@@ -154,4 +154,24 @@ public class LinkController {
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}
+	/**
+	 * 查询全部友链
+	 * @param index 第几页
+	 * @param length 页面长度
+	 * @return 成功则返回 ResponseResult<PageInfo<Link>> state：1，message：查询成功 data：友链分页信息
+	 */
+	@GetMapping("/getallpag/{index}/{length}")
+	public ResponseResult<PageInfo<Link>> getAllPag(@PathVariable int index,@PathVariable int length){
+		ResponseResult<PageInfo<Link>> result =new ResponseResult<PageInfo<Link>>();
+		PageInfo<Link> data=linkService.getAllPag(index, length);
+		if(data.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(data);
+		result.setMessage("查询成功");
+		result.setState(LeeConstant.STATE_SUCCESS);
+		return result;
+	}
 }

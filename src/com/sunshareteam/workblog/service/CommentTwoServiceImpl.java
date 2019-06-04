@@ -57,4 +57,11 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 		// TODO Auto-generated method stub
 		return commenttwoMapper.getCommentTwoByUser(userid);
 	}
+
+	@Override
+	public PageInfo<CommentTwo> getByOneAll(Integer oneid, int start, int size) {
+		PageHelper.startPage(start, size);
+		List<CommentTwo> list=commenttwoMapper.findByOneAll(oneid);
+		return new PageInfo<CommentTwo>(list);
+	}
 }

@@ -146,5 +146,25 @@ public class CommentOneController {
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}
-	
+	/**
+	 * 查询同文章评论，全部
+	 * @param index 第几页
+	 * @param length 页面长度
+	 * @param articleid 文章id
+	 * @return 成功则返回 ResponseResult<PageInfo<CommentOne>> state：1，message：查询成功 data：评论分页信息
+	 */
+	@GetMapping("/getcommentonebyarticleall/{index}/{length}")
+	public ResponseResult<PageInfo<CommentOne>> getCommentOneByArticleAll(@PathVariable int index,@PathVariable int length,Integer articleid){
+		ResponseResult<PageInfo<CommentOne>> result =new ResponseResult<PageInfo<CommentOne>>();
+		PageInfo<CommentOne> data=commentoneService.getByArticleAll(articleid, index, length);
+		if(data.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(data);
+		result.setMessage("查询成功");
+		result.setState(LeeConstant.STATE_SUCCESS);
+		return result;
+	}
 }

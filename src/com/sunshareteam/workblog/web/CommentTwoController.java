@@ -149,4 +149,23 @@ public class CommentTwoController {
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}
+	/**
+	 * 查询同一级评论的二级评论，全部
+	 * @param oneid 一级评论id
+	 * @return 成功则返回 ResponseResult<PageInfo<CommentTwo>> state：1，message：查询成功 data：评论分页信息
+	 */
+	@GetMapping("/getcommenttwobyoneall/{index}/{length}")
+	public ResponseResult<List<CommentTwo>> getCommentTwoByOneAll(@PathVariable Integer oneid){
+		ResponseResult<List<CommentTwo>> result =new ResponseResult<List<CommentTwo>>();
+		PageInfo<CommentTwo> info=commenttwoService.getByOneAll(oneid,0,1000);
+		if(info.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(info.getList());
+		result.setMessage("查询成功");
+		result.setState(LeeConstant.STATE_SUCCESS);
+		return result;
+	}
 }

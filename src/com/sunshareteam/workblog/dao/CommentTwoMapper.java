@@ -1,7 +1,6 @@
 package com.sunshareteam.workblog.dao;
 
 import java.util.List;
-
 import com.sunshareteam.workblog.entity.CommentTwo;
 
 public interface CommentTwoMapper {
@@ -12,4 +11,5 @@ public interface CommentTwoMapper {
 	   void insertCommentTwo(CommentTwo commenttwo);
 	   void deleteCommentTwo(Integer id);
 	   CommentTwo getCommentTwoByUser(Integer userId);
+	   List<CommentTwo> findByOneAll(Integer oneid);
 }

@@ -19,5 +19,8 @@
 	</delete>
 	<select id="getCommentTwoByUser" resultType="com.sunshareteam.workblog.entity.CommentTwo">
 		select t.comment_two_id,t.author,t.content,t.createuser,t.createdate,t.modifydate,t.modifyuser,t.oneid from tb_comment_two t,tb_user u where t.createuser=u.userid and u.userid=#{userId}
+	</select>
+	<select id="findByOneAll" resultType="com.sunshareteam.workblog.entity.CommentTwo">
+		select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two where oneid=#{oneid}
 	</select>	
 </mapper> 

@@ -48,6 +48,13 @@ public class LinkServiceImpl implements LinkService {
 	
 	@Override
 	public PageInfo<Link> getAll(int start, int size) {
+		PageHelper.startPage(start, size);
+		List<Link> list=linkMapper.findAll();
+		return new PageInfo<Link>(list);
+	}
+	
+	@Override
+	public PageInfo<Link> getAllPag(int start, int size) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -58,9 +65,4 @@ public class LinkServiceImpl implements LinkService {
 		List<Link> list=linkMapper.findByKey("%"+key+"%");
 		return new PageInfo<Link>(list);
 	}
-
-
-
-	
-
 }

@@ -55,4 +55,11 @@ public class CommentOneServiceImpl implements CommentOneService{
 		// TODO Auto-generated method stub
 		return commentoneMapper.getCommentOneByUser(userid);
 	}
+
+	@Override
+	public PageInfo<CommentOne> getByArticleAll(Integer articleid, int start, int size) {
+		PageHelper.startPage(start, size);
+		List<CommentOne> list=commentoneMapper.findByArticleAll(articleid);
+		return new PageInfo<CommentOne>(list);
+	}
 }

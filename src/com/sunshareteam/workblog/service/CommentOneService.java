@@ -10,4 +10,5 @@ public interface CommentOneService {
 	void insertCommentOne(CommentOne commentone);
 	void deleteCommentOne(Integer id);
 	CommentOne getByUser(Integer userid);
+	PageInfo<CommentOne> getByArticleAll(Integer articleid,int start,int size);
 }

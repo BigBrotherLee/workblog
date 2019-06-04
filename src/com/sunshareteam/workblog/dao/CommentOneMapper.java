@@ -13,5 +13,5 @@ public interface CommentOneMapper {
 	   void delete(Integer id);
 	   void deleteCommentTwoByCommentOne(Integer comment_one_id);
 	   CommentOne getCommentOneByUser(Integer userId);
-	   List<CommentOne> findByArticle(Integer articleid);
+	   List<CommentOne> findByArticleAll(Integer articleid);
 }

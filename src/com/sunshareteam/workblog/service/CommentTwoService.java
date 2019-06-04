@@ -10,4 +10,5 @@ public interface CommentTwoService {
 	void insertCommentTwo(CommentTwo commenttwo);
 	void deleteCommentTwo(Integer id);
 	CommentTwo getByUser(Integer userid);
+	PageInfo<CommentTwo> getByOneAll(Integer oneid,int start, int size);
 }
