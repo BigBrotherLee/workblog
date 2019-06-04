@@ -29,16 +29,15 @@ public class TestTagDao {
 	private CommentTwoMapper commenttwoMapper;
 	private LinkMapper linkmapper;
 	
-//   测试标签
- /*  @Test
+//  测试标签
+	/*   @Test
 	public void test1() {
 		Tag tag=new Tag();
 		tag.setTagtitle("1111");
 		tag.setCreatedate(new Date());
 		tag.setCreateuser(new Integer(10));
 		tag.setModifydate(new Date());
-        tag.setModifyuser(new Integer(10));
-		tagMapper.addTag(tag);
+        tag.setModifyuser(new Integer(10);
 	}    */
 //	@Test
 //	public void test2() {

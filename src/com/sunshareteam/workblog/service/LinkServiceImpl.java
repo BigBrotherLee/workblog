@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
@@ -11,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.dao.LinkMapper;
 import com.sunshareteam.workblog.entity.Link;
 
+@Service("linkService")
 public class LinkServiceImpl implements LinkService {
 	@Autowired
 	private LinkMapper linkMapper;

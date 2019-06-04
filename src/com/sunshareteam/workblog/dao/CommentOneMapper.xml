@@ -23,4 +23,8 @@
 	<select id="getCommentOneByUser" resultType="com.sunshareteam.workblog.entity.CommentOne">
 		select o.comment_one_id,o.author,o.content,o.createuser,o.createdate,o.modifydate,o.modifyuser,o.articleid from tb_comment_one o,tb_user u where o.createuser=u.userid and u.userid=#{userId}
 	</select>
+	<select id="findByArticle" resultType="com.sunshareteam.workblog.entity.CommentOne">
+		select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one where state=1 and author=#{articleid}
+	</select>
+	
 </mapper>
