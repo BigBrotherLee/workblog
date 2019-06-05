@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunshareteam.workblog.dao.ArticleMapper">
 	<select id="findById" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=1 and articleid=#{id}
+		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=0 and articleid=#{id}
 	</select>
 	
 	<update id="updateArticle" parameterType="com.sunshareteam.workblog.entity.Article">
@@ -33,36 +33,40 @@
 		delete from tb_comment_two where oneid in (select comment_one_id from tb_comment_one where articleid=#{articleid})
 	</delete>
 	
+	<delete id="deleteTag">
+		delete from tb_article_tag where articleid = #{articleid}
+	</delete>
+	
 	<insert id="insertArticle" parameterType="com.sunshareteam.workblog.entity.Article">
 			insert into tb_article(createdate,img,content,author,commentnum,categoty,title,summary,state)
 				values(#{createdate},#{img},#{content},#{author},#{commentnum},#{categoty},#{title},#{summary},0)
 	</insert>
 	
 	<select id="findByKey" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=1 and title like #{title}
+		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=0 and title like #{title}
 	</select>
 
 	
 	<select id="findHot" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=1 and order by commentnum desc
+		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=0 order by commentnum desc
 	</select>
 	
 	<select id="findNew" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=1 and order by createdate desc
+		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=0 order by createdate desc
 	</select>
 	
 	<select id="findByCategoty" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=1 and categoty=#{categotyid}
+		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=0 and categoty=#{categotyid}
 	</select>
 	
 	<select id="findByTag" resultType="com.sunshareteam.workblog.entity.Article">
 		select a.articleid,a.createdate,a.author,a.modifydate,a.img,a.commentnum,a.categoty,a.title 
-			from tb_article a,tb_article_tag ag where a.state=1 and ag.tagid=#{tagid} and ag.articleid=a.aticleid
+			from tb_article a,tb_article_tag ag where a.state=0 and ag.tagid=#{tagid} and ag.articleid=a.articleid
 	</select>
 	
 	<select id="findByAuthor" resultType="com.sunshareteam.workblog.entity.Article">
 		select articleid,createdate,author,modifydate,img,commentnum,categoty,title 
-			from tb_article  where state=1 and author=#{authorid}
+			from tb_article  where state=0 and author=#{authorid}
 	</select>
 	
 	<select id="findByKeyAll" resultType="com.sunshareteam.workblog.entity.Article">

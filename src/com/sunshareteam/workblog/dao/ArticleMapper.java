@@ -17,6 +17,8 @@ public interface ArticleMapper {
 	
 	void deleteCommentTwo(Integer articleid);
 	
+	void deleteTag(Integer articleid);
+	
 	List<Article> findByKey(String key);
 	
 	List<Article> findHot();
