@@ -34,6 +34,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public void delete(Integer id) {
 		articleMapper.deleteCommentTwo(id);
 		articleMapper.deleteCommentOne(id);
+		articleMapper.deleteTag(id);
 		articleMapper.deleteArticle(id);
 	}
 

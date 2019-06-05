@@ -7,7 +7,7 @@
 	</select>
 	
 	<select id="findRoleByUserId" resultType="com.sunshareteam.workblog.entity.Role">
-		select r.*  from tb_role r ,tb_user_role ur, user u  where ur.roleid=r.roleid and ur.userid=u.userid and u.userid=#{userid}
+		select r.*  from tb_role r ,tb_user_role ur, tb_user u  where ur.roleid=r.roleid and ur.userid=u.userid and u.userid=#{userid}
 	</select>
 	
 	<select id="findPromissionByUserId" resultType="com.sunshareteam.workblog.entity.Permission">
@@ -55,7 +55,7 @@
 	</update>
 	
 	<delete id="deleteUser">
-		delete from tb_user where userid=#{userid} 
+		update tb_user set deleted=1 where userid=#{userid} 
 	</delete>
 	
 	
@@ -64,7 +64,7 @@
 	</select>
 	
 	<select id="findAdmin" resultType="com.sunshareteam.workblog.entity.User">
-		select u.userid,u.username,u.password,u.phone,u.email,u.pic,u.autograph,y.createdate from tb_user u,tb_user_role ur where u.userid=ur.userid and ur.roleid=1 and username like #{username}
+		select u.userid,u.username,u.password,u.phone,u.email,u.pic,u.autograph,u.createdate from tb_user u,tb_user_role ur where u.userid=ur.userid and ur.roleid=1 and username like #{username}
 	</select>
 	
 	<select id="findUserByName" resultType="com.sunshareteam.workblog.entity.User">

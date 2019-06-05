@@ -28,13 +28,13 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<Role> getRoleByUserId(Integer userId) {
-		return userMapper.findRole(userId);
+		return userMapper.findRoleByUserId(userId);
 	}
 
 	@Override
 	public List<Permission> getPermissionByUserId(Integer userId) {
 		// TODO Auto-generated method stub
-		return userMapper.findPromission(userId);
+		return userMapper.findPromissionByUserId(userId);
 	}
 
 	@Override

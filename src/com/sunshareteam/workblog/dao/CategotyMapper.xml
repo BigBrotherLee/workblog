@@ -36,7 +36,7 @@
 	</select>
 	
 	<select id="getCategotyByArticle" resultType="com.sunshareteam.workblog.entity.Categoty">
-		select c.categotyid,c.createdate,c.categotytitle,.c.categotydetail,c.img from tb_categoty c,tb_article a where a.categoty=c.categityid and a.articleid=#{articleId}
+		select c.categotyid,c.createdate,c.categotytitle,.c.categotydetail,c.img from tb_categoty c,tb_article a where a.categoty=c.categotyid and a.articleid=#{articleId}
 	</select>
 	
 	<update id="updateArticleCategity" parameterType="com.sunshareteam.workblog.entity.Article">

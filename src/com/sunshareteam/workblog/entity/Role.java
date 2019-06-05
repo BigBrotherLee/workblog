@@ -5,7 +5,7 @@ import java.util.Date;
 public class Role {
 	private Integer roleid;
     private String rolename;
-    private String roletail;
+    private String roledetail;
     private Date createdate;
     private Date modifydate;
     private Integer modifyuser;
@@ -21,11 +21,12 @@ public class Role {
 	public void setRolename(String rolename) {
 		this.rolename = rolename;
 	}
-	public String getRoletail() {
-		return roletail;
+	
+	public String getRoledetail() {
+		return roledetail;
 	}
-	public void setRoletail(String roletail) {
-		this.roletail = roletail;
+	public void setRoledetail(String roledetail) {
+		this.roledetail = roledetail;
 	}
 	public Date getCreatedate() {
 		return createdate;
@@ -47,7 +48,8 @@ public class Role {
 	}
 	@Override
 	public String toString() {
-		return "Role [roleid=" + roleid + ", rolename=" + rolename + ", roletail=" + roletail + ", createdate="
+		return "Role [roleid=" + roleid + ", rolename=" + rolename + ", roledetail=" + roledetail + ", createdate="
 				+ createdate + ", modifydate=" + modifydate + ", modifyuser=" + modifyuser + "]";
 	}
+	
 }
