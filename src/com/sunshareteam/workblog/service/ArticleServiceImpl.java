@@ -43,6 +43,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public void insertArticle(Article article) {
 		article.setCreatedate(new Date());
 		article.setState(false);
+		article.setCommentnum(0);
 		articleMapper.insertArticle(article);
 	}
 

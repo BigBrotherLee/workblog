@@ -207,12 +207,6 @@ public class UserController {
 		String phone=BeanUtils.getProperty(session.getAttribute("registerUser"), "phone");
 		if(ObjectUtils.nullSafeEquals(email, user.getEmail()) && ObjectUtils.nullSafeEquals(phone, user.getPhone())) {
 			result.setState(LeeConstant.STATE_SUCCESS);
-			String salt=UUIDUtils.getUUIDNoConnect().substring(0, 6);
-			String pwd=new SimpleHash("MD5",user.getPassword(),ByteSource.Util.bytes(salt),2).toString();
-			user.setSalt(salt);
-			user.setPassword(pwd);
-			userService.addUser(user);
-			userService.addRoleToUser(2, user.getUserid());
 			result.setData(user);
 			result.setMessage("注册成功");
 			result.setState(LeeConstant.STATE_SUCCESS);

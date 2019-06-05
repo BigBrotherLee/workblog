@@ -14,9 +14,9 @@
 		select p.* from tb_user_role ur, tb_user u ,tb_permission p , tb_role_permission rp where rp.roleid=ur.roleid and rp.permissionid=p.permissionid and ur.userid=u.userid and u.userid=#{userid}
 	</select>
 	
-	<insert id="addUser" parameterType="com.sunshareteam.workblog.entity.User">
+	<insert id="addUser" parameterType="com.sunshareteam.workblog.entity.User" useGeneratedKeys="true" keyProperty="userid">
 		insert into tb_user(username,password,createdate,phone,email,pic,autograph,deleted,salt) 
-			values(#{username},#{password},#{createdate},#{phone},#{email},#{pic},#{autograph},0,#{salt})
+			values(#{username},#{password},#{createdate},#{phone},#{email},#{pic},#{autograph},1,#{salt})
 	</insert>
 	
 	<insert id="addRole" parameterType="com.sunshareteam.workblog.entity.Role">
@@ -55,7 +55,7 @@
 	</update>
 	
 	<delete id="deleteUser">
-		update tb_user set deleted=1 where userid=#{userid} 
+		update tb_user set deleted=0 where userid=#{userid} 
 	</delete>
 	
 	
