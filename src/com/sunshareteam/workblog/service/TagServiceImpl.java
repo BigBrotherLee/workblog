@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.dao.TagMapper;
+import com.sunshareteam.workblog.entity.ArticleTag;
 import com.sunshareteam.workblog.entity.Tag;
 
 @Service("tagService")
@@ -34,9 +35,9 @@ public class TagServiceImpl implements TagService {
 
 	@Override
 	@Transactional	
-	public void insertArticleTag(Integer articleid, Integer tagid) {
+	public void insertArticleTag(ArticleTag articletag) {
 		// TODO Auto-generated method stub
-		tagMapper.insertArticleTag(articleid, tagid);	
+		tagMapper.insertArticleTag(articletag);	
 	}
 	
 	@Override
@@ -50,9 +51,10 @@ public class TagServiceImpl implements TagService {
 
 	@Override
 	@Transactional
-	public void deleteTag(Integer id) {
+	public void delete(Integer id) {
 		// TODO Auto-generated method stub
 		tagMapper.deleteTag(id);
+		tagMapper.deleteArticleTag(id);
 	}
 
 	@Override
@@ -69,8 +71,9 @@ public class TagServiceImpl implements TagService {
 	}
 
 	@Override
-	public Tag getByArticle(Integer articleid) {
-		// TODO Auto-generated method stub
-		return tagMapper.getTagByArticle(articleid);
+	public PageInfo<Tag> getByArticle(Integer articleid,int start,int size) {
+		PageHelper.startPage(start, size);
+		List<Tag> list=tagMapper.fingTagByArticle(articleid);
+		return new PageInfo<Tag>(list);
 	}
 }

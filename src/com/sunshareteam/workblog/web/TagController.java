@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bigbrotherlee.utils.LeeConstant;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
+import com.sunshareteam.workblog.entity.ArticleTag;
 import com.sunshareteam.workblog.entity.Tag;
 import com.sunshareteam.workblog.entity.User;
 import com.sunshareteam.workblog.service.TagService;
@@ -56,7 +57,7 @@ public class TagController {
 	public ResponseResult<String> DeleteTag(@PathVariable Integer id) {
 		ResponseResult<String> result=new ResponseResult<String>();
 		try {
-			tagService.deleteTag(id);
+			tagService.delete(id);
 			result.setData(id.toString());
 			result.setMessage("删除成功");
 			result.setState(LeeConstant.STATE_SUCCESS);
@@ -93,15 +94,15 @@ public class TagController {
 	}
     /**
 	 * 添加已有标签
-	 * @param articleid tagid 文章id 标签id
+	 * @param articletag 你要添加的文章标签id信息
 	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：该文章所属标签信息
 	 */
 	@RequiresPermissions("tag:insert:*")
 	@GetMapping("/add/{articleid}/{tagid}")
-	public ResponseResult<String> addTagArticled(Integer articleid,Integer tagid){
+	public ResponseResult<String> addTagArticled(ArticleTag articletag){
 		ResponseResult<String> result =new ResponseResult<String>();
 		try {
-			tagService.insertArticleTag(articleid, tagid);
+			tagService.insertArticleTag(articletag);
 			result.setMessage("添加成功");
 			result.setState(LeeConstant.STATE_SUCCESS);
 		} catch (Exception e) {
@@ -141,13 +142,14 @@ public class TagController {
 	@GetMapping("/getTagbyarticle/{id}")
 	public ResponseResult<List<Tag>> getTagByArticle(@PathVariable int articleid){
 		ResponseResult<List<Tag>> result =new ResponseResult<List<Tag>>();
-		Tag tag=tagService.getByArticle(articleid);
-		if(ObjectUtils.allNotNull(tag)) {
-			result.setMessage("查询成功");
-			result.setState(LeeConstant.STATE_SUCCESS);
+		PageInfo<Tag> info=tagService.getByArticle(articleid,0,1000);
+		if(info.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
 			return result;
 		}
-		result.setMessage("查询为空");
+		result.setData(info.getList());
+		result.setMessage("查询成功");
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}

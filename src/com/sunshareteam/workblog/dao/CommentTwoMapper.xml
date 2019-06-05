@@ -8,9 +8,9 @@
          select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two   
        </select>
        <select id="findByKey" resultType="com.sunshareteam.workblog.entity.CommentTwo">
-		select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two where state=1 and content like #{content}
+		select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two where content like #{content}
 	</select>
-	<insert id="addCommentTwo">
+	<insert id="insertCommentTwo" parameterType="com.sunshareteam.workblog.entity.CommentTwo">
 	    insert into tb_comment_two(author,content,createuser,createdate,modifydate,modifyuser,oneid)
 	    values(#{author},#{content},#{createuser},#{createdate},#{modifydate},#{modifyuser},#{oneid})
 	</insert>

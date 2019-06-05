@@ -1,6 +1,7 @@
 package com.workblog.zjy;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +14,7 @@ import com.sunshareteam.workblog.dao.CommentOneMapper;
 import com.sunshareteam.workblog.dao.CommentTwoMapper;
 import com.sunshareteam.workblog.dao.LinkMapper;
 import com.sunshareteam.workblog.dao.TagMapper;
+import com.sunshareteam.workblog.entity.ArticleTag;
 import com.sunshareteam.workblog.entity.Categoty;
 import com.sunshareteam.workblog.entity.CommentOne;
 import com.sunshareteam.workblog.entity.CommentTwo;
@@ -30,26 +32,58 @@ public class TestTagDao {
 	private LinkMapper linkmapper;
 	
 //  测试标签
-	/*   @Test
+	  /* @Test
 	public void test1() {
+       Tag tag= tagMapper.findById(9);
+        System.out.println(tag);  
+	} */
+	/*  @Test
+	public void test2() {
+		List<Tag> list=tagMapper.findAll();
+		System.out.println(list);  
+	}*/ 
+	  /* @Test
+	public void test3() {
 		Tag tag=new Tag();
-		tag.setTagtitle("1111");
+		tag.setTagtitle("小说");
 		tag.setCreatedate(new Date());
 		tag.setCreateuser(new Integer(10));
 		tag.setModifydate(new Date());
-        tag.setModifyuser(new Integer(10);
+        tag.setModifyuser(new Integer(10));
+        tagMapper.insertTag(tag);
 	}    */
-//	@Test
-//	public void test2() {
-//		tagMapper.deleteTag(6);
-//	}
-/*		@Test
-	 	public void test3() {
+/*	   @Test
+	public void test4() {
+		ArticleTag articletag=new ArticleTag();
+		articletag.setArticleid(1);
+		articletag.setTagid(2);
+        tagMapper.insertArticleTag(articletag);
+        }*/	
+	/*@Test
+	 	public void test5() {
 		Tag tag=new Tag();
-		tag.setTagid(6);
+		tag.setTagid(9);
 		tag.setTagtitle("2222");
 		tagMapper.updateTag(tag);
 	}*/
+	@Test
+	public void test6() {
+	tagMapper.deleteTag(1);
+}
+	@Test
+	public void test7() {		
+	List<Tag> list=tagMapper.findByKey("%小%");
+	System.out.println(list);  
+}
+	@Test
+	public void test8() {		
+	List<Tag> list=tagMapper.fingTagByArticle(1);
+	System.out.println(list);
+}
+	/*@Test
+	public void test6() {
+		tagMapper.deleteTag(1);
+}*/
 	//测试一级评论
 	/*    @Test
  public void test1() {

@@ -13,4 +13,8 @@ import com.sunshareteam.workblog.service.TagService;
 public class TestService {
 	@Autowired
 	private TagService tagService;
+	
+	public void test1() {
+	
+	}
 }
