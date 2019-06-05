@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
@@ -281,8 +282,8 @@ public class UserController {
 	 * @return 登录成功则继续访问，登录失败则抛出异常
 	 */
 	@RequiresGuest   //访客
-	@PostMapping("/login")
-	public String login(HttpServletRequest request) {
+	@RequestMapping("/login")
+	public ModelAndView login(HttpServletRequest request) {
 		//如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
 		String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
 		//根据shiro返回的异常类路径判断，抛出指定异常信息
@@ -299,7 +300,7 @@ public class UserController {
 				throw new LeeException("未知错误");//最终在异常处理器生成未知错误
 			}
 		}
-		return "login";
+		return new ModelAndView("login");
 	}
 	
 	/**
