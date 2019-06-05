@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -178,6 +179,7 @@ public class UserController {
 	 * @param session
 	 * @return 成功则返回ResponseResult<User> state：1，message：注册成功，data注册的user
 	 */
+	@RequiresGuest
 	@PostMapping("/register")
 	public ResponseResult<User> register(User user,String code,HttpSession session) throws Exception{
 		ResponseResult<User> result=new ResponseResult<User>();
