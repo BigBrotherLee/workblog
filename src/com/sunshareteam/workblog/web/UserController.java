@@ -83,8 +83,8 @@ public class UserController {
 	 * @param eamil 接受邮件的email地址
 	 * @return 成功则返回 ResponseResult的json，state为1，message发送成功，data为空
 	 */
-	@GetMapping("/getemailcode/{email}")
-	public ResponseResult<String> getEmailCode(HttpSession session,@PathVariable String email){
+	@GetMapping("/getemailcode")
+	public ResponseResult<String> getEmailCode(HttpSession session,String email){
 		ResponseResult<String> result=new ResponseResult<String>();
 		Integer vCode=RandomUtils.nextInt(100000, 999999);
 		String msg="[workblog验证码] 感谢您使用workblog，你的验证码是\n："+vCode+"，15分钟内有效。\n如果这不是您的操作，请忽略";
