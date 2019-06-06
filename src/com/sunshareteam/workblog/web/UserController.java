@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
@@ -178,6 +180,7 @@ public class UserController {
 	 * @param session
 	 * @return 成功则返回ResponseResult<User> state：1，message：注册成功，data注册的user
 	 */
+	@RequiresGuest
 	@PostMapping("/register")
 	public ResponseResult<User> register(User user,String code,HttpSession session) throws Exception{
 		ResponseResult<User> result=new ResponseResult<User>();
@@ -207,12 +210,6 @@ public class UserController {
 		String phone=BeanUtils.getProperty(session.getAttribute("registerUser"), "phone");
 		if(ObjectUtils.nullSafeEquals(email, user.getEmail()) && ObjectUtils.nullSafeEquals(phone, user.getPhone())) {
 			result.setState(LeeConstant.STATE_SUCCESS);
-			String salt=UUIDUtils.getUUIDNoConnect().substring(0, 6);
-			String pwd=new SimpleHash("MD5",user.getPassword(),ByteSource.Util.bytes(salt),2).toString();
-			user.setSalt(salt);
-			user.setPassword(pwd);
-			userService.addUser(user);
-			userService.addRoleToUser(2, user.getUserid());
 			result.setData(user);
 			result.setMessage("注册成功");
 			result.setState(LeeConstant.STATE_SUCCESS);
@@ -284,8 +281,9 @@ public class UserController {
 	 * @param request
 	 * @return 登录成功则继续访问，登录失败则抛出异常
 	 */
-	@PostMapping("/login")
-	public String login(HttpServletRequest request) {
+	@RequiresGuest   //访客
+	@RequestMapping("/login")
+	public ModelAndView login(HttpServletRequest request) {
 		//如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
 		String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
 		//根据shiro返回的异常类路径判断，抛出指定异常信息
@@ -302,7 +300,7 @@ public class UserController {
 				throw new LeeException("未知错误");//最终在异常处理器生成未知错误
 			}
 		}
-		return "login";
+		return new ModelAndView("user/login");
 	}
 	
 	/**

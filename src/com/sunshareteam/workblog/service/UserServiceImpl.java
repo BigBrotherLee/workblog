@@ -3,10 +3,13 @@ package com.sunshareteam.workblog.service;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bigbrotherlee.utils.UUIDUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.dao.UserMapper;
@@ -40,8 +43,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional
 	public void addUser(User user) {
+		String salt=UUIDUtils.getUUIDNoConnect().substring(0, 6);
+		String pwd=new SimpleHash("MD5",user.getPassword(),ByteSource.Util.bytes(salt),2).toString();
+		user.setSalt(salt);
+		user.setPassword(pwd);
 		user.setCreatedate(new Date());
 		userMapper.addUser(user);
+		UserRole ur=new UserRole();
+		ur.setRoleid(2);
+		ur.setUserid(user.getUserid());
+		userMapper.addRoleToUser(ur);
 	}
 
 	@Override

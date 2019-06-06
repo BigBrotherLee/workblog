@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
+import com.bigbrotherlee.utils.LeeException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.dao.CategotyMapper;
@@ -46,8 +48,10 @@ public class CategotyServiceImpl implements CategotyService {
 
 	@Override
 	public PageInfo<Categoty> getAll(int start, int size) {
-		// TODO Auto-generated method stub
-		return null;
+		PageHelper.startPage(start, size);
+		List<Categoty> list=categotyMapper.findAll();
+		PageInfo<Categoty> info=new PageInfo<Categoty>(list);
+		return info;
 	}
 
 	@Override
@@ -66,6 +70,12 @@ public class CategotyServiceImpl implements CategotyService {
 	@Transactional
 	public void changeCategoty(Integer categotyid, Integer articleid) {
 		Article  article=new Article();
+		Categoty c=categotyMapper.findById(categotyid);
+		if(ObjectUtils.isEmpty(c)) {
+			throw new LeeException("无此分类");
+		}
+		article.setArticleid(articleid);
+		article.setCategoty(categotyid);
 		categotyMapper.updateArticleCategity(article);
 	}
 }
