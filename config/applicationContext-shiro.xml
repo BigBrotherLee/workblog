@@ -40,9 +40,7 @@
 				/user/getsmscode/*=anon
 				/user/validate/*=anon
 				/user/resetpassword=anon
-				/user/login=anon
 				<!-- 验证码，可匿名访问 -->
-				/index.* = anon
 				/validate = anon
 				<!-- 登出 -->
 				/user/logout = logout

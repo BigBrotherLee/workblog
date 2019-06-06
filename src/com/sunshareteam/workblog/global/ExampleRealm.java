@@ -11,6 +11,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bigbrotherlee.utils.LeeException;
 import com.sunshareteam.workblog.entity.Permission;
@@ -21,7 +22,7 @@ import com.sunshareteam.workblog.service.UserService;
 
 public class ExampleRealm extends  AuthorizingRealm{
 	
-//	@Autowired
+	@Autowired
 	private UserService userService;
 	
 	/* 
