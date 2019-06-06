@@ -1,81 +1,307 @@
-.fl{
-	float:left;
+.fl {
+	float: left;
 }
-.fr{
+
+.fr {
 	float: right;
 }
 
-.banxin{
-	width:80%;
-	height:1200px;	
-	margin:0 auto;
-	max-width:1280px;
+.banxin {
+	width: 80%;
+	height: 1200px;
+	margin: 0 auto;
+	max-width: 1280px;
 
 }
-.zuida{
-	background:url(../images/book.jpg) no-repeat 0px 0px;
-    background-size: cover;
+
+.zuida {
+	background: url(../images/book.jpg) no-repeat 0px 0px;
+	background-size: cover;
 }
-.tupian{
+
+.tupian {
 	width: 300px;
-	height:400px;
-	background:url(../images/gtupian.jpg) no-repeat 0px 0px;
+	height: 400px;
+	background: url(../images/gtupian.jpg) no-repeat 0px 0px;
 	margin-top: 30px;
-	
+
 }
-.fenglei{
-	width:900px;
+
+.fenglei {
+	width: 900px;
 	height: 973px;
 	margin-top: 30px;
-	margin-right:36px;
-    flex-grow: 1;
-    overflow: hidden;
-    transition: all .2s ease-in-out;
-    margin-left: 20px;
+	margin-right: 36px;
+	flex-grow: 1;
+	overflow: hidden;
+	transition: all .2s ease-in-out;
+	margin-left: 20px;
 
 }
+
 .g1 {
 	height: 150px;
 	margin-bottom: 15px;
 	background-color: white;
 	border: 2px solid #55615A;
 }
-.post{
-	height:150px;
+
+.post {
+	height: 150px;
 	width: 300px;
 	display: block;
 }
-.post-title{
+
+.post-title {
 	border-bottom: 3px solid #efefef;
 	display: inline-block;
-    font-size: 17px;
-    letter-spacing: 2px;
-    padding-bottom: 5px;
+	font-size: 17px;
+	letter-spacing: 2px;
+	padding-bottom: 5px;
 	padding-top: 15px;
 	margin-left: 30px;
-    
+
 }
-.post-tupian{
+
+.post-tupian {
 	height: 140px;
-	width:390px;
-	background:url(../images/gtupian.jpg) no-repeat 0px 0px;
+	width: 390px;
+	background: url(../images/gtupian.jpg) no-repeat 0px 0px;
 	background-size: cover;
 }
-.post-info{
+
+.post-info {
 	color: #999;
-    margin-top: 4px;
+	margin-top: 4px;
 	margin-left: 30px;
-    overflow: hidden
-	
+	overflow: hidden
 }
-.abzuida{
+
+.abzuida {
 	height: 1800px;
 	width: 100%;
 	background-color: yellow;
 }
-.abbanxin{
+
+.abbanxin {
 	width: 74%;
 	height: 1800px;
 	background-color: #000000;
 	margin: auto;
+}
+
+.shouxia {
+	height: 1600px;
+	width: 100%;
+	/* background: url(../images/j3.jpg) no-repeat 0px 0px; */
+	background-size: cover;
+	background-attachment: fixed;
+	border: 1px soild red;
+	padding-top: 25px;
+	overflow: hidden;
+}
+.b1{
+	width: 1000px;
+	height: 180px;
+	/* background-color: greenyellow; */
+	margin-top: 110px;
+	margin-left: 450px;
+	overflow: hidden;
+}
+.b1-1{
+	/* background: url(../images/baidu.gif) no-repeat;
+	background-size: 100%; */
+	width: 300px;
+	height: 100px;
+	/* background-color: wheat; */
+	/* margin-right: 50px; */
+	/* float: right; */
+	/* overflow: hidden; */
+	/* margin-top: 30px; */
+	border-radius: 7px;
+	/* box-shadow: 4px 4px #999999; */
+}
+.b1-2{
+	background: url(../images/wangyiyun.jpg) no-repeat;
+	background-size: 100%;
+	width: 300px;
+	height: 100px;
+	margin-right: 50px;
+	float: right;
+	overflow: hidden;
+	margin-top: 30px;
+	border-radius: 7px;
+}
+.b1-3{
+	background: url(../images/xinlang.jpg) no-repeat;
+	background-size: 100%;
+	width: 300px;
+	height: 100px;
+	margin-right: 50px;
+	float: right;
+	overflow: hidden;
+	margin-top: 30px;
+	border-radius: 7px;
+}
+.b1-1-x{
+	width: 300px;
+	height: 50px;
+	/* background-color: yellow; */
+	/* 222 */
+	margin-top: 8px;
+	overflow: hidden;
+	float: right;
+}
+.b1-2-x{
+	width: 300px;
+	height: 50px;
+	/* background-color: yellow; */
+	margin-right: 50px;
+	margin-top: 8px;
+	overflow: hidden;
+	float: right;
+}
+.b1-3-x{
+	width: 300px;
+	height: 50px;
+	/* background-color: yellow; */
+	margin-right: 50px;
+	margin-top: 8px;
+	overflow: hidden;
+	float: right;
+}
+.b1-1-x-r{
+	width: 130px;
+	height: 30px;
+	border: 1px solid #EEAD31;
+	/* background-color: #5d3335; */
+	margin-left: 150px;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 7px;
+	margin-top: 5px;
+	text-align: center;
+}
+.b1-1-x-r a{
+	font-family: "Wire One";
+	letter-spacing: 1px;
+	font-size: 15px;
+	line-height: 30px;
+	color: #EEAD31;
+	
+}
+.c1{
+	width: 230px;
+	height: 390px;
+	/* background-color: #f5deb3a6; */
+	float: left;
+	margin-left: 100px;
+	border-radius: 7px; 
+}
+.c2{
+	width: 230px;
+	height: 390px;
+	/* background-color: #f5deb3a6; */
+	float: left;
+	margin-left: 100px;
+	margin-top: -100px; 
+	border-radius: 7px;
+}
+.c3{
+	width: 230px;
+	height: 390px;
+	/* background-color: #f5deb3a6; */
+	float: left;
+	margin-left: 100px;
+	margin-top: -100px; 
+    border-radius: 7px;
+}
+.cc2{
+	width: 100%;
+	height: 250px;
+	/* background-color: #f5deb3a6; */
+	float: left;
+	/* margin-left: 130px;
+	margin-top: 50px; */ 
+	border-radius: 7px;
+	margin: auto;
+}
+.c1-1{
+	width: 100px;
+	height: 220px;
+	background-color: #00000030;
+	/* border-radius: 20px; */
+	margin-top: -39px;
+	margin-right: 3px;
+	float: right;
+}
+.c1-2{
+	width: 100px;
+	height: 250px;
+	background-color: #00000050;
+	/* border-radius: 20px; */
+	margin-top: 3px;
+	margin-right: 3px;
+	float: right;
+}
+.c1-3{
+	width: 100px;
+	height: 250px;
+	background-color: #00000070;
+	/* border-radius: 20px; */
+	margin-top:-67px;
+	margin-right: 3px;
+	float: right;
+}
+.c1-4{
+	width: 100px;
+	height: 224px;
+	background-color: #00000090;
+	/* border-radius: 20px; */
+	margin-top: 3px;
+	margin-right: 3px;
+	float: right;
+}
+.cc2-1{
+	width: 90%;
+	height: 80px;
+    background-color: #002E44;
+    border-radius: 7px;
+	margin: auto;
+	margin-top: 2.5px;
+	/* background: url(../images/ccc3.jpg) no-repeat ; */
+	/* background-size: cover; */
+	/* background-attachment: fixed; */
+}
+.cc2-2{
+	width: 90%;
+	height: 80px;
+    background-color: #002E44;
+    border-radius: 7px;
+	margin: auto;
+	margin-top: 2.5px;
+	/* background: url(../images/ccc4.jpg) no-repeat ; */
+	/* background-size: cover; */
+	/* background-attachment: fixed; */
+}
+.cc2-3{
+	width: 90%;
+	height: 80px;
+    background-color: #002E44;
+    border-radius: 7px;
+	margin: auto;
+	margin-top: 2.5px;
+	/* background: url(../images/ccc5.jpg) no-repeat; */
+	/* background-size: cover; */
+	/* background-attachment: fixed; */
+}
+
+.b1-1:hover{
+	border: 3px solid white;
+}
+.b1-2:hover{
+	border: 3px solid white;
+}
+.b1-3:hover{
+	border: 3px solid white;
 }
