@@ -132,14 +132,14 @@ public class CommentTwoController {
 		return result;
 	}
 	/**
-	 * 得到二级评论用户
+	 * 得到二级评论用户信息
 	 * @param userid 用户id
 	 * @return 成功则返回ResponseResult<CommentTwo> state：1，message：查询成功，data：得到二级评论角色信息
 	 */
 	@GetMapping("/getbyUser/{id}")
-	public ResponseResult<CommentTwo> getCommentOneByUser(@PathVariable int userid){
-		ResponseResult<CommentTwo> result =new ResponseResult<CommentTwo>();
-		CommentTwo commenttwo=commenttwoService.getByUser(userid);
+	public ResponseResult<PageInfo<CommentTwo>> getCommentTwoByUser(@PathVariable int userid,@PathVariable int index,@PathVariable int length){
+		ResponseResult<PageInfo<CommentTwo>> result =new ResponseResult<PageInfo<CommentTwo>>();
+		PageInfo<CommentTwo> commenttwo=commenttwoService.getByUser(userid, 0, 1000);
 		if(ObjectUtils.allNotNull(commenttwo)) {
 			result.setMessage("查询成功");
 			result.setState(LeeConstant.STATE_SUCCESS);

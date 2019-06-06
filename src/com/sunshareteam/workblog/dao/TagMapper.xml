@@ -35,7 +35,7 @@
 	<delete id="deleteArticleTag">
 	   delete from tb_article_tag where tagid=#{tagid}
 	</delete>
-	<select id="getTagByArticle" resultType="com.sunshareteam.workblog.entity.Tag">
-		select t.tagid,t.tagtitle from tb_tag t,tb_article_tag a where a.articleid=#{articleid} and 
+	<select id="findByArticle" resultType="com.sunshareteam.workblog.entity.Tag">
+		select t.tagid,t.tagtitle from tb_tag t,tb_article_tag a where a.articleid=#{articleid} and a.tagid=t.tagid
 	</select>
 </mapper>

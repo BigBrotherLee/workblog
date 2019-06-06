@@ -15,6 +15,6 @@ public interface TagMapper {
    void deleteTag(Integer id);
    void deleteArticleTag(Integer tagid);  
    List<Tag> findByKey(String key);//关键字查询
-   List<Tag> fingTagByArticle(Integer articleId);
+   List<Tag> findByArticle(Integer articleid);
    
 }

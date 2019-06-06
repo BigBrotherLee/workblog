@@ -59,8 +59,9 @@ public class TagServiceImpl implements TagService {
 
 	@Override
 	public PageInfo<Tag> getAll(int start, int size) {
-		// TODO Auto-generated method stub
-		return null;
+		PageHelper.startPage(start, size);
+		List<Tag> list=tagMapper.findAll();
+		return new PageInfo<Tag>(list);
 	}
 
 	@Override
@@ -73,7 +74,7 @@ public class TagServiceImpl implements TagService {
 	@Override
 	public PageInfo<Tag> getByArticle(Integer articleid,int start,int size) {
 		PageHelper.startPage(start, size);
-		List<Tag> list=tagMapper.fingTagByArticle(articleid);
+		List<Tag> list=tagMapper.findByArticle(articleid);
 		return new PageInfo<Tag>(list);
 	}
 }

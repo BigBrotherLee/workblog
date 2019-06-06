@@ -6,10 +6,10 @@ import com.sunshareteam.workblog.entity.CommentTwo;
 public interface CommentTwoMapper {
 
 	   CommentTwo findById(Integer commenttwo); //根据ID查询
-	   List<CommentTwo> fingAll();
+	   List<CommentTwo> findAll();
 	   List<CommentTwo> findByKey(String key);
 	   void insertCommentTwo(CommentTwo commenttwo);
 	   void deleteCommentTwo(Integer id);
-	   CommentTwo getCommentTwoByUser(Integer userId);
+	   List<CommentTwo> findByUser(Integer userid);
 	   List<CommentTwo> findByOneAll(Integer oneid);
 }
