@@ -34,7 +34,6 @@
 				<!-- 对静态资源设置匿名访问 -->
 				/html/static/**=anon
 				/html/user/**=anon
-				/html/admin/**=anon
 				/user/verify=anon
 				/user/getemailcode/*=anon
 				/user/getsmscode/*=anon
@@ -64,7 +63,6 @@
 		<!-- 记住我 -->
 		<property name="rememberMeManager" ref="rememberMeManager" />
 	</bean>
-	
 	<!-- 自定义form认证过虑器 -->
 	<!-- 基于Form表单的身份验证过滤器，不配置将也会注册此过虑器，表单中的用户账号、密码及loginurl将采用默认值，建议配置 -->
 	<bean id="formAuthenticationFilter"	class="com.sunshareteam.workblog.global.ExampleFormAuthenticationFilter " >
@@ -101,8 +99,12 @@
 		<property name="globalSessionTimeout" value="600000" />
 		<!-- 删除失效的session -->
 		<property name="deleteInvalidSessions" value="true" />
+		<property name="sessionIdCookie" ref="sessionIdCookie"/>
 	</bean>
-	
+	<!-- 重命名 -->
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+	    <constructor-arg name="name" value="SHRIOSESSIONID"/>
+	 </bean>
 	<!-- rememberMeManager管理器，写cookie，取出cookie生成用户信息 -->
 	<bean id="rememberMeManager"
 		class="org.apache.shiro.web.mgt.CookieRememberMeManager">

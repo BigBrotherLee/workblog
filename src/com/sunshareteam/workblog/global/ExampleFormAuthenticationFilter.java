@@ -18,6 +18,7 @@ public class ExampleFormAuthenticationFilter extends FormAuthenticationFilter {
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
 		HttpServletRequest servletRequest=(HttpServletRequest)request;
 		HttpSession session =servletRequest.getSession();
+		System.out.println(session.getId());
 //		String validateCode = (String) session.getAttribute("validateCode");
 //		String randomcode = servletRequest.getParameter("randomcode");
 //		if(randomcode!=null && validateCode!=null && !randomcode.equals(validateCode)){
