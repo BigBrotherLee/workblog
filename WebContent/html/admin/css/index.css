@@ -75,10 +75,16 @@ index.html
 	color: #000000;
 }
 
-.articletablea{
-	line-height: 1.8;
+.articledelbtn {
+	color: black;
+	height: 24px;
+	width: 40px;
 }
 
+.articleedbtn {
+	height: 24px;
+	width: 40px;
+}
 
 
 /* 
@@ -87,7 +93,10 @@ profile.html
 ======================================= 
 */
 
-
+.profilediv .profile-stat .stat-item .userage {
+	display: inline-block;
+	margin-right: 20px;
+}
 
 .profileleft {
 	width: 300px;
@@ -97,28 +106,29 @@ profile.html
 }
 
 .profileright {
-	width: 350px;
+	width: 550px;
 	margin: auto;
 	float: right;
 	border: 1px solid #c4c4c8;
 	padding: 0;
+	background-color: ghostwhite;
 }
 
 .profilediv {
-	width: 800px;
+	width: 1000px;
 	height: 500px;
 
 }
 
 .profileForm {
 	padding: 20px 0;
-	width: 300px;
+	width: 400px;
 	margin: auto;
 }
 
 .profilesubmit {
 	margin-top: 10px;
-	margin-left: 30px;
+	margin-left: 60px;
 	margin-bottom: 10px;
 	float: left;
 	padding: 0;
@@ -196,4 +206,180 @@ modifypassword.html
 	padding: 40px;
 	font-size: 18px;
 	font-weight: 300;
+}
+
+.modifypasswordform {
+	margin-top: 100px;
+	margin-left: 200px;
+	width: 600px;
+}
+
+.modifypasswordform .layui-form-item {
+	margin: auto;
+	margin-top: 20px;
+	/* padding: 0 85px; */
+}
+
+.modifypasswordform input {
+	border: none;
+	width: 430px;
+	height: 34px;
+	padding: 6px 12px;
+	box-shadow: 0px 1px 6px 3px rgba(0, 0, 0, 0.1);
+	border-radius: 2px;
+	border-color: #eaeaea;
+	background-color: #fcfcfc;
+}
+
+.modifypasswordform .emailinputdiv {
+	width: 430px;
+}
+
+.modifypasswordbtn {
+	width: 120px;
+	margin: auto;
+	margin-top: 20px;
+
+}
+
+
+/* 
+=======================================
+mycomment.html
+======================================= 
+*/
+.comment {
+	border: none;
+}
+
+.comment .firstcommentdiv {
+	border: none;
+	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.14);
+	background: none;
+	/* height: 120px; */
+}
+
+.secondcommentdiv .secondfirstcommentdiv {
+	background: none;
+	box-shadow: none;
+	border: none;
+}
+
+.secondcommentdiv .secondcommentfirstdiv {
+	box-shadow: none;
+}
+
+.comment .firstcommentdiv .commentdelbtn {
+	background-color: #C9302C;
+	padding: 6px 12px;
+	float: right;
+	display: block;
+	margin-bottom: 5px;
+
+}
+
+.secondcommentdiv .secondcommentfirstdiv .commentdelbtn {
+	background-color: #C9302C;
+	padding: 6px 12px;
+	float: right;
+	margin-bottom: 5px;
+}
+
+.comment .firstcommentdiv .commentreadbtn {
+	background-color: #41B314;
+	padding: 6px 12px;
+	float: right;
+	display: inline-block;
+	margin-bottom: 5px;
+	height: 26px;
+	width: 72px;
+}
+
+.secondcommentdiv .secondcommentfirstdiv .commentreadbtn {
+	background-color: #41B314;
+	padding: 6px 12px;
+	float: right;
+	height: 26px;
+	width: 72px;
+	display: inline-block;
+}
+
+.firstcommentdiv .touxiang {
+	float: left;
+	text-align: center;
+	width: 56px;
+}
+
+.firstcommentdiv .touxiang img {
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+.firstcommentdiv .touxiang span {
+	margin-right: 20px;
+	display: block;
+}
+
+.firstcommentdiv p {
+	margin-left: 30px;
+	width: 75%;
+	display: inline-block;
+	font-size: 15px;
+}
+
+.secondcommentdiv .touxiang {
+	float: left;
+	text-align: center;
+	width: 56px;
+}
+
+.secondcommentdiv .touxiang img {
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+.secondcommentdiv .touxiang span {
+	margin-right: 20px;
+	display: block;
+}
+
+.secondcommentdiv p {
+	margin-left: 30px;
+	width: 75%;
+	display: inline-block;
+	font-size: 15px;
+}
+
+
+/* 
+=======================================
+adminindex.html
+======================================= 
+*/
+
+.lineheight {
+	border: 1px dotted;
+}
+
+.adduser {
+	padding: 0 124px;
+}
+
+.adduserbtn {
+	width: 200px;
+	margin: auto;
+}
+
+.confirmpassword {
+	/* width: 86px; */
+	padding-top: 9px;
+	padding-left: 0;
+}
+
+.adduserform {
+	font-size: 14px;
 }
