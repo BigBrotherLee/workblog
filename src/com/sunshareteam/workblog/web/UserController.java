@@ -281,11 +281,11 @@ public class UserController {
 	 * @param request
 	 * @return 登录成功则继续访问，登录失败则抛出异常
 	 */
-	@RequiresGuest   //访客
 	@RequestMapping("/login")
 	public ModelAndView login(HttpServletRequest request) {
 		//如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
 		String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
+		System.out.println(exceptionClassName+"-----------------------");
 		//根据shiro返回的异常类路径判断，抛出指定异常信息
 		if(exceptionClassName!=null){
 			if (UnknownAccountException.class.getName().equals(exceptionClassName)) {
