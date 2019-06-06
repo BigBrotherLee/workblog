@@ -8,23 +8,25 @@
          select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one   
        </select>
        <select id="findByKey" resultType="com.sunshareteam.workblog.entity.CommentOne">
-		select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one where state=1 and content like #{content}
+		select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one where content like #{content}
 	</select>
-	<insert id="addCommentOne">
+	<insert id="insertCommentOne" parameterType="com.sunshareteam.workblog.entity.CommentOne">
 	    insert into tb_comment_one(author,content,createuser,createdate,modifydate,modifyuser,articleid)
 	    values(#{author},#{content},#{createuser},#{createdate},#{modifydate},#{modifyuser},#{articleid})
 	</insert>
 	<delete id="delete">
 	   delete from tb_comment_one where comment_one_id=#{id}
 	</delete>
-	<delete id="deleteCommentTwoByCommentOne">
-		delete from tb_comment_two where oneid=#{comment_one_id}
+	<delete id="deleteCommentTwo">
+		delete from tb_comment_two where oneid=#{commentoneid}
 	</delete>
-	<select id="getCommentOneByUser" resultType="com.sunshareteam.workblog.entity.CommentOne">
-		select o.comment_one_id,o.author,o.content,o.createuser,o.createdate,o.modifydate,o.modifyuser,o.articleid from tb_comment_one o,tb_user u where o.createuser=u.userid and u.userid=#{userId}
+	<select id="findByUser" resultType="com.sunshareteam.workblog.entity.User">
+		select u.userid,u.username,u.pic from tb_comment_one o,tb_user u where o.createuser=u.userid and u.userid=#{userid}
 	</select>
-	<select id="findByArticle" resultType="com.sunshareteam.workblog.entity.CommentOne">
-		select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one where state=1 and author=#{articleid}
+	<select id="findByArticleAll" resultType="com.sunshareteam.workblog.entity.CommentOne">
+		select comment_one_id,author,content from tb_comment_one where articleid=#{articleid}
+	</select>	
+	<select id="findByUserAll" resultType="com.sunshareteam.workblog.entity.CommentOne">
+		select comment_one_id,author,content from tb_comment_one where createuser=#{userid}
 	</select>
-	
 </mapper>

@@ -92,7 +92,7 @@ public class CommentTwoController {
 	}
 	/**
 	 * 添加二级评论
-	 * @param categoty 你要添加的二级评论信息
+	 * @param commenttwo 你要添加的二级评论信息
 	 * @return  成功返回ResponseResult<String> state：1，message：添加成功,data:你添加的二级评论dejson
 	 */
 	@RequiresPermissions("commenttwo:insert:*")
@@ -132,20 +132,39 @@ public class CommentTwoController {
 		return result;
 	}
 	/**
-	 * 得到二级评论用户
-	 * @param user户
+	 * 得到二级评论用户信息
+	 * @param userid 用户id
 	 * @return 成功则返回ResponseResult<CommentTwo> state：1，message：查询成功，data：得到二级评论角色信息
 	 */
 	@GetMapping("/getbyUser/{id}")
-	public ResponseResult<CommentTwo> getCommentOneByUser(@PathVariable int userid){
-		ResponseResult<CommentTwo> result =new ResponseResult<CommentTwo>();
-		CommentTwo commenttwo=commenttwoService.getByUser(userid);
+	public ResponseResult<PageInfo<CommentTwo>> getCommentTwoByUser(@PathVariable int userid,@PathVariable int index,@PathVariable int length){
+		ResponseResult<PageInfo<CommentTwo>> result =new ResponseResult<PageInfo<CommentTwo>>();
+		PageInfo<CommentTwo> commenttwo=commenttwoService.getByUser(userid, 0, 1000);
 		if(ObjectUtils.allNotNull(commenttwo)) {
 			result.setMessage("查询成功");
 			result.setState(LeeConstant.STATE_SUCCESS);
 			return result;
 		}
 		result.setMessage("查询为空");
+		result.setState(LeeConstant.STATE_SUCCESS);
+		return result;
+	}
+	/**
+	 * 查询同一级评论的二级评论，全部
+	 * @param oneid 一级评论id
+	 * @return 成功则返回 ResponseResult<PageInfo<CommentTwo>> state：1，message：查询成功 data：评论分页信息
+	 */
+	@GetMapping("/getcommenttwobyoneall/{index}/{length}")
+	public ResponseResult<List<CommentTwo>> getCommentTwoByOneAll(@PathVariable Integer oneid){
+		ResponseResult<List<CommentTwo>> result =new ResponseResult<List<CommentTwo>>();
+		PageInfo<CommentTwo> info=commenttwoService.getByOneAll(oneid,0,1000);
+		if(info.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(info.getList());
+		result.setMessage("查询成功");
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}

@@ -24,9 +24,9 @@ public class CommentOneServiceImpl implements CommentOneService{
 
 	@Override
 	@Transactional
-	public void deleteCommentOne(Integer id) {
+	public void delete(Integer id) {
 		commentoneMapper.delete(id);
-		commentoneMapper.deleteCommentTwoByCommentOne(id);	//删除一级评论下的二级评论
+		commentoneMapper.deleteCommentTwo(id);	//删除一级评论下的二级评论
 	}
 
 	@Override
@@ -39,8 +39,9 @@ public class CommentOneServiceImpl implements CommentOneService{
 	
 	@Override
 	public PageInfo<CommentOne> getAll(int start, int size) {
-		// TODO Auto-generated method stub
-		return null;
+		PageHelper.startPage(start, size);
+		List<CommentOne> list=commentoneMapper.findAll();
+		return new PageInfo<CommentOne>(list);
 	}
 
 	@Override
@@ -51,8 +52,23 @@ public class CommentOneServiceImpl implements CommentOneService{
 	}
 
 	@Override
-	public CommentOne getByUser(Integer userid) {
-		// TODO Auto-generated method stub
-		return commentoneMapper.getCommentOneByUser(userid);
+	public PageInfo<CommentOne> getByUser(Integer userid, int start, int size){
+		PageHelper.startPage(start, size);
+		List<CommentOne> list=commentoneMapper.findByUser(userid);
+		return new PageInfo<CommentOne>(list);
+	}
+
+	@Override
+	public PageInfo<CommentOne> getByArticleAll(Integer articleid, int start, int size) {
+		PageHelper.startPage(start, size);
+		List<CommentOne> list=commentoneMapper.findByArticleAll(articleid);
+		return new PageInfo<CommentOne>(list);
+	}
+
+	@Override
+	public PageInfo<CommentOne> getByUserAll(Integer userid, int start, int size) {
+		PageHelper.startPage(start, size);
+		List<CommentOne> list=commentoneMapper.findByUserAll(userid);
+		return new PageInfo<CommentOne>(list);
 	}
 }

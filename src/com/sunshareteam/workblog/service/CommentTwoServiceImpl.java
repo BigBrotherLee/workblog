@@ -41,8 +41,9 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 
 	@Override
 	public PageInfo<CommentTwo> getAll(int start, int size) {
-		// TODO Auto-generated method stub
-		return null;
+		PageHelper.startPage(start, size);
+		List<CommentTwo> list=commenttwoMapper.findAll();
+		return new PageInfo<CommentTwo>(list);
 	}
 
 	@Override
@@ -53,8 +54,16 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	}
 
 	@Override
-	public CommentTwo getByUser(Integer userid) {
-		// TODO Auto-generated method stub
-		return commenttwoMapper.getCommentTwoByUser(userid);
+	public PageInfo<CommentTwo> getByUser(Integer userid,int start,int size) {
+		PageHelper.startPage(start, size);
+		List<CommentTwo> list=commenttwoMapper.findByUser(userid);
+		return new PageInfo<CommentTwo>(list);
+	}
+
+	@Override
+	public PageInfo<CommentTwo> getByOneAll(Integer oneid, int start, int size) {
+		PageHelper.startPage(start, size);
+		List<CommentTwo> list=commenttwoMapper.findByOneAll(oneid);
+		return new PageInfo<CommentTwo>(list);
 	}
 }

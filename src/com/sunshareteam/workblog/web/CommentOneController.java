@@ -76,7 +76,7 @@ public class CommentOneController {
 	public ResponseResult<String> DeleteCommentOne(@PathVariable Integer id) {
 		ResponseResult<String> result=new ResponseResult<String>();
 		try {
-			commentoneService.deleteCommentOne(id);
+			commentoneService.delete(id);
 			result.setData(id.toString());
 			result.setMessage("删除成功");
 			result.setState(LeeConstant.STATE_SUCCESS);
@@ -134,17 +134,59 @@ public class CommentOneController {
 	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：得到一级评论用户信息
 	 */
 	@GetMapping("/getbyuser/{id}")
-	public ResponseResult<CommentOne> getCommentOneByUser(@PathVariable int userid){
-		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
-		CommentOne commentone=commentoneService.getByUser(userid);
-		if(ObjectUtils.allNotNull(commentone)) {
-			result.setMessage("查询成功");
-			result.setState(LeeConstant.STATE_SUCCESS);
+	public ResponseResult<List<CommentOne>> getCommentOneByUser(@PathVariable int userid){
+		ResponseResult<List<CommentOne>> result =new ResponseResult<List<CommentOne>>();
+		PageInfo<CommentOne> info=commentoneService.getByUser(userid, 0, 1000);
+		if(info.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
 			return result;
 		}
-		result.setMessage("查询为空");
+		result.setData(info.getList());
+		result.setMessage("查询成功");
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}
-	
+	/**
+	 * 查询同文章评论，全部
+	 * @param index 第几页
+	 * @param length 页面长度
+	 * @param articleid 文章id
+	 * @return 成功则返回 ResponseResult<PageInfo<CommentOne>> state：1，message：查询成功 data：评论分页信息
+	 */
+	@GetMapping("/getbyarticleall/{index}/{length}")
+	public ResponseResult<PageInfo<CommentOne>> getCommentOneByArticleAll(Integer articleid,@PathVariable int index,@PathVariable int length){
+		ResponseResult<PageInfo<CommentOne>> result =new ResponseResult<PageInfo<CommentOne>>();
+		PageInfo<CommentOne> data=commentoneService.getByArticleAll(articleid, index, length);
+		if(data.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(data);
+		result.setMessage("查询成功");
+		result.setState(LeeConstant.STATE_SUCCESS);
+		return result;
+	}
+	/**
+	 * 查询同用户评论，全部
+	 * @param index 第几页
+	 * @param length 页面长度
+	 * @param userid 用户id
+	 * @return 成功则返回 ResponseResult<PageInfo<CommentOne>> state：1，message：查询成功 data：评论分页信息
+	 */
+	@GetMapping("/getbyuserall/{index}/{length}")
+	public ResponseResult<PageInfo<CommentOne>> getByUserAll(@PathVariable int index,@PathVariable int length,Integer userid){
+		ResponseResult<PageInfo<CommentOne>> result =new ResponseResult<PageInfo<CommentOne>>();
+		PageInfo<CommentOne> data=commentoneService.getByUserAll(userid, index, length);
+		if(data.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(data);
+		result.setMessage("查询成功");
+		result.setState(LeeConstant.STATE_SUCCESS);
+		return result;
+	}
 }

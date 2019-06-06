@@ -8,6 +8,8 @@ public interface CommentOneService {
 	PageInfo<CommentOne> getAll(int start,int size);
 	PageInfo<CommentOne> getByKey(String key,int start,int size);
 	void insertCommentOne(CommentOne commentone);
-	void deleteCommentOne(Integer id);
-	CommentOne getByUser(Integer userid);
+	void delete(Integer id);
+	PageInfo<CommentOne> getByUser(Integer userid, int start, int size);
+	PageInfo<CommentOne> getByArticleAll(Integer articleid,int start,int size);
+	PageInfo<CommentOne> getByUserAll(Integer userid, int start, int size);
 }

@@ -8,13 +8,13 @@
          select linkid,linktitle,linkimg,linkaddress,modifydate,modifyuser from tb_link   
        </select>
        <select id="findByKey" resultType="com.sunshareteam.workblog.entity.Link">
-		select linkid,linktitle,linkimg,linkaddress,modifydate,modifyuser from tb_link where state=1 and linktitle like #{linktitle}
+		select linkid,linktitle,linkimg,linkaddress,modifydate,modifyuser from tb_link where linktitle like #{linktitle}
 	</select>
-	<insert id="addLink">
+	<insert id="insertLink" parameterType="com.sunshareteam.workblog.entity.Link">
 	    insert into tb_link(linktitle,linkimg,linkaddress,modifydate,modifyuser)
 	    values(#{linktitle},#{linkimg},#{linkaddress},#{modifydate},#{modifyuser})
 	</insert>
-	<update id="updateLink">
+	<update id="updateLink" parameterType="com.sunshareteam.workblog.entity.Link">
 	    update tb_link
 	    <set>
 	       <if test="linktitle!=null">linktitle=#{linktitle},</if>
