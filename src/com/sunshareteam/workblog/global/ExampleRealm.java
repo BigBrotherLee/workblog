@@ -51,7 +51,7 @@ public class ExampleRealm extends  AuthorizingRealm{
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		// 使用get方式会直接登录失败
 		String name=(String)token.getPrincipal();
-		System.out.println(name+"-----------------------------");
+		System.out.println("-----------------------------"+name+"=================================");
 		User a=userService.getByName(name);
 		if(a==null) {
 			a=userService.getByEmail(name);
