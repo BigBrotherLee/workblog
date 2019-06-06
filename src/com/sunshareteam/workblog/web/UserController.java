@@ -283,7 +283,7 @@ public class UserController {
 	 */
 	@RequiresGuest   //访客
 	@RequestMapping("/login")
-	public ModelAndView login(HttpServletRequest request) {
+	public String login(HttpServletRequest request) {
 		//如果登陆失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全限定名
 		String exceptionClassName = (String) request.getAttribute("shiroLoginFailure");
 		//根据shiro返回的异常类路径判断，抛出指定异常信息
@@ -300,7 +300,7 @@ public class UserController {
 				throw new LeeException("未知错误");//最终在异常处理器生成未知错误
 			}
 		}
-		return new ModelAndView("login");
+		return "login";
 	}
 	
 	/**
