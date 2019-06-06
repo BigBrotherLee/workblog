@@ -17,7 +17,7 @@
 	<!-- Shiro 的Web过滤器 -->
 	<bean id="shiroFilter"	class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/user/login" />
+		<property name="loginUrl" value="/html/user/login.html" />
 <!-- 		<property name="successUrl" value="/index.html"></property>-->
 		<!-- 通过unauthorizedUrl指定没有权限操作时跳转页面 -->
 		<property name="unauthorizedUrl" value="/refuse.jsp" />
@@ -32,7 +32,8 @@
 		<property name="filterChainDefinitions">
 			<value>
 				<!-- 对静态资源设置匿名访问 -->
-				/html/**=anon
+				/html/static/**=anon
+				/html/user/**=anon
 				<!-- 验证码，可匿名访问 -->
 				/index.* = anon
 				/validate = anon
