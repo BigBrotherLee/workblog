@@ -29,14 +29,16 @@ public class TestController {
         mvc = MockMvcBuilders.standaloneSetup(webApplicationContext).build();
     }
     
+    
+    
+  //测试标签  
     @Test
     public void test1() throws Exception {
     	MockHttpServletRequestBuilder mockHttpServletRequestBuilder = MockMvcRequestBuilders.get("/comment" );
-
-    	mockHttpServletRequestBuilder.param("itemId", "1" ); //要传入的参数
-
+    	mockHttpServletRequestBuilder.param("id", "12" ); //要传入的参数
     	ResultActions resultActions = mvc.perform( mockHttpServletRequestBuilder );
     	
+    	System.out.println(resultActions);
     }
 
 }
