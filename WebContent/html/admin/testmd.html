@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>测试markdown编辑器</title>
+		<script src="vendor/editor/js/jquery.min.js"></script>
+		<script type="text/javascript" src="vendor/editor/js/editormd.js"></script>
+		<script src="vendor/editor/js/editormd.min.js"></script>
+		<link href="vendor/editor/css/editormd.css"/>
+		<link rel="stylesheet" type="text/css" href="vendor/editor/css/editormd.min.css" />
+		<link rel="stylesheet" type="text/css" href="vendor/editor/css/editormd.preview.css"/> 
+		<link rel="stylesheet" type="text/css" href="vendor/editor/css/editormd.preview.min.css"/>
+		<link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+		<script src="vendor/editor/lib/marked.min.js"></script>
+		<script src="vendor/editor/lib/prettify.min.js"></script>
+		<script src="vendor/editor/lib/raphael.min.js"></script>
+		<script src="vendor/editor/lib/underscore.min.js"></script>
+		<script src="vendor/editor/lib/sequence-diagram.min.js"></script>
+		<script src="vendor/editor/lib/flowchart.min.js"></script>
+		
+	</head>
+	<body>
+
+		<div id="layout" class="editor">
+			<form action="adminindex.html" method="">
+				<div id="test-editormd">
+					<textarea></textarea>
+				</div>
+				<input type="submit" value="ss"/>
+			</form>
+			
+		</div>
+		<button type="button">shishi</button>
+		<script type="text/javascript">
+			function sub(){
+				
+			}
+			var testEditor;
+			testEditor = editormd("test-editormd", {
+				toolbarIcons: function() {
+					// Or return editormd.toolbarModes[name]; // full, simple, mini
+					// Using "||" set icons align right.
+					return ["undo", "redo", "|", "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", "h1",
+						"h2", "h3", "h4", "h5", "h6", "|", "list-ul", "list-ol", "hr", "|", "link", "reference-link", "image", "code",
+						"preformatted-text", "code-block", "table", "datetime", "emoji", "html-entities", "pagebreak", "|",
+						"goto-line", "watch", "preview", "fullscreen", "clear", "search", "|", "help", "info"
+					]
+				},
+				placeholder: '本编辑器支持Markdown编辑，左边编写，右边预览', //默认显示的文字，这里就不解释了
+				width: "90%",
+				height: 540,
+				syncScrolling: "single",
+				path: "vendor/editor/lib/", //你的path路径（原资源文件中lib包在我们项目中所放的位置）
+				imageUpload: true, //图片上传功能
+				imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+				imageUploadURL: "../article/uploadImage",
+				// theme: "dark", //工具栏主题
+				// previewTheme: "dark", //预览主题
+				// editorTheme: "pastel-on-dark", //编辑主题
+				saveHTMLToTextarea: true,
+				emoji: true,
+				taskList: true,
+				tocm: true, // Using [TOCM]
+				tex: true, // 开启科学公式TeX语言支持，默认关闭
+				flowChart: true, // 开启流程图支持，默认关闭
+				sequenceDiagram: true, // 开启时序/序列图支持，默认关闭,
+				//这个配置在simple.html中并没有，但是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单。
+            saveHTMLToTextarea : true,
+            toolbarIcons : function() {
+                // Or return editormd.toolbarModes[name]; // full, simple, mini
+                // Using "||" set icons align right.
+                return ["undo","redo","bold","del","italic","quote","ucwords","uppercase","lowercase","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","hr","link","reference-link","image","code","preformatted-text","code-block","table","datetime","emoji","html-entities","pagebreak","goto-line","watch","preview","fullscreen","clear","search"]
+            },
+        });
+			// 	toolbarIcons: function() { //自定义工具栏，后面有详细介绍
+			// 		return editormd.toolbarModes['full']; // full, simple, mini
+			// 	},
+			// });
+			//上面的挑有用的写上去就行
+		</script>
+	</body>
+</html>
+<!-- t.toolbarModes={
+    full:["undo","redo","|","bold","del","italic","quote","ucwords","uppercase","lowercase","|","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","hr","|","link","reference-link","image","code","preformatted-text","code-block","table","datetime","emoji","html-entities","pagebreak","|","goto-line","watch","preview","fullscreen","clear","search","|","help","info"],
+    simple:["undo","redo","|","bold","del","italic","quote","uppercase","lowercase","|","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","hr","|","watch","preview","fullscreen","|","help","info"],
+    mini:["undo","redo","|","watch","preview","|","help","info"]
+} -->
