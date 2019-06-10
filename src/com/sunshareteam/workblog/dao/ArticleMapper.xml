@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunshareteam.workblog.dao.ArticleMapper">
 	<select id="findById" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title from tb_article where state=0 and articleid=#{id}
+		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title,contentformat from tb_article where state=0 and articleid=#{id}
 	</select>
 	
 	<update id="updateArticle" parameterType="com.sunshareteam.workblog.entity.Article">
@@ -17,6 +17,7 @@
 				<if test="title!=null">title=#{title},</if>
 				<if test="summary!=null">summary=#{summary}</if>
 				<if test="state!=null">state=#{state}</if>
+				<if test="contentformat!=null">contentformat=#{contentformat}</if>
 			</set>
 			where articleid=#{articleid}
 	</update>
@@ -42,39 +43,44 @@
 				values(#{createdate},#{img},#{content},#{author},#{commentnum},#{categoty},#{title},#{summary},0)
 	</insert>
 	
-	<select id="findByKey" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=0 and title like #{title}
+	<select id="findByKey" resultType="com.sunshareteam.workblog.web.ArticleVO">
+		select a.img as img ,a.articleid as articleid,a.createdate as createdate,a.author as authorid,a.title as title,a.summary as summary,u.username as authorname,a.categoty as categotyid,c.categotytitle as categotyname
+			from tb_article a,tb_user u,tb_categoty c where a.state=0 and a.author=u.userid and c.categotyid=a.categoty and title like #{title}
 	</select>
 
 	
-	<select id="findHot" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=0 order by commentnum desc
+	<select id="findHot" resultType="com.sunshareteam.workblog.web.ArticleVO">
+		select a.img as img ,a.articleid as articleid,a.createdate as createdate,a.author as authorid,a.title as title,a.summary as summary,u.username as authorname,a.categoty as categotyid,c.categotytitle as categotyname
+			from tb_article a,tb_user u,tb_categoty c where a.state=0 and a.author=u.userid and c.categotyid=a.categoty  order by a.commentnum desc
 	</select>
 	
-	<select id="findNew" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=0 order by createdate desc
+	<select id="findNew" resultType="com.sunshareteam.workblog.web.ArticleVO">
+		select a.img as img ,a.articleid as articleid,a.createdate as createdate,a.author as authorid,a.title as title,a.summary as summary,u.username as authorname,a.categoty as categotyid,c.categotytitle as categotyname
+			from tb_article a,tb_user u,tb_categoty c where a.state=0 and a.author=u.userid and c.categotyid=a.categoty order by a.createdate desc
 	</select>
 	
-	<select id="findByCategoty" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where state=0 and categoty=#{categotyid}
+	<select id="findByCategoty" resultType="com.sunshareteam.workblog.web.ArticleVO">
+		select a.img as img ,a.articleid as articleid,a.createdate as createdate,a.author as authorid,a.title as title,a.summary as summary,u.username as authorname,a.categoty as categotyid,c.categotytitle as categotyname
+			from tb_article a,tb_user u,tb_categoty c where a.state=0 and a.author=u.userid and c.categotyid=a.categoty and a.categoty=#{categotyid}
 	</select>
 	
-	<select id="findByTag" resultType="com.sunshareteam.workblog.entity.Article">
-		select a.articleid,a.createdate,a.author,a.modifydate,a.img,a.commentnum,a.categoty,a.title 
-			from tb_article a,tb_article_tag ag where a.state=0 and ag.tagid=#{tagid} and ag.articleid=a.articleid
+	<select id="findByTag" resultType="com.sunshareteam.workblog.web.ArticleVO">
+		select a.img as img ,a.articleid as articleid,a.createdate as createdate,a.author as authorid,a.title as title,a.summary as summary,u.username as authorname,a.categoty as categotyid,c.categotytitle as categotyname
+			from tb_article a,tb_user u,tb_categoty c, tb_article_tag ag where a.state=0 and ag.tagid=#{tagid} and ag.articleid=a.articleid and a.author=u.userid and c.categotyid=a.categoty
 	</select>
 	
-	<select id="findByAuthor" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,commentnum,categoty,title 
-			from tb_article  where state=0 and author=#{authorid}
+	<select id="findByAuthor" resultType="com.sunshareteam.workblog.web.ArticleVO">
+		select a.img as img ,a.articleid as articleid,a.createdate as createdate,a.author as authorid,a.title as title,a.summary as summary,u.username as authorname,a.categoty as categotyid,c.categotytitle as categotyname
+			from tb_article a,tb_user u,tb_categoty c where a.state=0 and a.author=u.userid and c.categotyid=a.categoty  and a.author=#{authorid}
 	</select>
 	
-	<select id="findByKeyAll" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,commentnum,categoty,title from tb_article where title like #{title}
+	<select id="findByKeyAll" resultType="com.sunshareteam.workblog.web.ArticleVO">
+		select a.img as img ,a.articleid as articleid,a.createdate as createdate,a.author as authorid,a.title as title,a.summary as summary,u.username as authorname,a.categoty as categotyid,c.categotytitle as categotyname
+			from tb_article a,tb_user u,tb_categoty c where a.author=u.userid and c.categotyid=a.categoty and a.title like #{title}
 	</select>
 	
-	<select id="findByAuthorAll" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,commentnum,categoty,title 
-			from tb_article  where author=#{authorid}
+	<select id="findByAuthorAll" resultType="com.sunshareteam.workblog.web.ArticleVO">
+		select a.img as img ,a.articleid as articleid,a.createdate as createdate,a.author as authorid,a.title as title,a.summary as summary,u.username as authorname,a.categoty as categotyid,c.categotytitle as categotyname
+			from tb_article a,tb_user u,tb_categoty c where a.author=u.userid and c.categotyid=a.categoty and a.author=#{authorid}
 	</select>
 </mapper>  
