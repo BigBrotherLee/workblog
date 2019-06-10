@@ -78,6 +78,17 @@ public class UserController {
 	}
 	
 	/**
+	 * 登录后返回我的个人信息
+	 * @return 我的个人信息
+	 */
+	@GetMapping("/getme")
+	public User getMe() {
+		User user=(User) SecurityUtils.getSubject().getPrincipal();
+		user.setPassword(null);
+		return user;
+	}
+	
+	/**
 	 * 得到邮箱验证码，验证码有效期为15分钟
 	 * @param session
 	 * @param eamil 接受邮件的email地址
