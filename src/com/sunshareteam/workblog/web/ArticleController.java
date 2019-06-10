@@ -1,6 +1,5 @@
 package com.sunshareteam.workblog.web;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -110,7 +109,7 @@ public class ArticleController {
 	 * @param article 修改后的文章信息
 	 * @return 成功则返回 ResponseResult<Article> state：1，，message：修改成功 data：文章详情 
 	 */
-	@RequiresPermissions("article:upadte:*")
+	@RequiresPermissions("article:update:*")
 	@PutMapping("/update")
 	public ResponseResult<Article> updateArticle(Article article) throws Exception{
 		ResponseResult<Article> result=new ResponseResult<Article>();

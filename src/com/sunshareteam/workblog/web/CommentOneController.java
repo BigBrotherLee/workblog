@@ -1,6 +1,7 @@
 package com.sunshareteam.workblog.web;
 
 import java.util.List;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -54,8 +55,8 @@ public class CommentOneController {
 	 * @return 查询成功返回ResponseResult<PageInfo<CommentOneVO>>分页数据，失败抛出异常LeeException
 	 */
 	@RequiresPermissions("commentone:select:*")
-	@GetMapping("/getbyarticleanduser/{index}/{length}")
-	public ResponseResult<PageInfo<CommentOneVO>> ByArticleAndUser(@PathVariable int index,@PathVariable int length){
+	@GetMapping("/getbyarticleanduser")
+	public ResponseResult<PageInfo<CommentOneVO>> ByArticleAndUser(int index,int length)throws Exception{
 		ResponseResult<PageInfo<CommentOneVO>> result=new ResponseResult<PageInfo<CommentOneVO>>();
 		PageInfo<CommentOneVO> data=commentoneService.getByArticleAndUser(index, length);
 		if(data.getTotal()<=0) {
