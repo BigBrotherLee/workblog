@@ -3,10 +3,12 @@ package com.sunshareteam.workblog.dao;
 import java.util.List;
 
 import com.sunshareteam.workblog.entity.CommentOne;
+import com.sunshareteam.workblog.web.CommentOneVO;
 
 public interface CommentOneMapper {
 
 	   CommentOne findById(Integer commentone); //根据ID查询
+	   List<CommentOneVO> findByArticleAndUser(); //查文章标题和用户名
 	   List<CommentOne> findAll();
 	   List<CommentOne> findByKey(String key);
 	   void insertCommentOne(CommentOne commentone);

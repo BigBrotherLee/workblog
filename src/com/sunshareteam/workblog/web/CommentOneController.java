@@ -48,6 +48,27 @@ public class CommentOneController {
 		return result;
 	}
 	/**
+	 * 查询一级评论管理的内容
+	 * @param index 第几页
+	 * @param length 一页几条
+	 * @return 查询成功返回ResponseResult<PageInfo<CommentOneVO>>分页数据，失败抛出异常LeeException
+	 */
+	@RequiresPermissions("commentone:select:*")
+	@GetMapping("/getbyarticleanduser/{index}/{length}")
+	public ResponseResult<PageInfo<CommentOneVO>> ByArticleAndUser(@PathVariable int index,@PathVariable int length){
+		ResponseResult<PageInfo<CommentOneVO>> result=new ResponseResult<PageInfo<CommentOneVO>>();
+		PageInfo<CommentOneVO> data=commentoneService.getByArticleAndUser(index, length);
+		if(data.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(data);
+		result.setMessage("查询成功");
+		result.setState(LeeConstant.STATE_SUCCESS);
+		return result;
+	}
+	/**
 	 * 得到指定id的一级评论
 	 * @param id 一级评论id
 	 * @return 成功返回ResponseResult<CommentOne> state：1，message：查询成功,data:CommentOne的json
@@ -110,7 +131,8 @@ public class CommentOneController {
 			result.setState(LeeConstant.STATE_FAIL);
 		}
 		return result;
-	}	/**
+	}	
+	/**
 	 * 得到全部一级评论
 	 * @return 成功则返回ResponseResult<List<Categoty>> state：1，message：查询成功 ，data：所有一级评论的列表json
 	 */

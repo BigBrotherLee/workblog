@@ -51,6 +51,27 @@ public class CommentTwoController {
 		return result;
 	}	
 	/**
+	 * 查询二级评论管理的内容
+	 * @param index 第几页
+	 * @param length 一页几条
+	 * @return 查询成功返回ResponseResult<PageInfo<CommentTwoVO>>分页数据，失败抛出异常LeeException
+	 */
+	@RequiresPermissions("commenttwo:select:*")
+	@GetMapping("/getbycommentoneanduser/{index}/{length}")
+	public ResponseResult<PageInfo<CommentTwoVO>> ByCommentOneAndUser(@PathVariable int index,@PathVariable int length){
+		ResponseResult<PageInfo<CommentTwoVO>> result=new ResponseResult<PageInfo<CommentTwoVO>>();
+		PageInfo<CommentTwoVO> data=commenttwoService.getByCommentOneAndUser(index, length);
+		if(data.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(data);
+		result.setMessage("查询成功");
+		result.setState(LeeConstant.STATE_SUCCESS);
+		return result;
+	}
+	/**
 	 * 得到指定id的二级评论
 	 * @param id 二级评论id
 	 * @return 成功返回ResponseResult<CommentTwo> state：1，message：查询成功,data:CommentTwo的json

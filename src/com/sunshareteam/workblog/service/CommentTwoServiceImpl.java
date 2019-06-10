@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.dao.CommentTwoMapper;
 import com.sunshareteam.workblog.entity.CommentTwo;
+import com.sunshareteam.workblog.web.CommentTwoVO;
 
 @Service("commenttwoService")
 public class CommentTwoServiceImpl implements CommentTwoService {
@@ -22,6 +23,13 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	public CommentTwo getById(Integer id) {
 		// TODO Auto-generated method stub
 		return commenttwoMapper.findById(id);
+	}
+	
+	@Override
+	public PageInfo<CommentTwoVO> getByCommentOneAndUser(int start, int size) {
+		PageHelper.startPage(start, size);
+		List<CommentTwoVO> list=commenttwoMapper.findByCommentOneAndUser();
+		return new PageInfo<CommentTwoVO>(list);
 	}
 	
 	@Override
