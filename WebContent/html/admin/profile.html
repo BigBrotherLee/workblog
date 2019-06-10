@@ -7,6 +7,13 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<!-- VENDOR CSS -->
+		<link rel="stylesheet" href="css/cropper.min.css">
+		<link rel="stylesheet" href="css/sitelogo.css">
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="js/cropper.js"></script>
+		<script src="js/html2canvas.min.js"></script>
+		<script src="../static/js/bootstrap.min.js"></script>
+		<script src="js/sitelogo2.js"></script>
 		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="vendor/linearicons/style.css">
@@ -75,27 +82,28 @@
 					<nav>
 						<ul class="nav">
 							<li>
-								<a href="#subPages" data-toggle="collapse" class=""><i class="lnr lnr-user"></i> <span>个人</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-								<div id="subPages" class="collapse">
+								<a href="#subPages" data-toggle="collapse" class="active"><i class="lnr lnr-user"></i> <span>个人</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+								<div id="subPages" class="collapse in">
 									<ul class="nav">
-										<li><a href="profile.html" class="">修改个人信息</a></li>
+										<li><a href="profile.html" class="active">修改个人信息</a></li>
 										<li><a href="modifypassword.html" class="">修改密码</a></li>
 									</ul>
 								</div>
 							</li>
 							<li><a href="elements.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
-							<li><a href="index.html" class="active"><i class="lnr lnr-book"></i> <span>我的文章</span></a></li>
+							<li><a href="index.html" class=""><i class="lnr lnr-book"></i> <span>我的文章</span></a></li>
 							<li><a href="mycommentindex.html" class=""><i class="lnr lnr-keyboard"></i> <span>我的评论</span></a></li>
 							
 							
 							<li v-show="role" class="lineheight"></li>
 							<li v-show="role"><a href="useradmin.html" class=""><i class="lnr lnr-users"></i> <span>用户管理</span></a></li>
 							<li v-show="role"><a href="adminindex.html" class=""><i class="lnr lnr-map"></i> <span>文章管理</span></a></li>
-							<li v-show="role"><a href="commentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>评论管理</span></a></li>
-							<li v-show="role"><a href="classifyadmin你.html" class=""><i class="lnr lnr-dice"></i> <span>分类管理</span></a></li>
-							<li v-show="role"><a href="signadmin.html" class=""><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
+							<li v-show="role"><a href="firstcommentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>一级评论管理</span></a></li>
+							<li v-show="role"><a href="secondcommentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>二级评论管理</span></a></li>
+							<li v-show="role"><a href="classifyadmin.html" class=""><i class="lnr lnr-dice"></i> <span>分类管理</span></a></li>
+							<li v-show="role"><a href="tagadmin.html" class=""><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
 							<li v-show="role"><a href="linkadmin.html" class=""><i class="lnr lnr-paperclip"></i> <span>友链管理</span></a></li>
-							<li v-show="role"><a href="readtime.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
+							<li v-show="role"><a href="logadmin.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
 							
 							
 						</ul>
@@ -113,7 +121,7 @@
 							<div class="overlay"></div>
 							<div class="profile-main">
 								<div class="profileimgdiv">
-									<img src="img/user-medium.png" class="img-circle profileimg" alt="" id="cropedBigImg"/>
+									<img src="img/user-medium.png" class="img-circle profileimg" alt="" id="icon"/>
 								</div><!-- :src="list1.userPicture" -->
 								<h3 class="name">Samuel Gold</h3>
 								<span class="status-available">边走边唱，如诗如歌如理想</span>
@@ -169,7 +177,8 @@
 									</div> -->
 									
 									<div class="text-center profilesubmit btn btn-primary fileinput-button">
-										<input type="file" name="" id="file" class="fileinput"><span class="filefont">修改头像</span>
+										<button class="btn btn-primary btn-group-lg" data-toggle="modal" data-target="#avatar-modal">上传图片</button>
+										<!-- <img id="icon" src="img/touxiang.jpg" alt="裁剪后"> -->
 									</div>
 									<div class="text-center profilesubmit"><a href="#" class="btn btn-primary">确认修改</a></div>
 								</form>
@@ -178,7 +187,82 @@
 					</div>
 				</div>
 				<div class="clearfix"></div>
-
+				<!-- 模态框（Modal） -->
+				<!--图片裁剪-->
+					<div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog"
+					 tabindex="-1">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<!--<form class="avatar-form" action="upload-logo.php" enctype="multipart/form-data" method="post">-->
+								<form class="avatar-form">
+									<div class="modal-header">
+										<button class="close" data-dismiss="modal" type="button">×</button>
+										<h4 class="modal-title" id="avatar-modal-label">上传图片</h4>
+									</div>
+									<div class="modal-body">
+										<div class="avatar-body">
+											<div class="avatar-upload">
+												<input class="avatar-src" name="avatar_src" type="hidden">
+												<input class="avatar-data" name="avatar_data" type="hidden">
+												<label for="avatarInput" style="line-height: 35px;">图片上传</label>
+												<button class="btn btn-info" type="button" style="height: 35px;" onclick="$('input[id=avatarInput]').click();">请选择图片</button>
+												<span id="avatar-name"></span>
+												<input class="avatar-input hide" id="avatarInput" name="avatar_file" type="file"></div>
+											<div class="row">
+												<div class="col-md-9">
+													<div class="avatar-wrapper"></div>
+												</div>
+												<div class="col-md-3">
+													<div class="avatar-preview preview-lg" id="imageHead"></div>
+												</div>
+											</div>
+											<div class="row avatar-btns">
+												<div class="col-md-4">
+													<div class="btn-group">
+														<button class="btn btn-info fa fa-undo" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees">
+															向左旋转</button>
+													</div>
+													<div class="btn-group">
+														<button class="btn  btn-info fa fa-repeat" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees">
+															向右旋转</button>
+													</div>
+												</div>
+												<div class="col-md-5" style="text-align: right;">
+													<button class="btn btn-info fa fa-arrows" data-method="setDragMode" data-option="move" type="button"
+													 title="移动">
+														<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('setDragMode', 'move')">
+														</span>
+													</button>
+													<button type="button" class="btn btn-info fa fa-search-plus" data-method="zoom" data-option="0.1"
+													 title="放大图片">
+														<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('zoom', 0.1)">
+															<!--<span class="fa fa-search-plus"></span>-->
+														</span>
+													</button>
+													<button type="button" class="btn btn-info fa fa-search-minus" data-method="zoom" data-option="-0.1"
+													 title="缩小图片">
+														<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('zoom', -0.1)">
+															<!--<span class="fa fa-search-minus"></span>-->
+														</span>
+													</button>
+													<button type="button" class="btn btn-info fa fa-refresh" data-method="reset" title="重置图片">
+														<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('reset')"
+														 aria-describedby="tooltip866214"></span>
+													</button>
+												</div>
+												<div class="col-md-3">
+													<button class="btn btn-info btn-block avatar-save fa fa-save" type="button" data-dismiss="modal">
+														保存修改</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- /.modal -->
+				
 			</div>
 			<footer>
 				<div class="container-fluid">
@@ -190,22 +274,6 @@
 			</div>
 			<!-- END WRAPPER -->
 			<!-- Javascript -->
-			<script type="text/javascript">
-				
-			  document.getElementById("file").onchange=function(){
-			   var file=event.target.files[0];
-			   var reader=new FileReader();
-			   reader.readAsDataURL(file);//会读成url数据（base64）
-			   console.log(reader);
-			 	reader.onload = function (e) {
-			 		
-			     // 直接写入图片
-			       var img = document.getElementById("cropedBigImg");
-			 			console.log(img);
-			       img.src = e.target.result;
-			   }
-			 }
-			</script>
 			<script src="vendor/jquery/jquery.min.js"></script>
 			<script src="../static/js/bootstrap.min.js"></script>
 			<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
@@ -324,7 +392,66 @@
 					}
 				});
 			</script>
+			<script type="text/javascript">
+				//做个下简易的验证  大小 格式
+				$('#avatarInput').on('change', function(e) {
+					var filemaxsize = 1024 * 5; //5M
+					var target = $(e.target);
+					var Size = target[0].files[0].size / 1024;
+					if (Size > filemaxsize) {
+						alert('图片过大，请重新选择!');
+						$(".avatar-wrapper").childre().remove;
+						return false;
+					}
+					if (!this.files[0].type.match(/image.*/)) {
+						alert('请选择正确的图片!')
+					} else {
+						var filename = document.querySelector("#avatar-name");
+						var texts = document.querySelector("#avatarInput").value;
+						var teststr = texts; //你这里的路径写错了
+						testend = teststr.match(/[^\\]+\.[^\(]+/i); //直接完整文件名的
+						filename.innerHTML = testend;
+					}
 			
+				});
+				//#icon元素的src就是截图后的文件,base64
+				$(".avatar-save").on("click", function() {
+					var img_lg = document.getElementById('imageHead');
+			
+					// 截图小的显示框内的内容
+					html2canvas(img_lg, {
+						allowTaint: true,
+						taintTest: false,
+						onrendered: function(canvas) {
+							// var dataURL = $image.cropper("getCroppedCanvas");//这个可以获得大图
+							// var imgurl = dataURL.toDataURL("image/*", 1);
+							// $('#icon').attr('src', imgurl);
+							canvas.id = "mycanvas";
+							var dataUrl = canvas.toDataURL("image/png"); //这个可以获得压缩图片,适合作为头像
+							$('#icon').attr('src', dataUrl);
+			
+						}
+					});
+				});
+			
+				function imagesAjax(src) {
+					var data = {};
+					data.img = src;
+					$.ajax({
+						url: "../file/upload.do",
+						data: data,
+						type: "POST",
+						dataType: 'json',
+						success: function(data) {
+							if (data.state == 1) {
+								$('#icon').attr('src', data.data);
+								$('#iconPic').val(data.data);
+							}
+							toastr.info(data.message);
+						}
+					});
+				}
+			</script>
 	</body>
 
 </html>

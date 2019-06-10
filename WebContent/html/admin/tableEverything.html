@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="vendor/layui/css/layui.css" />
+		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="vendor/linearicons/style.css">
+		<link rel="stylesheet" href="vendor/chartist/css/chartist-custom.css">
+		<script type="text/javascript" src="vendor/layui/layui.all.js"></script>
+		<script src="vendor/jquery/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	<table id="demo"></table>
+		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+		<script>
+			var table=layui.table;
+			console.log(layui);
+			$tabledata={message:"",state:"",data:{pageNum:"",list:[]}};
+			var $option={
+				elem:"#demo",
+				height:315,
+				cols:[[{type:"normal",field:"commentid",title:"ID"},
+				{field:"username",title:"用户名",type:"normal"},
+				{field:"articletitle",title:"文章名",type:"normal"},
+				{field:"comment1",title:"评论内容",type:"normal"}]],
+				url:"comment.json",
+				request:{
+					pageName:"index",
+					limitName:"length"
+				},
+				parseData:function(response){
+					for(let d of response){
+						$tabledata.data.list.push({username:null,comment1:d.content,articletitle:null,userid:null,commentid:d.commentid,articleid:d.articleid});
+					};
+					for(let i of $tabledata.data.list){
+						$.get({
+							url:"article.json",
+							data:{id:i.articleid},
+							success:function(response){
+								i.articletitle=response.title,
+								i.articleid=response.articleid
+							}
+						});
+					}
+					for(let i of $tabledata.data.list){
+							$.get({
+								url:"user.json",
+								data:{id:i.userid},
+								success:function(response){
+									i.username=response.username,
+									i.userid=response.userid
+								}
+							});
+					}
+					console.log($tabledata.data.list);
+					return { "code": 0, //解析接口状态
+										"msg": "成功", //解析提示文本
+										"count": response.length, //解析数据长度
+										"data": $tabledata.data.list,//数据
+										};
+				},
+				done:function(data,index,count){
+					for(let i of $tabledata.data.list){
+						$.get({
+							url:"article.json",
+							data:{id:i.articleid},
+							success:function(response){
+								i.articletitle=response.title,
+								i.articleid=response.articleid
+							}
+						});
+					}
+					for(let i of $tabledata.data.list){
+							$.get({
+								url:"user.json",
+								data:{id:i.userid},
+								success:function(response){
+									i.username=response.username,
+									i.userid=response.userid
+								}
+							});
+					}
+					console.log(data);
+					console.log(index);
+					console.log(count);
+				}
+			};
+			var demotable=table.render($option);
+		</script>
+	</body>
+</html>

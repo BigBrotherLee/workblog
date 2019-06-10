@@ -383,3 +383,59 @@ adminindex.html
 .adduserform {
 	font-size: 14px;
 }
+
+
+/* 
+=======================================
+classifyadmin.html
+======================================= 
+*/
+
+.addclassify{
+	font-size: 13px;
+	float: right;
+	height: 45px;
+	margin-top: -4px;
+	margin-right: -120px;
+}
+
+.addclassify label{
+	float: left;
+}
+
+.addclassify input{
+	float: left;
+	width: 200px;
+}
+
+/* 
+=======================================
+tagadmin.html
+======================================= 
+*/
+
+
+.addtag{
+	margin-top: 1px;
+	height: 35px;
+	}
+	
+	.layui-table tbody tr{
+		height: 100%;
+		max-width: 100%;
+	}
+	.layui-table-cell {
+            height: 100%;
+            max-width: 100%;
+        }
+.layui-table-cell .layui-form-checkbox[lay-skin="primary"]{
+     /* top: 50%;
+     transform: translateY(-50%); */
+		 /* height: 100%;
+		 max-width: 100%; */
+}
+
+.classifyform .classifyimg{
+	width: 200px;
+	height: 70px;
+}
