@@ -1,5 +1,6 @@
 package com.sunshareteam.workblog.web;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -142,9 +143,9 @@ public class ArticleController {
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
 	@GetMapping("/getpage/{index}/{length}")
-	public ResponseResult<PageInfo<Article>> getArticlePage(@PathVariable int index,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key){
-		ResponseResult<PageInfo<Article>> result =new ResponseResult<PageInfo<Article>>();
-		PageInfo<Article> data=articleService.getByKey(key, index, length);
+	public ResponseResult<PageInfo<ArticleVO>> getArticlePage(@PathVariable int index,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key){
+		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
+		PageInfo<ArticleVO> data=articleService.getByKey(key, index, length);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
@@ -164,9 +165,9 @@ public class ArticleController {
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
 	@GetMapping("/getpagebyarthor/{index}/{length}")
-	public ResponseResult<PageInfo<Article>> getArticlePageByAuthor(@PathVariable int index,@PathVariable int length,Integer authorid){
-		ResponseResult<PageInfo<Article>> result =new ResponseResult<PageInfo<Article>>();
-		PageInfo<Article> data=articleService.getByAuthor(authorid, index, length);
+	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByAuthor(@PathVariable int index,@PathVariable int length,Integer authorid){
+		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
+		PageInfo<ArticleVO> data=articleService.getByAuthor(authorid, index, length);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
@@ -177,7 +178,21 @@ public class ArticleController {
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}
-	
+	@GetMapping("/getmyarticle")
+	public ResponseResult<PageInfo<ArticleVO>> getMyArticle(int index,int length) throws Exception{
+		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
+		Integer userid=Integer.parseInt(BeanUtils.getProperty(SecurityUtils.getSubject().getPrincipal(), "userid"));
+		PageInfo<ArticleVO> data=articleService.getByAuthor(userid, index, length);
+		if(data.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(data);
+		result.setMessage("查询成功");
+		result.setState(LeeConstant.STATE_SUCCESS);
+		return result;
+	}
 	/**
 	 * 查询同标签文章
 	 * @param index 第几页
@@ -186,9 +201,9 @@ public class ArticleController {
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
 	@GetMapping("/getpagebytag/{index}/{length}")
-	public ResponseResult<PageInfo<Article>> getArticlePageByTag(@PathVariable int index,@PathVariable int length,Integer tagid){
-		ResponseResult<PageInfo<Article>> result =new ResponseResult<PageInfo<Article>>();
-		PageInfo<Article> data=articleService.getByTag(tagid, index, length);
+	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByTag(@PathVariable int index,@PathVariable int length,Integer tagid){
+		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
+		PageInfo<ArticleVO> data=articleService.getByTag(tagid, index, length);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
@@ -208,9 +223,9 @@ public class ArticleController {
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
 	@GetMapping("/getpagebycategory/{index}/{length}")
-	public ResponseResult<PageInfo<Article>> getArticlePageByCategory(@PathVariable int index,@PathVariable int length,Integer categoryid){
-		ResponseResult<PageInfo<Article>> result =new ResponseResult<PageInfo<Article>>();
-		PageInfo<Article> data=articleService.getByCategoty(categoryid, index, length);
+	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByCategory(@PathVariable int index,@PathVariable int length,Integer categoryid){
+		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
+		PageInfo<ArticleVO> data=articleService.getByCategoty(categoryid, index, length);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
@@ -229,9 +244,9 @@ public class ArticleController {
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
 	@GetMapping("/getnew/{index}/{length}")
-	public ResponseResult<PageInfo<Article>> getNew(@PathVariable int index,@PathVariable int length){
-		ResponseResult<PageInfo<Article>> result =new ResponseResult<PageInfo<Article>>();
-		PageInfo<Article> info=articleService.getNew(index, length);
+	public ResponseResult<PageInfo<ArticleVO>> getNew(@PathVariable int index,@PathVariable int length){
+		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
+		PageInfo<ArticleVO> info=articleService.getNew(index, length);
 		if(info.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
@@ -250,9 +265,9 @@ public class ArticleController {
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
 	@GetMapping("/gethot/{index}/{length}")
-	public ResponseResult<PageInfo<Article>> getHot(@PathVariable int index,@PathVariable int length){
-		ResponseResult<PageInfo<Article>> result =new ResponseResult<PageInfo<Article>>();
-		PageInfo<Article> info=articleService.getHot(index, length);
+	public ResponseResult<PageInfo<ArticleVO>> getHot(@PathVariable int index,@PathVariable int length){
+		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
+		PageInfo<ArticleVO> info=articleService.getHot(index, length);
 		if(info.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
@@ -272,9 +287,9 @@ public class ArticleController {
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
 	@GetMapping("/getpageall/{index}/{length}")
-	public ResponseResult<PageInfo<Article>> getArticlePageAll(@PathVariable int index,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key){
-		ResponseResult<PageInfo<Article>> result =new ResponseResult<PageInfo<Article>>();
-		PageInfo<Article> data=articleService.getByKeyAll(key, index, length);
+	public ResponseResult<PageInfo<ArticleVO>> getArticlePageAll(@PathVariable int index,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key){
+		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
+		PageInfo<ArticleVO> data=articleService.getByKeyAll(key, index, length);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
@@ -294,9 +309,9 @@ public class ArticleController {
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
 	@GetMapping("/getpagebyarthorall/{index}/{length}")
-	public ResponseResult<PageInfo<Article>> getArticlePageByAuthorAll(@PathVariable int index,@PathVariable int length,Integer authorid){
-		ResponseResult<PageInfo<Article>> result =new ResponseResult<PageInfo<Article>>();
-		PageInfo<Article> data=articleService.getByAuthorAll(authorid, index, length);
+	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByAuthorAll(@PathVariable int index,@PathVariable int length,Integer authorid){
+		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
+		PageInfo<ArticleVO> data=articleService.getByAuthorAll(authorid, index, length);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);

@@ -3,6 +3,7 @@ package com.sunshareteam.workblog.dao;
 import java.util.List;
 
 import com.sunshareteam.workblog.entity.Article;
+import com.sunshareteam.workblog.web.ArticleVO;
 
 public interface ArticleMapper {
 	Article findById(Integer id);
@@ -19,19 +20,19 @@ public interface ArticleMapper {
 	
 	void deleteTag(Integer articleid);
 	
-	List<Article> findByKey(String key);
+	List<ArticleVO> findByKey(String key);
 	
-	List<Article> findHot();
+	List<ArticleVO> findHot();
 	
-	List<Article> findNew();
+	List<ArticleVO> findNew();
 	
-	List<Article> findByCategoty(Integer categotyid);
+	List<ArticleVO> findByCategoty(Integer categotyid);
 	
-	List<Article> findByTag(Integer tagid);
+	List<ArticleVO> findByTag(Integer tagid);
 	
-	List<Article> findByAuthor(Integer authorid);
+	List<ArticleVO> findByAuthor(Integer authorid);
 	
-	List<Article> findByKeyAll(String key);
+	List<ArticleVO> findByKeyAll(String key);
 	
-	List<Article> findByAuthorAll(Integer authorid);
+	List<ArticleVO> findByAuthorAll(Integer authorid);
 }

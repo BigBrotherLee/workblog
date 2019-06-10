@@ -15,7 +15,14 @@ public class Article {
     private String title;
     private String summary;
 	private Boolean state;
-	      public Integer getArticleid() {
+	private String contentformat;
+	public String getContentformat() {
+		return contentformat;
+	}
+	public void setContentformat(String contentformat) {
+		this.contentformat = contentformat;
+	}
+	public Integer getArticleid() {
 		return articleid;
 	}
 	public void setArticleid(Integer articleid) {
@@ -93,6 +100,6 @@ public class Article {
 		return "Article [articleid=" + articleid + ", createdate=" + createdate + ", modifydate=" + modifydate
 				+ ", modifyuser=" + modifyuser + ", img=" + img + ", content=" + content + ", author=" + author
 				+ ", commentnum=" + commentnum + ", categoty=" + categoty + ", title=" + title + ", summary=" + summary
-				+ ", state=" + state + "]";
+				+ ", state=" + state + ", contentformat=" + contentformat + "]";
 	}
 }

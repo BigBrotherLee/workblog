@@ -25,6 +25,7 @@ import com.sunshareteam.workblog.entity.Role;
 import com.sunshareteam.workblog.entity.RolePermission;
 import com.sunshareteam.workblog.entity.User;
 import com.sunshareteam.workblog.entity.UserRole;
+import com.sunshareteam.workblog.web.ArticleVO;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:applicationContext.xml","classpath:springmvc.xml",
@@ -326,42 +327,42 @@ public class TestMapper {
 	}
 	@Test
 	public void testfindByKey() {
-		List<Article> list=articleMapper.findByKey("%装逼%");
+		List<ArticleVO> list=articleMapper.findByKey("%装逼%");
 		System.out.println(list);
 	}
 	@Test
 	public void testfindHot() {
-		List<Article> list=articleMapper.findHot();
+		List<ArticleVO> list=articleMapper.findHot();
 		System.out.println(list);
 	}
 	@Test
 	public void testfindnew() {
-		List<Article> list=articleMapper.findNew();
+		List<ArticleVO> list=articleMapper.findNew();
 		System.out.println(list);
 	}
 	@Test
 	public void testfindByCategoty() {
-		List<Article> list=articleMapper.findByCategoty(1);
+		List<ArticleVO> list=articleMapper.findByCategoty(1);
 		System.out.println(list);
 	}
 	@Test
 	public void testfindByTag() {
-		List<Article> list=articleMapper.findByTag(1);
+		List<ArticleVO> list=articleMapper.findByTag(1);
 		System.out.println(list);
 	}
 	@Test
 	public void testfindByAuthor() {
-		List<Article> list=articleMapper.findByAuthor(5);
+		List<ArticleVO> list=articleMapper.findByAuthor(5);
 		System.out.println(list);
 	}
 	@Test
 	public void testfindByKeyAll() {
-		List<Article> list=articleMapper.findByKeyAll("%_%");
+		List<ArticleVO> list=articleMapper.findByKeyAll("%_%");
 		System.out.println(list);
 	}
 	@Test
 	public void testfindByAuthorAll() {
-		List<Article> list=articleMapper.findByAuthorAll(5);
+		List<ArticleVO> list=articleMapper.findByAuthorAll(5);
 		System.out.println(list);
 	}
 }

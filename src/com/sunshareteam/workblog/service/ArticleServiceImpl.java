@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.dao.ArticleMapper;
 import com.sunshareteam.workblog.entity.Article;
+import com.sunshareteam.workblog.web.ArticleVO;
 
 @Service("articleService")
 public class ArticleServiceImpl implements ArticleService {
@@ -48,59 +49,59 @@ public class ArticleServiceImpl implements ArticleService {
 	}
 
 	@Override
-	public PageInfo<Article> getByKey(String key, int start, int size) {
+	public PageInfo<ArticleVO> getByKey(String key, int start, int size) {
 		PageHelper.startPage(start, size);
-		List<Article> list=articleMapper.findByKey("%"+key+"%");
-		return new PageInfo<Article>(list);
+		List<ArticleVO> list=articleMapper.findByKey("%"+key+"%");
+		return new PageInfo<ArticleVO>(list);
 	}
 
 	@Override
-	public PageInfo<Article> getHot(int start, int size) {
+	public PageInfo<ArticleVO> getHot(int start, int size) {
 		PageHelper.startPage(start, size);
-		List<Article> list=articleMapper.findHot();
-		return new PageInfo<Article>(list);
+		List<ArticleVO> list=articleMapper.findHot();
+		return new PageInfo<ArticleVO>(list);
 	}
 
 	@Override
-	public PageInfo<Article> getNew(int start, int size) {
+	public PageInfo<ArticleVO> getNew(int start, int size) {
 		PageHelper.startPage(start, size);
-		List<Article> list=articleMapper.findNew();
-		return new PageInfo<Article>(list);
+		List<ArticleVO> list=articleMapper.findNew();
+		return new PageInfo<ArticleVO>(list);
 	}
 
 	@Override
-	public PageInfo<Article> getByCategoty(Integer categotyid, int start, int size) {
+	public PageInfo<ArticleVO> getByCategoty(Integer categotyid, int start, int size) {
 		PageHelper.startPage(start, size);
-		List<Article> list=articleMapper.findByCategoty(categotyid);
-		return new PageInfo<Article>(list);
+		List<ArticleVO> list=articleMapper.findByCategoty(categotyid);
+		return new PageInfo<ArticleVO>(list);
 	}
 
 	@Override
-	public PageInfo<Article> getByAuthor(Integer userid, int start, int size) {
+	public PageInfo<ArticleVO> getByAuthor(Integer userid, int start, int size) {
 		PageHelper.startPage(start, size);
-		List<Article> list=articleMapper.findByAuthor(userid);
-		return new PageInfo<Article>(list);
+		List<ArticleVO> list=articleMapper.findByAuthor(userid);
+		return new PageInfo<ArticleVO>(list);
 	}
 
 	@Override
-	public PageInfo<Article> getByTag(Integer tagid, int start, int size) {
+	public PageInfo<ArticleVO> getByTag(Integer tagid, int start, int size) {
 		PageHelper.startPage(start, size);
-		List<Article> list=articleMapper.findByTag(tagid);
-		return new PageInfo<Article>(list);
+		List<ArticleVO> list=articleMapper.findByTag(tagid);
+		return new PageInfo<ArticleVO>(list);
 	}
 
 	@Override
-	public PageInfo<Article> getByKeyAll(String key, int start, int size) {
+	public PageInfo<ArticleVO> getByKeyAll(String key, int start, int size) {
 		PageHelper.startPage(start, size);
-		List<Article> list=articleMapper.findByKeyAll("%"+key+"%");
-		return new PageInfo<Article>(list);
+		List<ArticleVO> list=articleMapper.findByKeyAll("%"+key+"%");
+		return new PageInfo<ArticleVO>(list);
 	}
 
 	@Override
-	public PageInfo<Article> getByAuthorAll(Integer userid, int start, int size) {
+	public PageInfo<ArticleVO> getByAuthorAll(Integer userid, int start, int size) {
 		PageHelper.startPage(start, size);
-		List<Article> list=articleMapper.findByAuthor(userid);
-		return new PageInfo<Article>(list);
+		List<ArticleVO> list=articleMapper.findByAuthor(userid);
+		return new PageInfo<ArticleVO>(list);
 	}
 	
 }
