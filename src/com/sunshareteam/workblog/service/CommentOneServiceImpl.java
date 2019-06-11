@@ -24,9 +24,9 @@ public class CommentOneServiceImpl implements CommentOneService{
 	}
 	
 	@Override
-	public PageInfo<CommentOneVO> getByArticleAndUser(int start, int size) {
+	public PageInfo<CommentOneVO> getByArticleAndUser(Integer userid,int start, int size) {
 		PageHelper.startPage(start, size);
-		List<CommentOneVO> list=commentoneMapper.findByArticleAndUser();
+		List<CommentOneVO> list=commentoneMapper.findByArticleAndUser(userid);
 		return new PageInfo<CommentOneVO>(list);
 	}
 	

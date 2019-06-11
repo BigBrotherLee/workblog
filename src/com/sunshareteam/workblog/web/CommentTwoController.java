@@ -13,17 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.bigbrotherlee.utils.LeeConstant;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
-import com.sunshareteam.workblog.entity.CommentOne;
 import com.sunshareteam.workblog.entity.CommentTwo;
+import com.sunshareteam.workblog.entity.User;
 import com.sunshareteam.workblog.service.CommentTwoService;
 
 
 @RestController
-@RequestMapping("/commentwo")
+@RequestMapping("/commenttwo")
 public class CommentTwoController {
 	@Autowired
 	private CommentTwoService commenttwoService;
@@ -57,10 +56,10 @@ public class CommentTwoController {
 	 * @return 查询成功返回ResponseResult<PageInfo<CommentTwoVO>>分页数据，失败抛出异常LeeException
 	 */
 	@RequiresPermissions("commenttwo:select:*")
-	@GetMapping("/getbycommentoneanduser/{index}/{length}")
-	public ResponseResult<PageInfo<CommentTwoVO>> ByCommentOneAndUser(@PathVariable int index,@PathVariable int length){
+	@GetMapping("/getbycommentoneanduser")
+	public ResponseResult<PageInfo<CommentTwoVO>> ByCommentOneAndUser(@PathVariable Integer userid){
 		ResponseResult<PageInfo<CommentTwoVO>> result=new ResponseResult<PageInfo<CommentTwoVO>>();
-		PageInfo<CommentTwoVO> data=commenttwoService.getByCommentOneAndUser(index, length);
+		PageInfo<CommentTwoVO> data=commenttwoService.getByCommentOneAndUser(userid,0,1000);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
@@ -120,9 +119,8 @@ public class CommentTwoController {
 	@PostMapping("/add")
 	public ResponseResult<CommentTwo> addCategoty(CommentTwo commenttwo){
 		ResponseResult<CommentTwo> result =new ResponseResult<CommentTwo>();
-//		CommentOne commentone =(CommentOne) SecurityUtils.getSubject().getPrincipal();
-//		Article article =(Article) SecurityUtils.getSubject().getPrincipal();
-//		commenttwo.setOneid(commentone.getComment_one_id());
+		User user =(User) SecurityUtils.getSubject().getPrincipal();
+		commenttwo.setCreateuser(user.getUserid());
 		try {
 			commenttwoService.insertCommentTwo(commenttwo);
 			result.setData(commenttwo);
@@ -155,19 +153,20 @@ public class CommentTwoController {
 	}
 	/**
 	 * 得到二级评论用户信息
-	 * @param userid 用户id
+	 * @param id 二评id
 	 * @return 成功则返回ResponseResult<CommentTwo> state：1，message：查询成功，data：得到二级评论角色信息
 	 */
-	@GetMapping("/getbyUser/{id}")
-	public ResponseResult<PageInfo<CommentTwo>> getCommentTwoByUser(@PathVariable Integer id,@PathVariable int index,@PathVariable int length){
-		ResponseResult<PageInfo<CommentTwo>> result =new ResponseResult<PageInfo<CommentTwo>>();
-		PageInfo<CommentTwo> commenttwo=commenttwoService.getByUser(id, 0, 1000);
-		if(ObjectUtils.allNotNull(commenttwo)) {
-			result.setMessage("查询成功");
-			result.setState(LeeConstant.STATE_SUCCESS);
+	@GetMapping("/getbyuser/{id}")
+	public ResponseResult<List<CommentTwo>> getCommentTwoByUser(@PathVariable Integer id){
+		ResponseResult<List<CommentTwo>> result =new ResponseResult<List<CommentTwo>>();
+		PageInfo<CommentTwo> info=commenttwoService.getByUser(id, 0, 1000);
+		if(info.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
 			return result;
 		}
-		result.setMessage("查询为空");
+		result.setData(info.getList());
+		result.setMessage("查询成功");
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}
@@ -176,7 +175,7 @@ public class CommentTwoController {
 	 * @param oneid 一级评论id
 	 * @return 成功则返回 ResponseResult<PageInfo<CommentTwo>> state：1，message：查询成功 data：评论分页信息
 	 */
-	@GetMapping("/getcommenttwobyoneall/{index}/{length}")
+	@GetMapping("/getcommenttwobyoneall")
 	public ResponseResult<List<CommentTwo>> getCommentTwoByOneAll(@PathVariable Integer oneid){
 		ResponseResult<List<CommentTwo>> result =new ResponseResult<List<CommentTwo>>();
 		PageInfo<CommentTwo> info=commenttwoService.getByOneAll(oneid,0,1000);

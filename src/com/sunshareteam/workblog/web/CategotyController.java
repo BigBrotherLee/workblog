@@ -101,7 +101,7 @@ public class CategotyController {
 	 * @param categoty 你更改后的分类信息
 	 * @return 成功则返回ResponseResult<Categoty> state：1，message：更新成功，data：你改后的分类信息
 	 */
-	@RequiresPermissions("categity:update:*")
+	@RequiresPermissions("categoty:update:*")
 	@PutMapping("/update")
 	public ResponseResult<Categoty> updateCategoty(Categoty categoty){
 		ResponseResult<Categoty> result =new ResponseResult<Categoty>();
@@ -126,8 +126,8 @@ public class CategotyController {
 	 * @param articleid 文章id
 	 * @return 成功则返回ResponseResult<Categoty> state：1，message：查询成功，data：该文章所属分类信息
 	 */
-	@GetMapping("/getbyarticle/{id}")
-	public ResponseResult<Categoty> getCategotyByArticle(@PathVariable int articleid){
+	@GetMapping("/getbyarticle/{articleid}")
+	public ResponseResult<Categoty> getCategotyByArticle(@PathVariable Integer articleid){
 		ResponseResult<Categoty> result =new ResponseResult<Categoty>();
 		Categoty categoty=categotyService.getByArticle(articleid);
 		if(ObjectUtils.allNotNull(categoty)) {

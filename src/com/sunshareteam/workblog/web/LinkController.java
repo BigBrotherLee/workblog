@@ -100,8 +100,6 @@ public class LinkController {
 	@PostMapping("/add")
 	public ResponseResult<Link> addTag(Link link){
 		ResponseResult<Link> result =new ResponseResult<Link>();
-		User user =(User) SecurityUtils.getSubject().getPrincipal();
-		link.setModifyuser(user.getUserid());
 		try {
 		    linkService.insertLink(link);
 			result.setData(link);
@@ -161,7 +159,7 @@ public class LinkController {
 	 * @param length 页面长度
 	 * @return 成功则返回 ResponseResult<PageInfo<Link>> state：1，message：查询成功 data：友链分页信息
 	 */
-	@GetMapping("/getallpag/{index}/{length}")
+	@GetMapping("/getallpage/{index}/{length}")
 	public ResponseResult<PageInfo<Link>> getAllPag(@PathVariable int index,@PathVariable int length){
 		ResponseResult<PageInfo<Link>> result =new ResponseResult<PageInfo<Link>>();
 		PageInfo<Link> data=linkService.getAllPag(index, length);

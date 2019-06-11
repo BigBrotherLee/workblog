@@ -98,7 +98,7 @@ public class TagController {
 	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：该文章所属标签信息
 	 */
 	@RequiresPermissions("tag:insert:*")
-	@GetMapping("/add/{articleid}/{tagid}")
+	@PostMapping("/addtagandarticle")
 	public ResponseResult<String> addTagArticled(ArticleTag articletag){
 		ResponseResult<String> result =new ResponseResult<String>();
 		try {
@@ -139,7 +139,7 @@ public class TagController {
 	 * @param articleid 文章id
 	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：该文章所属标签信息
 	 */
-	@GetMapping("/getTagbyarticle/{id}")
+	@GetMapping("/gettagbyarticle/{articleid}")
 	public ResponseResult<List<Tag>> getTagByArticle(@PathVariable Integer articleid){
 		ResponseResult<List<Tag>> result =new ResponseResult<List<Tag>>();
 		PageInfo<Tag> info=tagService.getByArticle(articleid,0,1000);
