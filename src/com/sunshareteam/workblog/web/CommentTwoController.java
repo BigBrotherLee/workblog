@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bigbrotherlee.utils.LeeConstant;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
+import com.sunshareteam.workblog.entity.CommentOne;
 import com.sunshareteam.workblog.entity.CommentTwo;
-import com.sunshareteam.workblog.entity.User;
 import com.sunshareteam.workblog.service.CommentTwoService;
 
 
@@ -120,8 +120,9 @@ public class CommentTwoController {
 	@PostMapping("/add")
 	public ResponseResult<CommentTwo> addCategoty(CommentTwo commenttwo){
 		ResponseResult<CommentTwo> result =new ResponseResult<CommentTwo>();
-		User user =(User) SecurityUtils.getSubject().getPrincipal();
-		commenttwo.setModifyuser(user.getUserid());
+//		CommentOne commentone =(CommentOne) SecurityUtils.getSubject().getPrincipal();
+//		Article article =(Article) SecurityUtils.getSubject().getPrincipal();
+//		commenttwo.setOneid(commentone.getComment_one_id());
 		try {
 			commenttwoService.insertCommentTwo(commenttwo);
 			result.setData(commenttwo);
@@ -158,9 +159,9 @@ public class CommentTwoController {
 	 * @return 成功则返回ResponseResult<CommentTwo> state：1，message：查询成功，data：得到二级评论角色信息
 	 */
 	@GetMapping("/getbyUser/{id}")
-	public ResponseResult<PageInfo<CommentTwo>> getCommentTwoByUser(@PathVariable int userid,@PathVariable int index,@PathVariable int length){
+	public ResponseResult<PageInfo<CommentTwo>> getCommentTwoByUser(@PathVariable Integer id,@PathVariable int index,@PathVariable int length){
 		ResponseResult<PageInfo<CommentTwo>> result =new ResponseResult<PageInfo<CommentTwo>>();
-		PageInfo<CommentTwo> commenttwo=commenttwoService.getByUser(userid, 0, 1000);
+		PageInfo<CommentTwo> commenttwo=commenttwoService.getByUser(id, 0, 1000);
 		if(ObjectUtils.allNotNull(commenttwo)) {
 			result.setMessage("查询成功");
 			result.setState(LeeConstant.STATE_SUCCESS);

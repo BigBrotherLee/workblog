@@ -43,7 +43,6 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	public void insertCommentTwo(CommentTwo commenttwo) {
 		// TODO Auto-generated method stub
 		commenttwo.setCreatedate(new Date());
-		commenttwo.setModifydate(new Date());
 		commenttwoMapper.insertCommentTwo(commenttwo);
 	}
 
@@ -62,9 +61,9 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	}
 
 	@Override
-	public PageInfo<CommentTwo> getByUser(Integer userid,int start,int size) {
+	public PageInfo<CommentTwo> getByUser(Integer id,int start,int size) {
 		PageHelper.startPage(start, size);
-		List<CommentTwo> list=commenttwoMapper.findByUser(userid);
+		List<CommentTwo> list=commenttwoMapper.findByUser(id);
 		return new PageInfo<CommentTwo>(list);
 	}
 

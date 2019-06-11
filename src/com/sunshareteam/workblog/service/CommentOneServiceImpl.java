@@ -41,7 +41,6 @@ public class CommentOneServiceImpl implements CommentOneService{
 	@Transactional
 	public void insertCommentOne(CommentOne commentone) {
 		commentone.setCreatedate(new Date());
-		commentone.setModifydate(new Date());
 		commentoneMapper.insertCommentOne(commentone);	
 	}
 	
@@ -60,9 +59,9 @@ public class CommentOneServiceImpl implements CommentOneService{
 	}
 
 	@Override
-	public PageInfo<CommentOne> getByUser(Integer userid, int start, int size){
+	public PageInfo<CommentOne> getByUser(Integer id, int start, int size){
 		PageHelper.startPage(start, size);
-		List<CommentOne> list=commentoneMapper.findByUser(userid);
+		List<CommentOne> list=commentoneMapper.findByUser(id);
 		return new PageInfo<CommentOne>(list);
 	}
 

@@ -140,7 +140,7 @@ public class TagController {
 	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：该文章所属标签信息
 	 */
 	@GetMapping("/getTagbyarticle/{id}")
-	public ResponseResult<List<Tag>> getTagByArticle(@PathVariable int articleid){
+	public ResponseResult<List<Tag>> getTagByArticle(@PathVariable Integer articleid){
 		ResponseResult<List<Tag>> result =new ResponseResult<List<Tag>>();
 		PageInfo<Tag> info=tagService.getByArticle(articleid,0,1000);
 		if(info.getTotal()<=0) {
