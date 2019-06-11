@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<title>WokeBlog-修改密码</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<!-- VENDOR CSS -->
+		<link rel="stylesheet" type="text/css" href="vendor/layui/css/layui.css" />
+		<script type="text/javascript" src="vendor/layui/layui.js"></script>
+		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="vendor/linearicons/style.css">
+		<link rel="stylesheet" href="vendor/chartist/css/chartist-custom.css">
+		<!-- MAIN CSS -->
+		<link rel="stylesheet" href="css/main.css">
+		<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+		<link rel="stylesheet" href="css/demo.css">
+		<!-- GOOGLE FONTS -->
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+		<!-- ICONS -->
+		<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
+		<link rel="stylesheet" href="css/index.css">
+		<script type="text/javascript" src="../static/js/vue.js"></script>
+		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
+
+	</head>
+<body>
+          
+              
+ <form class="layui-form adduser adduserform" action="">
+ 			<div class="layui-form-item"><label class="layui-form-label">用户名</label>
+ 				<div class="layui-input-inline"><input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？"
+ 					 placeholder="请输入" autocomplete="off" class="layui-input"> </div>
+ 			</div>
+ 			<div class="layui-form-item"><label class="layui-form-label">邮箱</label>
+ 				<div class="layui-input-inline"><input type="text" name="email" lay-verify="email" placeholder="请输入邮箱"
+ 					 autocomplete="off" class="layui-input"></div>
+ 			</div>
+ 			<div class="layui-form-item"><label class="layui-form-label">密码</label>
+ 				<div class="layui-input-inline"><input type="password" name="password" lay-verify="pass" placeholder="请输入密码"
+ 					 autocomplete="off" class="layui-input"></div>
+ 				<!-- <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div> -->
+ 			</div>
+ 			<div class="layui-form-item"><label class="layui-form-label confirmpassword">确认密码</label>
+ 				<div class="layui-input-inline"><input type="password" name="password" lay-verify="pass" placeholder="请输入密码"
+ 					 autocomplete="off" class="layui-input"></div>
+ 				<!-- <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div> -->
+ 			</div>
+ 			<div class="layui-form-item">
+ 				<div class="adduserbtn">
+ 					<button class="btn btn-danger" lay-submit="" lay-filter="demo1">立即提交</button>
+ 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+ 					</div>
+ 				
+ 			</div>
+ 			
+ 		</form>
+ 
+          
+					
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+  
+  
+ 
+  //自定义验证规则
+  // form.verify({
+  //   title: function(value){
+  //     if(value.length < 5){
+  //       return '标题至少得5个字符啊';
+  //     }
+  //   }
+  //   ,pass: [
+  //     /^[\S]{6,12}$/
+  //     ,'密码必须6到12位，且不能出现空格'
+  //   ]
+  //   ,content: function(value){
+  //     layedit.sync(editIndex);
+  //   }
+  // });
+  
+ //  
+ //  //监听提交
+ //  form.on('submit(demo1)', function(data){
+ //    layer.alert(JSON.stringify(data.field), {
+ //      title: '最终的提交信息'
+ //    })
+ //    return false;
+ //  });
+ // 
+ //  
+  
+});
+</script>
+
+</body>
+</html>
