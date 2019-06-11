@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>WokeBlog-一级评论管理</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" type="text/css" href="vendor/layui/css/layui.css" />
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendor/linearicons/style.css">
+    <link rel="stylesheet" href="vendor/chartist/css/chartist-custom.css">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" href="css/demo.css">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
+    <link rel="stylesheet" href="css/cropper.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/sitelogo.css">
+    <link rel="stylesheet" type="text/css" href="vendor/editor/css/editormd.min.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/editor/css/editormd.preview.css"/>
+    <link rel="stylesheet" type="text/css" href="vendor/editor/css/editormd.preview.min.css"/>
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<!-- WRAPPER -->
+<div id="wrapper">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-default navbar-fixed-top navclass">
+        <div class="navbar-btn">
+            <h1><a class="navbar-brand" href="index.html">Work <span>Blog </span></a></h1>
+        </div>
+        <div class="container-fluid">
+            <div class="navbar-btn arrowButton">
+                <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+            </div>
+            <form class="navbar-form navbar-left">
+                <div class="input-group">
+                    <input type="text" value="" class="form-control" placeholder="Search dashboard...">
+                    <span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+                </div>
+            </form>
+            <div id="navbar-menu">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
+                            <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">关于</a></li>
+                            <li><a href="#">友链</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
+                            <span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
+                            <li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li>
+                            <li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- END NAVBAR -->
+    <!-- LEFT SIDEBAR -->
+    <div id="sidebar-nav" class="sidebar sidebarclass">
+        <div class="sidebar-scroll">
+            <nav>
+                <ul class="nav">
+                    <li>
+                        <a href="#subPages" data-toggle="collapse" class=""><i class="lnr lnr-user"></i> <span>个人</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="subPages" class="collapse">
+                            <ul class="nav">
+                                <li><a href="profile.html" class="">修改个人信息</a></li>
+                                <li><a href="modifypassword.html" class="">修改密码</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="elements.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
+                    <li><a href="index.html" class=""><i class="lnr lnr-book"></i> <span>我的文章</span></a></li>
+                    <li><a href="mycommentindex.html" class=""><i class="lnr lnr-keyboard"></i> <span>我的评论</span></a></li>
+
+
+                    <li v-show="role" class="lineheight"></li>
+                    <li v-show="role"><a href="useradmin.html" class=""><i class="lnr lnr-users"></i> <span>用户管理</span></a></li>
+                    <li v-show="role"><a href="adminindex.html" class=""><i class="lnr lnr-map"></i> <span>文章管理</span></a></li>
+                    <li v-show="role"><a href="firstcommentadmin.html" class="active"><i class="lnr lnr-keyboard"></i> <span>一级评论管理</span></a></li>
+                    <li v-show="role"><a href="secondcommentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>二级评论管理</span></a></li>
+                    <li v-show="role"><a href="classifyadmin.html" class=""><i class="lnr lnr-dice"></i> <span>分类管理</span></a></li>
+                    <li v-show="role"><a href="signadmin.html" class=""><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
+                    <li v-show="role"><a href="linkadmin.html" class=""><i class="lnr lnr-paperclip"></i> <span>友链管理</span></a></li>
+                    <li v-show="role"><a href="readtime.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
+
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- END LEFT SIDEBAR -->
+    <!-- MAIN -->
+    <div class="main">
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="container-fluid">
+                <!-- END OVERVIEW -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="layui-form-item">
+                            <div class="h3">创建新文章</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <form class="layui-form layui-form-pane" action="">
+                            <div class="layui-form-item">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">文章标题</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="title" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">文章分类</label>
+                                    <div class="layui-input-block">
+                                        <select name="categoty" lay-filter="aihao">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <div class="layui-input-block">
+                                        <button type="button" class="layui-btn layui-btn-normal" data-toggle="modal" data-target="#avatar-modal">选择封面</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">摘要</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                                </div>
+                            </div>
+                            <blockquote class="layui-elem-quote layui-quote-nm" id="tags">
+                                <span class="layui-badge layui-bg-black">标签</span>
+
+                            </blockquote>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">添加标签</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="tags" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="col-lg-3">
+                        <h3>封面预览：</h3>
+                        <div class="thumbnail">
+                            <img src="" id="icon" class="img-responsive" alt="图片预览">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-offset-9 col-lg-3">
+                        <button type="button" class="btn btn-block btn-primary save-article">保存文章</button>
+                    </div>
+                    <div class="col-lg-12">
+                        <div id="test-editormd">
+                            <textarea></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <button type="button" class="btn btn-block btn-primary save-article">保存文章</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END MAIN CONTENT -->
+        <!--图片裁剪-->
+        <div>
+            <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog"
+                 tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <!--<form class="avatar-form" action="upload-logo.php" enctype="multipart/form-data" method="post">-->
+                        <form class="avatar-form">
+                            <div class="modal-header">
+                                <button class="close" data-dismiss="modal" type="button">×</button>
+                                <h4 class="modal-title" id="avatar-modal-label">上传图片</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="avatar-body">
+                                    <div class="avatar-upload">
+                                        <input class="avatar-src" name="avatar_src" type="hidden">
+                                        <input class="avatar-data" name="avatar_data" type="hidden">
+                                        <label for="avatarInput" style="line-height: 35px;">图片上传</label>
+                                        <button class="btn btn-info" type="button" style="height: 35px;" onclick="$('input[id=avatarInput]').click();">请选择图片</button>
+                                        <span id="avatar-name"></span>
+                                        <input class="avatar-input hide" id="avatarInput" name="avatar_file" type="file"></div>
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="avatar-wrapper"></div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="avatar-preview preview-lg" id="imageHead"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row avatar-btns">
+                                        <div class="col-md-4">
+                                            <div class="btn-group">
+                                                <button class="btn btn-info fa fa-undo" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees">
+                                                    向左旋转</button>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button class="btn  btn-info fa fa-repeat" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees">
+                                                    向右旋转</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5" style="text-align: right;">
+                                            <button class="btn btn-info fa fa-arrows" data-method="setDragMode" data-option="move" type="button"
+                                                    title="移动">
+																			<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('setDragMode', 'move')">
+																			</span>
+                                            </button>
+                                            <button type="button" class="btn btn-info fa fa-search-plus" data-method="zoom" data-option="0.1"
+                                                    title="放大图片">
+																			<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('zoom', 0.1)">
+																				<!--<span class="fa fa-search-plus"></span>-->
+																			</span>
+                                            </button>
+                                            <button type="button" class="btn btn-info fa fa-search-minus" data-method="zoom" data-option="-0.1"
+                                                    title="缩小图片">
+																			<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('zoom', -0.1)">
+																				<!--<span class="fa fa-search-minus"></span>-->
+																			</span>
+                                            </button>
+                                            <button type="button" class="btn btn-info fa fa-refresh" data-method="reset" title="重置图片">
+																			<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('reset')"
+                                                                                  aria-describedby="tooltip866214"></span>
+                                            </button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button  class="btn btn-info btn-block avatar-save fa fa-save" type="button" data-dismiss="modal">保存修改</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MAIN -->
+    <div class="clearfix"></div>
+    <footer>
+        <div class="container-fluid">
+            <p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WOrkBlog </p>
+
+        </div>
+    </footer>
+</div>
+<!-- END WRAPPER -->
+<script type="text/javascript" src="../static/js/vue.js"></script>
+<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
+<script src="vendor/layui/layui.js" charset="utf-8"></script>
+<script src="vendor/editor/js/jquery.min.js"></script>
+<script src="vendor/editor/js/editormd.min.js"></script>
+<script src="vendor/editor/lib/marked.min.js"></script>
+<script src="vendor/editor/lib/prettify.min.js"></script>
+<script src="vendor/editor/lib/raphael.min.js"></script>
+<script src="vendor/editor/lib/underscore.min.js"></script>
+<script src="vendor/editor/lib/sequence-diagram.min.js"></script>
+<script src="vendor/editor/lib/flowchart.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+<script src="vendor/chartist/js/chartist.min.js"></script>
+<script src="js/klorofil-common.js"></script>
+<script type="text/javascript" src="js/paginathing.js"></script>
+<script type="text/javascript" src="js/cropper.js"></script>
+<script type="text/javascript" src="js/sitelogo.js"></script>
+
+<!--分类-->
+<script>
+    $(function () {
+        //得到全部分类
+        $.ajax({
+            method:"get",
+            url:"categoty/getall",
+            success:function (data) {
+                $("select[name='categoty']").append("<option value='0'>"+"写作"+"</option>" );
+                $("select[name='categoty']").append("<option value='0'>"+"写作"+"</option>" );
+                $("select[name='categoty']").append("<option value='0'>"+"写作"+"</option>" );
+            },
+            error:function () {
+                $("select[name='categoty']").append("<option value='0'>"+"写作"+"</option>" );
+                $("select[name='categoty']").append("<option value='0'>"+"写作"+"</option>" );
+                $("select[name='categoty']").append("<option value='0'>"+"写作"+"</option>" );
+            }
+        });
+    });
+</script>
+<!--标签-->
+<script>
+    $("#tags").click(function (e) {
+        if($(e.target).hasClass("layui-badge")){
+            $(e.target).remove()
+        };
+    });
+    $("input[name='tags']").change(function () {
+        console.log("后台查询数据");
+    });
+    $("input[name='tags']").keypress(function (e) {
+        if(e.which === 13){
+            $("#tags").append('<span class="layui-badge layui-bg-black">'+e.target.value+'</span>');
+            e.target.value=null;
+        }
+    });
+</script>
+
+<!--提交表单-->
+<script>
+    $("save-srticle").click(function () {
+        var img=$("#icon").attr("src");
+        var content=testEditor.getMarkdown();
+        var contentformat=testEditor.getHTML() ||testEditor.getPreviewedHTML();
+        //校验
+        $.ajax({
+            method: "POST",
+            data:{},
+            url: "article/add",
+            success:function () {
+
+            },
+            error:function () {
+                
+            }
+        });
+    });
+</script>
+<!--img cutter-->
+<script>
+    //做个下简易的验证  大小 格式
+    $('#avatarInput').on('change', function(e) {
+        var filemaxsize = 1024 * 5; //5M
+        var target = $(e.target);
+        var Size = target[0].files[0].size / 1024;
+        if (Size > filemaxsize) {
+            alert('图片过大，请重新选择!');
+            $(".avatar-wrapper").childre().remove;
+            return false;
+        }
+        if (!this.files[0].type.match(/image.*/)) {
+            alert('请选择正确的图片!')
+        } else {
+            var filename = document.querySelector("#avatar-name");
+            var texts = document.querySelector("#avatarInput").value;
+            var teststr = texts; //你这里的路径写错了
+            testend = teststr.match(/[^\\]+\.[^\(]+/i); //直接完整文件名的
+            filename.innerHTML = testend;
+        }
+
+    });
+    //#icon元素的src就是截图后的文件,base64
+
+    $(".avatar-save").on("click",function() {
+        console.log("==========================================");
+        var dataURL = $image.cropper("getCroppedCanvas");//这个可以获得大图
+        var imgurl = dataURL.toDataURL("image/*", 1);
+        $('#icon').attr('src', imgurl);
+    });
+</script>
+
+<!--layui-->
+<script>
+    layui.use(['form', 'layedit'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit;
+
+        //自定义验证规则
+        form.verify({
+            title: function(value){
+                if(value.length < 5){
+                    return '标题至少得5个字符啊';
+                }
+            }
+            ,pass: [
+                /^[\S]{6,12}$/
+                ,'密码必须6到12位，且不能出现空格'
+            ]
+            ,content: function(value){
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+
+        //表单初始赋值
+        form.val('example', {
+            "username": "贤心" // "name": "value"
+            ,"password": "123456"
+            ,"interest": 1
+            ,"like[write]": true //复选框选中状态
+            ,"close": true //开关状态
+            ,"sex": "女"
+            ,"desc": "我爱 layui"
+        })
+
+
+    });
+</script>
+<!--editor-->
+<script>
+    var testEditor;
+    testEditor = editormd("test-editormd", {
+        toolbarIcons: function() {
+            // Or return editormd.toolbarModes[name]; // full, simple, mini
+            // Using "||" set icons align right.
+            return ["undo", "redo", "|", "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", "h1",
+                "h2", "h3", "h4", "h5", "h6", "|", "list-ul", "list-ol", "hr", "|", "link", "reference-link", "image", "code",
+                "preformatted-text", "code-block", "table", "datetime", "emoji", "html-entities", "pagebreak", "|",
+                "goto-line", "watch", "preview", "fullscreen", "clear", "search", "|", "help", "info"
+            ]
+        },
+        placeholder: '本编辑器支持Markdown编辑，左边编写，右边预览', //默认显示的文字，这里就不解释了
+        width: "100%",
+        height: 600,
+        syncScrolling: "single",
+        path: "vendor/editor/lib/", //你的path路径（原资源文件中lib包在我们项目中所放的位置）
+        imageUpload: true, //图片上传功能
+        imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+        imageUploadURL: "../article/uploadImage",
+        // theme: "dark", //工具栏主题
+        // previewTheme: "dark", //预览主题
+        // editorTheme: "pastel-on-dark", //编辑主题
+        saveHTMLToTextarea: true,
+        emoji: true,
+        taskList: true,
+        tocm: true, // Using [TOCM]
+        tex: true, // 开启科学公式TeX语言支持，默认关闭
+        flowChart: true, // 开启流程图支持，默认关闭
+        sequenceDiagram: true, // 开启时序/序列图支持，默认关闭,
+        //这个配置在simple.html中并没有，但是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单。
+        saveHTMLToTextarea : true,
+        toolbarIcons : function() {
+            // Or return editormd.toolbarModes[name]; // full, simple, mini
+            // Using "||" set icons align right.
+            return ["undo","redo","bold","del","italic","quote","ucwords","uppercase","lowercase","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","hr","link","reference-link","image","code","preformatted-text","code-block","table","datetime","emoji","html-entities","pagebreak","goto-line","watch","preview","fullscreen","clear","search"]
+        },
+    });
+</script>
+
+</body>
+
+</html>
