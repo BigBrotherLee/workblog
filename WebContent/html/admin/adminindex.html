@@ -86,7 +86,7 @@
 									</ul>
 								</div>
 							</li>
-							<li><a href="elements.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
+							<li><a href="createarticle.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
 							<li><a href="index.html" class=""><i class="lnr lnr-book"></i> <span>我的文章</span></a></li>
 							<li><a href="mycommentindex.html" class=""><i class="lnr lnr-keyboard"></i> <span>我的评论</span></a></li>
 
@@ -94,12 +94,12 @@
 							<li v-show="role" class="lineheight"></li>
 							<li v-show="role"><a href="useradmin.html" class=""><i class="lnr lnr-users"></i> <span>用户管理</span></a></li>
 							<li v-show="role"><a href="adminindex.html" class="active"><i class="lnr lnr-map"></i> <span>文章管理</span></a></li>
-							<li v-show="role"><a href="commentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>一级评论管理</span></a></li>
-							<li v-show="role"><a href="commentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>二级评论管理</span></a></li>
-							<li v-show="role"><a href="classifyadmin你.html" class=""><i class="lnr lnr-dice"></i> <span>分类管理</span></a></li>
-							<li v-show="role"><a href="signadmin.html" class=""><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
+							<li v-show="role"><a href="firstcommentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>一级评论管理</span></a></li>
+							<li v-show="role"><a href="secondcommentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>二级评论管理</span></a></li>
+							<li v-show="role"><a href="classifyadmin.html" class=""><i class="lnr lnr-dice"></i> <span>分类管理</span></a></li>
+							<li v-show="role"><a href="tagadmin.html" class=""><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
 							<li v-show="role"><a href="linkadmin.html" class=""><i class="lnr lnr-paperclip"></i> <span>友链管理</span></a></li>
-							<li v-show="role"><a href="readtime.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
+							<li v-show="role"><a href="logadmin.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
 
 
 						</ul>
@@ -154,42 +154,37 @@
 													}, {
 														field: 'id',
 														title: 'ID',
-														width: 80,
+														// width: 80,
 														fixed: 'left',
 														unresize: true,
 														sort: true
 													}, {
 														field: 'username',
 														title: '作者',
-														width: 120,
+														// width: 120,
 														sort: true
 														// edit: 'text'
 													}, {
 														field: 'title',
 														title: '标题',
-														width: 200,
+														// width: 200,
 														// edit: 'text',
 													}, {
 														field: 'abstract',
 														title: '摘要',
-														width: 220,
+														// width: 220,
 														// edit: 'text',
 
 													}, {
 														field: 'classify',
 														title: '分类',
-														width: 100,
+														// width: 100,
 														sort: true
-													}, {
-														field: 'sign',
-														title: '标签',
-														width: 140,
-														sort: true
-													}, {
+													},{
 														fixed: 'right',
 														title: '操作',
 														toolbar: '#barDemo',
-														width: 120
+														// width: 120
 													}]
 												],
 												page: true

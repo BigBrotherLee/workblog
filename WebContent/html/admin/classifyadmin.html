@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<title>WokeBlog-分类管理</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<!-- VENDOR CSS -->
+		<link rel="stylesheet" href="css/cropper.min.css">
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/sitelogo.css">
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="js/cropper.js"></script>
+		<script src="js/html2canvas.min.js"></script>
+		<script src="../static/js/bootstrap.min.js"></script>
+		<script src="js/sitelogo.js"></script>
+		<link rel="stylesheet" type="text/css" href="vendor/layui/css/layui.css" />
+		<script type="text/javascript" src="vendor/layui/layui.js"></script>
+		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="vendor/linearicons/style.css">
+		<link rel="stylesheet" href="vendor/chartist/css/chartist-custom.css">
+		<!-- MAIN CSS -->
+		<link rel="stylesheet" href="css/main.css">
+		<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+		<link rel="stylesheet" href="css/demo.css">
+		<!-- GOOGLE FONTS -->
+		<!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet"> -->
+		<!-- ICONS -->
+		<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
+		<link rel="stylesheet" href="css/index.css">
+		<script type="text/javascript" src="../static/js/vue.js"></script>
+		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
+
+	</head>
+
+	<body>
+		<!-- WRAPPER -->
+		<div id="wrapper">
+			<!-- NAVBAR -->
+			<nav class="navbar navbar-default navbar-fixed-top navclass">
+				<div class="navbar-btn">
+					<h1><a class="navbar-brand" href="index.html">Work <span>Blog </span></a></h1>
+				</div>
+				<div class="container-fluid">
+					<div class="navbar-btn arrowButton">
+						<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+					</div>
+					<form class="navbar-form navbar-left">
+						<div class="input-group">
+							<input type="text" value="" class="form-control" placeholder="Search dashboard...">
+							<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+						</div>
+					</form>
+					<div id="navbar-menu">
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
+									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">关于</a></li>
+									<li><a href="#">友链</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
+									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
+									<li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li>
+									<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<!-- END NAVBAR -->
+			<!-- LEFT SIDEBAR -->
+			<div id="sidebar-nav" class="sidebar sidebarclass">
+				<div class="sidebar-scroll">
+					<nav>
+						<ul class="nav">
+							<li>
+								<a href="#subPages" data-toggle="collapse" class=""><i class="lnr lnr-user"></i> <span>个人</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+								<div id="subPages" class="collapse">
+									<ul class="nav">
+										<li><a href="profile.html" class="">修改个人信息</a></li>
+										<li><a href="modifypassword.html" class="">修改密码</a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="elements.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
+							<li><a href="index.html" class=""><i class="lnr lnr-book"></i> <span>我的文章</span></a></li>
+							<li><a href="mycommentindex.html" class=""><i class="lnr lnr-keyboard"></i> <span>我的评论</span></a></li>
+
+
+							<li v-show="role" class="lineheight"></li>
+							<li v-show="role"><a href="useradmin.html" class=""><i class="lnr lnr-users"></i> <span>用户管理</span></a></li>
+							<li v-show="role"><a href="adminindex.html" class=""><i class="lnr lnr-map"></i> <span>文章管理</span></a></li>
+							<li v-show="role"><a href="firstcommentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>一级评论管理</span></a></li>
+							<li v-show="role"><a href="secondcommentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>二级评论管理</span></a></li>
+							<li v-show="role"><a href="classifyadmin.html" class="active"><i class="lnr lnr-dice"></i> <span>分类管理</span></a></li>
+							<li v-show="role"><a href="tagadmin.html" class=""><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
+							<li v-show="role"><a href="linkadmin.html" class=""><i class="lnr lnr-paperclip"></i> <span>友链管理</span></a></li>
+							<li v-show="role"><a href="logadmin.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
+							
+
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<!-- END LEFT SIDEBAR -->
+			<!-- MAIN -->
+			<div class="main">
+				<!-- MAIN CONTENT -->
+				<div class="main-content">
+					<div class="container-fluid">
+						<!-- END OVERVIEW -->
+						<div class="row">
+							<div class="col-md-12">
+								<!-- RECENT PURCHASES -->
+								<div class="panel">
+									<div class="panel-heading">
+										<h3 class="panel-title">分类</h3>
+									</div>
+									<!-- 模态框（Modal） -->
+									<!--图片裁剪-->
+									<div>
+										<div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog"
+										 tabindex="-1">
+											<div class="modal-dialog modal-lg">
+												<div class="modal-content">
+													<!--<form class="avatar-form" action="upload-logo.php" enctype="multipart/form-data" method="post">-->
+													<form class="avatar-form">
+														<div class="modal-header">
+															<button class="close" data-dismiss="modal" type="button">×</button>
+															<h4 class="modal-title" id="avatar-modal-label">上传图片</h4>
+														</div>
+														<div class="modal-body">
+															<div class="avatar-body">
+																<div class="avatar-upload">
+																	<input class="avatar-src" name="avatar_src" type="hidden">
+																	<input class="avatar-data" name="avatar_data" type="hidden">
+																	<label for="avatarInput" style="line-height: 35px;">图片上传</label>
+																	<button class="btn btn-info" type="button" style="height: 35px;" onclick="$('input[id=avatarInput]').click();">请选择图片</button>
+																	<span id="avatar-name"></span>
+																	<input class="avatar-input hide" id="avatarInput" name="avatar_file" type="file"></div>
+																<div class="row">
+																	<div class="col-md-9">
+																		<div class="avatar-wrapper"></div>
+																	</div>
+																	<div class="col-md-3">
+																		<div class="avatar-preview preview-lg" id="imageHead"></div>
+																	</div>
+																</div>
+																<div class="row avatar-btns">
+																	<div class="col-md-4">
+																		<div class="btn-group">
+																			<button class="btn btn-info fa fa-undo" data-method="rotate" data-option="-90" type="button" title="Rotate -90 degrees">
+																				向左旋转</button>
+																		</div>
+																		<div class="btn-group">
+																			<button class="btn  btn-info fa fa-repeat" data-method="rotate" data-option="90" type="button" title="Rotate 90 degrees">
+																				向右旋转</button>
+																		</div>
+																	</div>
+																	<div class="col-md-5" style="text-align: right;">
+																		<button class="btn btn-info fa fa-arrows" data-method="setDragMode" data-option="move" type="button"
+																		 title="移动">
+																			<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('setDragMode', 'move')">
+																			</span>
+																		</button>
+																		<button type="button" class="btn btn-info fa fa-search-plus" data-method="zoom" data-option="0.1"
+																		 title="放大图片">
+																			<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('zoom', 0.1)">
+																				<!--<span class="fa fa-search-plus"></span>-->
+																			</span>
+																		</button>
+																		<button type="button" class="btn btn-info fa fa-search-minus" data-method="zoom" data-option="-0.1"
+																		 title="缩小图片">
+																			<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('zoom', -0.1)">
+																				<!--<span class="fa fa-search-minus"></span>-->
+																			</span>
+																		</button>
+																		<button type="button" class="btn btn-info fa fa-refresh" data-method="reset" title="重置图片">
+																			<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('reset')"
+																			 aria-describedby="tooltip866214"></span>
+																		</button>
+																	</div>
+																	<div class="col-md-3">
+																		<button class="btn btn-info btn-block avatar-save fa fa-save" type="button" data-dismiss="modal">
+																			保存修改</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- /.modal -->
+
+									<table class="layui-hide" id="test" lay-filter="test"></table>
+
+
+
+								</div>
+								<!-- END RECENT PURCHASES -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END MAIN CONTENT -->
+			</div>
+			<!-- END MAIN -->
+			<div class="clearfix"></div>
+			<footer>
+				<div class="container-fluid">
+					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WOrkBlog <a href="http://www.cssmoban.com/"
+						 target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+				</div>
+			</footer>
+		</div>
+		<!-- END WRAPPER -->
+		<!-- Javascript -->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="../static/js/bootstrap.min.js"></script>
+		<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+		<script src="vendor/chartist/js/chartist.min.js"></script>
+		<script src="js/klorofil-common.js"></script>
+
+		<script type="text/html" id="toolbarDemo">
+			<div class="layui-btn-container-fluid">
+				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="">&nbsp;删除</button>
+				
+				<form class="layui-form addclassify" action="">
+							<label class="confirmpassword layui-form-label">分类名称</label>
+							<input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+							<label class="confirmpassword layui-form-label">分类描述</label>
+							<input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？"
+							 placeholder="请输入" autocomplete="off" class="layui-input">
+							<label class="confirmpassword layui-form-label">分类图片</label>
+							<button class="btn btn-primary btn-group-lg" data-toggle="modal" data-target="#avatar-modal">上传图片</button>
+							<!-- <img id="icon" src="img/touxiang.jpg" alt="裁剪后"> -->
+							<button class="btn btn-danger" lay-submit="" lay-filter="demo1">新增分类</button>
+							<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
+				
+				
+				</form>
+				<!-- <button class="btn btn-success btn-sm lnr lnr-file-add" data-toggle="modal" data-target="#myModal" style="float: right; margin-right: -110px;">&nbsp;新增</button> -->
+			</div>
+			
+		</script>
+		<script type="text/html" id="barDemo">
+			<!-- <button class="btn btn-default btn-xs lnr lnr-pencil articledelbtn" lay-event="edit"></button> -->
+				<button class="btn btn-danger btn-xs lnr lnr-trash articleedbtn" lay-event="del"></button>
+			</script>
+
+		<script src="vendor/layui/layui.js" charset="utf-8"></script>
+		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+		<script>
+			layui.use('table', function() {
+				var table = layui.table;
+
+				//监听单元格编辑
+				table.on('edit(test)', function(obj) {
+					var value = obj.value //得到修改后的值
+						,
+						data = obj.data //得到所在行所有键值
+						,
+						field = obj.field; //得到字段
+					layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+				});
+			});
+		</script>
+		<script>
+			layui.use('table', function() {
+				var table = layui.table;
+				table.render({
+					elem: '#test'
+						// method: 'post'
+						,
+					url: 'json/demo3.json',
+					toolbar: '#toolbarDemo',
+					defaultToolbar: [],
+					title: '分类数据表',
+					cols: [
+						[{
+							type: 'checkbox',
+							// fixed: 'left'
+						}, {
+							field: 'id',
+							title: 'ID',
+							// width: 80,
+							// fixed: 'left',
+							// unresize: true,
+							sort: true
+						}, {
+							field: 'categotytitle',
+							title: '分类名称',
+							// width: 120,
+							sort: true,
+							edit: 'text'
+						}, {
+							field: 'categotydetail',
+							title: '分类描述',
+							// width: 200,
+							edit: 'text'
+						}, {
+							field: 'modifydate',
+							title: '修改日期',
+							// width: 200,
+							// edit: 'text'
+						},
+							{
+								field: 'img',
+								title: '图片',
+								unresize: true,
+								sort: false,
+								//style:'height:100px;',
+								templet: function(d) {
+									return `<div class="layer-photos-demo" onclick="img_click()" style="cursor:pointer;">
+                                      <img class="classifyimg" style="height:35px; width:100px;    max-width: 300px;" layer-pid="图片id，可以不写"  layer-src="img/touxiang.jpg" src="img/touxiang.jpg" alt="图片名">
+                                    </div>`;
+								}
+							}, {
+							fixed: 'right',
+							title: '操作',
+							toolbar: '#barDemo',
+							// width: 70
+						}]
+					],
+					page: true
+				});
+
+				//头工具栏事件
+				table.on('toolbar(test)', function(obj) {
+					var checkStatus = table.checkStatus(obj.config.id);
+					switch (obj.event) {
+						case 'getCheckData':
+							var data = checkStatus.data;
+							layer.alert(JSON.stringify(data));
+							break;
+						case 'getCheckLength':
+							var data = checkStatus.data;
+							layer.msg('选中了：' + data.length + ' 个');
+							break;
+						case 'isAll':
+							layer.msg(checkStatus.isAll ? '全选' : '未全选');
+							break;
+					};
+				});
+
+				//监听行工具事件
+				table.on('tool(test)', function(obj) {
+					var data = obj.data;
+					//console.log(obj)
+					if (obj.event === 'del') {
+						layer.confirm('真的删除行么', function(index) {
+							obj.del();
+							layer.close(index);
+						});
+					} else if (obj.event === 'edit') {
+						layer.prompt({
+							formType: 2,
+							value: data.email
+						}, function(value, index) {
+							obj.update({
+								email: value
+							});
+							layer.close(index);
+						});
+					}
+				});
+			});
+		</script>
+
+		<script type="text/javascript">
+			//做个下简易的验证  大小 格式
+			$('#avatarInput').on('change', function(e) {
+				var filemaxsize = 1024 * 5; //5M
+				var target = $(e.target);
+				var Size = target[0].files[0].size / 1024;
+				if (Size > filemaxsize) {
+					alert('图片过大，请重新选择!');
+					$(".avatar-wrapper").childre().remove;
+					return false;
+				}
+				if (!this.files[0].type.match(/image.*/)) {
+					alert('请选择正确的图片!')
+				} else {
+					var filename = document.querySelector("#avatar-name");
+					var texts = document.querySelector("#avatarInput").value;
+					var teststr = texts; //你这里的路径写错了
+					testend = teststr.match(/[^\\]+\.[^\(]+/i); //直接完整文件名的
+					filename.innerHTML = testend;
+				}
+
+			});
+			//#icon元素的src就是截图后的文件,base64
+			$(".avatar-save").on("click", function() {
+				var img_lg = document.getElementById('imageHead');
+
+				// 截图小的显示框内的内容
+				html2canvas(img_lg, {
+					allowTaint: true,
+					taintTest: false,
+					onrendered: function(canvas) {
+						// var dataURL = $image.cropper("getCroppedCanvas");//这个可以获得大图
+						// var imgurl = dataURL.toDataURL("image/*", 1);
+						// $('#icon').attr('src', imgurl);
+						canvas.id = "mycanvas";
+						var dataUrl = canvas.toDataURL("image/png"); //这个可以获得压缩图片,适合作为头像
+						$('#icon').attr('src', dataUrl);
+
+					}
+				});
+			});
+
+			function imagesAjax(src) {
+				var data = {};
+				data.img = src;
+				$.ajax({
+					url: "../file/upload.do",
+					data: data,
+					type: "POST",
+					dataType: 'json',
+					success: function(data) {
+						if (data.state == 1) {
+							$('#icon').attr('src', data.data);
+							$('#iconPic').val(data.data);
+						}
+						toastr.info(data.message);
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,6 +1,5 @@
 package com.sunshareteam.workblog.web;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -321,7 +320,5 @@ public class ArticleController {
 		result.setMessage("查询成功");
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
-	}
-	
-	
+	}	
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.sunshareteam.workblog.dao.CategotyMapper">
 
 	<select id="findById" resultType="com.sunshareteam.workblog.entity.Categoty">
-		select categotyid,createdate,categotytitle,categotydetail,img from tb_categoty where categotyid=#{id}
+		select categotyid,modifydate,categotytitle,categotydetail,img from tb_categoty where categotyid=#{id}
 	</select>
 	
 	<delete id="delete">
@@ -28,15 +28,15 @@
 	</insert>
 	
 	<select id="findAll" resultType="com.sunshareteam.workblog.entity.Categoty">
-		select categotyid,createdate,categotytitle,categotydetail,img from tb_categoty 
+		select categotyid,modifydate,categotytitle,categotydetail,img from tb_categoty 
 	</select>
 	
 	<select id="findCategotyByKey" resultType="com.sunshareteam.workblog.entity.Categoty">
-		select categotyid,createdate,categotytitle,categotydetail,img from tb_categoty where categotytitle like #{key}
+		select categotyid,modifydate,categotytitle,categotydetail,img from tb_categoty where categotytitle like #{key}
 	</select>
 	
 	<select id="getCategotyByArticle" resultType="com.sunshareteam.workblog.entity.Categoty">
-		select c.categotyid,c.createdate,c.categotytitle,.c.categotydetail,c.img from tb_categoty c,tb_article a where a.categoty=c.categotyid and a.articleid=#{articleId}
+		select c.categotyid,c.modifydate,c.categotytitle,.c.categotydetail,c.img from tb_categoty c,tb_article a where a.categoty=c.categotyid and a.articleid=#{articleId}
 	</select>
 	
 	<update id="updateArticleCategity" parameterType="com.sunshareteam.workblog.entity.Article">
