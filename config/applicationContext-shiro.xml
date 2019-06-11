@@ -41,8 +41,20 @@
 				/user/getsmscode/*=anon
 				/user/validate/*=anon
 				/user/resetpassword=anon
+				/article/get*/**
+				/article/get*
+				/categoty/get*/**
+				/categoty/get*
+				/commentone/get*
+				/commentone/get*/**
+				/commenttwo/get*/**
+				/commenttwo/get*
+				/link/get*
+				/link/get*/**
+				/tag/get*
+				/tag/get*/**
 				<!-- 验证码，可匿名访问 -->
-				/validate = anon
+				/user/validate = anon
 				<!-- 登出 -->
 				/user/logout = logout
 				<!-- /** = authc 所有url都必须认证通过才可以访问 -->
