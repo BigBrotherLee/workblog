@@ -32,7 +32,7 @@
 		<property name="filterChainDefinitions">
 			<value>
 				<!-- 对静态资源设置匿名访问 -->
-				/**=anon
+				/** = anon
 				/html/static/**=anon
 				/html/user/**=anon
 				/user/verify=anon
@@ -41,18 +41,18 @@
 				/user/getsmscode/*=anon
 				/user/validate/*=anon
 				/user/resetpassword=anon
-				/article/get*/**
-				/article/get*
-				/categoty/get*/**
-				/categoty/get*
-				/commentone/get*
-				/commentone/get*/**
-				/commenttwo/get*/**
-				/commenttwo/get*
-				/link/get*
-				/link/get*/**
-				/tag/get*
-				/tag/get*/**
+				/article/get*/**=anon
+				/article/get*=anon
+				/categoty/get*/**=anon
+				/categoty/get*=anon
+				/commentone/get*=anon
+				/commentone/get*/**=anon
+				/commenttwo/get*/**=anon
+				/commenttwo/get*=anon
+				/link/get*=anon
+				/link/get*/**=anon
+				/tag/get*=anon
+				/tag/get*/**=anon
 				<!-- 验证码，可匿名访问 -->
 				/user/validate = anon
 				<!-- 登出 -->
