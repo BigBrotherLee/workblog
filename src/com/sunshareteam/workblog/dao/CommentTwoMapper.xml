@@ -4,6 +4,9 @@
 	  <select id="findById" resultType="com.sunshareteam.workblog.entity.CommentTwo">
 		select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two where comment_two_id=#{id}
 	</select>
+	<select id="findByCommentOneAndUser" resultType="com.sunshareteam.workblog.web.CommentTwoVO">
+		select t.comment_two_id,u1.username usernameone,o.content contentone,u2.username usernametwo,t.content contentwo,t.createdate from tb_comment_two t,tb_comment_one o,tb_user u1,tb_user u2 where o.comment_one_id=t.oneid and u1.userid=o.createuser and u2.userid=t.createuser
+	</select>	
 	<select id="findAll" resultType="com.sunshareteam.workblog.entity.CommentTwo">    
          select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two   
        </select>
@@ -18,7 +21,7 @@
 	   delete from tb_comment_two where comment_two_id=#{id}
 	</delete>
 	<select id="findByUser" resultType="com.sunshareteam.workblog.entity.User">
-		select u.userid,u.username,u.pic from tb_comment_two t,tb_user u where t.createuser=u.userid and u.userid=#{userid}
+		select u.userid,u.username,u.pic from tb_comment_two t,tb_user u where t.createuser=u.userid and t.comment_two_id=#{id}
 	</select>
 	<select id="findByOneAll" resultType="com.sunshareteam.workblog.entity.CommentTwo">
 		select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two where oneid=#{oneid}

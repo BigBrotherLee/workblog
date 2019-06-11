@@ -20,6 +20,8 @@ import com.sunshareteam.workblog.entity.CommentOne;
 import com.sunshareteam.workblog.entity.CommentTwo;
 import com.sunshareteam.workblog.entity.Link;
 import com.sunshareteam.workblog.entity.Tag;
+import com.sunshareteam.workblog.web.CommentOneVO;
+import com.sunshareteam.workblog.web.CommentTwoVO;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:applicationContext.xml","classpath:springmvc.xml",
@@ -33,7 +35,7 @@ public class TestTagDao {
 	private CommentTwoMapper commenttwoMapper;
 	@Autowired
 	private LinkMapper linkMapper;
-	
+ 
 //  测试标签
 	 /*  @Test
 	public void test1() {
@@ -90,6 +92,7 @@ public class TestTagDao {
 	
 	
 	//测试一级评论
+	
 /*	 @Test
 	public void test1() {
 	CommentOne commentone=commentoneMapper.findById(1);
@@ -139,7 +142,13 @@ public class TestTagDao {
 	public void test9() {
 		List<CommentOne> list=commentoneMapper.findByUserAll(1);
 		System.out.println(list);
-	}*/
+	}
+	  @Test
+		public void test10() {
+		List<CommentOneVO> list=commentoneMapper.findByArticleAndUser();
+		System.out.println(list);  
+		}
+	*/
 	
 	
 	//测试二级评论
@@ -183,7 +192,13 @@ public class TestTagDao {
 	public void test7() {
 	List<CommentTwo> list=commenttwoMapper.findByOneAll(6);
 	System.out.println(list);
-	}*/
+	}
+		  @Test
+			public void test8() {
+			List<CommentTwoVO> list=commenttwoMapper.findByCommentOneAndUser();
+			System.out.println(list);  
+			}
+	*/
 
 	
 //测试友链

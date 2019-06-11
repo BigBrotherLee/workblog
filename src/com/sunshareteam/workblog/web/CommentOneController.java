@@ -1,8 +1,8 @@
 package com.sunshareteam.workblog.web;
 
 import java.util.List;
+
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +16,6 @@ import com.bigbrotherlee.utils.LeeConstant;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.CommentOne;
-import com.sunshareteam.workblog.entity.User;
 import com.sunshareteam.workblog.service.CommentOneService;
 
 @RestController
@@ -37,6 +36,27 @@ public class CommentOneController {
 	public ResponseResult<PageInfo<CommentOne>> getUser(@PathVariable int index,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key) {
 		ResponseResult<PageInfo<CommentOne>> result=new ResponseResult<PageInfo<CommentOne>>();
 		PageInfo<CommentOne> data=commentoneService.getByKey(key, index, length);
+		if(data.getTotal()<=0) {
+			result.setMessage("查询为空");
+			result.setState(LeeConstant.STATE_FAIL);
+			return result;
+		}
+		result.setData(data);
+		result.setMessage("查询成功");
+		result.setState(LeeConstant.STATE_SUCCESS);
+		return result;
+	}
+	/**
+	 * 查询一级评论管理的内容
+	 * @param index 第几页
+	 * @param length 一页几条
+	 * @return 查询成功返回ResponseResult<PageInfo<CommentOneVO>>分页数据，失败抛出异常LeeException
+	 */
+	@RequiresPermissions("commentone:select:*")
+	@GetMapping("/getbyarticleanduser")
+	public ResponseResult<PageInfo<CommentOneVO>> ByArticleAndUser()throws Exception{
+		ResponseResult<PageInfo<CommentOneVO>> result=new ResponseResult<PageInfo<CommentOneVO>>();
+		PageInfo<CommentOneVO> data=commentoneService.getByArticleAndUser(0,1000);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
@@ -97,8 +117,8 @@ public class CommentOneController {
 	@PostMapping("/add")
 	public ResponseResult<CommentOne> addCategoty(CommentOne commentone){
 		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
-		User user =(User) SecurityUtils.getSubject().getPrincipal();
-		commentone.setModifyuser(user.getUserid());
+//		Article article =(Article) SecurityUtils.getSubject().getPrincipal();
+//		commentone.setCreateuser(article.getArticleid());
 		try {
 			commentoneService.insertCommentOne(commentone);
 			result.setData(commentone);
@@ -110,7 +130,8 @@ public class CommentOneController {
 			result.setState(LeeConstant.STATE_FAIL);
 		}
 		return result;
-	}	/**
+	}	
+	/**
 	 * 得到全部一级评论
 	 * @return 成功则返回ResponseResult<List<Categoty>> state：1，message：查询成功 ，data：所有一级评论的列表json
 	 */
@@ -134,9 +155,9 @@ public class CommentOneController {
 	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：得到一级评论用户信息
 	 */
 	@GetMapping("/getbyuser/{id}")
-	public ResponseResult<List<CommentOne>> getCommentOneByUser(@PathVariable int userid){
+	public ResponseResult<List<CommentOne>> getCommentOneByUser(@PathVariable Integer id){
 		ResponseResult<List<CommentOne>> result =new ResponseResult<List<CommentOne>>();
-		PageInfo<CommentOne> info=commentoneService.getByUser(userid, 0, 1000);
+		PageInfo<CommentOne> info=commentoneService.getByUser(id, 0, 1000);
 		if(info.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);

@@ -18,6 +18,8 @@ import com.sunshareteam.workblog.service.CommentOneService;
 import com.sunshareteam.workblog.service.CommentTwoService;
 import com.sunshareteam.workblog.service.LinkService;
 import com.sunshareteam.workblog.service.TagService;
+import com.sunshareteam.workblog.web.CommentOneVO;
+import com.sunshareteam.workblog.web.CommentTwoVO;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:applicationContext.xml","classpath:springmvc.xml",
@@ -129,8 +131,12 @@ public class TestService {
 	public void test8() {
 		PageInfo<CommentOne> list=commentoneService.getByUserAll(1,0,1000);
 		System.out.println(list);
-	}*/
-	
+	}
+	@Test
+    public void test9() {
+	PageInfo<CommentOneVO> list=commentoneService.getByArticleAndUser(0, 1000);
+	System.out.println(list);  
+}*/
 	
 	//测试二评
 	/*@Test
@@ -173,8 +179,12 @@ public class TestService {
 	public void test7() {
 		PageInfo<CommentTwo> list=commenttwoService.getByOneAll(6,0,1000);
 		System.out.println(list);
-	}*/
-	
+	}
+	@Test
+    public void test8() {
+	PageInfo<CommentTwoVO> list=commenttwoService.getByCommentOneAndUser(0, 1000);
+	System.out.println(list);  
+}*/
 	
 	//测试友链
 	/*@Test

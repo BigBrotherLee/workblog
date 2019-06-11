@@ -12,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.dao.CommentTwoMapper;
 import com.sunshareteam.workblog.entity.CommentTwo;
+import com.sunshareteam.workblog.web.CommentTwoVO;
 
 @Service("commenttwoService")
 public class CommentTwoServiceImpl implements CommentTwoService {
@@ -25,6 +26,13 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	}
 	
 	@Override
+	public PageInfo<CommentTwoVO> getByCommentOneAndUser(int start, int size) {
+		PageHelper.startPage(start, size);
+		List<CommentTwoVO> list=commenttwoMapper.findByCommentOneAndUser();
+		return new PageInfo<CommentTwoVO>(list);
+	}
+	
+	@Override
 	@Transactional
 	public void deleteCommentTwo(Integer id) {
 		commenttwoMapper.deleteCommentTwo(id);	
@@ -35,7 +43,6 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	public void insertCommentTwo(CommentTwo commenttwo) {
 		// TODO Auto-generated method stub
 		commenttwo.setCreatedate(new Date());
-		commenttwo.setModifydate(new Date());
 		commenttwoMapper.insertCommentTwo(commenttwo);
 	}
 
@@ -54,9 +61,9 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	}
 
 	@Override
-	public PageInfo<CommentTwo> getByUser(Integer userid,int start,int size) {
+	public PageInfo<CommentTwo> getByUser(Integer id,int start,int size) {
 		PageHelper.startPage(start, size);
-		List<CommentTwo> list=commenttwoMapper.findByUser(userid);
+		List<CommentTwo> list=commenttwoMapper.findByUser(id);
 		return new PageInfo<CommentTwo>(list);
 	}
 

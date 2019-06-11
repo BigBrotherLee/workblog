@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.dao.CommentOneMapper;
 import com.sunshareteam.workblog.entity.CommentOne;
+import com.sunshareteam.workblog.web.CommentOneVO;
 
 @Service("commentoneService")
 public class CommentOneServiceImpl implements CommentOneService{
@@ -21,7 +22,14 @@ public class CommentOneServiceImpl implements CommentOneService{
 	public CommentOne getById(Integer id) {
 		return commentoneMapper.findById(id);
 	}
-
+	
+	@Override
+	public PageInfo<CommentOneVO> getByArticleAndUser(int start, int size) {
+		PageHelper.startPage(start, size);
+		List<CommentOneVO> list=commentoneMapper.findByArticleAndUser();
+		return new PageInfo<CommentOneVO>(list);
+	}
+	
 	@Override
 	@Transactional
 	public void delete(Integer id) {
@@ -33,7 +41,6 @@ public class CommentOneServiceImpl implements CommentOneService{
 	@Transactional
 	public void insertCommentOne(CommentOne commentone) {
 		commentone.setCreatedate(new Date());
-		commentone.setModifydate(new Date());
 		commentoneMapper.insertCommentOne(commentone);	
 	}
 	
@@ -52,9 +59,9 @@ public class CommentOneServiceImpl implements CommentOneService{
 	}
 
 	@Override
-	public PageInfo<CommentOne> getByUser(Integer userid, int start, int size){
+	public PageInfo<CommentOne> getByUser(Integer id, int start, int size){
 		PageHelper.startPage(start, size);
-		List<CommentOne> list=commentoneMapper.findByUser(userid);
+		List<CommentOne> list=commentoneMapper.findByUser(id);
 		return new PageInfo<CommentOne>(list);
 	}
 
