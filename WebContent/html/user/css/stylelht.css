@@ -5,7 +5,31 @@
 .fr {
 	float: right;
 }
-
+.btn2{
+	margin-top: -6px;
+}
+.banner1{
+	width: 100%;
+	z-index: 100;
+	min-width: 320px;
+}
+.navdiv{
+	width: 80%;
+}
+.noperminssion h1{
+	text-align: center;
+	line-height: 200px;
+	font-weight: 1000;
+}
+.return{
+	height: 100%;
+	width: 50%;
+	/* background-color: #000000; */
+	margin: auto;
+}
+.return h3{
+	text-align: center;
+}
 .banxin {
 	width: 80%;
 	height: 1200px;
@@ -237,13 +261,14 @@
 
 }
 
-.post-tupian {
+.post-tupian img {
 	height: 140px;
-	width: 390px;
-	background: url(../images/gtupian.jpg) no-repeat 0px 0px;
-	background-size: cover;
+	width: 400px;
+	/* background: url(../images/gtupian.jpg) no-repeat 0px 0px; */
+	/* background-size: cover; */
 	border-radius: 10px;
 	margin-top: 3px;
+	margin-right: 2px;
 }
 
 .post-info {
@@ -658,7 +683,7 @@ input {
 
 .article-zhong {
 	height: 4400px;
-	width: 95%;
+	width: 90%;
 	margin: auto;
 	background-color: white;
 }
@@ -692,7 +717,7 @@ input {
 
 .daohangw {
 	height: 80%;
-
+	width:65% ;
 	text-align: center;
 	border-right: 1px solid #eead31;
 	color: #eead31;
@@ -702,6 +727,8 @@ input {
 
 .daohangwz {
 	padding-top: 15px;
+	margin-right: 20px;
+
 }
 
 .daohangtz {
@@ -729,7 +756,7 @@ input {
 
 .daohangtz li {
 	display: inline-block;
-	font-size: 20px;
+	font-size: 15px;
 	color: #eead31;
 }
 
@@ -760,7 +787,7 @@ input {
 	width: 30%;
 	/* background-color: wheat; */
 	margin-top: -2000px;
-	margin-left: 1121px;
+	margin-left: 1035px;
 }
 
 .left-wai {
@@ -779,7 +806,7 @@ input {
 
 .left-image {
 	height: 600px;
-	width: 1060px;
+	width: 83.7%;
 	background: url(../images/articltu.jpg) no-repeat 0px 0px;
 	background-size: cover;
 	/* 			background-color: red; */
@@ -841,16 +868,24 @@ input {
 .article-mainbodyimage {
 	height: 400px;
 	width: 100%;
-	background: url(../images/articltu.jpg) no-repeat 0px 0px;
+/* 	background: url(../images/articltu.jpg) no-repeat 0px 0px; */
 	background-size: cover;
 }
 
 .right-personmsg-wai {
-	height: 700px;
+	height: 30%;
 	width: 100%;
 	background-color: white;
 	border: 1px solid #e7e7e7;
 	padding-top: 30px;
+
+}
+.right-personmsg-wai1 {
+	height: 30%;
+	width: 100%;
+	background-color: white;
+	border: 1px solid #e7e7e7;
+	margin-top: 30px;
 
 }
 
@@ -882,7 +917,7 @@ input {
 }
 
 .widget-title1 {
-	margin-top: 2px;
+	margin-top: 40px;
 	font-family: "Merriweather";
 	font-weight: 400;
 	text-transform: uppercase;
@@ -911,7 +946,7 @@ input {
 .personmsg-image {
 	height: 300px;
 	width: 100%;
-	background: url(../images/articltu.jpg) no-repeat 0px 0px;
+	/* background: url(../images/articltu.jpg) no-repeat 0px 0px; */
 	background-size: cover;
 }
 
@@ -952,8 +987,8 @@ input {
 }
 
 .content-box {
-	height: 1200px;
-	width: 98%;
+	height: 100%;
+	width: 95%;
 	background-color: white;
 	margin: auto;
 	border: 1px solid #e7e7e7;
@@ -961,15 +996,15 @@ input {
 }
 
 .content-box-li {
-	height: 1200px;
+	height: 97.7%;
 	width: 95%;
 	/* background-color: #000000; */
 	border-left: 2px solid #eead31;
 }
 
 .content-one-box {
-	height: 250px;
-	width: 98%;
+	height: 22%;
+	width: 95%;
 	/* background-color: #000000;  */
 	margin-top: 40px;
 
@@ -987,7 +1022,7 @@ input {
 }
 
 .content-neirong-box {
-	height: 250px;
+	height: 260px;
 	width: 94%;
 	/* background-color: red; */
 	margin-top: -90px;
@@ -1016,25 +1051,48 @@ input {
 
 .content-first {
 	width: 100%;
-	height: 45px;
+	height: 20%;
 	background-color: white;
 	border: 1px solid #e7e7e7;
 	border-radius: 10px;
 }
-
 .content-two {
 	width: 100%;
-	height: 150px;
+	height: 20%;
+	float: left;
+	background-color: white;
+	border: 1px solid #e7e7e7;
+	border-radius: 10px;
+	margin-top: 10px;
+}
+.content-two a {
+	line-height: 30px;
+	color: black;
+	font-size: 18px;
+}
+
+.content-yours {
+	width: 100%;
+	height: 10%;
 	/* background-color: yellow; */
-	margin-top: 15px;
+	margin-top: 60px;
 }
 
 .content-first a {
-	line-height: 40px;
+	line-height: 30px;
 	color: black;
 	font-size: 20px;
 }
-
+.zhankai{
+	height: 100%;
+	width: 10%;
+	/* background-color: #000000; */
+}
+.zhankai a{
+		line-height: 30px;
+	font-size: 18px;
+	color: blue;
+}
 .yx-btn {
 	height: 60px;
 	width: 120px;
