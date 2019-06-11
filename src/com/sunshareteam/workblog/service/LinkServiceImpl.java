@@ -27,7 +27,6 @@ public class LinkServiceImpl implements LinkService {
 	@Transactional
 	public void insertLink(Link link) {
 		// TODO Auto-generated method stub
-		link.setModifydate(new Date());
 		linkMapper.insertLink(link);
 	}
 

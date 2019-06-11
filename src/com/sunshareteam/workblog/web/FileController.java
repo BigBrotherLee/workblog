@@ -34,7 +34,7 @@ public class FileController {
 	 * @return
 	 */
 	@RequiresPermissions("file:insert:*")
-	@PostMapping(value="/upload",produces="text/html; charset=UTF-8")
+	@PostMapping(value="/upload")
 	public ResponseResult<String>  fileUpload(MultipartFile file) {
 		ResponseResult<String> result=new ResponseResult<String>();
 		Calendar calendar= Calendar.getInstance();

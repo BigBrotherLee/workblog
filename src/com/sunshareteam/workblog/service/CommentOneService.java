@@ -6,7 +6,7 @@ import com.sunshareteam.workblog.web.CommentOneVO;
 
 public interface CommentOneService {
 	CommentOne getById(Integer id);
-	PageInfo<CommentOneVO> getByArticleAndUser(int start,int size);
+	PageInfo<CommentOneVO> getByArticleAndUser(Integer userid,int start,int size);
 	PageInfo<CommentOne> getAll(int start,int size);
 	PageInfo<CommentOne> getByKey(String key,int start,int size);
 	void insertCommentOne(CommentOne commentone);

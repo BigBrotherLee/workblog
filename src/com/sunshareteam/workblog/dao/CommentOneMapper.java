@@ -8,7 +8,7 @@ import com.sunshareteam.workblog.web.CommentOneVO;
 public interface CommentOneMapper {
 
 	   CommentOne findById(Integer commentone); //根据ID查询
-	   List<CommentOneVO> findByArticleAndUser(); //查文章标题和用户名
+	   List<CommentOneVO> findByArticleAndUser(Integer userid); //查文章标题和用户名
 	   List<CommentOne> findAll();
 	   List<CommentOne> findByKey(String key);
 	   void insertCommentOne(CommentOne commentone);

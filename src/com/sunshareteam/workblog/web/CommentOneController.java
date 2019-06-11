@@ -3,6 +3,7 @@ package com.sunshareteam.workblog.web;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +17,7 @@ import com.bigbrotherlee.utils.LeeConstant;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.CommentOne;
+import com.sunshareteam.workblog.entity.User;
 import com.sunshareteam.workblog.service.CommentOneService;
 
 @RestController
@@ -54,9 +56,9 @@ public class CommentOneController {
 	 */
 	@RequiresPermissions("commentone:select:*")
 	@GetMapping("/getbyarticleanduser")
-	public ResponseResult<PageInfo<CommentOneVO>> ByArticleAndUser()throws Exception{
+	public ResponseResult<PageInfo<CommentOneVO>> ByArticleAndUser(@PathVariable Integer userid){
 		ResponseResult<PageInfo<CommentOneVO>> result=new ResponseResult<PageInfo<CommentOneVO>>();
-		PageInfo<CommentOneVO> data=commentoneService.getByArticleAndUser(0,1000);
+		PageInfo<CommentOneVO> data=commentoneService.getByArticleAndUser(userid,0,1000);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
@@ -117,8 +119,8 @@ public class CommentOneController {
 	@PostMapping("/add")
 	public ResponseResult<CommentOne> addCategoty(CommentOne commentone){
 		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
-//		Article article =(Article) SecurityUtils.getSubject().getPrincipal();
-//		commentone.setCreateuser(article.getArticleid());
+		User user =(User) SecurityUtils.getSubject().getPrincipal();
+		commentone.setCreateuser(user.getUserid());
 		try {
 			commentoneService.insertCommentOne(commentone);
 			result.setData(commentone);
@@ -151,7 +153,7 @@ public class CommentOneController {
 	}
 	/**
 	 * 得到一级评论用户信息
-	 * @param userid 用户id
+	 * @param id 用户id
 	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：得到一级评论用户信息
 	 */
 	@GetMapping("/getbyuser/{id}")

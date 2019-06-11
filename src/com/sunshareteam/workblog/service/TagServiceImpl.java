@@ -29,7 +29,6 @@ public class TagServiceImpl implements TagService {
 	public void insertTag(Tag tag) {
 		// TODO Auto-generated method stub
 		tag.setCreatedate(new Date());
-		tag.setModifydate(new Date());
 		tagMapper.insertTag(tag);
 	}
 
@@ -44,7 +43,6 @@ public class TagServiceImpl implements TagService {
 	@Transactional
 	public void updateTag(Tag tag) {
 		// TODO Auto-generated method stub
-		tag.setCreatedate(new Date());
 		tag.setModifydate(new Date());
 		tagMapper.updateTag(tag);
 	}

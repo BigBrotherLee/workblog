@@ -26,9 +26,9 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	}
 	
 	@Override
-	public PageInfo<CommentTwoVO> getByCommentOneAndUser(int start, int size) {
+	public PageInfo<CommentTwoVO> getByCommentOneAndUser(Integer userid,int start, int size) {
 		PageHelper.startPage(start, size);
-		List<CommentTwoVO> list=commenttwoMapper.findByCommentOneAndUser();
+		List<CommentTwoVO> list=commenttwoMapper.findByCommentOneAndUser(userid);
 		return new PageInfo<CommentTwoVO>(list);
 	}
 	
