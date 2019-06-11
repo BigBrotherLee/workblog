@@ -46,7 +46,7 @@
 				<!-- 登出 -->
 				/user/logout = logout
 				<!-- /** = authc 所有url都必须认证通过才可以访问 -->
-				/** = authc
+				<!-- /** = authc -->
 			</value>
 		</property>
 	</bean>
