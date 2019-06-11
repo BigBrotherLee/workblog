@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<title>WokeBlog-一级评论管理</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<!-- VENDOR CSS -->
+		<link rel="stylesheet" type="text/css" href="vendor/layui/css/layui.css" />
+		<script type="text/javascript" src="vendor/layui/layui.js"></script>
+		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="vendor/linearicons/style.css">
+		<link rel="stylesheet" href="vendor/chartist/css/chartist-custom.css">
+		<!-- MAIN CSS -->
+		<link rel="stylesheet" href="css/main.css">
+		<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+		<link rel="stylesheet" href="css/demo.css">
+		<!-- GOOGLE FONTS -->
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+		<!-- ICONS -->
+		<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
+		<link rel="stylesheet" href="css/index.css">
+		<script type="text/javascript" src="../static/js/vue.js"></script>
+		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
+
+	</head>
+
+	<body>
+		<!-- WRAPPER -->
+		<div id="wrapper">
+			<!-- NAVBAR -->
+			<nav class="navbar navbar-default navbar-fixed-top navclass">
+				<div class="navbar-btn">
+					<h1><a class="navbar-brand" href="index.html">Work <span>Blog </span></a></h1>
+				</div>
+				<div class="container-fluid">
+					<div class="navbar-btn arrowButton">
+						<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+					</div>
+					<form class="navbar-form navbar-left">
+						<div class="input-group">
+							<input type="text" value="" class="form-control" placeholder="Search dashboard...">
+							<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+						</div>
+					</form>
+					<div id="navbar-menu">
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
+									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">关于</a></li>
+									<li><a href="#">友链</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
+									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
+									<li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li>
+									<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<!-- END NAVBAR -->
+			<!-- LEFT SIDEBAR -->
+			<div id="sidebar-nav" class="sidebar sidebarclass">
+				<div class="sidebar-scroll">
+					<nav>
+						<ul class="nav">
+							<li>
+								<a href="#subPages" data-toggle="collapse" class=""><i class="lnr lnr-user"></i> <span>个人</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+								<div id="subPages" class="collapse">
+									<ul class="nav">
+										<li><a href="profile.html" class="">修改个人信息</a></li>
+										<li><a href="modifypassword.html" class="">修改密码</a></li>
+									</ul>
+								</div>
+							</li>
+							<li><a href="elements.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
+							<li><a href="index.html" class=""><i class="lnr lnr-book"></i> <span>我的文章</span></a></li>
+							<li><a href="mycommentindex.html" class=""><i class="lnr lnr-keyboard"></i> <span>我的评论</span></a></li>
+
+
+							<li v-show="role" class="lineheight"></li>
+							<li v-show="role"><a href="useradmin.html" class=""><i class="lnr lnr-users"></i> <span>用户管理</span></a></li>
+							<li v-show="role"><a href="adminindex.html" class=""><i class="lnr lnr-map"></i> <span>文章管理</span></a></li>
+							<li v-show="role"><a href="firstcommentadmin.html" class="active"><i class="lnr lnr-keyboard"></i> <span>一级评论管理</span></a></li>
+							<li v-show="role"><a href="secondcommentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>二级评论管理</span></a></li>
+							<li v-show="role"><a href="classifyadmin.html" class=""><i class="lnr lnr-dice"></i> <span>分类管理</span></a></li>
+							<li v-show="role"><a href="signadmin.html" class=""><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
+							<li v-show="role"><a href="linkadmin.html" class=""><i class="lnr lnr-paperclip"></i> <span>友链管理</span></a></li>
+							<li v-show="role"><a href="readtime.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
+
+
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<!-- END LEFT SIDEBAR -->
+			<!-- MAIN -->
+			<div class="main">
+				<!-- MAIN CONTENT -->
+				<div class="main-content">
+					<div class="container-fluid">
+						<!-- END OVERVIEW -->
+						<div class="row">
+							<div class="col-md-12">
+								<!-- RECENT PURCHASES -->
+								<div class="panel">
+									<div class="panel-heading">
+										<h3 class="panel-title">一级评论</h3>
+									</div>
+
+									<table class="layui-hide" id="test" lay-filter="test"></table>
+
+									
+
+								</div>
+								<!-- END RECENT PURCHASES -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END MAIN CONTENT -->
+			</div>
+			<!-- END MAIN -->
+			<div class="clearfix"></div>
+			<footer>
+				<div class="container-fluid">
+					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WOrkBlog <a href="http://www.cssmoban.com/"
+						 target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+
+				</div>
+			</footer>
+		</div>
+		<!-- END WRAPPER -->
+		<!-- Javascript -->
+		<script type="text/html" id="toolbarDemo">
+				<div class="layui-btn-container-fluid">
+				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="">&nbsp;删除</button>
+			</div>
+		</script>
+			<script type="text/html" id="barDemo">
+				<button class="btn btn-danger btn-xs lnr lnr-trash" lay-event="del"></button>
+			</script>
+		
+			<script src="vendor/layui/layui.js" charset="utf-8"></script>
+			<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+			<script>
+				layui.use('table', function() {
+					var table = layui.table;
+					table.render({
+						elem: '#test'
+							// method: 'post'
+							,
+						url: 'json/demo1.json',
+						toolbar: '#toolbarDemo',
+						defaultToolbar: [],
+						title: '一级评论数据表',
+						cols: [
+							[{
+								type: 'checkbox',
+								fixed: 'left'
+							}, {
+								field: 'id',
+								title: 'ID',
+								// width: 80,
+								fixed: 'left',
+								unresize: true,
+								sort: true
+							}, {
+								field: 'username',
+								title: '作者',
+								// width: 120,
+								sort: true
+								// edit: 'text'
+							}, {
+								field: 'title',
+								title: '标题',
+								// width: 200,
+								// edit: 'text',
+							}, {
+								field: 'author',
+								title: '评论者',
+								// width: 120,
+								// edit: 'text',
+		
+							}, {
+								field: 'content',
+								title: '评论内容',
+								// width: 250,
+								sort: true
+							}, {
+								field: 'createdate',
+								title: '评论时间',
+								// width: 140,
+								sort: true
+							}, {
+								fixed: 'right',
+								title: '操作',
+								toolbar: '#barDemo',
+								// width: 70
+							}]
+						],
+						page: true
+					});
+		
+					//头工具栏事件
+					table.on('toolbar(test)', function(obj) {
+						var checkStatus = table.checkStatus(obj.config.id);
+						switch (obj.event) {
+							case 'getCheckData':
+								var data = checkStatus.data;
+								layer.alert(JSON.stringify(data));
+								break;
+							case 'getCheckLength':
+								var data = checkStatus.data;
+								layer.msg('选中了：' + data.length + ' 个');
+								break;
+							case 'isAll':
+								layer.msg(checkStatus.isAll ? '全选' : '未全选');
+								break;
+						};
+					});
+		
+					//监听行工具事件
+					table.on('tool(test)', function(obj) {
+						var data = obj.data;
+						//console.log(obj)
+						if (obj.event === 'del') {
+							layer.confirm('真的删除行么', function(index) {
+								obj.del();
+								layer.close(index);
+							});
+						} else if (obj.event === 'edit') {
+							layer.prompt({
+								formType: 2,
+								value: data.email
+							}, function(value, index) {
+								obj.update({
+									email: value
+								});
+								layer.close(index);
+							});
+						}
+					});
+				});
+			</script>
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="../static/js/bootstrap.min.js"></script>
+		<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+		<script src="vendor/chartist/js/chartist.min.js"></script>
+		<script src="js/klorofil-common.js"></script>
+		<script type="text/javascript" src="js/paginathing.js"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				/* for (var i = 1; i <= 150; i++) {
+					$('.list-group').append('<li class="list-group-item"> Item ' + i + '</li>');
+				} */
+
+				// $('.list-group').paginathing({
+				// 	perPage: 5,
+				// 	limitPagination: 9,
+				// 	containerClass: 'panel-footer',
+				// 	pageNumbers: true
+				// })
+
+				$('.table tbody').paginathing({
+					perPage: 5,
+					limitPagination: 9,
+					insertAfter: '.table',
+					pageNumbers: true
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			var vm1 = new Vue({
+				el: '#wrapper',
+				data: {
+					role: true,
+					list1: {},
+					formData: {},
+				},
+				created() {
+					// this.getRequest();
+					// this.getUserList();
+				},
+				methods: {
+					chooserole() {
+						//判断用户的角色	
+					},
+					changeActive(a) {
+						var myInfoActive = $("#myInfoActive");
+						//					alert(myInfoActive)
+						var changeImgActive = $("#changeImgActive");
+						var myInfo = $("#myInfo"); //基本资料内容
+						var changeImg = $("#changeImg"); //内容
+						//					var a = $("#myInfoActive").hasClass('active');//切换功能
+						if (a) {
+							//显示修改头像
+							myInfoActive.removeClass('active'); //基本资料
+							changeImgActive.addClass('active');
+							myInfo.removeClass('active');
+							changeImg.addClass('active');
+
+						} else {
+							//显示基本资料
+							myInfoActive.addClass('active');
+							changeImgActive.removeClass('active'); //基本资料
+							myInfo.addClass('active');
+							changeImg.removeClass('active');
+						}
+
+					},
+					getUserList() { /*http://localhost:8080/WMPX/user/showIndustry*/
+						var t = this.getCookie("token");
+						this.$http.get('/wmpx/user/token/' + t).then(result => {
+							var result = result.body;
+							if (result.status === 200) {
+								this.list1 = result.data;
+								console.log(this.list1);
+							} else {
+								alert("数据连接失败");
+							}
+						});
+					},
+					getRequest() {
+						var url = location.search; //获取url中"?"符后的字串
+						var theRequest = new Object();
+						if (url.indexOf("?") != -1) {
+							var strs = url.substr(1);
+							this.id = strs.split("=")[1];
+						}
+						return theRequest;
+					},
+					getCookie(cookie_name) {
+						var allcookies = document.cookie;
+						//索引长度，开始索引的位置
+						var cookie_pos = allcookies.indexOf(cookie_name);
+						// alert(cookie_pos)
+						// 如果找到了索引，就代表cookie存在,否则不存在
+						if (cookie_pos != -1) {
+							// 把cookie_pos放在值的开始，只要给值加1即可
+							//计算取cookie值得开始索引，加的1为“=”
+							cookie_pos = cookie_pos + cookie_name.length + 1;
+							//计算取cookie值得结束索引
+							var cookie_end = allcookies.indexOf(";", cookie_pos);
+
+							if (cookie_end == -1) {
+								cookie_end = allcookies.length;
+
+							}
+							//得到想要的cookie的值
+							var value = unescape(allcookies.substring(cookie_pos, cookie_end));
+						}
+						// alert(value);
+						return value;
+
+					},
+				}
+			});
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="vendor/layui/css/layui.css" />
+		<script type="text/javascript" src="vendor/layui/layui.js"></script>
+		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="vendor/linearicons/style.css">
+		<link rel="stylesheet" href="vendor/chartist/css/chartist-custom.css">
+	</head>
+	<body>
+
+		<div class="layui-btn-group demoTable" style="margin-bottom: 10px;">
+			<button class="layui-btn" data-type="parseTable">立即转化为数据表格</button>
+		</div>
+
+		<table lay-filter="parse-table-demo">
+			<thead>
+				<tr>
+					<th lay-data="{type: 'checkbox',fixed: 'left'}"></th>
+					<th lay-data="{field:'username', width:200}">昵称</th>
+					<th lay-data="{field:'joinTime', width:150}">加入时间</th>
+					<th lay-data="{field:'sign', minWidth: 180}">签名</th>
+					<th lay-data="{fixed: 'right',title: '操作',toolbar: '#barDemo',width: 120}"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td></td>
+					<td>贤心1</td>
+					<td>2016-11-28</td>
+					<td>人生就像是一场修行 A</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>贤心2</td>
+					<td>2016-11-29</td>
+					<td>人生就像是一场修行 B</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>贤心3</td>
+					<td>2016-11-30</td>
+					<td>人生就像是一场修行 C</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+
+		<script type="text/html" id="barDemo">
+			<button class="btn btn-default btn-xs lnr lnr-pencil articledelbtn" lay-event="edit"></button>
+										<button class="btn btn-danger btn-xs lnr lnr-trash articleedbtn" lay-event="del"></button>
+									</script>
+		<script type="text/javascript" src="vendor/layui/layui.js"></script>
+		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+		<script>
+			layui.use('table', function() {
+				var table = layui.table;
+
+				var $ = layui.$,
+					active = {
+						parseTable: function() {
+							table.init('parse-table-demo', { //转化静态表格
+								//height: 'full-500'
+							});
+						}
+					};
+
+				$('.demoTable .layui-btn').on('click', function() {
+					var type = $(this).data('type');
+					active[type] ? active[type].call(this) : '';
+				});
+			});
+		</script>
+	</body>
+</html>
