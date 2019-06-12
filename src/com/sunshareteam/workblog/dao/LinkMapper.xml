@@ -5,7 +5,7 @@
 		select linkid,linktitle,linkimg,linkaddress,modifydate,modifyuser from tb_link where linkid=#{id}
 	</select>
 	<select id="findAll" resultType="com.sunshareteam.workblog.entity.Link">    
-         select linkid,linktitle,linkimg,linkaddress,modifydate,modifyuser from tb_link   
+         select linkid,linktitle,linkimg,linkaddress from tb_link   
        </select>
        <select id="findByKey" resultType="com.sunshareteam.workblog.entity.Link">
 		select linkid,linktitle,linkimg,linkaddress,modifydate,modifyuser from tb_link where linktitle like #{linktitle}

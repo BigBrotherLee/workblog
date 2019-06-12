@@ -4,9 +4,9 @@
     <select id="findById" resultType="com.sunshareteam.workblog.entity.Tag">
 		select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag where tagid=#{tagid}
 	</select>
-	<select id="findAll" resultType="com.sunshareteam.workblog.entity.Tag">    
-         select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag   
-       </select>
+	<select id="findAll" resultType="com.sunshareteam.workblog.web.TagVO">    
+         select t.tagid,t.tagtitle,u.username from tb_tag t,tb_user u where t.createuser=u.userid  
+    </select>
      <select id="findByKey" resultType="com.sunshareteam.workblog.entity.Tag">
 		select tagid,createuser,createdate,modifydate,modifyuser,tagtitle from tb_tag where tagtitle like #{tagtitle}
 	</select>

@@ -26,13 +26,6 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	}
 	
 	@Override
-	public PageInfo<CommentTwoVO> getByCommentOneAndUser(Integer userid,int start, int size) {
-		PageHelper.startPage(start, size);
-		List<CommentTwoVO> list=commenttwoMapper.findByCommentOneAndUser(userid);
-		return new PageInfo<CommentTwoVO>(list);
-	}
-	
-	@Override
 	@Transactional
 	public void deleteCommentTwo(Integer id) {
 		commenttwoMapper.deleteCommentTwo(id);	
@@ -47,10 +40,10 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	}
 
 	@Override
-	public PageInfo<CommentTwo> getAll(int start, int size) {
+	public PageInfo<CommentTwoVO> getAll(int start, int size) {
 		PageHelper.startPage(start, size);
-		List<CommentTwo> list=commenttwoMapper.findAll();
-		return new PageInfo<CommentTwo>(list);
+		List<CommentTwoVO> list=commenttwoMapper.findAll();
+		return new PageInfo<CommentTwoVO>(list);
 	}
 
 	@Override

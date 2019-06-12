@@ -6,8 +6,7 @@ import com.sunshareteam.workblog.web.CommentTwoVO;
 
 public interface CommentTwoService {
 	CommentTwo getById(Integer id);
-	PageInfo<CommentTwoVO> getByCommentOneAndUser(Integer userid,int start,int size);
-	PageInfo<CommentTwo> getAll(int start,int size);
+	PageInfo<CommentTwoVO> getAll(int start,int size);
 	PageInfo<CommentTwo> getByKey(String key,int start,int size);
 	void insertCommentTwo(CommentTwo commenttwo);
 	void deleteCommentTwo(Integer id);

@@ -1,5 +1,6 @@
 package com.sunshareteam.workblog.web;
 
+
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -8,10 +9,10 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.bigbrotherlee.utils.LeeConstant;
 import com.bigbrotherlee.utils.ResponseResult;
@@ -32,8 +33,8 @@ public class TagController {
 	 * @param id 标签id
 	 * @return 成功返回ResponseResult<Tag> state：1，message：查询成功,data:Categoty的json
 	 */
-	@GetMapping("/get/{id}")
-	public ResponseResult<Tag> getById(@PathVariable Integer id) {
+	@GetMapping("/get")
+	public ResponseResult<Tag> getById(Integer id) {
 		ResponseResult<Tag> result=new ResponseResult<Tag>();
 		Tag tag=tagService.getById(id);
 		if(ObjectUtils.allNotNull(tag)) {
@@ -53,8 +54,8 @@ public class TagController {
 	 * @return 成功返回ResponseResult<String> state：1，message：删除成功,data:null
 	 */
 	@RequiresPermissions("tag:delete:*")
-	@DeleteMapping("/delete/{id}")
-	public ResponseResult<String> DeleteTag(@PathVariable Integer id) {
+	@DeleteMapping("/delete")
+	public ResponseResult<String> DeleteTag(Integer id) {
 		ResponseResult<String> result=new ResponseResult<String>();
 		try {
 			tagService.delete(id);
@@ -139,8 +140,8 @@ public class TagController {
 	 * @param articleid 文章id
 	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：该文章所属标签信息
 	 */
-	@GetMapping("/gettagbyarticle/{articleid}")
-	public ResponseResult<List<Tag>> getTagByArticle(@PathVariable Integer articleid){
+	@GetMapping("/gettagbyarticle")
+	public ResponseResult<List<Tag>> getTagByArticle(Integer articleid){
 		ResponseResult<List<Tag>> result =new ResponseResult<List<Tag>>();
 		PageInfo<Tag> info=tagService.getByArticle(articleid,0,1000);
 		if(info.getTotal()<=0) {
@@ -156,18 +157,20 @@ public class TagController {
 	
 	/**
 	 * 得到全部标签
+	 * @param index 第几页
+	 * @param length 一页几条
 	 * @return 成功则返回ResponseResult<List<Tag>> state：1，message：查询成功 ，data：所有标签的列表json
 	 */
 	@GetMapping("/getall")
-	public ResponseResult<List<Tag>> getAll(){
-		ResponseResult<List<Tag>> result=new ResponseResult<List<Tag>>();
-		PageInfo<Tag> info=tagService.getAll(0, 1000);
-		if(info.getTotal()<=0) {
+	public ResponseResult<PageInfo<TagVO>> getAll(int index,int length){
+		ResponseResult<PageInfo<TagVO>> result=new ResponseResult<PageInfo<TagVO>>();
+		PageInfo<TagVO> data=tagService.getAll(index, length);
+		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
 			return result;
 		}
-		result.setData(info.getList());
+		result.setData(data);
 		result.setMessage("查询成功");
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
@@ -180,8 +183,8 @@ public class TagController {
 	 * @param key 搜索关键字
 	 * @return 成功则返回ResponseResultPageInfo<Tag>> state：1，message：查询成功 ，data：分页标签的列表json
 	 */
-	@GetMapping("/getpage/{index}/{length}")
-	public ResponseResult<PageInfo<Tag>> getPage(@PathVariable int index,@PathVariable int length,String key){
+	@GetMapping("/getpage")
+	public ResponseResult<PageInfo<Tag>> getPage(int index,int length,@RequestParam(defaultValue = "_",required = false) String key){
 		ResponseResult<PageInfo<Tag>> result=new ResponseResult<PageInfo<Tag>>();
 		PageInfo<Tag> data=tagService.getByKey(key, index, length);
 		if(data.getTotal()<=0) {

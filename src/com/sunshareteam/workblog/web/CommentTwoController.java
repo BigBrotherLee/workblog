@@ -8,7 +8,6 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,8 +34,8 @@ public class CommentTwoController {
 	 * @return 查询成功返回ResponseResult<PageInfo<CommentTwo>>分页数据，失败抛出异常LeeException
 	 */
 	@RequiresPermissions("commenttwo:select:*")
-	@GetMapping("/getcommenttwo/{index}/{length}")
-	public ResponseResult<PageInfo<CommentTwo>> getUser(@PathVariable int index,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key) {
+	@GetMapping("/getcommenttwo")
+	public ResponseResult<PageInfo<CommentTwo>> getUser(int index,int length,@RequestParam(defaultValue = "_",required = false) String key) {
 		ResponseResult<PageInfo<CommentTwo>> result=new ResponseResult<PageInfo<CommentTwo>>();
 		PageInfo<CommentTwo> data=commenttwoService.getByKey(key, index, length);
 		if(data.getTotal()<=0) {
@@ -49,34 +48,14 @@ public class CommentTwoController {
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}	
-	/**
-	 * 查询二级评论管理的内容
-	 * @param index 第几页
-	 * @param length 一页几条
-	 * @return 查询成功返回ResponseResult<PageInfo<CommentTwoVO>>分页数据，失败抛出异常LeeException
-	 */
-	@RequiresPermissions("commenttwo:select:*")
-	@GetMapping("/getbycommentoneanduser")
-	public ResponseResult<PageInfo<CommentTwoVO>> ByCommentOneAndUser(@PathVariable Integer userid){
-		ResponseResult<PageInfo<CommentTwoVO>> result=new ResponseResult<PageInfo<CommentTwoVO>>();
-		PageInfo<CommentTwoVO> data=commenttwoService.getByCommentOneAndUser(userid,0,1000);
-		if(data.getTotal()<=0) {
-			result.setMessage("查询为空");
-			result.setState(LeeConstant.STATE_FAIL);
-			return result;
-		}
-		result.setData(data);
-		result.setMessage("查询成功");
-		result.setState(LeeConstant.STATE_SUCCESS);
-		return result;
-	}
+	
 	/**
 	 * 得到指定id的二级评论
 	 * @param id 二级评论id
 	 * @return 成功返回ResponseResult<CommentTwo> state：1，message：查询成功,data:CommentTwo的json
 	 */
-	@GetMapping("/get/{id}")
-	public ResponseResult<CommentTwo> getById(@PathVariable Integer id) {
+	@GetMapping("/get")
+	public ResponseResult<CommentTwo> getById(Integer id) {
 		ResponseResult<CommentTwo> result=new ResponseResult<CommentTwo>();
 		CommentTwo commenttwo=commenttwoService.getById(id);
 		if(ObjectUtils.allNotNull(commenttwo)) {
@@ -95,8 +74,8 @@ public class CommentTwoController {
 	 * @return 成功返回ResponseResult<String> state：1，message：删除成功,data:null
 	 */
 	@RequiresPermissions("commentone:delete:*")
-	@DeleteMapping("/delete/{id}")
-	public ResponseResult<String> DeleteCommentTwo(@PathVariable Integer id) {
+	@DeleteMapping("/delete")
+	public ResponseResult<String> DeleteCommentTwo(Integer id) {
 		ResponseResult<String> result=new ResponseResult<String>();
 		try {
 			commenttwoService.deleteCommentTwo(id);
@@ -135,18 +114,20 @@ public class CommentTwoController {
 	}	
 	/**
 	 * 得到全部二级评论
+	 * @param index 第几页
+	 * @param length 一页几条
 	 * @return 成功则返回ResponseResult<List<CommentTwo>> state：1，message：查询成功 ，data：所有一级评论的列表json
 	 */
 	@GetMapping("/getall")
-	public ResponseResult<List<CommentTwo>> getAll(){
-		ResponseResult<List<CommentTwo>> result=new ResponseResult<List<CommentTwo>>();
-		PageInfo<CommentTwo> info=commenttwoService.getAll(0, 1000);
-		if(info.getTotal()<=0) {
+	public ResponseResult<PageInfo<CommentTwoVO>> getAll(int index,int length){
+		ResponseResult<PageInfo<CommentTwoVO>> result=new ResponseResult<PageInfo<CommentTwoVO>>();
+		PageInfo<CommentTwoVO> data=commenttwoService.getAll(index, length);
+		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
 			return result;
 		}
-		result.setData(info.getList());
+		result.setData(data);
 		result.setMessage("查询成功");
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
@@ -156,8 +137,8 @@ public class CommentTwoController {
 	 * @param id 二评id
 	 * @return 成功则返回ResponseResult<CommentTwo> state：1，message：查询成功，data：得到二级评论角色信息
 	 */
-	@GetMapping("/getbyuser/{id}")
-	public ResponseResult<List<CommentTwo>> getCommentTwoByUser(@PathVariable Integer id){
+	@GetMapping("/getbyuser")
+	public ResponseResult<List<CommentTwo>> getCommentTwoByUser(Integer id){
 		ResponseResult<List<CommentTwo>> result =new ResponseResult<List<CommentTwo>>();
 		PageInfo<CommentTwo> info=commenttwoService.getByUser(id, 0, 1000);
 		if(info.getTotal()<=0) {

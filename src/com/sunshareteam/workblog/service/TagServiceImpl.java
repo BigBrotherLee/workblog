@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.dao.TagMapper;
 import com.sunshareteam.workblog.entity.ArticleTag;
 import com.sunshareteam.workblog.entity.Tag;
+import com.sunshareteam.workblog.web.TagVO;
 
 @Service("tagService")
 public class TagServiceImpl implements TagService {
@@ -56,10 +57,10 @@ public class TagServiceImpl implements TagService {
 	}
 
 	@Override
-	public PageInfo<Tag> getAll(int start, int size) {
+	public PageInfo<TagVO> getAll(int start, int size) {
 		PageHelper.startPage(start, size);
-		List<Tag> list=tagMapper.findAll();
-		return new PageInfo<Tag>(list);
+		List<TagVO> list=tagMapper.findAll();
+		return new PageInfo<TagVO>(list);
 	}
 
 	@Override
