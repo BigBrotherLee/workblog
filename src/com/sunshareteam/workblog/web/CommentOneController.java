@@ -117,7 +117,7 @@ public class CommentOneController {
 	 */
 	@RequiresPermissions("commentone:insert:*")
 	@PostMapping("/add")
-	public ResponseResult<CommentOne> addCategoty(CommentOne commentone){
+	public ResponseResult<CommentOne> addCommentOne(CommentOne commentone){
 		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
 		User user =(User) SecurityUtils.getSubject().getPrincipal();
 		commentone.setCreateuser(user.getUserid());

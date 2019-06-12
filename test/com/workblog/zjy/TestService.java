@@ -83,8 +83,6 @@ public class TestService {
 	    PageInfo<Tag> list=tagService.getByArticle(1, 0, 1000);
         System.out.println(list);  
     }*/
-	
-	
 	//测试一评
 	/* @Test
 	     public void test1() {
