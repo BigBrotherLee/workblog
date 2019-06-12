@@ -6,12 +6,11 @@ import com.sunshareteam.workblog.web.CommentOneVO;
 
 public interface CommentOneService {
 	CommentOne getById(Integer id);
-	PageInfo<CommentOneVO> getByArticleAndUser(Integer userid,int start,int size);
-	PageInfo<CommentOne> getAll(int start,int size);
+	PageInfo<CommentOneVO> getAll(int start,int size);
 	PageInfo<CommentOne> getByKey(String key,int start,int size);
 	void insertCommentOne(CommentOne commentone);
 	void delete(Integer id);
 	PageInfo<CommentOne> getByUser(Integer id, int start, int size);
-	PageInfo<CommentOne> getByArticleAll(Integer articleid,int start,int size);
+	PageInfo<CommentOneVO> getByArticleAll(Integer articleid,int start,int size);
 	PageInfo<CommentOne> getByUserAll(Integer userid, int start, int size);
 }

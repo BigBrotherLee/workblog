@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class CommentOneVO {
 	private Integer comment_one_id;
+    private String pic;
 	private String author;
 	private String title;
     private String username;
@@ -44,12 +45,17 @@ public class CommentOneVO {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}	
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 	@Override
 	public String toString() {
-		return "CommentOneVO [comment_one_id=" + comment_one_id + ", content=" + content + ", createdate=" + createdate
-				+ ", username=" + username + ", title=" + title + ", author=" + author + "]";
-	}
-	
+		return "CommentOneVO [comment_one_id=" + comment_one_id + ", pic=" + pic + ", author=" + author + ", title="
+				+ title + ", username=" + username + ", content=" + content + ", createdate=" + createdate + "]";
+	}	
 	
 }

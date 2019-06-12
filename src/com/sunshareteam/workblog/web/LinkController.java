@@ -1,14 +1,11 @@
 package com.sunshareteam.workblog.web;
 
-import java.util.List;
-
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +32,8 @@ public class LinkController {
 	 * @return 查询成功返回ResponseResult<PageInfo<CommentOne>>分页数据，失败抛出异常LeeException
 	 */
 	@RequiresPermissions("link:select:*")
-	@GetMapping("/getlink/{index}/{length}")
-	public ResponseResult<PageInfo<Link>> getUser(@PathVariable int index,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key) {
+	@GetMapping("/getlink")
+	public ResponseResult<PageInfo<Link>> getUser(int index,int length,@RequestParam(defaultValue = "_",required = false) String key) {
 		ResponseResult<PageInfo<Link>> result=new ResponseResult<PageInfo<Link>>();
 		PageInfo<Link> data=linkService.getByKey(key, index, length);
 		if(data.getTotal()<=0) {
@@ -54,8 +51,8 @@ public class LinkController {
 	 * @param id 友链id
 	 * @return 成功返回ResponseResult<Link> state：1，message：查询成功,data:Categoty的json
 	 */
-	@GetMapping("/get/{id}")
-	public ResponseResult<Link> getById(@PathVariable Integer id) {
+	@GetMapping("/get")
+	public ResponseResult<Link> getById(Integer id) {
 		ResponseResult<Link> result=new ResponseResult<Link>();
 		Link link=linkService.getById(id);
 		if(ObjectUtils.allNotNull(link)) {
@@ -75,8 +72,8 @@ public class LinkController {
 	 * @return 成功返回ResponseResult<String> state：1，message：删除成功,data:null
 	 */
 	@RequiresPermissions("link:delete:*")
-	@DeleteMapping("/delete/{id}")
-	public ResponseResult<String> DeleteLink(@PathVariable Integer id) {
+	@DeleteMapping("/delete")
+	public ResponseResult<String> DeleteLink(Integer id) {
 		ResponseResult<String> result=new ResponseResult<String>();
 		try {
 			linkService.deleteLink(id);
@@ -136,33 +133,15 @@ public class LinkController {
 		return result;
 	}
 	/**
-	 * 得到全部友链
-	 * @return 成功则返回ResponseResult<List<link>> state：1，message：查询成功 ，data：所有友链的列表json
-	 */
-	@GetMapping("/getall")
-	public ResponseResult<List<Link>> getAll(){
-		ResponseResult<List<Link>> result=new ResponseResult<List<Link>>();
-		PageInfo<Link> info=linkService.getAll(0, 1000);
-		if(info.getTotal()<=0) {
-			result.setMessage("查询为空");
-			result.setState(LeeConstant.STATE_FAIL);
-			return result;
-		}
-		result.setData(info.getList());
-		result.setMessage("查询成功");
-		result.setState(LeeConstant.STATE_SUCCESS);
-		return result;
-	}
-	/**
 	 * 查询全部友链
 	 * @param index 第几页
 	 * @param length 页面长度
 	 * @return 成功则返回 ResponseResult<PageInfo<Link>> state：1，message：查询成功 data：友链分页信息
 	 */
-	@GetMapping("/getallpage/{index}/{length}")
-	public ResponseResult<PageInfo<Link>> getAllPag(@PathVariable int index,@PathVariable int length){
+	@GetMapping("/getall")
+	public ResponseResult<PageInfo<Link>> getAll(int index,int length){
 		ResponseResult<PageInfo<Link>> result =new ResponseResult<PageInfo<Link>>();
-		PageInfo<Link> data=linkService.getAllPag(index, length);
+		PageInfo<Link> data=linkService.getAll(index, length);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);

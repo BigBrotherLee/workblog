@@ -5,6 +5,7 @@ import java.util.Date;
 public class CommentTwoVO {
 	private Integer comment_two_id;
 	private String usernameone;
+	private String pic;
 	private String contentone;
 	private String usernametwo;
 	private String contenttwo;
@@ -45,10 +46,16 @@ public class CommentTwoVO {
 	public void setCreatedate(Date createdate) {
 		this.createdate = createdate;
 	}
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
 	@Override
 	public String toString() {
-		return "CommentTwoVO [comment_two_id=" + comment_two_id + ", usernameone=" + usernameone + ", contentone="
-				+ contentone + ", usernametwo=" + usernametwo + ", contenttwo=" + contenttwo + ", createdate="
-				+ createdate + "]";
-	}
+		return "CommentTwoVO [comment_two_id=" + comment_two_id + ", usernameone=" + usernameone + ", pic=" + pic
+				+ ", contentone=" + contentone + ", usernametwo=" + usernametwo + ", contenttwo=" + contenttwo
+				+ ", createdate=" + createdate + "]";
+	}	
 }

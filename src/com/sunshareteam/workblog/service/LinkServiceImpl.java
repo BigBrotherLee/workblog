@@ -51,14 +51,6 @@ public class LinkServiceImpl implements LinkService {
 		List<Link> list=linkMapper.findAll();
 		return new PageInfo<Link>(list);
 	}
-	
-	@Override
-	public PageInfo<Link> getAllPag(int start, int size) {
-		PageHelper.startPage(start, size);
-		List<Link> list=linkMapper.findAll();
-		return new PageInfo<Link>(list);
-	}
-
 	@Override
 	public PageInfo<Link> getByKey(String key, int start, int size) {
 		PageHelper.startPage(start, size);

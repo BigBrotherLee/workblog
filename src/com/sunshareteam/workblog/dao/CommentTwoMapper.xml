@@ -3,12 +3,9 @@
 <mapper namespace="com.sunshareteam.workblog.dao.CommentTwoMapper">
 	  <select id="findById" resultType="com.sunshareteam.workblog.entity.CommentTwo">
 		select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two where comment_two_id=#{id}
-	</select>
-	<select id="findByCommentOneAndUser" resultType="com.sunshareteam.workblog.web.CommentTwoVO">
-		select t.comment_two_id,u1.username usernameone,o.content contentone,u2.username usernametwo,t.content contentwo,t.createdate from tb_comment_two t,tb_comment_one o,tb_user u1,tb_user u2 where o.comment_one_id=t.oneid and u1.userid=o.createuser and u2.userid=t.createuser
 	</select>	
-	<select id="findAll" resultType="com.sunshareteam.workblog.entity.CommentTwo">    
-         select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two   
+	<select id="findAll" resultType="com.sunshareteam.workblog.web.CommentTwoVO">    
+        select t.comment_two_id,u1.username usernameone,o.content contentone,u2.username usernametwo,t.content contentwo,t.createdate from tb_comment_two t,tb_comment_one o,tb_user u1,tb_user u2 where o.comment_one_id=t.oneid and u1.userid=o.createuser and u2.userid=t.createuser
        </select>
        <select id="findByKey" resultType="com.sunshareteam.workblog.entity.CommentTwo">
 		select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two where content like #{content}
@@ -23,7 +20,7 @@
 	<select id="findByUser" resultType="com.sunshareteam.workblog.entity.User">
 		select u.userid,u.username,u.pic from tb_comment_two t,tb_user u where t.createuser=u.userid and t.comment_two_id=#{id}
 	</select>
-	<select id="findByOneAll" resultType="com.sunshareteam.workblog.entity.CommentTwo">
-		select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two where oneid=#{oneid}
+	<select id="findByOneAll" resultType="com.sunshareteam.workblog.web.CommentTwoVO">
+		select t.comment_two_id,t.content contenttwo,u.pic,u.username usernametwo from tb_comment_two t,tb_user u where u.userid=t.createuser and t.oneid=#{oneid}
 	</select>	
 </mapper> 

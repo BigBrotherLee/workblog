@@ -8,12 +8,12 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.bigbrotherlee.utils.LeeConstant;
+import com.bigbrotherlee.utils.LeeException;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.CommentOne;
@@ -34,8 +34,8 @@ public class CommentOneController {
 	 * @return 查询成功返回ResponseResult<PageInfo<CommentOne>>分页数据，失败抛出异常LeeException
 	 */
 	@RequiresPermissions("commentone:select:*")
-	@GetMapping("/getcommentone/{index}/{length}")
-	public ResponseResult<PageInfo<CommentOne>> getUser(@PathVariable int index,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key) {
+	@GetMapping("/getcommentone")
+	public ResponseResult<PageInfo<CommentOne>> getUser(int index,int length,@RequestParam(defaultValue = "_",required = false) String key) {
 		ResponseResult<PageInfo<CommentOne>> result=new ResponseResult<PageInfo<CommentOne>>();
 		PageInfo<CommentOne> data=commentoneService.getByKey(key, index, length);
 		if(data.getTotal()<=0) {
@@ -48,34 +48,14 @@ public class CommentOneController {
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
 	}
-	/**
-	 * 查询一级评论管理的内容
-	 * @param index 第几页
-	 * @param length 一页几条
-	 * @return 查询成功返回ResponseResult<PageInfo<CommentOneVO>>分页数据，失败抛出异常LeeException
-	 */
-	@RequiresPermissions("commentone:select:*")
-	@GetMapping("/getbyarticleanduser")
-	public ResponseResult<PageInfo<CommentOneVO>> ByArticleAndUser(@PathVariable Integer userid){
-		ResponseResult<PageInfo<CommentOneVO>> result=new ResponseResult<PageInfo<CommentOneVO>>();
-		PageInfo<CommentOneVO> data=commentoneService.getByArticleAndUser(userid,0,1000);
-		if(data.getTotal()<=0) {
-			result.setMessage("查询为空");
-			result.setState(LeeConstant.STATE_FAIL);
-			return result;
-		}
-		result.setData(data);
-		result.setMessage("查询成功");
-		result.setState(LeeConstant.STATE_SUCCESS);
-		return result;
-	}
+	
 	/**
 	 * 得到指定id的一级评论
 	 * @param id 一级评论id
 	 * @return 成功返回ResponseResult<CommentOne> state：1，message：查询成功,data:CommentOne的json
 	 */
-	@GetMapping("/get/{id}")
-	public ResponseResult<CommentOne> getById(@PathVariable Integer id) {
+	@GetMapping("/get")
+	public ResponseResult<CommentOne> getById(Integer id) {
 		ResponseResult<CommentOne> result=new ResponseResult<CommentOne>();
 		CommentOne commentone=commentoneService.getById(id);
 		if(ObjectUtils.allNotNull(commentone)) {
@@ -94,8 +74,8 @@ public class CommentOneController {
 	 * @return 成功返回ResponseResult<String> state：1，message：删除成功,data:null
 	 */
 	@RequiresPermissions("commentone:delete:*")
-	@DeleteMapping("/delete/{id}")
-	public ResponseResult<String> DeleteCommentOne(@PathVariable Integer id) {
+	@DeleteMapping("/delete")
+	public ResponseResult<String> DeleteCommentOne(Integer id) {
 		ResponseResult<String> result=new ResponseResult<String>();
 		try {
 			commentoneService.delete(id);
@@ -117,7 +97,10 @@ public class CommentOneController {
 	 */
 	@RequiresPermissions("commentone:insert:*")
 	@PostMapping("/add")
-	public ResponseResult<CommentOne> addCategoty(CommentOne commentone){
+	public ResponseResult<CommentOne> addCommentOne(CommentOne commentone){
+		if(!ObjectUtils.allNotNull(commentone.getArticleid())) {
+			throw new LeeException("文章id为空");
+		}
 		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
 		User user =(User) SecurityUtils.getSubject().getPrincipal();
 		commentone.setCreateuser(user.getUserid());
@@ -135,18 +118,20 @@ public class CommentOneController {
 	}	
 	/**
 	 * 得到全部一级评论
+	 * @param index 第几页
+	 * @param length 一页几条
 	 * @return 成功则返回ResponseResult<List<Categoty>> state：1，message：查询成功 ，data：所有一级评论的列表json
 	 */
 	@GetMapping("/getall")
-	public ResponseResult<List<CommentOne>> getAll(){
-		ResponseResult<List<CommentOne>> result=new ResponseResult<List<CommentOne>>();
-		PageInfo<CommentOne> info=commentoneService.getAll(0, 1000);
-		if(info.getTotal()<=0) {
+	public ResponseResult<PageInfo<CommentOneVO>> getAll(int index,int length){
+		ResponseResult<PageInfo<CommentOneVO>> result=new ResponseResult<PageInfo<CommentOneVO>>();
+		PageInfo<CommentOneVO> data=commentoneService.getAll(index, length);
+		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
 			return result;
 		}
-		result.setData(info.getList());
+		result.setData(data);
 		result.setMessage("查询成功");
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
@@ -156,8 +141,8 @@ public class CommentOneController {
 	 * @param id 用户id
 	 * @return 成功则返回ResponseResult<Tag> state：1，message：查询成功，data：得到一级评论用户信息
 	 */
-	@GetMapping("/getbyuser/{id}")
-	public ResponseResult<List<CommentOne>> getCommentOneByUser(@PathVariable Integer id){
+	@GetMapping("/getbyuser")
+	public ResponseResult<List<CommentOne>> getCommentOneByUser(Integer id){
 		ResponseResult<List<CommentOne>> result =new ResponseResult<List<CommentOne>>();
 		PageInfo<CommentOne> info=commentoneService.getByUser(id, 0, 1000);
 		if(info.getTotal()<=0) {
@@ -177,10 +162,10 @@ public class CommentOneController {
 	 * @param articleid 文章id
 	 * @return 成功则返回 ResponseResult<PageInfo<CommentOne>> state：1，message：查询成功 data：评论分页信息
 	 */
-	@GetMapping("/getbyarticleall/{index}/{length}")
-	public ResponseResult<PageInfo<CommentOne>> getCommentOneByArticleAll(Integer articleid,@PathVariable int index,@PathVariable int length){
-		ResponseResult<PageInfo<CommentOne>> result =new ResponseResult<PageInfo<CommentOne>>();
-		PageInfo<CommentOne> data=commentoneService.getByArticleAll(articleid, index, length);
+	@GetMapping("/getbyarticleall")
+	public ResponseResult<PageInfo<CommentOneVO>> getCommentOneByArticleAll(Integer articleid,int index,int length){
+		ResponseResult<PageInfo<CommentOneVO>> result =new ResponseResult<PageInfo<CommentOneVO>>();
+		PageInfo<CommentOneVO> data=commentoneService.getByArticleAll(articleid, index, length);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
@@ -198,8 +183,8 @@ public class CommentOneController {
 	 * @param userid 用户id
 	 * @return 成功则返回 ResponseResult<PageInfo<CommentOne>> state：1，message：查询成功 data：评论分页信息
 	 */
-	@GetMapping("/getbyuserall/{index}/{length}")
-	public ResponseResult<PageInfo<CommentOne>> getByUserAll(@PathVariable int index,@PathVariable int length,Integer userid){
+	@GetMapping("/getbyuserall")
+	public ResponseResult<PageInfo<CommentOne>> getByUserAll(int index,int length,Integer userid){
 		ResponseResult<PageInfo<CommentOne>> result =new ResponseResult<PageInfo<CommentOne>>();
 		PageInfo<CommentOne> data=commentoneService.getByUserAll(userid, index, length);
 		if(data.getTotal()<=0) {

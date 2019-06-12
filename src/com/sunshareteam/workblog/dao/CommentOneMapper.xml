@@ -4,11 +4,8 @@
     <select id="findById" resultType="com.sunshareteam.workblog.entity.CommentOne">
 		select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one where comment_one_id=#{id}
 	</select>
-	<select id="findByArticleAndUser" resultType="com.sunshareteam.workblog.web.CommentOneVO">
-		select o.comment_one_id,o.author,a.title,u.username,o.content,o.createdate from tb_article a,tb_comment_one o,tb_user u where a.articleid=o.articleid and u.userid=o.createuser 
-	</select>
-	<select id="findAll" resultType="com.sunshareteam.workblog.entity.CommentOne">    
-         select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one   
+	<select id="findAll" resultType="com.sunshareteam.workblog.web.CommentOneVO">    
+     	select o.comment_one_id,o.author,a.title,u.username,o.content,o.createdate from tb_article a,tb_comment_one o,tb_user u where a.articleid=o.articleid and u.userid=o.createuser 
        </select>
        <select id="findByKey" resultType="com.sunshareteam.workblog.entity.CommentOne">
 		select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one where content like #{content}
@@ -26,8 +23,8 @@
 	<select id="findByUser" resultType="com.sunshareteam.workblog.entity.User">
 		select u.userid,u.username,u.pic from tb_comment_one o,tb_user u where o.createuser=u.userid and o.comment_one_id=#{id}
 	</select>
-	<select id="findByArticleAll" resultType="com.sunshareteam.workblog.entity.CommentOne">
-		select comment_one_id,author,content from tb_comment_one where articleid=#{articleid}
+	<select id="findByArticleAll" resultType="com.sunshareteam.workblog.web.CommentOneVO">
+		select u.username,u.pic,o.content,o.comment_one_id from tb_comment_one o,tb_user u where o.createuser=u.userid and o.articleid=#{articleid}
 	</select>	
 	<select id="findByUserAll" resultType="com.sunshareteam.workblog.entity.CommentOne">
 		select comment_one_id,author,content from tb_comment_one where createuser=#{userid}

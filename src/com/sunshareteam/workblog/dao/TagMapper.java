@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.sunshareteam.workblog.entity.ArticleTag;
 import com.sunshareteam.workblog.entity.Tag;
+import com.sunshareteam.workblog.web.TagVO;
 
 public interface TagMapper {
 	
    Tag findById(Integer id); //根据ID查询
-   List<Tag> findAll();
+   List<TagVO> findAll();
    void insertTag(Tag tag);
    void insertArticleTag(ArticleTag articletag);
    void updateTag(Tag tag);

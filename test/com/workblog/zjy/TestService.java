@@ -20,6 +20,7 @@ import com.sunshareteam.workblog.service.LinkService;
 import com.sunshareteam.workblog.service.TagService;
 import com.sunshareteam.workblog.web.CommentOneVO;
 import com.sunshareteam.workblog.web.CommentTwoVO;
+import com.sunshareteam.workblog.web.TagVO;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:applicationContext.xml","classpath:springmvc.xml",
@@ -33,7 +34,6 @@ public class TestService {
 	private CommentTwoService commenttwoService;
 	@Autowired
 	private LinkService linkService;
-	
 	//测试标签
 	/*  @Test
 	  public void test1() {
@@ -83,8 +83,6 @@ public class TestService {
 	    PageInfo<Tag> list=tagService.getByArticle(1, 0, 1000);
         System.out.println(list);  
     }*/
-	
-	
 	//测试一评
 	/* @Test
 	     public void test1() {
