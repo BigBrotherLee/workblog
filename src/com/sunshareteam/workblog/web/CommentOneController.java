@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.bigbrotherlee.utils.LeeConstant;
+import com.bigbrotherlee.utils.LeeException;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.CommentOne;
@@ -97,6 +98,9 @@ public class CommentOneController {
 	@RequiresPermissions("commentone:insert:*")
 	@PostMapping("/add")
 	public ResponseResult<CommentOne> addCommentOne(CommentOne commentone){
+		if(!ObjectUtils.allNotNull(commentone.getArticleid())) {
+			throw new LeeException("文章id为空");
+		}
 		ResponseResult<CommentOne> result =new ResponseResult<CommentOne>();
 		User user =(User) SecurityUtils.getSubject().getPrincipal();
 		commentone.setCreateuser(user.getUserid());
