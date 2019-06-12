@@ -18,7 +18,7 @@
 	<bean id="shiroFilter"	class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/user/login" />
-<!-- 		<property name="successUrl" value="/index.html"></property>-->
+<!-- 		<property name="successUrl" value="/html/user/services.html"></property>-->
 		<!-- 通过unauthorizedUrl指定没有权限操作时跳转页面 -->
 		<property name="unauthorizedUrl" value="/refuse.jsp" />
 		<!-- 自定义filter配置 -->
