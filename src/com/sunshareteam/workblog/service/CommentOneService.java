@@ -12,6 +12,6 @@ public interface CommentOneService {
 	void insertCommentOne(CommentOne commentone);
 	void delete(Integer id);
 	PageInfo<CommentOne> getByUser(Integer id, int start, int size);
-	PageInfo<CommentOne> getByArticleAll(Integer articleid,int start,int size);
+	PageInfo<CommentOneVO> getByArticleAll(Integer articleid,int start,int size);
 	PageInfo<CommentOne> getByUserAll(Integer userid, int start, int size);
 }

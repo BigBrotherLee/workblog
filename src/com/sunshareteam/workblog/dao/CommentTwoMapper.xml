@@ -23,7 +23,7 @@
 	<select id="findByUser" resultType="com.sunshareteam.workblog.entity.User">
 		select u.userid,u.username,u.pic from tb_comment_two t,tb_user u where t.createuser=u.userid and t.comment_two_id=#{id}
 	</select>
-	<select id="findByOneAll" resultType="com.sunshareteam.workblog.entity.CommentTwo">
-		select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two where oneid=#{oneid}
+	<select id="findByOneAll" resultType="com.sunshareteam.workblog.web.CommentTwoVO">
+		select t.comment_two_id,t.content contenttwo,u.pic,u.username usernametwo from tb_comment_two t,tb_user u where u.userid=t.createuser and t.oneid=#{oneid}
 	</select>	
 </mapper> 

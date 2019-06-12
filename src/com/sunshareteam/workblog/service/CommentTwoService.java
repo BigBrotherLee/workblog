@@ -12,5 +12,5 @@ public interface CommentTwoService {
 	void insertCommentTwo(CommentTwo commenttwo);
 	void deleteCommentTwo(Integer id);
 	PageInfo<CommentTwo> getByUser(Integer id,int start,int size);
-	PageInfo<CommentTwo> getByOneAll(Integer oneid,int start, int size);
+	PageInfo<CommentTwoVO> getByOneAll(Integer oneid,int start, int size);
 }

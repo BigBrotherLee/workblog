@@ -15,6 +15,6 @@ public interface CommentOneMapper {
 	   void delete(Integer id);
 	   void deleteCommentTwo(Integer commentoneid);
 	   List<CommentOne> findByUser(Integer id); //查用户信息
-	   List<CommentOne> findByArticleAll(Integer articleid); //查同文章的评论
+	   List<CommentOneVO> findByArticleAll(Integer articleid); //查同文章的评论
 	   List<CommentOne> findByUserAll(Integer userid); //查同用户的评论
 }

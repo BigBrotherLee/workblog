@@ -176,9 +176,9 @@ public class CommentTwoController {
 	 * @return 成功则返回 ResponseResult<PageInfo<CommentTwo>> state：1，message：查询成功 data：评论分页信息
 	 */
 	@GetMapping("/getcommenttwobyoneall")
-	public ResponseResult<List<CommentTwo>> getCommentTwoByOneAll(@PathVariable Integer oneid){
-		ResponseResult<List<CommentTwo>> result =new ResponseResult<List<CommentTwo>>();
-		PageInfo<CommentTwo> info=commenttwoService.getByOneAll(oneid,0,1000);
+	public ResponseResult<List<CommentTwoVO>> getCommentTwoByOneAll(Integer oneid){
+		ResponseResult<List<CommentTwoVO>> result =new ResponseResult<List<CommentTwoVO>>();
+		PageInfo<CommentTwoVO> info=commenttwoService.getByOneAll(oneid,0,1000);
 		if(info.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);

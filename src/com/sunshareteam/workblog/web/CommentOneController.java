@@ -178,9 +178,9 @@ public class CommentOneController {
 	 * @return 成功则返回 ResponseResult<PageInfo<CommentOne>> state：1，message：查询成功 data：评论分页信息
 	 */
 	@GetMapping("/getbyarticleall/{index}/{length}")
-	public ResponseResult<PageInfo<CommentOne>> getCommentOneByArticleAll(Integer articleid,@PathVariable int index,@PathVariable int length){
-		ResponseResult<PageInfo<CommentOne>> result =new ResponseResult<PageInfo<CommentOne>>();
-		PageInfo<CommentOne> data=commentoneService.getByArticleAll(articleid, index, length);
+	public ResponseResult<PageInfo<CommentOneVO>> getCommentOneByArticleAll(Integer articleid,@PathVariable int index,@PathVariable int length){
+		ResponseResult<PageInfo<CommentOneVO>> result =new ResponseResult<PageInfo<CommentOneVO>>();
+		PageInfo<CommentOneVO> data=commentoneService.getByArticleAll(articleid, index, length);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);

@@ -36,6 +36,11 @@ public class TestTagDao {
 	@Autowired
 	private LinkMapper linkMapper;
  
+	@Test
+	public void test7() {
+	List<CommentTwoVO> list=commenttwoMapper.findByOneAll(3);
+	System.out.println(list);
+	}
 //  测试标签
 	 /*  @Test
 	public void test1() {
@@ -199,8 +204,6 @@ public class TestTagDao {
 			System.out.println(list);  
 			}
 	*/
-
-	
 //测试友链
 	/*@Test
 	public void test1() {

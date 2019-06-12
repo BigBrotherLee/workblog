@@ -66,10 +66,10 @@ public class CommentOneServiceImpl implements CommentOneService{
 	}
 
 	@Override
-	public PageInfo<CommentOne> getByArticleAll(Integer articleid, int start, int size) {
+	public PageInfo<CommentOneVO> getByArticleAll(Integer articleid, int start, int size) {
 		PageHelper.startPage(start, size);
-		List<CommentOne> list=commentoneMapper.findByArticleAll(articleid);
-		return new PageInfo<CommentOne>(list);
+		List<CommentOneVO> list=commentoneMapper.findByArticleAll(articleid);
+		return new PageInfo<CommentOneVO>(list);
 	}
 
 	@Override

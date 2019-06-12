@@ -13,5 +13,5 @@ public interface CommentTwoMapper {
 	   void insertCommentTwo(CommentTwo commenttwo);
 	   void deleteCommentTwo(Integer id);
 	   List<CommentTwo> findByUser(Integer id);
-	   List<CommentTwo> findByOneAll(Integer oneid);
+	   List<CommentTwoVO> findByOneAll(Integer oneid);
 }

@@ -68,9 +68,9 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	}
 
 	@Override
-	public PageInfo<CommentTwo> getByOneAll(Integer oneid, int start, int size) {
+	public PageInfo<CommentTwoVO> getByOneAll(Integer oneid, int start, int size) {
 		PageHelper.startPage(start, size);
-		List<CommentTwo> list=commenttwoMapper.findByOneAll(oneid);
-		return new PageInfo<CommentTwo>(list);
+		List<CommentTwoVO> list=commenttwoMapper.findByOneAll(oneid);
+		return new PageInfo<CommentTwoVO>(list);
 	}
 }
