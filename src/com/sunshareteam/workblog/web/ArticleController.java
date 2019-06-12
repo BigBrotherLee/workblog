@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -319,5 +320,28 @@ public class ArticleController {
 		result.setMessage("查询成功");
 		result.setState(LeeConstant.STATE_SUCCESS);
 		return result;
-	}	
+	}
+	
+	/**
+	 * 添加标签到文章
+	 * @param articleid 添加标签的文章
+	 * @param tags 标签名数组
+	 * @return
+	 */
+	@PostMapping("/addtagstoarticle")
+	public ResponseResult<String> addTagsToArticle(Integer articleid,String [] tags){
+		ResponseResult<String> result=new ResponseResult<String>();
+		if(StringUtils.isAnyBlank(tags)||StringUtils.isAnyEmpty(tags)) {
+			throw new LeeException("标签不能为不可见字符,也不能为空");
+		}
+		articleService.addTags(articleid, tags);
+		return result;
+	}
+	
+	@DeleteMapping("/romovetag")
+	public ResponseResult<String> removeTag(Integer articleid,Integer tagid){
+		ResponseResult<String> result=new ResponseResult<String>();
+		articleService.removeTag(articleid, tagid);
+		return result;
+	}
 }

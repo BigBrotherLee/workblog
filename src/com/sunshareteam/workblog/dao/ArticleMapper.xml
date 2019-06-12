@@ -38,7 +38,7 @@
 		delete from tb_article_tag where articleid = #{articleid}
 	</delete>
 	
-	<insert id="insertArticle" parameterType="com.sunshareteam.workblog.entity.Article">
+	<insert id="insertArticle" parameterType="com.sunshareteam.workblog.entity.Article" useGeneratedKeys="true" keyProperty="articleid">
 			insert into tb_article(createdate,img,content,author,commentnum,categoty,title,summary,state)
 				values(#{createdate},#{img},#{content},#{author},#{commentnum},#{categoty},#{title},#{summary},0)
 	</insert>
@@ -83,4 +83,17 @@
 		select a.img as img ,a.articleid as articleid,a.createdate as createdate,a.author as authorid,a.title as title,a.summary as summary,u.username as authorname,a.categoty as categotyid,c.categotytitle as categotyname
 			from tb_article a,tb_user u,tb_categoty c where a.author=u.userid and c.categotyid=a.categoty and a.author=#{authorid}
 	</select>
+	<delete id="deleteArtilceTag" parameterType="com.sunshareteam.workblog.entity.ArticleTag">
+		delete from tb_article_tag where articleid=#{articleid} and tagid=#{tagid}
+	</delete>
+	<insert id="insertArticleTag" parameterType="com.sunshareteam.workblog.entity.ArticleTag">
+		insert into tb_article_tag(articleid,tagid) values(#{articleid},#{tagid})
+	</insert>
+	<select id="findTagByName" resultType="com.sunshareteam.workblog.entity.Tag">
+		select tagid from tb_tag where tagtitle=#{name}
+	</select>
+	<insert id="insertTag" parameterType="com.sunshareteam.workblog.entity.Tag" useGeneratedKeys="true" keyProperty="tagid">
+		insert into tb_tag(createdate,tagtitle) values(#{createdate},#{tagtitle})
+	</insert>
+	
 </mapper>  
