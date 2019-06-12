@@ -24,8 +24,8 @@ import com.bigbrotherlee.utils.ResponseResult;
 @RestController
 @RequestMapping("/file")
 public class FileController {
-	public static final String BASE_D="/home/imageserver";
-	public static final String BASE_URL="http://image.bigbrotherlee.com";
+	public static final String BASE_D="/home/lee/data/imageserver";
+	public static final String BASE_URL="http://localhost:8080/image";
 	
 	/**
 	 * 文件上传
