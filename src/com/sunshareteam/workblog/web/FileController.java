@@ -91,8 +91,8 @@ public class FileController {
 	 * 文件下载，这种化为流的方式可以使视频播放流畅
 	 * @param fileurl 你要播放的文件路径
 	 */
-	@GetMapping("/play/{fileurl}")
-	public void fileAsStream(@PathVariable String fileurl) {
+	@GetMapping("/play")
+	public void fileAsStream(String fileurl) {
 		
 	}
 }

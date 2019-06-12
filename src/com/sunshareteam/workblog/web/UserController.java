@@ -3,6 +3,8 @@ package com.sunshareteam.workblog.web;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -82,10 +84,16 @@ public class UserController {
 	 * @return 我的个人信息
 	 */
 	@GetMapping("/getme")
-	public User getMe() {
+	public UserVO getMe() {
+		UserVO userVO=new UserVO();
 		User user=(User) SecurityUtils.getSubject().getPrincipal();
 		user.setPassword(null);
-		return user;
+		userVO.setUser(user);
+		List<Role> roles=userService.getRoleByUserId(user.getUserid());
+		List<Permission> permissions=userService.getPermissionByUserId(user.getUserid());
+		userVO.setPermissions(permissions);
+		userVO.setRoles(roles);
+		return userVO;
 	}
 	
 	/**
@@ -126,8 +134,8 @@ public class UserController {
 	 * @param phone 用户电话号码
 	 * @return 成功则返回 ResponseResult的json，state为1，message发送成功，data为空
 	 */
-	@GetMapping("/getsmscode/{phone}")
-	public ResponseResult<String> getSmsCode(HttpSession session,@PathVariable String phone){
+	@GetMapping("/getsmscode")
+	public ResponseResult<String> getSmsCode(HttpSession session, String phone){
 		ResponseResult<String> result=new ResponseResult<String>();
 		Integer vCode=RandomUtils.nextInt(100000, 999999);
 		SendSmsRequest request=Alisms.buildRequest(phone, "workblog", "SMS_166865875", "{'code':'"+vCode+"'}", null, null);
@@ -161,8 +169,8 @@ public class UserController {
 	 * @param session
 	 * @return 成功则无返回ResponseResult<String>,state:1,message:验证成功，失败则抛出异常LeeException
 	 */
-	@GetMapping("/validate/{code}")
-	public ResponseResult<String> validate(@PathVariable String code,HttpSession session){
+	@GetMapping("/validate")
+	public ResponseResult<String> validate(String code,HttpSession session){
 		ResponseResult<String> result=new ResponseResult<String>();
 		VerifyCode realcode=(VerifyCode) session.getAttribute("validateCode");
 		if(realcode==null) {
@@ -319,8 +327,8 @@ public class UserController {
 	 * @param id 用户id
 	 * @return 查询成功则返回responseresult<user>，state：1，message：查询成功，data:该user的json
 	 */
-	@GetMapping("/get/{id}")
-	public ResponseResult<User> getUserInfoById(@PathVariable Integer id){
+	@GetMapping("/get")
+	public ResponseResult<User> getUserInfoById(Integer id){
 		ResponseResult<User> result=new ResponseResult<User>();
 		User user=userService.getUserById(id);
 		if(ObjectUtils.isEmpty(user)) {
@@ -342,8 +350,8 @@ public class UserController {
 	 * @return 查询成功返回ResponseResult<PageInfo<User>>分页数据，失败抛出异常LeeException
 	 */
 	@RequiresPermissions("admin:select:*")
-	@GetMapping("/getadmin/{index}/{length}")
-	public ResponseResult<PageInfo<User>> getAdmin(@PathVariable int index,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key) {
+	@GetMapping("/getadmin")
+	public ResponseResult<PageInfo<User>> getAdmin(int index,int length,@RequestParam(defaultValue = "_",required = false) String key) {
 		ResponseResult<PageInfo<User>> result=new ResponseResult<PageInfo<User>>();
 		PageInfo<User> info=userService.getAdmin(index, length,key);
 		if(info.getTotal()<=0) {
@@ -364,8 +372,8 @@ public class UserController {
 	 */
 	@RequiresRoles("admin")
 	@RequiresPermissions("user:delete:*")
-	@DeleteMapping("/delete/{id}")
-	public ResponseResult<String> deleteUser(@PathVariable Integer id){
+	@DeleteMapping("/delete")
+	public ResponseResult<String> deleteUser(Integer id){
 		ResponseResult<String> result=new ResponseResult<String>();
 		try {
 			userService.disableUser(id);
@@ -419,10 +427,10 @@ public class UserController {
 	 * @param key 用户名
 	 * @return 成功则返回responseresult<PageInfo<User>>，state：1，message：查询成功，data：用户分页数据，失败抛出异常
 	 */
-	@GetMapping("/list/{start}/{length}")
-	public ResponseResult<PageInfo<User>> getUserList(@PathVariable int start,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key) {
+	@GetMapping("/list")
+	public ResponseResult<PageInfo<User>> getUserList(int index,int length,@RequestParam(defaultValue = "_",required = false) String key) {
 		ResponseResult<PageInfo<User>> result=new ResponseResult<PageInfo<User>>();
-		PageInfo<User> data=userService.getByKey(key, start, length);
+		PageInfo<User> data=userService.getByKey(key, index, length);
 		if(data.getTotal()<=0) {
 			result.setMessage("查询为空");
 			result.setState(LeeConstant.STATE_FAIL);
@@ -509,7 +517,7 @@ public class UserController {
 	 * @return 添加成功则返回responseresult<String>，state：1，message：添加成功，data：
 	 */
 	@RequiresPermissions("permission:insert:*")
-	@PostMapping("/addPermissionToRole/{permissionid}/{roleid}")
+	@PostMapping("/addPermissionToRole")
 	public ResponseResult<String> addPermissionToRole(int permissionid,int roleid){
 		ResponseResult<String> result=new ResponseResult<String>();
 		try {
@@ -531,7 +539,7 @@ public class UserController {
 	 * @return 添加成功则返回responseresult<String>，state：1，message：添加成功，data
 	 */
 	@RequiresRoles("admin")
-	@PostMapping("/addusertorole/{userid}/{roleid}")
+	@PostMapping("/addusertorole")
 	public ResponseResult<String> addUserToRole(int userid,int roleid){
 		ResponseResult<String> result=new ResponseResult<String>();
 		try {

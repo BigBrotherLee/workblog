@@ -27,8 +27,8 @@ public class LogController {
 	 * @return ResponseResult<PageInfo<Log>> 分页数
 	 */
 	@RequiresPermissions("log:select:*")
-	@GetMapping("/getpage/{index}/{length}")
-	public ResponseResult<PageInfo<Log>> getPage(@PathVariable int index,@PathVariable int length) {
+	@GetMapping("/getpage")
+	public ResponseResult<PageInfo<Log>> getPage( int index,int length) {
 		ResponseResult<PageInfo<Log>> result=new ResponseResult<PageInfo<Log>>();
 		PageInfo<Log> data=logService.getAll(index, length);
 		if(data.getTotal()<=0) {
@@ -48,8 +48,8 @@ public class LogController {
 	 * @return Log详情
 	 */
 	@RequiresPermissions("log:select:*")
-	@GetMapping("/get/{id}")
-	public ResponseResult<Log> get(@PathVariable int id){
+	@GetMapping("/get")
+	public ResponseResult<Log> get(int id){
 		ResponseResult<Log> result=new ResponseResult<Log>();
 		Log log=logService.getById(id);
 		if(ObjectUtils.allNotNull(log)) {

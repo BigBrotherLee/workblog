@@ -35,8 +35,8 @@ public class CategotyController {
 	 * @param id 分类id
 	 * @return 成功返回ResponseResult<Categoty> state：1，message：查询成功,data:Categoty的json
 	 */
-	@GetMapping("/get/{id}")
-	public ResponseResult<Categoty> getById(@PathVariable Integer id) {
+	@GetMapping("/get")
+	public ResponseResult<Categoty> getById(Integer id) {
 		ResponseResult<Categoty> result=new ResponseResult<Categoty>();
 		Categoty categoty=categotyService.getById(id);
 		if(ObjectUtils.allNotNull(categoty)) {
@@ -56,8 +56,8 @@ public class CategotyController {
 	 * @return 成功返回ResponseResult<String> state：1，message：删除成功,data:null
 	 */
 	@RequiresPermissions("categoty:delete:*")
-	@DeleteMapping("/delete/{id}")
-	public ResponseResult<String> DeleteCategoty(@PathVariable Integer id) {
+	@DeleteMapping("/delete")
+	public ResponseResult<String> DeleteCategoty(Integer id) {
 		ResponseResult<String> result=new ResponseResult<String>();
 		try {
 			categotyService.deleteCategoty(id);
@@ -126,8 +126,8 @@ public class CategotyController {
 	 * @param articleid 文章id
 	 * @return 成功则返回ResponseResult<Categoty> state：1，message：查询成功，data：该文章所属分类信息
 	 */
-	@GetMapping("/getbyarticle/{articleid}")
-	public ResponseResult<Categoty> getCategotyByArticle(@PathVariable Integer articleid){
+	@GetMapping("/getbyarticle")
+	public ResponseResult<Categoty> getCategotyByArticle(Integer articleid){
 		ResponseResult<Categoty> result =new ResponseResult<Categoty>();
 		Categoty categoty=categotyService.getByArticle(articleid);
 		if(ObjectUtils.allNotNull(categoty)) {
@@ -167,8 +167,8 @@ public class CategotyController {
 	 * @param key 搜索关键字
 	 * @return 成功则返回ResponseResultPageInfo<Categoty>> state：1，message：查询成功 ，data：分页分类的列表json
 	 */
-	@GetMapping("/getpage/{index}/{length}")
-	public ResponseResult<PageInfo<Categoty>> getPage(@PathVariable int index,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key){
+	@GetMapping("/getpage")
+	public ResponseResult<PageInfo<Categoty>> getPage(int index,int length,@RequestParam(defaultValue = "_",required = false) String key){
 		ResponseResult<PageInfo<Categoty>> result=new ResponseResult<>();
 		PageInfo<Categoty> data=categotyService.getByKey(key, index, length);
 		if(data.getTotal()<=0) {

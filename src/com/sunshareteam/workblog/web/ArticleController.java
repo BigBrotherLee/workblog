@@ -34,8 +34,8 @@ public class ArticleController {
 	 * @param id 文章id
 	 * @return 成功则返回 ResponseResult<Article> state：1，，message：查询成功 data：文章详情 
 	 */
-	@GetMapping("/get/{id}")
-	public ResponseResult<Article> get(@PathVariable int id) {
+	@GetMapping("/get")
+	public ResponseResult<Article> get(int id) {
 		ResponseResult<Article> result=new ResponseResult<Article>();
 		Article article=articleService.getById(id);
 		if(ObjectUtils.allNotNull(article)) {
@@ -56,8 +56,8 @@ public class ArticleController {
 	 * @return 成功则返回 ResponseResult<String> state：1，，message：删除成功  
 	 */
 	@RequiresPermissions("article:delete:*")
-	@DeleteMapping("/delete/{id}")
-	public ResponseResult<String> delete(@PathVariable int id) throws Exception{
+	@DeleteMapping("/delete")
+	public ResponseResult<String> delete(int id) throws Exception{
 		ResponseResult<String> result=new ResponseResult<String>();
 		Integer userid=Integer.parseInt(BeanUtils.getProperty(SecurityUtils.getSubject().getPrincipal(), "userid"));
 		Article realArticle=articleService.getById(id);
@@ -141,8 +141,8 @@ public class ArticleController {
 	 * @param key 关键字
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
-	@GetMapping("/getpage/{index}/{length}")
-	public ResponseResult<PageInfo<ArticleVO>> getArticlePage(@PathVariable int index,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key){
+	@GetMapping("/getpage")
+	public ResponseResult<PageInfo<ArticleVO>> getArticlePage(int index,int length,@RequestParam(defaultValue = "_",required = false) String key){
 		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
 		PageInfo<ArticleVO> data=articleService.getByKey(key, index, length);
 		if(data.getTotal()<=0) {
@@ -163,8 +163,8 @@ public class ArticleController {
 	 * @param authorid 作者id
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
-	@GetMapping("/getpagebyarthor/{index}/{length}")
-	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByAuthor(@PathVariable int index,@PathVariable int length,Integer authorid){
+	@GetMapping("/getpagebyarthor")
+	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByAuthor( int index, int length,Integer authorid){
 		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
 		PageInfo<ArticleVO> data=articleService.getByAuthor(authorid, index, length);
 		if(data.getTotal()<=0) {
@@ -199,8 +199,8 @@ public class ArticleController {
 	 * @param tagid 标签id
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
-	@GetMapping("/getpagebytag/{index}/{length}")
-	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByTag(@PathVariable int index,@PathVariable int length,Integer tagid){
+	@GetMapping("/getpagebytag")
+	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByTag(int index,int length,Integer tagid){
 		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
 		PageInfo<ArticleVO> data=articleService.getByTag(tagid, index, length);
 		if(data.getTotal()<=0) {
@@ -221,8 +221,8 @@ public class ArticleController {
 	 * @param categoryid 分类id
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
-	@GetMapping("/getpagebycategory/{index}/{length}")
-	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByCategory(@PathVariable int index,@PathVariable int length,Integer categoryid){
+	@GetMapping("/getpagebycategory")
+	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByCategory(int index,int length,Integer categoryid){
 		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
 		PageInfo<ArticleVO> data=articleService.getByCategoty(categoryid, index, length);
 		if(data.getTotal()<=0) {
@@ -242,8 +242,8 @@ public class ArticleController {
 	 * @param length 页面长度
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
-	@GetMapping("/getnew/{index}/{length}")
-	public ResponseResult<PageInfo<ArticleVO>> getNew(@PathVariable int index,@PathVariable int length){
+	@GetMapping("/getnew")
+	public ResponseResult<PageInfo<ArticleVO>> getNew(int index,int length){
 		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
 		PageInfo<ArticleVO> info=articleService.getNew(index, length);
 		if(info.getTotal()<=0) {
@@ -263,8 +263,8 @@ public class ArticleController {
 	 * @param length 页面长度
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
-	@GetMapping("/gethot/{index}/{length}")
-	public ResponseResult<PageInfo<ArticleVO>> getHot(@PathVariable int index,@PathVariable int length){
+	@GetMapping("/gethot")
+	public ResponseResult<PageInfo<ArticleVO>> getHot(int index,int length){
 		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
 		PageInfo<ArticleVO> info=articleService.getHot(index, length);
 		if(info.getTotal()<=0) {
@@ -285,8 +285,8 @@ public class ArticleController {
 	 * @param key 关键字
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
-	@GetMapping("/getpageall/{index}/{length}")
-	public ResponseResult<PageInfo<ArticleVO>> getArticlePageAll(@PathVariable int index,@PathVariable int length,@RequestParam(defaultValue = "_",required = false) String key){
+	@GetMapping("/getpageall")
+	public ResponseResult<PageInfo<ArticleVO>> getArticlePageAll(int index,int length,@RequestParam(defaultValue = "_",required = false) String key){
 		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
 		PageInfo<ArticleVO> data=articleService.getByKeyAll(key, index, length);
 		if(data.getTotal()<=0) {
@@ -307,8 +307,8 @@ public class ArticleController {
 	 * @param authorid 作者id
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
-	@GetMapping("/getpagebyarthorall/{index}/{length}")
-	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByAuthorAll(@PathVariable int index,@PathVariable int length,Integer authorid){
+	@GetMapping("/getpagebyauthorall")
+	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByAuthorAll(int index,int length,Integer authorid){
 		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
 		PageInfo<ArticleVO> data=articleService.getByAuthorAll(authorid, index, length);
 		if(data.getTotal()<=0) {
