@@ -1,0 +1,53 @@
+{
+	"message": "查询成功",
+	"state": 1,
+	"data": [{
+		"categotyid": 1,
+		"createdate": null,
+		"modifydate": 1559696738000,
+		"modifyuser": null,
+		"categotytitle": "测试分类哈哈哈哈",
+		"categotydetail": "测试分类详情测试分类详情测试分类详情测试分类",
+		"img": "images/2.jpg"
+	},{
+		"categotyid": 2,
+		"createdate": null,
+		"modifydate": 1559696738000,
+		"modifyuser": null,
+		"categotytitle": "测试分类哈哈哈哈",
+		"categotydetail": "测试分类详情测试分类详情测试分类详情测试分类详情测试分类详情",
+		"img": "images/2.jpg"
+	},{
+		"categotyid": 3,
+		"createdate": null,
+		"modifydate": 1559696738000,
+		"modifyuser": null,
+		"categotytitle": "测试分类哈哈",
+		"categotydetail": "测试分类详情测试分类详情测试分类详情测试分类详情测试分类详情",
+		"img": "images/3.jpg"
+	},{
+		"categotyid": 4,
+		"createdate": null,
+		"modifydate": 1559696738000,
+		"modifyuser": null,
+		"categotytitle": "测试分类哈哈",
+		"categotydetail": "测试分类详情测试分类详情测试分类详情测试分类详情测试分类详情",
+		"img": "images/4.jpg"
+	},{
+		"categotyid": 5,
+		"createdate": null,
+		"modifydate": 1559696738000,
+		"modifyuser": null,
+		"categotytitle": "测试分类哈哈",
+		"categotydetail": "测试分类详情测试分类详情测试分类详情测试分类详情测试分类详情",
+		"img": "images/5.jpg"
+	}, {
+		"categotyid": 6,
+		"createdate": null,
+		"modifydate": 1559719771000,
+		"modifyuser": null,
+		"categotytitle": "测试分类哈哈",
+		"categotydetail": "测试分类详情测试分类详情测试分类详情测试分类详情测试分类详情",
+		"img": "images/6.jpg"
+	}]
+}

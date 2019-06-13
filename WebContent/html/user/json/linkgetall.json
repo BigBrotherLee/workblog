@@ -1,0 +1,68 @@
+{
+	"message": "查询成功",
+	"state": 1,
+	"data": [{
+		"linkid": 1,
+		"linktitle": "百度一下",
+		"linkimg": "images/g1.jpg",
+		"linkaddress": "https://www.baidu.com",
+		"modifydate": 1560214610000,
+		"modifyuser": 5
+	}, {
+		"linkid": 2,
+		"linktitle": "百度一下",
+		"linkimg": "images/g2.jpg",
+		"linkaddress": "https://www.baidu.com",
+		"modifydate": 1560214610000,
+		"modifyuser": 5
+	},{
+		"linkid": 3,
+		"linktitle": "百度一下",
+		"linkimg": "images/g3.jpg",
+		"linkaddress": "https://www.baidu.com",
+		"modifydate": 1560214610000,
+		"modifyuser": 5
+	},{
+		"linkid": 4,
+		"linktitle": "百度一下",
+		"linkimg": "images/g4.jpg",
+		"linkaddress": "https://www.baidu.com",
+		"modifydate": 1560214610000,
+		"modifyuser": 5
+	},{
+		"linkid": 5,
+		"linktitle": "百度一下",
+		"linkimg": "images/g5.jpg",
+		"linkaddress": "https://www.baidu.com",
+		"modifydate": 1560214610000,
+		"modifyuser": 5
+	},{
+		"linkid": 6,
+		"linktitle": "百度一下",
+		"linkimg": "images/g6.jpg",
+		"linkaddress": "https://www.baidu.com",
+		"modifydate": 1560214610000,
+		"modifyuser": 5
+	},{
+		"linkid": 7,
+		"linktitle": "百度一下",
+		"linkimg": "images/g4.jpg",
+		"linkaddress": "https://www.baidu.com",
+		"modifydate": 1560214610000,
+		"modifyuser": 5
+	},{
+		"linkid": 8,
+		"linktitle": "百度一下",
+		"linkimg": "images/g5.jpg",
+		"linkaddress": "https://www.baidu.com",
+		"modifydate": 1560214610000,
+		"modifyuser": 5
+	},{
+		"linkid": 9,
+		"linktitle": "百度一下",
+		"linkimg": "images/g6.jpg",
+		"linkaddress": "https://www.baidu.com",
+		"modifydate": 1560214610000,
+		"modifyuser": 5
+	}]
+}

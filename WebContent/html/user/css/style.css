@@ -1163,6 +1163,10 @@ input.email {
     color:#eead31;
     text-transform: capitalize;
     letter-spacing: 2px;
+	overflow: hidden; 
+	display: -webkit-box; 
+	-webkit-line-clamp: 1; 
+	-webkit-box-orient: vertical;
 }
 .agileits_services_grid p{
 	overflow: hidden; 
@@ -1235,7 +1239,7 @@ input.email {
 }
 .w3ls_banner_bottom_grids {
     margin-top: 45px;
-	height: 440px;
+	height: 1400px;
 }
 /*-- //services --*/
 /*-- offer --*/
@@ -1252,6 +1256,7 @@ input.email {
     background-attachment: fixed;
     padding: 3em 0;
 	margin-top: 45px;
+	
 }
 .wthree_head1{
 	color:#fff;
@@ -1274,12 +1279,16 @@ input.email {
     color: #eead31;
 	font-weight:600;
     text-transform: capitalize;
+	    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 .agile_offer_grid p.w3_agileits_service_para{
 	margin:1em 0 0;
 	color:#fff;
 	line-height:2em;
-	height: 10em;
+	height: 8em;
 }
 .agileits_w3layouts_offer_grid{
 	position:relative;
@@ -2372,7 +2381,7 @@ button.btn1 {
 	margin-bottom: 20px;
 }
 .agileits_services_grid {
-    padding: 0;
+    padding: 20px;
 }
 .offer {
     padding: 2em 0 0em;
