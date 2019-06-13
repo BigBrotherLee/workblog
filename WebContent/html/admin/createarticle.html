@@ -300,7 +300,7 @@ $(function () {
     //得到全部分类
     $.ajax({
         method:"get",
-        url:"categoty/getall",
+        url:"/workblog/categoty/getall",
         success:function (data) {
             if(data.state!==1){
                 alert(data.message);
@@ -313,7 +313,6 @@ $(function () {
                 str+="<option value='"+c.categotyid+"'>"+c.categotytitle+"</option>";
             }
             ele.append(str);
-
         },
         error:function (data) {
             alert("查询出错");
@@ -370,7 +369,7 @@ $("save-srticle").click(function () {
             formdata.append("articleid",data.data.articleid);
             $.ajax({
                 method:"post",
-                url:"article/addtagstoarticle",
+                url:"/workblog/article/addtagstoarticle",
                 data:formdata,
                 success:function (data) {
                     console.log("添加tag标签成功");
