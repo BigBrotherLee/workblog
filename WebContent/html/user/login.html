@@ -116,13 +116,14 @@
 								toastr.warning("用户名不能为空");
 								return false;
 							}
+					
 							if (password == null || password == ""){
-								$("text").text("密码不能为空");
+								toastr.error("密码不能为空");
 								return false;
 							}
 							$.ajax({
 								method:"post",
-								url:"/user/login",
+								url:"/workblog/user/login",
 								data:{
 									"username":username,
 									"password":password

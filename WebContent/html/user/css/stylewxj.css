@@ -7,6 +7,13 @@
 	padding-top: 25px;
 	overflow: hidden;
 }
+.friend1{
+	margin-right: 0px;
+	margin-left: 0;
+}
+.friend{
+	min-height:650px ;
+}
 .b1{
 	width: 1000px;
 	height: 180px;

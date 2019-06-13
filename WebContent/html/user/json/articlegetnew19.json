@@ -1,0 +1,114 @@
+{
+	"message": "查询成功",
+	"state": 1,
+	"data": {
+		"total": 2,
+		"list": [{
+			"articleid": 1,
+			"authorid": 5,
+			"authorname": "admin",
+			"title": "我爱祖国",
+			"summary": "最成功的一次是和我同事去吃饭，我同事说那边几个妹子挺好看的，\n我顺势看过去是很好看，仔细一看竟然是我女朋友还有她朋友在吃饭，\n他说你去要个微信啊，我说无不无聊，他说要到的话饭我请然后去 KTV 唱歌，\n我说好啊，然后就过去直接给我对象说了一下，就又回到了座位。\n看着我要到的微信，从此同事对我刮目相看，不过他到现在都不知道那是我对象。\n",
+			"categotyname": "测试分类",
+			"categotyid": 1,
+			"createdate": 1560235572000,
+			"img": "images/g10.jpg"
+		}, {
+			"articleid": 2,
+			"authorid": 5,
+			"authorname": "admin",
+			"title": "我爱祖国",
+			"summary": "最成功的一次是和我同事去吃饭，我同事说那边几个妹子挺好看的，\n我顺势看过去是很好看，仔细一看竟然是我女朋友还有她朋友在吃饭，\n他说你去要个微信啊，我说无不无聊，他说要到的话饭我请然后去 KTV 唱歌，\n我说好啊，然后就过去直接给我对象说了一下，就又回到了座位。\n看着我要到的微信，从此同事对我刮目相看，不过他到现在都不知道那是我对象。\n",
+			"categotyname": "测试分类",
+			"categotyid": 1,
+			"createdate": 1560235572000,
+			"img": "images/g10.jpg"
+		},{
+			"articleid": 3,
+			"authorid": 5,
+			"authorname": "admin",
+			"title": "我爱祖国",
+			"summary": "最成功的一次是和我同事去吃饭，我同事说那边几个妹子挺好看的，\n我顺势看过去是很好看，仔细一看竟然是我女朋友还有她朋友在吃饭，\n他说你去要个微信啊，我说无不无聊，他说要到的话饭我请然后去 KTV 唱歌，\n我说好啊，然后就过去直接给我对象说了一下，就又回到了座位。\n看着我要到的微信，从此同事对我刮目相看，不过他到现在都不知道那是我对象。\n",
+			"categotyname": "测试分类",
+			"categotyid": 1,
+			"createdate": 1560235572000,
+			"img": "images/g10.jpg"
+		},{
+			"articleid": 4,
+			"authorid": 5,
+			"authorname": "admin",
+			"title": "我爱祖国",
+			"summary": "最成功的一次是和我同事去吃饭，我同事说那边几个妹子挺好看的，\n我顺势看过去是很好看，仔细一看竟然是我女朋友还有她朋友在吃饭，\n他说你去要个微信啊，我说无不无聊，他说要到的话饭我请然后去 KTV 唱歌，\n我说好啊，然后就过去直接给我对象说了一下，就又回到了座位。\n看着我要到的微信，从此同事对我刮目相看，不过他到现在都不知道那是我对象。\n",
+			"categotyname": "测试分类",
+			"categotyid": 1,
+			"createdate": 1560235572000,
+			"img": "images/g10.jpg"
+		},{
+			"articleid": 5,
+			"authorid": 5,
+			"authorname": "admin",
+			"title": "我爱祖国",
+			"summary": "最成功的一次是和我同事去吃饭，我同事说那边几个妹子挺好看的，\n我顺势看过去是很好看，仔细一看竟然是我女朋友还有她朋友在吃饭，\n他说你去要个微信啊，我说无不无聊，他说要到的话饭我请然后去 KTV 唱歌，\n我说好啊，然后就过去直接给我对象说了一下，就又回到了座位。\n看着我要到的微信，从此同事对我刮目相看，不过他到现在都不知道那是我对象。\n",
+			"categotyname": "测试分类",
+			"categotyid": 1,
+			"createdate": 1560235572000,
+			"img": "images/g10.jpg"
+		},{
+			"articleid": 6,
+			"authorid": 5,
+			"authorname": "admin",
+			"title": "我爱祖国",
+			"summary": "最成功的一次是和我同事去吃饭，我同事说那边几个妹子挺好看的，\n我顺势看过去是很好看，仔细一看竟然是我女朋友还有她朋友在吃饭，\n他说你去要个微信啊，我说无不无聊，他说要到的话饭我请然后去 KTV 唱歌，\n我说好啊，然后就过去直接给我对象说了一下，就又回到了座位。\n看着我要到的微信，从此同事对我刮目相看，不过他到现在都不知道那是我对象。\n",
+			"categotyname": "测试分类",
+			"categotyid": 1,
+			"createdate": 1560235572000,
+			"img": "images/g10.jpg"
+		},{
+			"articleid": 7,
+			"authorid": 5,
+			"authorname": "admin",
+			"title": "我爱祖国",
+			"summary": "最成功的一次是和我同事去吃饭，我同事说那边几个妹子挺好看的，\n我顺势看过去是很好看，仔细一看竟然是我女朋友还有她朋友在吃饭，\n他说你去要个微信啊，我说无不无聊，他说要到的话饭我请然后去 KTV 唱歌，\n我说好啊，然后就过去直接给我对象说了一下，就又回到了座位。\n看着我要到的微信，从此同事对我刮目相看，不过他到现在都不知道那是我对象。\n",
+			"categotyname": "测试分类",
+			"categotyid": 1,
+			"createdate": 1560235572000,
+			"img": "images/g10.jpg"
+		},{
+			"articleid": 8,
+			"authorid": 5,
+			"authorname": "admin",
+			"title": "我爱祖国",
+			"summary": "最成功的一次是和我同事去吃饭，我同事说那边几个妹子挺好看的，\n我顺势看过去是很好看，仔细一看竟然是我女朋友还有她朋友在吃饭，\n他说你去要个微信啊，我说无不无聊，他说要到的话饭我请然后去 KTV 唱歌，\n我说好啊，然后就过去直接给我对象说了一下，就又回到了座位。\n看着我要到的微信，从此同事对我刮目相看，不过他到现在都不知道那是我对象。\n",
+			"categotyname": "测试分类",
+			"categotyid": 1,
+			"createdate": 1560235572000,
+			"img": "images/g10.jpg"
+		},{
+			"articleid": 9,
+			"authorid": 5,
+			"authorname": "admin",
+			"title": "吱吱吱吱吱吱吱吱吱吱吱吱吱吱吱吱吱吱吱吱",
+			"summary": "最成功的一次是和我同事去吃饭，我同事说那边几个妹子挺好看的，\n我顺势看过去是很好看，仔细一看竟然是我女朋友还有她朋友在吃饭，\n他说你去要个微信啊，我说无不无聊，他说要到的话饭我请然后去 KTV 唱歌，\n我说好啊，然后就过去直接给我对象说了一下，就又回到了座位。\n看着我要到的微信，从此同事对我刮目相看，不过他到现在都不知道那是我对象。\n",
+			"categotyname": "测试分类",
+			"categotyid": 1,
+			"createdate": 1559696315000,
+			"img": "images/g9.jpg"
+		}],
+		"pageNum": 1,
+		"pageSize": 9,
+		"size": 2,
+		"startRow": 1,
+		"endRow": 2,
+		"pages": 1,
+		"prePage": 0,
+		"nextPage": 0,
+		"isFirstPage": true,
+		"isLastPage": true,
+		"hasPreviousPage": false,
+		"hasNextPage": false,
+		"navigatePages": 8,
+		"navigatepageNums": [1],
+		"navigateFirstPage": 1,
+		"navigateLastPage": 1
+	}
+}
