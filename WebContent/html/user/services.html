@@ -230,13 +230,13 @@
 					chooserole() {
 						
 						//判断用户的角色	
-						this.$http.get('/user/getme').then(result => {
+						this.$http.get('/workblog/user/getme').then(result => {
 							var result = result.body;
 						});
 					},
 					getNew() {
 						//判断用户的角色	
-						this.$http.get('json/articlegetnew19.json').then(result => {
+						this.$http.get('/workblog/article/getnew').then(result => {
 							var result = result.body;
 							// alert(result);
 							this.newlist=result.data.list;
@@ -245,7 +245,7 @@
 					},
 					getHot() {
 						//判断用户的角色	
-						this.$http.get('json/articlegethot19.json').then(result => {
+						this.$http.get('/workblog/article/gethot').then(result => {
 							var result = result.body;
 							// alert(result);
 							this.hotlist=result.data.list;
