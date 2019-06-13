@@ -177,13 +177,13 @@
 						chooserole() {
 							
 							//判断用户的角色	
-							this.$http.get('/user/getme').then(result => {
+							this.$http.get('/workbolg/user/getme').then(result => {
 								var result = result.body;
 							});
 						},
 						getAll() {
 							//判断用户的角色	
-							this.$http.get('json/categotygetall.json').then(result => {
+							this.$http.get('/workblog/categoty/getall').then(result => {
 								var result = result.body;
 								console.log(result.data);
 								this.categotylist=result.data;
