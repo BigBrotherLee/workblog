@@ -71,7 +71,7 @@ public class TagController {
 	}
 	
 	/**
-	 * 添加标签
+	 * 创建标签
 	 * @param tag 你要添加的标签信息
 	 * @return  成功返回ResponseResult<String> state：1，message：添加成功,data:你添加的标签的json
 	 */

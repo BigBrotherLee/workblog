@@ -102,4 +102,5 @@ public class Article {
 				+ ", commentnum=" + commentnum + ", categoty=" + categoty + ", title=" + title + ", summary=" + summary
 				+ ", state=" + state + ", contentformat=" + contentformat + "]";
 	}
+
 }

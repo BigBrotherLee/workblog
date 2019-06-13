@@ -114,7 +114,7 @@ public class LinkController {
 	 * @param link 你更改后的友链信息
 	 * @return 成功则返回ResponseResult<Link> state：1，message：更新成功，data：你改后的友链信息
 	 */
-	@RequiresPermissions("link:update:*")
+//	@RequiresPermissions("link:update:*")
 	@PutMapping("/update")
 	public ResponseResult<Link> updateLink(Link link){
 		ResponseResult<Link> result =new ResponseResult<Link>();

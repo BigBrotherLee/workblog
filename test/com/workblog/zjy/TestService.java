@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.github.pagehelper.PageInfo;
+import com.sunshareteam.workblog.entity.Article;
 import com.sunshareteam.workblog.entity.ArticleTag;
 import com.sunshareteam.workblog.entity.CommentOne;
 import com.sunshareteam.workblog.entity.CommentTwo;
@@ -84,6 +85,10 @@ public class TestService {
         System.out.println(list);  
     }*/
 	//测试一评
+/*	 @Test
+	   public void test5() {
+	   commentoneService.delete(4);;
+  }*/
 	/* @Test
 	     public void test1() {
 	     CommentOne commentone= commentoneService.getById(4);
@@ -135,7 +140,10 @@ public class TestService {
 	PageInfo<CommentOneVO> list=commentoneService.getByArticleAndUser(0, 1000);
 	System.out.println(list);  
 }*/
-	
+	@Test
+	public void test4() {
+	commenttwoService.deleteCommentTwo(10);;
+	}	
 	//测试二评
 	/*@Test
     public void test1() {

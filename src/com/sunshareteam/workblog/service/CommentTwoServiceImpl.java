@@ -10,14 +10,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sunshareteam.workblog.dao.ArticleMapper;
 import com.sunshareteam.workblog.dao.CommentTwoMapper;
+import com.sunshareteam.workblog.entity.Article;
+import com.sunshareteam.workblog.entity.CommentOne;
 import com.sunshareteam.workblog.entity.CommentTwo;
+import com.sunshareteam.workblog.entity.Commentnum;
 import com.sunshareteam.workblog.web.CommentTwoVO;
 
 @Service("commenttwoService")
 public class CommentTwoServiceImpl implements CommentTwoService {
 	@Autowired
 	private CommentTwoMapper commenttwoMapper;
+	@Autowired
+	private ArticleMapper articleMapper;
 
 	@Override
 	public CommentTwo getById(Integer id) {
@@ -28,7 +34,14 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	@Override
 	@Transactional
 	public void deleteCommentTwo(Integer id) {
+		CommentTwo commenttwo=commenttwoMapper.findById(id);
 		commenttwoMapper.deleteCommentTwo(id);	
+		CommentOne commentone=commenttwoMapper.findArticleId(commenttwo.getOneid());
+		Commentnum commentnum=commenttwoMapper.findArticle(commentone.getArticleid());
+		Article article=new Article();
+		article.setArticleid(commentone.getArticleid());
+		article.setCommentnum(commentnum.getCommentnum()-1);
+		articleMapper.updateArticle(article);
 	}
 
 	@Override
@@ -36,7 +49,13 @@ public class CommentTwoServiceImpl implements CommentTwoService {
 	public void insertCommentTwo(CommentTwo commenttwo) {
 		// TODO Auto-generated method stub
 		commenttwo.setCreatedate(new Date());
+		CommentOne commentone=commenttwoMapper.findArticleId(commenttwo.getOneid());
+		Commentnum commentnum=commenttwoMapper.findArticle(commentone.getArticleid());
 		commenttwoMapper.insertCommentTwo(commenttwo);
+		Article article=new Article();
+		article.setArticleid(commentone.getArticleid());
+		article.setCommentnum(commentnum.getCommentnum()+1);
+		articleMapper.updateArticle(article);
 	}
 
 	@Override

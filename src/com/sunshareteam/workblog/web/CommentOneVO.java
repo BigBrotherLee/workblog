@@ -51,11 +51,11 @@ public class CommentOneVO {
 	}
 	public void setPic(String pic) {
 		this.pic = pic;
-	}
+	}	
 	@Override
 	public String toString() {
 		return "CommentOneVO [comment_one_id=" + comment_one_id + ", pic=" + pic + ", author=" + author + ", title="
-				+ title + ", username=" + username + ", content=" + content + ", createdate=" + createdate + "]";
-	}	
-	
+				+ title + ", username=" + username + ", content=" + content + ", createdate=" + createdate
+				+ "]";
+	}
 }

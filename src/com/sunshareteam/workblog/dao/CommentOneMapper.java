@@ -1,12 +1,14 @@
 package com.sunshareteam.workblog.dao;
 
 import java.util.List;
-
 import com.sunshareteam.workblog.entity.CommentOne;
+import com.sunshareteam.workblog.entity.Commentnum;
+import com.sunshareteam.workblog.entity.CommentnumAll;
 import com.sunshareteam.workblog.web.CommentOneVO;
 
 public interface CommentOneMapper {
-
+       CommentnumAll findCount(Integer commentoneid);
+       Commentnum findArticle(Integer articleid);
 	   CommentOne findById(Integer commentone); //根据ID查询
 	   List<CommentOneVO> findAll();
 	   List<CommentOne> findByKey(String key);

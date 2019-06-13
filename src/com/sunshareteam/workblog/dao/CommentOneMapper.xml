@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunshareteam.workblog.dao.CommentOneMapper">
+	<select id="findArticle" resultType="com.sunshareteam.workblog.entity.Commentnum">
+		select commentnum,articleid from tb_article where articleid=#{articleid}
+	</select>
     <select id="findById" resultType="com.sunshareteam.workblog.entity.CommentOne">
 		select comment_one_id,author,content,createuser,createdate,modifydate,modifyuser,articleid from tb_comment_one where comment_one_id=#{id}
 	</select>
@@ -28,5 +31,8 @@
 	</select>	
 	<select id="findByUserAll" resultType="com.sunshareteam.workblog.entity.CommentOne">
 		select comment_one_id,author,content from tb_comment_one where createuser=#{userid}
+	</select>
+	   <select id="findCount" resultType="com.sunshareteam.workblog.entity.CommentnumAll">
+		select count(ct.comment_two_id) commentnumall from tb_comment_one co,tb_comment_two ct where co.comment_one_id=ct.oneid and co.comment_one_id=#{commentoneid}
 	</select>
 </mapper>

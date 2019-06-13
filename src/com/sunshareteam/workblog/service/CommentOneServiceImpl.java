@@ -9,14 +9,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sunshareteam.workblog.dao.ArticleMapper;
 import com.sunshareteam.workblog.dao.CommentOneMapper;
+import com.sunshareteam.workblog.entity.Article;
 import com.sunshareteam.workblog.entity.CommentOne;
+import com.sunshareteam.workblog.entity.Commentnum;
+import com.sunshareteam.workblog.entity.CommentnumAll;
 import com.sunshareteam.workblog.web.CommentOneVO;
 
 @Service("commentoneService")
 public class CommentOneServiceImpl implements CommentOneService{
 	@Autowired
 	private CommentOneMapper commentoneMapper;
+	@Autowired
+	private ArticleMapper articleMapper;
 
 	@Override
 	public CommentOne getById(Integer id) {
@@ -26,6 +32,13 @@ public class CommentOneServiceImpl implements CommentOneService{
 	@Override
 	@Transactional
 	public void delete(Integer id) {
+		CommentOne commentone=commentoneMapper.findById(id);
+		CommentnumAll commentnumall=commentoneMapper.findCount(id);
+		Commentnum commentnum=commentoneMapper.findArticle(commentone.getArticleid());
+    	Article article=new Article();
+		article.setArticleid(commentone.getArticleid());
+		article.setCommentnum(commentnum.getCommentnum()-(commentnumall.getCommentnumall()+1));
+		articleMapper.updateArticle(article);
 		commentoneMapper.delete(id);
 		commentoneMapper.deleteCommentTwo(id);	//删除一级评论下的二级评论
 	}
@@ -35,6 +48,11 @@ public class CommentOneServiceImpl implements CommentOneService{
 	public void insertCommentOne(CommentOne commentone) {
 		commentone.setCreatedate(new Date());
 		commentoneMapper.insertCommentOne(commentone);	
+		Commentnum commentnum=commentoneMapper.findArticle(commentone.getArticleid());
+		Article article=new Article();
+		article.setArticleid(commentone.getArticleid());
+		article.setCommentnum(commentnum.getCommentnum()+1);
+		articleMapper.updateArticle(article);
 	}
 	
 	@Override

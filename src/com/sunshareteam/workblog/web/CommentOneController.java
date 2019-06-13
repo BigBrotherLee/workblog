@@ -25,7 +25,6 @@ import com.sunshareteam.workblog.service.CommentOneService;
 public class CommentOneController {
 	@Autowired
 	private CommentOneService commentoneService;
-	
 	/**
 	 * 查询一级评论
 	 * @param index 第几页

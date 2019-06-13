@@ -35,4 +35,5 @@ public interface ArticleMapper {
 	List<ArticleVO> findByKeyAll(String key);
 	
 	List<ArticleVO> findByAuthorAll(Integer authorid);
+
 }
