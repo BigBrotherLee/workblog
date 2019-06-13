@@ -9,6 +9,8 @@ public interface ArticleService {
 	void updateArticle(Article article);
 	void delete(Integer id);
 	void insertArticle(Article article);
+	void addTags(Integer articleid,String[] tags);
+	void removeTag(Integer articleid, Integer tagid);
 	PageInfo<ArticleVO> getByKey(String key,int start,int size);
 	PageInfo<ArticleVO> getHot(int start,int size);
 	PageInfo<ArticleVO> getNew(int start,int size);

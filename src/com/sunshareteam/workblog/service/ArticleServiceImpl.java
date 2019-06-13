@@ -11,6 +11,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.dao.ArticleMapper;
 import com.sunshareteam.workblog.entity.Article;
+import com.sunshareteam.workblog.entity.ArticleTag;
+import com.sunshareteam.workblog.entity.Tag;
 import com.sunshareteam.workblog.web.ArticleVO;
 
 @Service("articleService")
@@ -102,6 +104,33 @@ public class ArticleServiceImpl implements ArticleService {
 		PageHelper.startPage(start, size);
 		List<ArticleVO> list=articleMapper.findByAuthor(userid);
 		return new PageInfo<ArticleVO>(list);
+	}
+
+	@Override
+	@Transactional
+	public void addTags(Integer articleid, String[] tags) {
+		ArticleTag articleTag=new ArticleTag();
+		articleTag.setArticleid(articleid);
+		for(String tagname:tags) {
+			Tag tag=articleMapper.findTagByName(tagname);
+			if(tag==null) {
+				tag=new Tag();
+				tag.setCreatedate(new Date());
+				tag.setTagtitle(tagname);
+				articleMapper.insertTag(tag);
+			}
+			articleTag.setTagid(tag.getTagid());
+			articleMapper.insertArticleTag(articleTag);
+		}
+	}
+
+	@Override
+	@Transactional
+	public void removeTag(Integer articleid, Integer tagid) {
+		ArticleTag articleTag=new ArticleTag();
+		articleTag.setArticleid(articleid);
+		articleTag.setTagid(tagid);
+		articleMapper.deleteArtilceTag(articleTag);
 	}
 	
 }

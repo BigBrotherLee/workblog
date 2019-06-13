@@ -3,6 +3,8 @@ package com.sunshareteam.workblog.dao;
 import java.util.List;
 
 import com.sunshareteam.workblog.entity.Article;
+import com.sunshareteam.workblog.entity.ArticleTag;
+import com.sunshareteam.workblog.entity.Tag;
 import com.sunshareteam.workblog.web.ArticleVO;
 
 public interface ArticleMapper {
@@ -19,6 +21,14 @@ public interface ArticleMapper {
 	void deleteCommentTwo(Integer articleid);
 	
 	void deleteTag(Integer articleid);
+	
+	void deleteArtilceTag(ArticleTag articleTag);
+	
+	void insertArticleTag(ArticleTag articleTag);
+	
+	Tag findTagByName(String name);
+	
+	void insertTag(Tag tag);
 	
 	List<ArticleVO> findByKey(String key);
 	

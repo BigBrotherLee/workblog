@@ -20,6 +20,8 @@
 
 		<link href="http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&amp;subset=latin-ext" rel="stylesheet">
 		<link href="http://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+		<script type="text/javascript" src="../static/js/vue.js"></script>
+		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
 	</head>
 
 	<body>
@@ -43,7 +45,7 @@
 								<li><a href="services.html"><span>首页</span></a></li>
 								<li class="active"><a href="gallery.html"><span>分类</span></a></li>
 								<li><a href="friend.html"><span>友链</span></a></li>
-								<li><a href="about.html"><span>关于</span></a>
+								<li><a href="about.html"><span>关于</span></a></li>
 							</ul>
 							<div class="agileinfo_social_icons">
 								<ul class="agileits_social_list">
@@ -58,117 +60,38 @@
 									<li><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">&nbsp&nbsp&nbsp注册</i></a></li>
 								</ul>
 							</div>
+						</nav>
 					</div>
 				</nav>
 			</div>
-			</nav>
-		</div>
 		</div>
 
 		<!-- //banner -->
 		<!-- gallery -->
 
 		<div class="zuida container-fluid">
-			<div class="banxin row">
+			<div class="banxin row" id="app">
 				<div class="tupian fl col-lg-4 col-md-4 visible-lg-block"></div>
 				<div class="fenglei fr col-lg-8 col-md-8">
-					<div class="g1 row">
+					<div v-for="item in categotylist" :key="item.categotyid" class="g1 row">
+						<a href="gallerydetail.html?categotyid=1">
 						<div class="post fl col-md-6">
-							<div class="post-title">做一把尺子，正确衡量时间。</div>
+							<div class="post-title">{{item.categotytitle}}</div>
 							<div class="post-info ">
-								<small>把自己当做一把尺子，去正确地衡量时间，公平地对待时间，方能静待时间给我们最佳的答案。</small>
+								<small>{{item.categotydetail}}</small>
 								<br>
-								<small>1个月前更新
+								<!-- <small>1个月前更新
 									, 1个月前发布
-								</small>
+								</small> -->
 
 							</div>
 						</div>
 						<div class="post-tupian fr col-md-6">
-							<img class="img-responsive" src="images/gtupian.jpg">
+							<img class="img-responsive" :src="item.img">
 						</div>
+						</a>
 					</div>
-					<div class="g1 row">
-						<div class="post fl col-md-6">
-							<div class="post-title">做一把尺子，正确衡量时间。</div>
-							<div class="post-info ">
-								<small>把自己当做一把尺子，去正确地衡量时间，公平地对待时间，方能静待时间给我们最佳的答案。</small>
-								<br>
-								<small>1个月前更新
-									, 1个月前发布
-								</small>
-
-							</div>
-						</div>
-						<div class="post-tupian fr col-md-6">
-							<img class="img-responsive" src="images/gtupian.jpg">
-						</div>
-					</div>
-					<div class="g1 row">
-						<div class="post fl col-md-6">
-							<div class="post-title">做一把尺子，正确衡量时间。</div>
-							<div class="post-info ">
-								<small>把自己当做一把尺子，去正确地衡量时间，公平地对待时间，方能静待时间给我们最佳的答案。</small>
-								<br>
-								<small>1个月前更新
-									, 1个月前发布
-								</small>
-
-							</div>
-						</div>
-						<div class="post-tupian fr col-md-6">
-							<img class="img-responsive" src="images/gtupian.jpg">
-						</div>
-					</div>
-					<div class="g1 row">
-						<div class="post fl col-md-6">
-							<div class="post-title">做一把尺子，正确衡量时间。</div>
-							<div class="post-info ">
-								<small>把自己当做一把尺子，去正确地衡量时间，公平地对待时间，方能静待时间给我们最佳的答案。</small>
-								<br>
-								<small>1个月前更新
-									, 1个月前发布
-								</small>
-
-							</div>
-						</div>
-						<div class="post-tupian fr col-md-6">
-							<img class="img-responsive" src="images/gtupian.jpg">
-						</div>
-					</div>
-					<div class="g1 row">
-						<div class="post fl col-md-6">
-							<div class="post-title">做一把尺子，正确衡量时间。</div>
-							<div class="post-info ">
-								<small>把自己当做一把尺子，去正确地衡量时间，公平地对待时间，方能静待时间给我们最佳的答案。</small>
-								<br>
-								<small>1个月前更新
-									, 1个月前发布
-								</small>
-
-							</div>
-						</div>
-						<div class="post-tupian fr col-md-6">
-							<img class="img-responsive" src="images/gtupian.jpg">
-						</div>
-					</div>
-					<div class="g1 row">
-						<div class="post fl col-md-6">
-							<div class="post-title">做一把尺子，正确衡量时间。</div>
-							<div class="post-info ">
-								<small>把自己当做一把尺子，去正确地衡量时间，公平地对待时间，方能静待时间给我们最佳的答案。</small>
-								<br>
-								<small>1个月前更新
-									, 1个月前发布
-								</small>
-
-							</div>
-						</div>
-						<div class="post-tupian fr col-md-6">
-							<img class="img-responsive" src="images/gtupian.jpg">
-						</div>
-					</div>
-
+					
 				</div>
 			</div>
 		</div>
@@ -206,6 +129,7 @@
 		<!-- start-smoth-scrolling -->
 		<script type="text/javascript" src="js/move-top.js"></script>
 		<script type="text/javascript" src="js/easing.js"></script>
+		<!-- 滚回顶部 -->
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$(".scroll").click(function(event) {
@@ -236,5 +160,85 @@
 			});
 		</script>
 		<!-- //here ends scrolling icon -->
+		
+		<!-- vue.js -->
+			<script type="text/javascript">
+				var vm1 = new Vue({
+					el: '#app',
+					data: {
+						role: true,
+						categotylist: [1,2,3],
+					},
+					created() {
+						this.chooserole();
+						this.getAll();
+					},
+					methods: {
+						chooserole() {
+							
+							//判断用户的角色	
+							this.$http.get('/workblog/user/getme').then(result => {
+								var result = result.body;
+							});
+						},
+						getAll() {
+							//判断用户的角色	
+							this.$http.get('/workblog/categoty/getall?index=1&length=9').then(result => {
+								var result = result.body;
+								console.log(result.data);
+								this.categotylist=result.data;
+								
+							});
+						},
+						
+						changeActive(a) {
+							var myInfoActive = $("#myInfoActive");
+							//					alert(myInfoActive)
+							var changeImgActive = $("#changeImgActive");
+							var myInfo = $("#myInfo"); //基本资料内容
+							var changeImg = $("#changeImg"); //内容
+							//					var a = $("#myInfoActive").hasClass('active');//切换功能
+							if (a) {
+								//显示修改头像
+								myInfoActive.removeClass('active'); //基本资料
+								changeImgActive.addClass('active');
+								myInfo.removeClass('active');
+								changeImg.addClass('active');
+		
+							} else {
+								//显示基本资料
+								myInfoActive.addClass('active');
+								changeImgActive.removeClass('active'); //基本资料
+								myInfo.addClass('active');
+								changeImg.removeClass('active');
+							}
+		
+						},
+						getUserList() { /*http://localhost:8080/WMPX/user/showIndustry*/
+							var t = this.getCookie("token");
+							this.$http.get('/wmpx/user/token/' + t).then(result => {
+								var result = result.body;
+								if (result.status === 200) {
+									this.list1 = result.data;
+									console.log(this.list1);
+								} else {
+									alert("数据连接失败");
+								}
+							});
+						},
+						getRequest() {
+							var url = location.search; //获取url中"?"符后的字串
+							var theRequest = new Object();
+							if (url.indexOf("?") != -1) {
+								var strs = url.substr(1);
+								this.id = strs.split("=")[1];
+							}
+							return theRequest;
+						},
+					}
+				});
+			</script>
+		
+		
 	</body>
 </html>

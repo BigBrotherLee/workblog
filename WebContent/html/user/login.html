@@ -6,15 +6,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="keywords" content="" />
-		<script type="application/x-javascript">
-			addEventListener("load", function() {
-				setTimeout(hideURLbar, 0);
-			}, false);
-
-			function hideURLbar() {
-				window.scrollTo(0, 1);
-			}
-		</script>
 		<!-- //custom-theme -->
 		<link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -27,114 +18,187 @@
 		<link href="../admin/vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
 		<!-- //font-awesome-icons -->
 		<link href="css/stylelht.css" rel="stylesheet" type="text/css" media="all" />
-     <link href="css/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
-		 
-		<link href="http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&amp;subset=latin-ext" rel="stylesheet">
-		<link href="http://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+		<link href="css/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
+		
+		<!-- <link href="http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&amp;subset=latin-ext" rel="stylesheet"> -->
+		<!-- <link href="http://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet"> -->
 	</head>
 	<body>
 		<div class="banner1">
-				<div class="container navdiv">	
-					<nav class="navbar navbar-default">
-						<div class="navbar-header navbar-left">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-							<h1><a class="navbar-brand" href="index.html">WORK <span>BLOG </span></a></h1>
-						</div>
-						<!-- Collect the nav links, forms, and other content for toggling -->
-						<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-							<nav>
-									<ul class="nav navbar-nav link-effect-14" id="link-effect-14">
-										<li ><a href="services.html"><span>首页</span></a></li>
-									<li><a href="gallery.html"><span>分类</span></a></li>
-									<li><a href="friend.html"><span>友链</span></a></li>
-									<li><a href="about.html"><span>关于</span></a>
-									</ul>
-									<div class="tishi fr">
-										<span>还没账号？立即<a href="register.html" class="ts">注册</a></span>
-									</div>
-								</div>
-							</nav>	
-						</div>
-					</nav>
-				</div>
+			<div class="container navdiv">
+				<nav class="navbar navbar-default">
+					<div class="navbar-header navbar-left">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<h1><a class="navbar-brand" href="index.html">WORK <span>BLOG </span></a></h1>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+						<nav>
+							<ul class="nav navbar-nav link-effect-14" id="link-effect-14">
+								<li class="active"><a href="services.html"><span>首页</span></a></li>
+								<li><a href="gallery.html"><span>分类</span></a></li>
+								<li><a href="friend.html"><span>友链</span></a></li>
+								<li><a href="about.html"><span>关于</span></a></li>
+							</ul>
+							<div class="agileinfo_social_icons">
+								<ul class="agileits_social_list">
+									<li>
+										<input type="text" class="form-control" placeholder="搜索...">
+									</li>
+									<li><span class="input-group-btn1">
+											<button class="btn btn-default btn2" type="button">搜索</button>
+										</span>
+									</li>
+									<li v-show="role"><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">&nbsp&nbsp&nbsp登录</i></a></li>
+									<li v-show="role"><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">&nbsp&nbsp&nbsp注册</i></a></li>
+									<li v-show="role"><a href="../admin/index.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">&nbsp&nbsp&nbsp用户名</i></a></li>
+									<li v-show="role"><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">&nbsp&nbsp&nbsp退出</i></a></li>
+								</ul>
+							</div>
+						</nav>
+					</div>
+				</nav>
 			</div>
-					<div class="dlzuida">
-						<div class="dlleft fl">
-							<img src="images/book.jpg">
-						</div>
-						<div class="dl fr">
-							<div class="login-li">
-								<div class="login-top">用户登录</div>
-								<div class="login-z">
-									<div class="login-neirong fr">
-										<div class="login-form">
+		</div>
+		<div class="dlzuida">
+			<div class="dlleft fl">
+				<img src="images/book.jpg">
+			</div>
+			<div class="dl fr">
+				<div class="login-li">
+					<div class="login-top">用户登录</div>
+					<div class="login-z">
+						<div class="login-neirong fr">
+							<div class="login-form">
 
-											<dl>
-												<dt>账&nbsp;&nbsp;&nbsp;号：</dt>
-												<dd>
-													<input type="text" class="text" autocomplete="off" name="user_name" tipmsg="用户名/邮箱" placeholder="用户名/邮箱" style="float:right;">
-												</dd>
-											</dl>
-										</div>
+								<dl>
+									<dt>账&nbsp;&nbsp;&nbsp;号：</dt>
+									<dd>
+										<input type="text" class="text" autocomplete="off" name="user_name" tipmsg="用户名/邮箱" placeholder="用户名/邮箱"
+										 style="float:right;">
+									</dd>
+								</dl>
+							</div>
 
-										<div class="login-form">
-											<dl>
-												<dt>密&nbsp;&nbsp;&nbsp;码：</dt>
-												<dd>
-													<input type="password" class="text" name="password" autocomplete="off" tipMsg="6-20个大小写英文字母和数字" placeholder="6-20个大小写英文字母和数字"
-													 style="float:right;">
-												</dd>
-											</dl>	
-											</div>
-								         <div class="forgetmima">
-													 <a href="reset.html" >忘记密码？</a>
-												 </div>	
-												<div class="login-btn">
+							<div class="login-form">
+								<dl>
+									<dt>密&nbsp;&nbsp;&nbsp;码：</dt>
+									<dd>
+										<input type="password" class="text" name="password" autocomplete="off" tipmsg="6-20个大小写英文字母和数字" placeholder="6-20个大小写英文字母和数字"
+										 style="float:right;">
+									</dd>
+								</dl>
+							</div>
+							<div class="forgetmima">
+								<a href="reset.html">忘记密码？</a>
+							</div>
+							<div class="login-btn">
 
-                       <input type="button" class="submit" value="登&nbsp;&nbsp;&nbsp;录">
-
-												</div>
-
-									</div>
-								</div>
+								<input type="button" class="submit" value="登&nbsp;&nbsp;&nbsp;录">
 
 							</div>
+
 						</div>
 					</div>
-					<script type="text/javascript">
-						$(".submit").click(function(){
-							var username=$("input[name='user_name']").val();
-							var password=$("input[name='password']").val();
-							// 校验
-							// console.log("===============");
-							if (username == null || username ==""){
-								toastr.warning("用户名不能为空");
-								return false;
-							}
-							if (password == null || password == ""){
-								$("text").text("密码不能为空");
-								return false;
-							}
-							$.ajax({
-								method:"post",
-								url:"/user/login",
-								data:{
-									"username":username,
-									"password":password
-								},
-								success:function(result){
-									
-								},
-								error:function(result){
-									
+
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			username = $("input[name='user_name']").val();
+			password = $("input[name='password']").val();
+
+			$("input[name='user_name']").blur(function() {
+				// ^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$  邮箱正则表达式
+				var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/; // 所有包含一个以上的字母、数字或下划线的字符串
+				if (reg.test(username)) {
+					return;
+				} else {
+					toastr.error("用户名/邮箱格式不正确");
+				}
+
+				$.ajax({
+					method: "post",
+					url: "/workblog/user/checkuser",
+					data: {
+						"name": username,
+					},
+					success: function(result) {
+						toastr.success("用户名可用");
+					},
+					error: function(result) {
+						toastr.error("该用户名不存在");
+					}
+				});
+			});
+
+			$("input[name='password']").blur(function() {
+
+
+				// var reg = /^[a-zA-Z0-9]{6,16}$/;      // 所有包含一个以上的字母、数字或下划线的字符串
+				alert(password);
+				// alert((/^[a-zA-Z0-9]{6,16}$/).test("123456"));
+				if ((/^[a-zA-Z0-9]{6,16}$/).test(password) || (/([^\s]{2,6})/g).test(password)) {
+					return;
+				} else {
+					toastr.error("密码格式不正确");
+				}
+			});
+
+			$(".submit").click(function() {
+				alert(password + "--------------");
+				// 校验
+				// console.log("===============");
+				if (username == null || username == "") {
+					toastr.warning("用户名不能为空");
+					return false;
+				}
+
+				if (password == null || password == "") {
+					toastr.error("密码不能为空");
+					return false;
+				}
+				$.ajax({
+					method: "post",
+					url: "/workblog/user/login",
+					data: {
+						"username": username,
+						"password": password
+					},
+					success: function(result) {
+						$.ajax({
+							method: "post",
+							url: "/workblog/user/getme",
+							data: {
+								"username": username,
+								"password": password
+							},
+							success: function(result) {
+								for(let i of result.roles){
+									if(i.roleid==1 || i.roleid==2){
+										window.location.href="index.html";
+									}else if(i.roleid==3){
+										window.location.href="../aadmin/superadmin.html";
+									}else{
+										toastr.error("哦吼，出错了~");
+									}
 								}
-							});
+							},
+							error: function(result) {
+								toastr.error("哦吼，出错了~");
+							}
 						});
-					</script>
+					},
+					error: function(result) {
+
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
