@@ -84,8 +84,7 @@
 								<div class="w3_blur"></div>
 							</div>
 							<div class="w3layouts_more">
-								<a href="article.html" data-toggle="modal" data-target="#myModal">了解更多<i class="fa fa-long-arrow-right"
-									 aria-hidden="true"></i></a>
+								<a :href="'article.html?articleid='+item.articleid">文章详情<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
 							</div>
 						</div>
 					</div>
@@ -100,6 +99,7 @@
 						</div>
 						<div class="w3ls_banner_bottom_grids lht4">
 							<div v-for="item in hotlist" :key="item.articleid" class="col-md-4 agile_offer_grid lht2">
+								<a :href="'article.html?articleid='+item.articleid">
 								<div class="agileits_w3layouts_offer_grid">
 									<div class="agile_offer_grid_pos">
 										<p>{{item.articleid}}</p>
@@ -109,6 +109,7 @@
 									<h4>{{item.title}}</h4>
 									<p class="w3_agileits_service_para lht5">{{item.summary}}</p>
 								</div>
+								</a>
 							</div>
 						
 							<div class="clearfix"> </div>
@@ -122,8 +123,7 @@
 			<div class="copy-right-grids" style="margin-top: 10px;">
 				<div>
 					<div class="copy-left">
-						<p class="footer-gd">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 浅行博客 模板来自 <a href="http://www.cssmoban.com/"
-							 target="_blank" title="模板之家">模板之家</a><a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+						<p class="footer-gd">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 浅行博客 模板来自 </p>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -195,7 +195,6 @@
 						//判断用户的角色	
 						this.$http.get('/workblog/article/getnew?index=1&length=9').then(result => {
 							var result = result.body;
-							alert(result);
 							this.newlist=result.data.list;
 							
 						});
@@ -203,7 +202,7 @@
 					getHot() {
 						//判断用户的角色	
 						this.$http.get('/workblog/article/gethot?index=1&length=9').then(result => {
-							// var result = result.body;
+							var result = result.body;
 							// alert(result);
 							this.hotlist=result.data.list;
 							

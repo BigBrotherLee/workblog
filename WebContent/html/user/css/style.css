@@ -1163,7 +1163,7 @@ input.email {
     color:#eead31;
     text-transform: capitalize;
     letter-spacing: 2px;
-	overflow: hidden; 
+	/* overflow: hidden; */ 
 	display: -webkit-box; 
 	-webkit-line-clamp: 1; 
 	-webkit-box-orient: vertical;
