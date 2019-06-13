@@ -116,11 +116,12 @@
 				var password = $("input[name='password']").val();				
 				
 				var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/; // 所有包含一个以上的字母、数字或下划线的字符串
-				if (!reg.test(username)) {
+				var isUsernameFormat=reg.test(username)|| (/([^\s]{2,6})/g).test(username)
+				if (!isUsernameFormat) {
 					toastr.error("用户名/邮箱格式不正确");
 					return;
 				}
-				var isPasswordFormat=(/^[a-zA-Z0-9]{6,16}$/).test(password) || (/([^\s]{2,6})/g).test(password);
+				var isPasswordFormat=(/^[a-zA-Z0-9]{6,16}$/).test(password) ;
 				if (!isPasswordFormat) {
 					toastr.error("密码格式不正确");
 					return;
