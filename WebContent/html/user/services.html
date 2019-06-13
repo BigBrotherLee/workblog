@@ -236,8 +236,8 @@
 					},
 					getNew() {
 						//判断用户的角色	
-						this.$http.get('/workblog/article/getnew').then(result => {
-							var result = result.body;
+						this.$http.get('/workblog/article/getnew?index=1&length=9').then(result => {
+							// var result = result.body;
 							// alert(result);
 							this.newlist=result.data.list;
 							
@@ -245,8 +245,8 @@
 					},
 					getHot() {
 						//判断用户的角色	
-						this.$http.get('/workblog/article/gethot').then(result => {
-							var result = result.body;
+						this.$http.get('/workblog/article/gethot?index=1&length=9').then(result => {
+							// var result = result.body;
 							// alert(result);
 							this.hotlist=result.data.list;
 							
