@@ -142,10 +142,22 @@
 				var username = $("input[name='user_name']").val();
 				var isUsernameFormat1= (/([^\s]{2,6})/g).test(username);
 				if(!isUsernameFormat1){
-					toastr.error("用户名不正确");
-				
+					toastr.error("用户名格式不正确");
 					return;
-					
+				}else{
+					$.ajax({
+						method:"post",
+						url:"/workblog/user/register",
+						data:{
+							"username":username,
+						},
+						success:function(result){
+							toastr.error("用户名不可用")
+						},
+						error:function(result){
+							toastr.error("用户名可用")
+						}
+					});
 				}
 			});
 			$(".password1").blur(function(){
