@@ -45,22 +45,10 @@
 								<li><a href="friend.html"><span>友链</span></a></li>
 								<li><a href="about.html"><span>关于</span></a></li>
 							</ul>
-							<div class="agileinfo_social_icons">
-								<ul class="agileits_social_list">
-									<li>
-										<input type="text" class="form-control" placeholder="搜索...">
-									</li>
-									<li><span class="input-group-btn1">
-											<button class="btn btn-default btn2" type="button">搜索</button>
-										</span>
-									</li>
-									<li v-show="role"><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">&nbsp&nbsp&nbsp登录</i></a></li>
-									<li v-show="role"><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">&nbsp&nbsp&nbsp注册</i></a></li>
-									<li v-show="role"><a href="../admin/index.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">&nbsp&nbsp&nbsp用户名</i></a></li>
-									<li v-show="role"><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">&nbsp&nbsp&nbsp退出</i></a></li>
-								</ul>
-							</div>
-						</nav>
+							<div class="tishi fr">
+								<span>没有账号，点此<a href="register.html" class="ts">注册</a></span>
+							</div>	
+							</nav>
 					</div>
 				</nav>
 			</div>
@@ -114,7 +102,6 @@
 			$(".submit").click(function() {
 				var username = $("input[name='user_name']").val();
 				var password = $("input[name='password']").val();				
-				
 				var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/; // 所有包含一个以上的字母、数字或下划线的字符串
 				var isUsernameFormat=reg.test(username)|| (/([^\s]{2,6})/g).test(username)
 				if (!isUsernameFormat) {

@@ -1163,7 +1163,6 @@ input.email {
     color:#eead31;
     text-transform: capitalize;
     letter-spacing: 2px;
-	overflow: hidden; 
 	display: -webkit-box; 
 	-webkit-line-clamp: 1; 
 	-webkit-box-orient: vertical;
@@ -1239,7 +1238,7 @@ input.email {
 }
 .w3ls_banner_bottom_grids {
     margin-top: 45px;
-	height: 1400px;
+	height: 1500px;
 }
 /*-- //services --*/
 /*-- offer --*/
