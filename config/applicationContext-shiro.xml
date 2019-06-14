@@ -20,7 +20,7 @@
 		<property name="loginUrl" value="/user/login" />
 		<property name="successUrl" value="/html/user/services.html"></property>
 		<!-- 通过unauthorizedUrl指定没有权限操作时跳转页面 -->
-		<property name="unauthorizedUrl" value="/refuse.jsp" />
+		<property name="unauthorizedUrl" value="/refuse.html" />
 		<!-- 自定义filter配置 -->
 		<property name="filters">
 			<map>
