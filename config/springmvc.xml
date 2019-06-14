@@ -29,8 +29,8 @@
 
 	<!-- 配置视图处理器 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
-		<property name="prefix" value="/html/"></property>  
-        <property name="suffix" value=".html"></property>  
+		<!-- <property name="prefix" value="/html/"></property>  
+        <property name="suffix" value=".html"></property>   -->
 	</bean>
 
 	<!-- 多部件视图解析器 -->
