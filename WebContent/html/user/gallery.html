@@ -185,7 +185,6 @@
 							//判断用户的角色	
 							this.$http.get('/workblog/categoty/getall?index=1&length=9').then(result => {
 								var result = result.body;
-								console.log(result.data);
 								this.categotylist=result.data;
 								
 							});

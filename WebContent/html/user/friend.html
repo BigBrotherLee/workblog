@@ -116,7 +116,6 @@
 							//判断用户的角色	
 							this.$http.get('/workblog/link/getall?index=1&length=1000').then(result => {
 								var result = result.body;
-								console.log(result.data);
 								this.linklist=result.data.list;
 								
 							});
