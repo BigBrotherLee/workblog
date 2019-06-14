@@ -26,7 +26,8 @@
 		<link href="../admin/vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
 		<!-- //font-awesome-icons -->
 		<link href="css/stylelht.css" rel="stylesheet" type="text/css" media="all" />
-
+		<script type="text/javascript" src="js/toastr.min.js"></script>
+		<link href="css/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&amp;subset=latin-ext" rel="stylesheet">
 		<link href="http://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
 	</head>
@@ -75,7 +76,7 @@
 													<dl>
 														<dt>邮&nbsp;&nbsp;&nbsp;箱：</dt>
 														<dd>
-															<input type="text" class="text" autocomplete="off" name="user_name" tipmsg="输入验证的邮箱" placeholder="输入验证的邮箱"
+															<input type="text" class="text email_reset" autocomplete="off" name="email_name" tipmsg="输入验证的邮箱" placeholder="输入验证的邮箱"
 															 style="float:right;">
 														</dd>
 													</dl>
@@ -87,7 +88,7 @@
 													<dl>
 														<dt>输&nbsp;入&nbsp;验&nbsp;证&nbsp;码：</dt>
 														<dd>
-															<input type="text" class="text" autocomplete="off" name="user_name" tipmsg="输入邮箱中收到的验证码" placeholder="输入邮箱中收到的验证码"
+															<input type="text" class="text code-reset" autocomplete="off" name="code_name" tipmsg="输入邮箱中收到的验证码" placeholder="输入邮箱中收到的验证码"
 															 style="float:right;">
 														</dd>
 													</dl>
@@ -96,7 +97,7 @@
 													<dl>
 														<dt>新&nbsp;密&nbsp;码：</dt>
 														<dd>
-															<input type="text" class="text1" name="password" autocomplete="off" tipMsg="6-20个大小写英文字母或数字" placeholder="6-20个大小写英文字母或数字"
+															<input type="text" class="text password1" name="password1" autocomplete="off" tipMsg="6-20个大小写英文字母或数字" placeholder="6-20个大小写英文字母或数字"
 															 style="float:right;">
 														</dd>
 													</dl>
@@ -105,13 +106,13 @@
 													<dl>
 														<dt>确&nbsp;认&nbsp;新&nbsp;密&nbsp;码：</dt>
 														<dd>
-															<input type="password" class="text" name="password" autocomplete="off" tipMsg="6-20个大小写英文字母或数字" placeholder="6-20个大小写英文字母或数字"
+															<input type="password" class="text password2" name="password2" autocomplete="off" tipMsg="6-20个大小写英文字母或数字" placeholder="6-20个大小写英文字母或数字"
 															 style="float:right;">
 														</dd>
 													</dl>
 												</div>
 												<div class="reset-anniu fl">
-															<input type="submit" class="submit" value="确认">
+															<input type="submit" class="submit1 confirm" value="确认">
 												</div>
 												
 											</div>
@@ -124,6 +125,98 @@
 		</div>
 		
 		<!-- //login -->		
-
+<script type="text/javascript">
+		var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+		var reg1 = /^[a-zA-Z0-9]{6,16}$/;
+		$(".email_reset").blur(function(){
+			var email_name = $("input[name='email_name']").val();
+			if (!reg.test(email_name)) {
+				toastr.error("邮箱格式不正确");
+				return;
+				}
+		});
+		$(".submit").click(function() {
+		var email_name = $("input[name='email_name']").val();
+		if (!reg.test(email_name)) {
+			    toastr.error("邮箱格式不正确");
+					return;
+			}else if(email_name==null || email_name==""){
+				  toastr.error("邮箱格式不正确");
+			}else{
+				$.ajax({
+					method: "get",
+					url: "/workblog/user/getemailcode",
+					data: {
+						"email": email_name
+					},
+					success: function(result) {
+						toastr.error("请注意查收验证码");
+						return;
+					},
+					error: function(result) {
+				      toastr.error("哦吼，出错了~");
+					}
+				});
+			}
+		});
+			$(".password1").blur(function(){
+			var password1 = $("input[name='password1']").val();
+			var isPasswordFormat=reg1.test(password1) ;
+			if (!isPasswordFormat) {
+				toastr.error("密码格式不正确");
+				return;
+			}		
+		});
+		$(".password2").blur(function(){
+			var password2 = $("input[name='password2']").val();
+			var password1 = $("input[name='password1']").val();
+			var isPasswordFormat=reg1.test(password1) ;
+			var isPasswordFormat1=reg1.test(password2) ;
+			if (password1!=password2) {
+				toastr.error("两次密码不一致");
+				return;
+			}		
+		});
+		$(".confirm").click(function(){
+			var email_name = $("input[name='email_name']").val();
+			var password1 = $("input[name='password1']").val();
+			var password2 = $("input[name='password2']").val();
+			var code_name = $("input[name='code_name']").val();
+			var isPasswordFormat1=reg1.test(password2) ;
+			var isPasswordFormat=reg1.test(password1) ;
+				if (!reg.test(email_name)) {
+					toastr.error("邮箱格式不正确");
+					return;
+				}
+				if(code_name == null || code_name== ""){
+					toastr.error("	验证码不能为空！");
+					return;
+					}
+				if (!isPasswordFormat) {
+				toastr.error("密码格式不正确");
+				return;
+				}
+			if (password1!=password2) {
+				toastr.error("两次密码不一致");
+				return;
+			}		
+			
+				$.ajax({
+					method:"post",
+					url:"/workblog/user/resetPassword",
+					data:{
+						"password":password1,
+						"code":code_name
+					},
+					success:function(result){
+						if(result.state===1){
+						window.location.href="login.html";
+						}else{
+							toastr.erro("哦吼，出错了~");
+						}
+					},
+				});
+		});
+</script>
 	</body>
 </html>
