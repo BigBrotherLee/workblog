@@ -21,6 +21,8 @@
 		<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
 		<!-- js -->
 		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/toastr.min.js"></script>
+		<link href="css/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
 		<script type="text/javascript" src="js/jquery.wmuSlider.js"></script><!-- //js -->
 		<!-- font-awesome-icons -->
 		<link href="../admin/vendor/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -32,36 +34,36 @@
 	</head>
 	<body>
 		<div class="banner1">
-				<div class="container navdiv">	
-					<nav class="navbar navbar-default">
-						<div class="navbar-header navbar-left">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-							<h1><a class="navbar-brand" href="index.html">WORK <span>BLOG </span></a></h1>
-						</div>
-						<!-- Collect the nav links, forms, and other content for toggling -->
-						<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-							<nav>
-									<ul class="nav navbar-nav link-effect-14" id="link-effect-14">
-										<li ><a href="services.html"><span>首页</span></a></li>
-									<li><a href="gallery.html"><span>分类</span></a></li>
-									<li><a href="friend.html"><span>友链</span></a></li>
-									<li ><a href="about.html"><span>关于</span></a>
-									</ul>
-									<div class="tishi fr">
-																<span>我已经注册,现在就<a href="login.html" class="ts">登录</a></span>
-															</div>
-								</div>
-							</nav>	
-						</div>
-					</nav>
-				</div>
+			<div class="container navdiv">
+				<nav class="navbar navbar-default">
+					<div class="navbar-header navbar-left">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<h1><a class="navbar-brand" href="index.html">WORK <span>BLOG </span></a></h1>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+						<nav>
+							<ul class="nav navbar-nav link-effect-14" id="link-effect-14">
+								<li><a href="services.html"><span>首页</span></a></li>
+								<li><a href="gallery.html"><span>分类</span></a></li>
+								<li><a href="friend.html"><span>友链</span></a></li>
+								<li><a href="about.html"><span>关于</span></a>
+							</ul>
+							<div class="tishi fr">
+								<span>我已经注册,现在就<a href="login.html" class="ts">登录</a></span>
+							</div>
+					</div>
+				</nav>
 			</div>
-		
+			</nav>
+		</div>
+		</div>
+
 		<!-- login <-->
 		<!-- 账户名 密码  确认密码 邮箱 验证码 点击发送验证码 注册 -->
 		<div class="zczuida">
@@ -74,58 +76,58 @@
 							<!-- <form action="" method=""> -->
 
 
-								<div class="login-form">
+							<div class="login-form">
 
-									<dl>
-										<dt>账&nbsp;&nbsp;&nbsp;号：</dt>
-										<dd>
-											<input type="text" class="text" autocomplete="off" name="user_name" tipmsg="用户名/邮箱" placeholder="用户名/邮箱"
-											 style="float:right;">
-										</dd>
-									</dl>
-								</div>
-								<div class="login-form">
-									<dl>
-										<dt>密&nbsp;&nbsp;&nbsp;码：</dt>
-										<dd>
-											<input type="password" class="text" name="password" autocomplete="off" tipMsg="6-20个大小写英文字母或数字" placeholder="6-20个大小写英文字母或数字"
-											 style="float:right;">
-										</dd>
-									</dl>
-								</div>
-								<div class="login-form">
-									<dl>
-										<dt>确&nbsp;认&nbsp;密&nbsp;码：</dt>
-										<dd>
-											<input type="password" class="text" name="password" autocomplete="off" tipMsg="6-20个大小写英文字母或数字" placeholder="6-20个大小写英文字母或数字"
-											 style="float:right;">
-										</dd>
-									</dl>
-								</div>
-								<div class="login-form">
-									<dl>
-										<dt>邮&nbsp;&nbsp;箱：</dt>
-										<dd>
-											<input type="text" class="text" autocomplete="off" name="user_name" tipmsg="输入邮箱" placeholder="输入邮箱" style="float:right;">
-										</dd>
-									</dl>
-								</div>
-								<div class="tiptext" id="sms_text">确保上方邮箱输入正确，点击<span><a class="btn btn-warning btn-large" href="">发送邮箱验证</a></span>，并将您邮箱所接收到的“6位动态码”输入到下方邮箱验证，再提交下一步。
-								</div>
-								<div class="login-form">
-									<dl>
-										<dt>验&nbsp;&nbsp;证&nbsp;&nbsp;码：</dt>
-										<dd>
-											<input type="text" class="text" autocomplete="off" name="user_name" tipmsg="输入验证码" placeholder="输入验证码" style="float:right;">
-										</dd>
-									</dl>
-								</div>
-								<div class="register-btn">
+								<dl>
+									<dt>账&nbsp;&nbsp;&nbsp;号：</dt>
+									<dd>
+										<input type="text" class="text nubname" autocomplete="off" name="user_name" tipmsg="用户名/邮箱" placeholder="用户名/邮箱"
+										 style="float:right;">
+									</dd>
+								</dl>
+							</div>
+							<div class="login-form">
+								<dl>
+									<dt>密&nbsp;&nbsp;&nbsp;码：</dt>
+									<dd>
+										<input type="password" class="text password1" name="password1" autocomplete="off" tipMsg="6-20个大小写英文字母或数字" placeholder="6-20个大小写英文字母或数字"
+										 style="float:right;">
+									</dd>
+								</dl>
+							</div>
+							<div class="login-form">
+								<dl>
+									<dt>确&nbsp;认&nbsp;密&nbsp;码：</dt>
+									<dd>
+										<input type="password" class="text password2" name="password2" autocomplete="off" tipMsg="6-20个大小写英文字母或数字" placeholder="6-20个大小写英文字母或数字"
+										 style="float:right;">
+									</dd>
+								</dl>
+							</div>
+							<div class="login-form">
+								<dl>
+									<dt>邮&nbsp;&nbsp;箱：</dt>
+									<dd>
+										<input type="text" class="text email_register" autocomplete="off" name="email_name" tipmsg="输入邮箱" placeholder="输入邮箱" style="float:right;">
+									</dd>
+								</dl>
+							</div>
+							<div class="tiptext" id="sms_text">确保上方邮箱输入正确，点击<span><a class="btn btn-warning btn-large send_btn">发送邮箱验证</a></span>，并将您邮箱所接收到的“6位动态码”输入到下方邮箱验证，再提交下一步。
+							</div>
+							<div class="login-form">
+								<dl>
+									<dt>验&nbsp;&nbsp;证&nbsp;&nbsp;码：</dt>
+									<dd>
+										<input type="text" class="text" autocomplete="off" name="code_name" tipmsg="输入验证码" placeholder="输入验证码" style="float:right;">
+									</dd>
+								</dl>
+							</div>
+							<div class="register-btn">
 
-									<input type="submit" class="submit" value="下&nbsp;&nbsp;&nbsp;一&nbsp;&nbsp;&nbsp;步">
+								<input type="submit" class="submit" name="next_btn" value="下&nbsp;&nbsp;&nbsp;一&nbsp;&nbsp;&nbsp;步">
 
-								</div>
-					<!-- 		</form> -->
+							</div>
+							<!-- 		</form> -->
 						</div>
 					</div>
 				</div>
@@ -133,6 +135,120 @@
 		</div>
 
 		<!-- //login -->
-
+		<script type="text/javascript">
+			var reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+			var reg1 = /^[a-zA-Z0-9]{6,16}$/;
+			$(".nubname").blur(function(){
+				var username = $("input[name='user_name']").val();
+				var isUsernameFormat1= (/([^\s]{2,6})/g).test(username);
+				if(!isUsernameFormat1){
+					toastr.error("用户名不正确");
+				
+					return;
+					
+				}
+			});
+			$(".password1").blur(function(){
+				var password1 = $("input[name='password1']").val();
+				var isPasswordFormat=reg1.test(password1) ;
+				if (!isPasswordFormat) {
+					toastr.error("密码格式不正确");
+					return;
+				}		
+			});
+			$(".password2").blur(function(){
+				var password2 = $("input[name='password2']").val();
+				var password1 = $("input[name='password1']").val();
+				var isPasswordFormat=reg1.test(password1) ;
+				var isPasswordFormat1=reg1.test(password2) ;
+				if (password1!=password2) {
+					toastr.error("两次密码不一致");
+					return;
+				}		
+			});
+			$(".email_register").blur(function(){
+					var email_name = $("input[name='email_name']").val();
+				if (!reg.test(email_name)) {
+					toastr.error("邮箱格式不正确");
+					return;
+				}
+			})
+			$(".send_btn").click(function() {
+			var email_name = $("input[name='email_name']").val();
+			if (!reg.test(email_name)) {
+				    toastr.error("邮箱格式不正确");
+						return;
+				}else if(email_name==null || email_name==""){
+					  toastr.error("邮箱格式不正确");
+				}else{
+					$.ajax({
+						method: "get",
+						url: "/user/getemailcode",
+						data: {
+							"email": email_name
+						},
+						success: function(result) {
+							toastr.error("请注意查收验证码");
+							return;
+						},
+						error: function(result) {
+					      toastr.error("哦吼，出错了~");
+						}
+					});
+				}
+			});
+			$(".submit").click(function(){
+				var username = $("input[name='user_name']").val();
+				var email_name = $("input[name='email_name']").val();
+				var password1 = $("input[name='password1']").val();
+				var password2 = $("input[name='password2']").val();
+				var code_name = $("input[name='code_name']").val();
+				var email_name = $("input[name='email_name']").val();
+				console.log(username);
+				var isPasswordFormat1=reg1.test(password2) ;
+				var isUsernameFormat1= (/([^\s]{2,6})/g).test(username);
+				var isPasswordFormat=reg1.test(password1) ;
+				if(!isUsernameFormat1){
+					toastr.error("用户名不正确");
+					return;
+				}
+				if (!isPasswordFormat) {
+					toastr.error("密码格式不正确");
+					return;
+					}
+				if (password1!=password2) {
+					toastr.error("两次密码不一致");
+					return;
+				}		
+				if (!reg.test(email_name)) {
+					toastr.error("邮箱格式不正确");
+					return;
+				}
+				if(code_name == null || code_name== ""){
+					toastr.error("	验证码不能为空！");
+					return;
+					}
+				$.ajax({
+					method:"post",
+					url:"/user/register",
+					data:{
+						"username":username,
+						"password":password1,
+						"email":email_name,
+						"code":code_name
+					},
+					success:function(result){
+						if(result.state===1){
+						window.location.href="login.html";
+						}else{
+							toastr.erro("哦吼，出错了~");
+						}
+					},
+					error:function(){
+						toastr.erro("哦吼，出错了~");
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
