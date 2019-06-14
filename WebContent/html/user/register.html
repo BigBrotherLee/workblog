@@ -81,7 +81,7 @@
 								<dl>
 									<dt>账&nbsp;&nbsp;&nbsp;号：</dt>
 									<dd>
-										<input type="text" class="text nubname" autocomplete="off" name="user_name" tipmsg="用户名/邮箱" placeholder="用户名/邮箱"
+										<input type="text" class="text nubname" autocomplete="off" name="user_name" tipmsg="用户名" placeholder="用户名"
 										 style="float:right;">
 									</dd>
 								</dl>
@@ -183,7 +183,7 @@
 				}else{
 					$.ajax({
 						method: "get",
-						url: "/user/getemailcode",
+						url: "/workblog/user/getemailcode",
 						data: {
 							"email": email_name
 						},
@@ -230,7 +230,7 @@
 					}
 				$.ajax({
 					method:"post",
-					url:"/user/register",
+					url:"/workblog/user/register",
 					data:{
 						"username":username,
 						"password":password1,
