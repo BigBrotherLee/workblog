@@ -147,9 +147,9 @@
 				}else{
 					$.ajax({
 						method:"post",
-						url:"/workblog/user/register",
+						url:"/workblog/user/checkname",
 						data:{
-							"username":username,
+							"name":username,
 						},
 						success:function(result){
 							toastr.error("用户名不可用")
@@ -192,6 +192,21 @@
 						return;
 				}else if(email_name==null || email_name==""){
 					  toastr.error("邮箱格式不正确");
+				}else if{
+						$.ajax({
+							method:"get",
+							url: "/workblog/user/getemail",
+							data:{
+								"email":email_name
+							},
+							success: function(result) {
+								toastr.error("邮箱已注册");
+								return;
+							},
+							error: function(result) {
+							    toastr.error("邮箱可用");
+							}
+						});
 				}else{
 					$.ajax({
 						method: "get",
@@ -216,7 +231,6 @@
 				var password2 = $("input[name='password2']").val();
 				var code_name = $("input[name='code_name']").val();
 				var email_name = $("input[name='email_name']").val();
-				console.log(username);
 				var isPasswordFormat1=reg1.test(password2) ;
 				var isUsernameFormat1= (/([^\s]{2,6})/g).test(username);
 				var isPasswordFormat=reg1.test(password1) ;
