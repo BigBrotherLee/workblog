@@ -9,7 +9,7 @@
 		<!-- //custom-theme -->
 		<link href="../static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-		<link rel="stylesheet" type="text/css" href="css/stylewxj.css"/>
+		<link rel="stylesheet" type="text/css" href="css/stylewxj.css" />
 		<!-- js -->
 		<script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
 		<!-- //js -->
@@ -18,107 +18,157 @@
 		<!-- //font-awesome-icons -->
 		<link href="http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&amp;subset=latin-ext" rel="stylesheet">
 		<link href="http://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
-		<link href="css/stylelht.css" rel="stylesheet" type="text/css" media="all" />
+		<script type="text/javascript" src="../static/js/vue.js"></script>
+		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
 	</head>
 
 	<body>
 		<!-- banner -->
-	<div class="banner1">
-		<div class="container navdiv">	
-			<nav class="navbar navbar-default">
-				<div class="navbar-header navbar-left">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<h1><a class="navbar-brand" href="index.html">WORK <span>BLOG </span></a></h1>
-				</div>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-					<nav>
+		<div class="banner1">
+			<div class="container navdiv">
+				<nav class="navbar navbar-default">
+					<div class="navbar-header navbar-left">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<h1><a class="navbar-brand" href="index.html">WORK <span>BLOG </span></a></h1>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+						<nav>
 							<ul class="nav navbar-nav link-effect-14" id="link-effect-14">
-								<li ><a href="services.html"><span>首页</span></a></li>
-							<li><a href="gallery.html"><span>分类</span></a></li>
-							<li class="active"><a href="friend.html"><span>友链</span></a></li>
-							<li><a href="about.html"><span>关于</span></a>
+								<li><a href="services.html"><span>首页</span></a></li>
+								<li class="active"><a href="gallery.html"><span>分类</span></a></li>
+								<li><a href="friend.html"><span>友链</span></a></li>
+								<li><a href="about.html"><span>关于</span></a></li>
 							</ul>
 							<div class="agileinfo_social_icons">
-							    			<ul class="agileits_social_list">
-							    	<li>
-							    		<input type="text" class="form-control" placeholder="搜索...">
-							    	</li>
-							    	<li><span class="input-group-btn1">
-							    			<button class="btn btn-default btn2" type="button">搜索</button>
-							    		  </span>
-							    	</li>
-							    	<li><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">&nbsp&nbsp&nbsp登录</i></a></li>
-							    	<li><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">&nbsp&nbsp&nbsp注册</i></a></li>
-							    </ul>
+								<ul class="agileits_social_list">
+									<li>
+										<input type="text" class="form-control" placeholder="搜索...">
+									</li>
+									<li><span class="input-group-btn1">
+											<button class="btn btn-default btn2" type="button">搜索</button>
+										</span>
+									</li>
+									<li><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">&nbsp&nbsp&nbsp登录</i></a></li>
+									<li><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">&nbsp&nbsp&nbsp注册</i></a></li>
+								</ul>
 							</div>
-						</div>
-					</nav>	
-				</div>
-			</nav>
+						</nav>
+					</div>
+				</nav>
+			</div>
 		</div>
-	</div>
-	
+
 		<!-- //banner -->
 		<!-- services -->
-		<div class="friend">
-			<div class="row friend1">
+		<div class="friend" id="app">
+			<div class="row">
 				<div class="friendlink container">
-					<div class="linkimgdiv col-md-4">
-						<a href="https://www.baidu.com"><img class="img-responsive" src="images/baidu.gif" title="百度" alt=""></a>
+					<div v-for="item in linklist" :key="item.linkid" class="linkimgdiv col-md-4">
+						<img class="img-responsive" :src="item.linkimg" :title="item.linktitle" alt="">
 					</div>
-					<div class="linkimgdiv col-md-4">
-						<a href="https://www.youku.com/"><img class="img-responsive" src="images/youku.jpg" title="优酷" alt=""></a>
-					</div>
-					<div class="linkimgdiv col-md-4">
-						<a href="https://www.tencent.com"><img class="img-responsive" src="images/tenxun.jpg" title="腾讯"alt=""></a>
-					</div>
-					<div class="linkimgdiv col-md-4">
-						<a href="https://www.baidu.com"><img class="img-responsive" src="images/baidu.gif" title="百度" alt=""></a>
-					</div>
-					<div class="linkimgdiv col-md-4">
-						<a href="https://www.youku.com/"><img class="img-responsive" src="images/youku.jpg" title="优酷" alt=""></a>
-					</div>
-					<div class="linkimgdiv col-md-4">
-						<a href="https://www.tencent.com"><img class="img-responsive" src="images/tenxun.jpg" title="腾讯"alt=""></a>
-					</div>
-					<div class="linkimgdiv col-md-4">
-						<a href="https://www.baidu.com"><img class="img-responsive" src="images/baidu.gif" title="百度" alt=""></a>
-					</div>
-					<div class="linkimgdiv col-md-4">
-						<a href="https://www.youku.com/"><img class="img-responsive" src="images/youku.jpg" title="优酷" alt=""></a>
-					</div>
-					<div class="linkimgdiv col-md-4">
-						<a href="https://www.tencent.com"><img class="img-responsive" src="images/tenxun.jpg" title="腾讯"alt=""></a>
-					</div>
-					<div class="linkimgdiv col-md-4">
-						<a href="https://www.baidu.com"><img class="img-responsive" src="images/baidu.gif" title="百度" alt=""></a>
-					</div>
-					<div class="linkimgdiv col-md-4">
-						<a href="https://www.youku.com/"><img class="img-responsive" src="images/youku.jpg" title="优酷" alt=""></a>
-					</div>
-					<div class="linkimgdiv col-md-4">
-						<a href="https://www.tencent.com"><img class="img-responsive" src="images/tenxun.jpg" title="腾讯"alt=""></a>
-					</div>
+					
 				</div>
 			</div>
-			
+
 		</div>
-		
-		
-		
+
+
+
 		<div class="copy-right-grids" style="margin-top: 10px;">
 			<div>
 				<div class="copy-left">
-					<p class="footer-gd">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 浅行博客</p>
+					<p class="footer-gd">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 浅行博客 模板来自 <a href="http://www.cssmoban.com/"
+						 target="_blank" title="模板之家">模板之家</a><a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
+		
+		<!-- vue.js -->
+			<script type="text/javascript">
+				var vm1 = new Vue({
+					el: '#app',
+					data: {
+						role: true,
+						linklist: [1,2,3],
+					},
+					created() {
+						this.chooserole();
+						this.getAll();
+					},
+					methods: {
+						chooserole() {
+							
+							//判断用户的角色	
+							this.$http.get('/user/getme').then(result => {
+								var result = result.body;
+							});
+						},
+						getAll() {
+							//判断用户的角色	
+							this.$http.get('json/linkgetall.json').then(result => {
+								var result = result.body;
+								console.log(result.data);
+								this.linklist=result.data;
+								
+							});
+						},
+						
+						changeActive(a) {
+							var myInfoActive = $("#myInfoActive");
+							//					alert(myInfoActive)
+							var changeImgActive = $("#changeImgActive");
+							var myInfo = $("#myInfo"); //基本资料内容
+							var changeImg = $("#changeImg"); //内容
+							//					var a = $("#myInfoActive").hasClass('active');//切换功能
+							if (a) {
+								//显示修改头像
+								myInfoActive.removeClass('active'); //基本资料
+								changeImgActive.addClass('active');
+								myInfo.removeClass('active');
+								changeImg.addClass('active');
+		
+							} else {
+								//显示基本资料
+								myInfoActive.addClass('active');
+								changeImgActive.removeClass('active'); //基本资料
+								myInfo.addClass('active');
+								changeImg.removeClass('active');
+							}
+		
+						},
+						getUserList() { /*http://localhost:8080/WMPX/user/showIndustry*/
+							var t = this.getCookie("token");
+							this.$http.get('/wmpx/user/token/' + t).then(result => {
+								var result = result.body;
+								if (result.status === 200) {
+									this.list1 = result.data;
+									console.log(this.list1);
+								} else {
+									alert("数据连接失败");
+								}
+							});
+						},
+						getRequest() {
+							var url = location.search; //获取url中"?"符后的字串
+							var theRequest = new Object();
+							if (url.indexOf("?") != -1) {
+								var strs = url.substr(1);
+								this.id = strs.split("=")[1];
+							}
+							return theRequest;
+						},
+					}
+				});
+			</script>
+		
+		
+		
 	</body>
 </html>
