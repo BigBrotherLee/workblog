@@ -37,6 +37,8 @@
 				/html/user/**=anon
 				/user/verify=anon
 				/user/register=anon
+				/user/checkname=anon
+				/user/checkemail=anon
 				/user/getemailcode=anon
 				/user/getsmscode/*=anon
 				/user/validate/*=anon

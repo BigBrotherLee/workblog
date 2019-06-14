@@ -227,6 +227,7 @@ public class UserController {
 		String email=BeanUtils.getProperty(session.getAttribute("registerUser"), "email");
 		String phone=BeanUtils.getProperty(session.getAttribute("registerUser"), "phone");
 		if(ObjectUtils.nullSafeEquals(email, user.getEmail()) && ObjectUtils.nullSafeEquals(phone, user.getPhone())) {
+			userService.addUser(user);
 			result.setState(LeeConstant.STATE_SUCCESS);
 			result.setData(user);
 			result.setMessage("注册成功");

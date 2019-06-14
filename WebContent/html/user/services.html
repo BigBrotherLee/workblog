@@ -193,7 +193,7 @@
 						//判断用户的角色	
 						this.$http.get('/workblog/user/getme').then(result => {
 							var result = result.body;
-							if(result.user !==null){
+							if(typeof result.user !=="undefined"){
 								this.user = result.user;
 								this.role = true;	
 							}
