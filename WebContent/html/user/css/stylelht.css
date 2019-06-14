@@ -442,23 +442,25 @@ img {
 .licheng {
 	width: 80%;
 	height: 300px;
-	margin: 70px 20px 10px 150px;
-	background-color: red;
+	margin: auto;
+	margin-top: 70px;
+	/* background-color: red; */
+	 background: url(../images/licheng.jpg) no-repeat 0px 0px; 
+	background-size: cover; 
+	
 }
 
+
 .lctitle {
-	margin-top: -255px;
-	margin-left: 520px;
+text-align: center;
 	font-size: 1.5rem;
-	background-color: rgba(0, 0, 0, 0.6);
+	/* background-color: rgba(0, 0, 0, 0.6); */
 	color: white;
 	letter-spacing: 2px;
 
 }
 
-.lctitle :hover {
-	background-color: black;
-}
+
 
 .tishi {
 	padding-top: 10px;
@@ -1253,6 +1255,10 @@ input {
 	border: solid 0px #E6E6E6;
 	z-index: 1;
 }
+.licheng-img{
+height: 100%;
+width: 100%;
+}
 
 .reset-anniu {
 	height: 46px;
@@ -1260,4 +1266,33 @@ input {
 	background-color: #EEAD31;
 	border-radius: 4px;
 	margin-top: 20px;
+}
+.article-list{
+	padding-top: 20px;
+	width:90%;
+	margin:auto;
+}
+.article-author-wai{
+	margin-top: 10px;
+	width: 100%;
+	height: 64px;
+}
+.article-author-img{
+	float: left;
+	height: 64px;
+	width: 70px;
+}
+.article-author-title{
+	padding-left: 73px;
+	padding-bottom: 3px;
+	padding-top: 3px;
+}
+.article-author-wai:hover{
+	 box-shadow: 0 0 5px #888;
+}
+p {
+overflow: hidden;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
 }
