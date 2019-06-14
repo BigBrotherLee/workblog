@@ -319,7 +319,7 @@ public class UserController {
 				throw new LeeException("未知错误");//最终在异常处理器生成未知错误
 			}
 		}
-		return new ModelAndView("redirect:user/login");
+		return new ModelAndView("redirect:/html/user/login.html");
 	}
 	
 	/**
