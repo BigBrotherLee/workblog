@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -51,6 +52,10 @@ public class LeeExceptionHandler {
         map.put("url", req.getRequestURL());
         map.put("params", req.getParameterMap());
         log.error("发生未处理的异常={}",ex.getMessage(),ex);
+        Log l=new Log();
+        l.setCreatedate(new Date());
+        logService.addLog(l);
+        l.setLogcontent(StringUtils.join(map, ","));
         return map;
     }
  

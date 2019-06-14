@@ -176,6 +176,7 @@
 			var vm1 = new Vue({
 				el: '#app',
 				data: {
+					username:'',
 					role: '',
 					user:{},
 					newlist: [1,2,3],
@@ -192,8 +193,10 @@
 						//判断用户的角色	
 						this.$http.get('/workblog/user/getme').then(result => {
 							var result = result.body;
-							this.user = result.user;
-							this.role = true;
+							if(result.user !==null){
+								this.user = result.user;
+								this.role = true;	
+							}
 						});
 					},
 					getNew() {

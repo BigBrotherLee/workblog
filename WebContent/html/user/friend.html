@@ -10,6 +10,7 @@
 		<link href="../static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 		<link rel="stylesheet" type="text/css" href="css/stylewxj.css" />
+		<link rel="stylesheet" type="text/css" href="css/stylelht.css" />
 		<!-- js -->
 		<script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
 		<!-- //js -->
@@ -41,8 +42,8 @@
 						<nav>
 							<ul class="nav navbar-nav link-effect-14" id="link-effect-14">
 								<li><a href="services.html"><span>首页</span></a></li>
-								<li class="active"><a href="gallery.html"><span>分类</span></a></li>
-								<li><a href="friend.html"><span>友链</span></a></li>
+								<li><a href="gallery.html"><span>分类</span></a></li>
+								<li class="active"><a href="friend.html"><span>友链</span></a></li>
 								<li><a href="about.html"><span>关于</span></a></li>
 							</ul>
 							<div class="agileinfo_social_icons">
@@ -70,7 +71,9 @@
 			<div class="row">
 				<div class="friendlink container">
 					<div v-for="item in linklist" :key="item.linkid" class="linkimgdiv col-md-4">
-						<img class="img-responsive" :src="item.linkimg" :title="item.linktitle" alt="">
+						<a :href="item.linkaddress">
+							<img class="img-responsive" :src="item.linkimg" :title="item.linktitle" alt="">
+						</a>
 					</div>
 					
 				</div>
@@ -83,8 +86,7 @@
 		<div class="copy-right-grids" style="margin-top: 10px;">
 			<div>
 				<div class="copy-left">
-					<p class="footer-gd">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 浅行博客 模板来自 <a href="http://www.cssmoban.com/"
-						 target="_blank" title="模板之家">模板之家</a><a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+					<p class="footer-gd">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 浅行博客</p>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -106,53 +108,17 @@
 						chooserole() {
 							
 							//判断用户的角色	
-							this.$http.get('/user/getme').then(result => {
+							this.$http.get('/workblog/user/getme').then(result => {
 								var result = result.body;
 							});
 						},
 						getAll() {
 							//判断用户的角色	
-							this.$http.get('json/linkgetall.json').then(result => {
+							this.$http.get('/workblog/link/getall?index=1&length=1000').then(result => {
 								var result = result.body;
 								console.log(result.data);
-								this.linklist=result.data;
+								this.linklist=result.data.list;
 								
-							});
-						},
-						
-						changeActive(a) {
-							var myInfoActive = $("#myInfoActive");
-							//					alert(myInfoActive)
-							var changeImgActive = $("#changeImgActive");
-							var myInfo = $("#myInfo"); //基本资料内容
-							var changeImg = $("#changeImg"); //内容
-							//					var a = $("#myInfoActive").hasClass('active');//切换功能
-							if (a) {
-								//显示修改头像
-								myInfoActive.removeClass('active'); //基本资料
-								changeImgActive.addClass('active');
-								myInfo.removeClass('active');
-								changeImg.addClass('active');
-		
-							} else {
-								//显示基本资料
-								myInfoActive.addClass('active');
-								changeImgActive.removeClass('active'); //基本资料
-								myInfo.addClass('active');
-								changeImg.removeClass('active');
-							}
-		
-						},
-						getUserList() { /*http://localhost:8080/WMPX/user/showIndustry*/
-							var t = this.getCookie("token");
-							this.$http.get('/wmpx/user/token/' + t).then(result => {
-								var result = result.body;
-								if (result.status === 200) {
-									this.list1 = result.data;
-									console.log(this.list1);
-								} else {
-									alert("数据连接失败");
-								}
 							});
 						},
 						getRequest() {
@@ -163,7 +129,7 @@
 								this.id = strs.split("=")[1];
 							}
 							return theRequest;
-						},
+						}
 					}
 				});
 			</script>
