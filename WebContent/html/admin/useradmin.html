@@ -23,6 +23,7 @@
 		<!-- ICONS -->
 		<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
+		<link href="css/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
 		<link rel="stylesheet" href="css/index.css">
 		<script type="text/javascript" src="../static/js/vue.js"></script>
 		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
@@ -53,17 +54,15 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">关于</a></li>
-									<li><a href="#">友链</a></li>
+									<li><a href="../user/about.html">关于</a></li>
+									<li><a href="../user/friend.html">友链</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
 									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
-									<li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li>
-									<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+									<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
 								</ul>
 							</li>
 						</ul>
@@ -190,9 +189,16 @@
 		</div>
 		<!-- END WRAPPER -->
 		<!-- Javascript -->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="js/toastr.min.js"></script>
+		<script src="../static/js/bootstrap.min.js"></script>
+		<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+		<script src="vendor/chartist/js/chartist.min.js"></script>
+		<script src="js/klorofil-common.js"></script>
 		<script type="text/html" id="toolbarDemo">
 				<div class="layui-btn-container-fluid">
-				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="">&nbsp;删除</button>
+				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="del">&nbsp;删除</button>
 				<button class="btn btn-success btn-sm lnr lnr-file-add" data-toggle="modal" data-target="#myModal" style="float: right; margin-right: -110px;">&nbsp;新增</button>
 			</div>
 			
@@ -278,49 +284,77 @@
 					table.on('toolbar(test)', function(obj) {
 						var checkStatus = table.checkStatus(obj.config.id);
 						switch (obj.event) {
-							case 'getCheckData':
+							case 'del':
 								var data = checkStatus.data;
-								layer.alert(JSON.stringify(data));
-								break;
-							case 'getCheckLength':
-								var data = checkStatus.data;
-								layer.msg('选中了：' + data.length + ' 个');
-								break;
-							case 'isAll':
-								layer.msg(checkStatus.isAll ? '全选' : '未全选');
-								break;
-						};
+								var list = [];
+								layer.confirm('真的要删除这' + data.length + '个用户么？', function(index) {
+									for (let i of data) {
+										var id = i.articleid;
+										$.ajax({
+											method: "post",
+											url: "json/delete.json",
+											/* /workblog/article/delete */
+											data: {
+												"id": id,
+												"_method": "delete"
+											},
+											success: function(result) {
+												if (result.state !== 1) {
+													return;
+												}
+												var str = "id为" + id + "的文章，" + result.message + "\n";
+								
+												layer.close(index);
+											},
+											error: function(result) {
+												var str = "id为" + id + "的文章，删除失败！\n";
+												toastr.error(str);
+												layer.close(index);
+											}
+										});
+									}
+								}
+								
+								);break;
+							
+						}
 					});
-		
+					
 					//监听行工具事件
 					table.on('tool(test)', function(obj) {
 						var data = obj.data;
+						var id = data.articleid;	
 						//console.log(obj)
 						if (obj.event === 'del') {
-							layer.confirm('真的删除行么', function(index) {
-								obj.del();
-								layer.close(index);
-							});
-						} else if (obj.event === 'edit') {
-							layer.prompt({
-								formType: 2,
-								value: data.email
-							}, function(value, index) {
-								obj.update({
-									email: value
+							layer.confirm('真的要删除“' + data.username + '”这个用户么？', function(index) {
+								$.ajax({
+									method: "post",
+									url: "json/delete.json",
+									/* /workblog/article/delete */
+									data: {
+										"id": id,
+										"_method": "delete"
+									},
+									success: function(result) {
+										if (result.state !== 1) {
+											return;
+										}
+										var str = "id为" + id + "的文章，" + result.message + "\n";
+								
+										layer.close(index);
+									},
+									error: function(result) {
+										var str = "id为" + id + "的文章，删除失败！\n";
+										toastr.error(str);
+										layer.close(index);
+									}
 								});
-								layer.close(index);
 							});
 						}
 					});
 				});
 			</script>
-		<script src="vendor/jquery/jquery.min.js"></script>
-		<script src="../static/js/bootstrap.min.js"></script>
-		<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-		<script src="vendor/chartist/js/chartist.min.js"></script>
-		<script src="js/klorofil-common.js"></script>
+		
 		<script type="text/javascript">
 			var vm1 = new Vue({
 				el: '#wrapper',
@@ -337,7 +371,26 @@
 				},
 				methods: {
 					chooserole(){
-					//判断用户的角色	
+						//判断用户的角色
+						this.$http.get('/workblog/user/getme').then(result => {
+							var result = result.body;
+							if (result.state != null || result.state === 1) {
+								this.user = result.user;
+								this.usesrname = result.user.username;
+								this.email = result.user.email;
+								this.phone = result.user.phone;
+								this.autograph = result.user.autograph;
+								var now = (new Date()).getYear();
+								var pass = (new Date(user.createdate)).getYear();
+								this.year = now - pass;
+								for (let i of result.roles) {
+									if (i.roleid === 1) {
+										this.role = true;
+									}
+								}
+							}
+
+						});
 					},
 					changeActive(a) {
 						var myInfoActive = $("#myInfoActive");

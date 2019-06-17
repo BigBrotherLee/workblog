@@ -2,7 +2,7 @@
 <html lang="en">
 
 	<head>
-		<title>WokeBlog-我的文章</title>
+		<title>WrokBlog-我的文章</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -26,6 +26,7 @@
 		<link rel="stylesheet" href="css/index.css">
 		<script type="text/javascript" src="../static/js/vue.js"></script>
 		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/toastr.min.css" />
 
 	</head>
 
@@ -43,27 +44,27 @@
 					</div>
 					<form class="navbar-form navbar-left">
 						<div class="input-group">
-							<input type="text" value="" class="form-control" placeholder="Search dashboard...">
+							<input type="text" value="" class="form-control" placeholder="输入关键字...">
 							<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
 						</div>
 					</form>
 					<div id="navbar-menu">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">相关</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">关于</a></li>
-									<li><a href="#">友链</a></li>
+									<li><a href="../user/about.html">关于</a></li>
+									<li><a href="../user/friend.html">友链</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
-									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+									<span class="spanclass" id="userselfname">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
-									<li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li>
-									<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+									<!-- <li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
+									<li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li> -->
+									<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
 								</ul>
 							</li>
 						</ul>
@@ -89,8 +90,8 @@
 							<li><a href="createarticle.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
 							<li><a href="index.html" class="active"><i class="lnr lnr-book"></i> <span>我的文章</span></a></li>
 							<li><a href="mycommentindex.html" class=""><i class="lnr lnr-keyboard"></i> <span>我的评论</span></a></li>
-							
-							
+
+
 							<li v-show="role" class="lineheight"></li>
 							<li v-show="role"><a href="useradmin.html" class=""><i class="lnr lnr-users"></i> <span>用户管理</span></a></li>
 							<li v-show="role"><a href="adminindex.html" class=""><i class="lnr lnr-map"></i> <span>文章管理</span></a></li>
@@ -100,8 +101,8 @@
 							<li v-show="role"><a href="tagadmin.html" class=""><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
 							<li v-show="role"><a href="linkadmin.html" class=""><i class="lnr lnr-paperclip"></i> <span>友链管理</span></a></li>
 							<li v-show="role"><a href="logadmin.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
-							
-							
+
+
 						</ul>
 					</nav>
 				</div>
@@ -123,7 +124,7 @@
 
 									<table class="layui-hide" id="test" lay-filter="test"></table>
 
-									
+
 								</div>
 								<!-- END RECENT PURCHASES -->
 							</div>
@@ -145,21 +146,23 @@
 		<!-- END WRAPPER -->
 		<!-- Javascript -->
 		<script src="vendor/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="js/toastr.min.js"></script>
 		<script src="../static/js/bootstrap.min.js"></script>
 		<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 		<script src="vendor/chartist/js/chartist.min.js"></script>
 		<script src="js/klorofil-common.js"></script>
 		<script type="text/html" id="toolbarDemo">
-				<div class="layui-btn-container-fluid">
-				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="">&nbsp;删除</button>
-				<button class="btn btn-success btn-sm lnr lnr-file-add" lay-event="" style="float: right; margin-right: -110px;">&nbsp;新增</button>
+			<div class="layui-btn-container-fluid">
+				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="del">&nbsp;删除</button>
+				<button class="btn btn-success btn-sm lnr lnr-file-add" lay-event="add" style="float: right; margin-right: -110px;">&nbsp;新增</button>
 			</div>
 		</script>
-			<script type="text/html" id="barDemo">
-				<button class="btn btn-default btn-xs lnr lnr-pencil articledelbtn" lay-event="edit"></button>
+		<script type="text/html" id="barDemo">
+			<button class="btn btn-default btn-xs lnr lnr-pencil articledelbtn" lay-event="edit"></button>
 				<button class="btn btn-danger btn-xs lnr lnr-trash articleedbtn" lay-event="del"></button>
 			</script>
+<<<<<<< HEAD
 			
 			<script src="vendor/layui/layui.js" charset="utf-8"></script>
 			<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
@@ -192,7 +195,29 @@
 								// edit: 'text',
 								templet: function(res) {
 									return '<em>' + res.email + '</em>'
+=======
+
+		<script src="vendor/layui/layui.js" charset="utf-8"></script>
+		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+		<script>
+			$(function() {
+						$.ajax({
+								method: "get",
+								url: "/workblog/user/getme",
+								success: function(data) {
+									if (data.state !== 1) {
+										alert(data.message);
+										return;
+									}
+									var user = data.data;
+									var name = $('#userselfname');
+									name.val(user.username);
+								},
+								error:function(data) {
+									
+>>>>>>> refs/remotes/origin/zss
 								}
+<<<<<<< HEAD
 							}, {
 								field: 'abstract',
 								title: '摘要',
@@ -253,128 +278,172 @@
 							}, function(value, index) {
 								obj.update({
 									email: value
+=======
+>>>>>>> refs/remotes/origin/zss
 								});
-								layer.close(index);
-							});
-						}
-					});
-				});
-			</script>
-		
-		<script type="text/javascript" src="js/paginathing.js"></script>
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				/* for (var i = 1; i <= 150; i++) {
-					$('.list-group').append('<li class="list-group-item"> Item ' + i + '</li>');
-				} */
+						});
 
-				// $('.list-group').paginathing({
-				// 	perPage: 5,
-				// 	limitPagination: 9,
-				// 	containerClass: 'panel-footer',
-				// 	pageNumbers: true
-				// })
-
-				$('.table tbody').paginathing({
-					perPage: 5,
-					limitPagination: 9,
-					insertAfter: '.table',
-					pageNumbers: true
-				});
-			});
-		</script>
-	
-		<script type="text/javascript">
-			var vm1 = new Vue({
-				el: '#wrapper',
-				data: {
-					role: true,
-					list1: {
+					layui.use('table', function() {
+						var table = layui.table;
+						table.render({
+							elem: '#test'
+								// method: 'post'
+								,
+							url: 'json/articlegethot19.json',
+							toolbar: '#toolbarDemo',
+							defaultToolbar: [],
+							title: '文章数据表',
+							request: {
+								pageName: "index",
+								limitName: "length"
 							},
-					formData: {
-					},
-				},
-				created() {
-					// this.getRequest();
-					// this.getUserList();
-				},
-				methods: {
-					chooserole(){
-					//判断用户的角色	
-					},
-					changeActive(a) {
-						var myInfoActive = $("#myInfoActive");
-						//					alert(myInfoActive)
-						var changeImgActive = $("#changeImgActive");
-						var myInfo = $("#myInfo"); //基本资料内容
-						var changeImg = $("#changeImg"); //内容
-						//					var a = $("#myInfoActive").hasClass('active');//切换功能
-						if (a) {
-							//显示修改头像
-							myInfoActive.removeClass('active'); //基本资料
-							changeImgActive.addClass('active');
-							myInfo.removeClass('active');
-							changeImg.addClass('active');
-		
-						} else {
-							//显示基本资料
-							myInfoActive.addClass('active');
-							changeImgActive.removeClass('active'); //基本资料
-							myInfo.addClass('active');
-							changeImg.removeClass('active');
-						}
-		
-					},
-					getUserList() { /*http://localhost:8080/WMPX/user/showIndustry*/
-						var t = this.getCookie("token");
-						this.$http.get('/wmpx/user/token/'+ t).then(result => {
-							var result = result.body;
-							if (result.status === 200) {
-								this.list1 = result.data;
-								console.log(this.list1);
-							} else {
-								alert("数据连接失败");
+							parseData: function(response) {
+
+								if (response.state == 1) {
+									return {
+										"code": 0, //解析接口状态
+										"msg": "成功", //解析提示文本
+										"count": response.data.total, //解析数据长度
+										"data": response.data.list, //数据
+									};
+								} else {
+									// return {"code"}
+								}
+
+
+							},
+							cols: [
+								[{
+										type: 'checkbox',
+										fixed: 'left'
+									}, {
+										field: 'articleid',
+										title: 'ID',
+										// width: 80,
+										// fixed: 'left',
+										unresize: true,
+										sort: true
+									}
+									/* , {
+																	field: 'authorname',
+																	title: '作者',
+																	// width: 120,
+																	sort: true
+																	// edit: 'text'
+																} */
+									, {
+										field: 'title',
+										title: '标题',
+										// width: 200,
+										// edit: 'text',
+									}, {
+										field: 'summary',
+										title: '摘要',
+										// width: 220,
+										// edit: 'text',
+
+									}, {
+										field: 'categotyname',
+										title: '分类',
+										// width: 100,
+										sort: true
+									}, {
+										// fixed: 'right',
+										title: '操作',
+										toolbar: '#barDemo',
+										// width: 120
+									}
+								]
+							],
+							page: true
+						});
+
+						//头工具栏事件
+						table.on('toolbar(test)', function(obj) {
+							var checkStatus = table.checkStatus(obj.config.id);
+							switch (obj.event) {
+								case 'del':
+
+									var data = checkStatus.data;
+									if (data.length == 0) {
+										return;
+									}
+									var list = [];
+									layer.confirm('真的要删除这' + data.length + '篇文章么？', function(index) {
+										for (let i of data) {
+											var id = i.articleid;
+											$.ajax({
+												method: "post",
+												url: "/workblog/article/delete",
+												data: {
+													"id": id,
+													"_method": "delete"
+												},
+												success: function(result) {
+													if (result.state !== 1) {
+														return;
+													}
+													var str = "id为" + id + "的文章，" + result.message + "\n";
+
+													layer.close(index);
+												},
+												error: function(result) {
+													var str = "id为" + id + "的文章，删除失败！\n";
+													toastr.error(str);
+													layer.close(index);
+												}
+											});
+										}
+									});
+									break;
+								case 'add':
+									window.location.href = "createarticle.html";
+									break;
 							}
 						});
-					},
-					getRequest() {
-						var url = location.search; //获取url中"?"符后的字串
-						var theRequest = new Object();
-						if (url.indexOf("?") != -1) {
-							var strs = url.substr(1);
-							this.id = strs.split("=")[1];
-						}
-						return theRequest;
-					},
-					getCookie(cookie_name) {
-						var allcookies = document.cookie;
-						//索引长度，开始索引的位置
-						var cookie_pos = allcookies.indexOf(cookie_name);
-						// alert(cookie_pos)
-						// 如果找到了索引，就代表cookie存在,否则不存在
-						if (cookie_pos != -1) {
-							// 把cookie_pos放在值的开始，只要给值加1即可
-							//计算取cookie值得开始索引，加的1为“=”
-							cookie_pos = cookie_pos + cookie_name.length + 1;
-							//计算取cookie值得结束索引
-							var cookie_end = allcookies.indexOf(";", cookie_pos);
-		
-							if (cookie_end == -1) {
-								cookie_end = allcookies.length;
-		
+						//监听行工具事件
+						table.on('tool(test)', function(obj) {
+							var data = obj.data;
+							var id = data.articleid;
+							//console.log(obj)
+							if (obj.event === 'del') {
+								layer.confirm('真的要删除“' + data.title + '”这篇文章么？', function(index) {
+									$.ajax({
+										method: "post",
+										url: "/workblog/article/delete",
+										/* /workblog/article/delete */
+										data: {
+											"id": id,
+											"_method": "delete"
+										},
+										success: function(result) {
+											if (result.state !== 1) {
+												return;
+											}
+											var str = "id为" + id + "的文章，" + result.message + "\n";
+
+											layer.close(index);
+										},
+										error: function(result) {
+											var str = "id为" + id + "的文章，删除失败！\n";
+											toastr.error(str);
+											layer.close(index);
+										}
+									});
+								});
+							} else if (obj.event === 'edit') {
+								var id = data.articleid;
+								window.location.href = "createarticle.html?id=" + id;
+								layer.close(index);
 							}
-							//得到想要的cookie的值
-							var value = unescape(allcookies.substring(cookie_pos, cookie_end));
-						}
-						// alert(value);
-						return value;
-		
-					},
-				}
-			});
+						});
+
+					});
 		</script>
-		
-	
+
+
+
+
 	</body>
 
 </html>

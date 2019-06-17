@@ -2,18 +2,12 @@
 <html lang="en">
 
 	<head>
-		<title>WokeBlog-个人信息</title>
+		<title>WorkBlog-个人信息</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<!-- VENDOR CSS -->
 		<link rel="stylesheet" href="css/cropper.min.css">
-		<link rel="stylesheet" href="css/sitelogo.css">
-		<script src="vendor/jquery/jquery.min.js"></script>
-		<script src="js/cropper.js"></script>
-		<script src="js/html2canvas.min.js"></script>
-		<script src="../static/js/bootstrap.min.js"></script>
-		<script src="js/sitelogo2.js"></script>
 		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
 		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="vendor/linearicons/style.css">
@@ -27,10 +21,13 @@
 		<!-- ICONS -->
 		<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
-		<link rel="stylesheet" href="css/index.css">
+		
 		<script type="text/javascript" src="../static/js/vue.js"></script>
 		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
 		
+		<link rel="stylesheet" href="css/sitelogo.css">
+		<link href="css/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
+		<link rel="stylesheet" href="css/index.css">
 	</head>
 
 	<body>
@@ -54,20 +51,18 @@
 					<div id="navbar-menu">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">帮助</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">关于</a></li>
-									<li><a href="#">友链</a></li>
+									<li><a href="../user/about.html">关于</a></li>
+									<li><a href="../user/friend.html">友链</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
-									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+									<span class="spanclass">{{username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
-									<li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li>
-									<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+									<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
 								</ul>
 							</li>
 						</ul>
@@ -90,11 +85,11 @@
 									</ul>
 								</div>
 							</li>
-							<li><a href="createarticle.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
+							<li><a href="elements.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
 							<li><a href="index.html" class=""><i class="lnr lnr-book"></i> <span>我的文章</span></a></li>
 							<li><a href="mycommentindex.html" class=""><i class="lnr lnr-keyboard"></i> <span>我的评论</span></a></li>
-							
-							
+
+
 							<li v-show="role" class="lineheight"></li>
 							<li v-show="role"><a href="useradmin.html" class=""><i class="lnr lnr-users"></i> <span>用户管理</span></a></li>
 							<li v-show="role"><a href="adminindex.html" class=""><i class="lnr lnr-map"></i> <span>文章管理</span></a></li>
@@ -104,8 +99,8 @@
 							<li v-show="role"><a href="tagadmin.html" class=""><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
 							<li v-show="role"><a href="linkadmin.html" class=""><i class="lnr lnr-paperclip"></i> <span>友链管理</span></a></li>
 							<li v-show="role"><a href="logadmin.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
-							
-							
+
+
 						</ul>
 					</nav>
 				</div>
@@ -121,10 +116,10 @@
 							<div class="overlay"></div>
 							<div class="profile-main">
 								<div class="profileimgdiv">
-									<img src="img/user-medium.png" class="img-circle profileimg" alt="" id="icon"/>
+									<img :src="user.pic" class="img-circle profileimg" alt="" id="icon" />
 								</div><!-- :src="list1.userPicture" -->
-								<h3 class="name">Samuel Gold</h3>
-								<span class="status-available">边走边唱，如诗如歌如理想</span>
+								<h3 class="name">{{username}}</h3>
+								<!-- <span class="status-available">边走边唱，如诗如歌如理想</span> -->
 							</div>
 							<div class="profile-stat">
 								<div class="row">
@@ -135,12 +130,12 @@
 										15 <span>评论数量</span>
 									</div> -->
 									<div class="col-md-12 stat-item">
-										<span class="userage">使用年限：</span>2174 
+										<span class="userage">使用年限：</span>{{year}}
 									</div>
 								</div>
 							</div>
 						</div>
-						
+
 						<!-- END PROFILE HEADER -->
 						<!-- PROFILE DETAIL -->
 						<div class="profile-detail profileright">
@@ -148,25 +143,25 @@
 								<form class="form-horizontal profileForm">
 									<div class="form-group formgroupdiv">
 										<label for="username">用户名</label>
-										<input type="text" class="form-control" id="username" placeholder="Samuel Gold">
+										<input type="text" class="form-control" id="username" placeholder="Samuel Gold" v-model="username">
 									</div>
 
 									<div class="form-group formgroupdiv">
 										<label class="control-label">邮箱</label>
 										<div class="">
-											<input type="text" class="form-control" id="email" placeholder="请输入你的邮箱地址~">
+											<input type="text" class="form-control" id="email" placeholder="请输入你的邮箱地址~" v-model="email">
 										</div>
 									</div>
 									<div class="form-group formgroupdiv">
 										<label class="control-label">手机号码</label>
 										<div class="">
-											<input type="text" class="form-control" id="phone" placeholder="请输入你的电话号码~">
+											<input type="text" class="form-control" id="phone" placeholder="请输入你的电话号码~" v-model="phone">
 										</div>
 									</div>
 									<div class="form-group formgroupdiv">
 										<label class="control-label">个性签名</label>
 										<div class="">
-											<input type="text" class="form-control" id="autograph" placeholder="请输入你的个签~">
+											<input type="text" class="form-control" id="autograph" placeholder="请输入你的个签~" v-model="autograph">
 										</div>
 									</div>
 									<!-- <div class="form-group formgroupdiv">
@@ -175,20 +170,20 @@
 											<input type="password" class="form-control" id="inputPassword" placeholder="请输入你的密码~">
 										</div>
 									</div> -->
-									
-									<div class="text-center profilesubmit btn btn-primary fileinput-button">
-										<button class="btn btn-primary btn-group-lg" data-toggle="modal" data-target="#avatar-modal">上传图片</button>
-										<!-- <img id="icon" src="img/touxiang.jpg" alt="裁剪后"> -->
-									</div>
-									<div class="text-center profilesubmit"><a href="#" class="btn btn-primary">确认修改</a></div>
+
+									<div class="text-center profilesubmit"><button :onclick="modify()" class="btn btn-primary">确认修改</button></div>
 								</form>
+								<button class="btn btn-primary btn-group-lg upfile" data-toggle="modal" data-target="#avatar-modal">上传图片</button>
+
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="clearfix"></div>
+
 				<!-- 模态框（Modal） -->
 				<!--图片裁剪-->
+				<div>
 					<div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog"
 					 tabindex="-1">
 						<div class="modal-dialog modal-lg">
@@ -228,19 +223,16 @@
 													</div>
 												</div>
 												<div class="col-md-5" style="text-align: right;">
-													<button class="btn btn-info fa fa-arrows" data-method="setDragMode" data-option="move" type="button"
-													 title="移动">
+													<button class="btn btn-info fa fa-arrows" data-method="setDragMode" data-option="move" type="button" title="移动">
 														<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('setDragMode', 'move')">
 														</span>
 													</button>
-													<button type="button" class="btn btn-info fa fa-search-plus" data-method="zoom" data-option="0.1"
-													 title="放大图片">
+													<button type="button" class="btn btn-info fa fa-search-plus" data-method="zoom" data-option="0.1" title="放大图片">
 														<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('zoom', 0.1)">
 															<!--<span class="fa fa-search-plus"></span>-->
 														</span>
 													</button>
-													<button type="button" class="btn btn-info fa fa-search-minus" data-method="zoom" data-option="-0.1"
-													 title="缩小图片">
+													<button type="button" class="btn btn-info fa fa-search-minus" data-method="zoom" data-option="-0.1" title="缩小图片">
 														<span class="docs-tooltip" data-toggle="tooltip" title="" data-original-title="$().cropper('zoom', -0.1)">
 															<!--<span class="fa fa-search-minus"></span>-->
 														</span>
@@ -251,7 +243,7 @@
 													</button>
 												</div>
 												<div class="col-md-3">
-													<button class="btn btn-info btn-block avatar-save fa fa-save" type="button" data-dismiss="modal">
+													<button :onclick="changePic()"  class="btn btn-info btn-block avatar-save fa fa-save" type="button" data-dismiss="modal">
 														保存修改</button>
 												</div>
 											</div>
@@ -261,8 +253,11 @@
 							</div>
 						</div>
 					</div>
-					<!-- /.modal -->
-				
+				</div>
+				<!-- /.modal -->
+
+
+
 			</div>
 			<footer>
 				<div class="container-fluid">
@@ -271,184 +266,144 @@
 
 				</div>
 			</footer>
-			</div>
-			<!-- END WRAPPER -->
-			<!-- Javascript -->
-			<script src="vendor/jquery/jquery.min.js"></script>
-			<script src="../static/js/bootstrap.min.js"></script>
-			<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-			<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-			<script src="vendor/chartist/js/chartist.min.js"></script>
-			<script src="js/klorofil-common.js"></script>
-			<script type="text/javascript" src="js/paginathing.js"></script>
-			
-			<script type="text/javascript">
-				jQuery(document).ready(function($) {
-					/* for (var i = 1; i <= 150; i++) {
-						$('.list-group').append('<li class="list-group-item"> Item ' + i + '</li>');
-					} */
-
-					// $('.list-group').paginathing({
-					// 	perPage: 5,
-					// 	limitPagination: 9,
-					// 	containerClass: 'panel-footer',
-					// 	pageNumbers: true
-					// })
-
-					$('.table tbody').paginathing({
-						perPage: 5,
-						limitPagination: 9,
-						insertAfter: '.table',
-						pageNumbers: true
-					});
-				});
-			</script>
-			<script type="text/javascript">
-				var vm1 = new Vue({
-					el: '#wrapper',
-					data: {
-						role: true,
-						list1: {},
-					},
-					created() {
-						// this.getRequest();
-						// this.getUserList();
-					},
-					methods: {
-						chooserole(){
-						//判断用户的角色	
-						},
-						changeActive(a) {
-							var myInfoActive = $("#myInfoActive");
-							//					alert(myInfoActive)
-							var changeImgActive = $("#changeImgActive");
-							var myInfo = $("#myInfo"); //基本资料内容
-							var changeImg = $("#changeImg"); //内容
-							//					var a = $("#myInfoActive").hasClass('active');//切换功能
-							if (a) {
-								//显示修改头像
-								myInfoActive.removeClass('active'); //基本资料
-								changeImgActive.addClass('active');
-								myInfo.removeClass('active');
-								changeImg.addClass('active');
-			
-							} else {
-								//显示基本资料
-								myInfoActive.addClass('active');
-								changeImgActive.removeClass('active'); //基本资料
-								myInfo.addClass('active');
-								changeImg.removeClass('active');
-							}
-			
-						},
-						getUserList() { /*http://localhost:8080/WMPX/user/showIndustry*/
-							var t = this.getCookie("token");
-							this.$http.get('/wmpx/user/token/'+ t).then(result => {
-								var result = result.body;
-								if (result.status === 200) {
-									this.list1 = result.data;
-									console.log(this.list1);
-								} else {
-									alert("数据连接失败");
+		</div>
+		<!-- END WRAPPER -->
+		<!-- Javascript -->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+		<script src="../static/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/toastr.min.js"></script>
+		<script src="vendor/chartist/js/chartist.min.js"></script>
+		<script src="js/klorofil-common.js"></script>
+		<script src="js/cropper.js"></script>
+		<script src="js/html2canvas.min.js"></script>
+		<script src="js/sitelogo2.js"></script>
+		<script type="text/javascript">
+			var vm1 = new Vue({
+				el: '#wrapper',
+				data: {
+					role: true,
+					user: {},
+					username: '',
+					email: '',
+					phone: '',
+					autograph: '',
+					year: '',
+				},
+				created() {
+					this.chooserole();
+					// this.getUserList();
+				},
+				methods: {
+					chooserole() {
+						//判断用户的角色
+						this.$http.get('/workblog/user/getme').then(result => {
+							var result = result.body;
+							if (result.state != null || result.state === 1) {
+								this.user = result.user;
+								this.usesrname = result.user.username;
+								this.email = result.user.email;
+								this.phone = result.user.phone;
+								this.autograph = result.user.autograph;
+								var now = (new Date()).getYear();
+								var pass = (new Date(user.createdate)).getYear();
+								this.year = now - pass;
+								for (let i of result.roles) {
+									if (i.roleid === 1) {
+										this.role = true;
+									}
 								}
-							});
-						},
-						getRequest() {
-							var url = location.search; //获取url中"?"符后的字串
-							var theRequest = new Object();
-							if (url.indexOf("?") != -1) {
-								var strs = url.substr(1);
-								this.id = strs.split("=")[1];
 							}
-							return theRequest;
-						},
-						getCookie(cookie_name) {
-							var allcookies = document.cookie;
-							//索引长度，开始索引的位置
-							var cookie_pos = allcookies.indexOf(cookie_name);
-							// alert(cookie_pos)
-							// 如果找到了索引，就代表cookie存在,否则不存在
-							if (cookie_pos != -1) {
-								// 把cookie_pos放在值的开始，只要给值加1即可
-								//计算取cookie值得开始索引，加的1为“=”
-								cookie_pos = cookie_pos + cookie_name.length + 1;
-								//计算取cookie值得结束索引
-								var cookie_end = allcookies.indexOf(";", cookie_pos);
-			
-								if (cookie_end == -1) {
-									cookie_end = allcookies.length;
-			
-								}
-								//得到想要的cookie的值
-								var value = unescape(allcookies.substring(cookie_pos, cookie_end));
+
+						});
+					},
+					modify() {
+						alert("testmodify");
+						this.$http.get('/workblog/user/upadte?userid='+this.user.userid+'&username='+this.username+'&email='+this.email+'&phone='+this.phone+'&autograph='+this.autograph+'&pic='+this.pic).then(result => {
+							var result = result.body;
+							if (result.state != null || result.state === 1) {
+								toastr.success("更新成功");
+							}else{
+								toastr.error("更新失败");
 							}
-							// alert(value);
-							return value;
-			
-						},
-					}
-				});
-			</script>
-			<script type="text/javascript">
-				//做个下简易的验证  大小 格式
-				$('#avatarInput').on('change', function(e) {
-					var filemaxsize = 1024 * 5; //5M
-					var target = $(e.target);
-					var Size = target[0].files[0].size / 1024;
-					if (Size > filemaxsize) {
-						alert('图片过大，请重新选择!');
-						$(".avatar-wrapper").childre().remove;
-						return false;
-					}
-					if (!this.files[0].type.match(/image.*/)) {
-						alert('请选择正确的图片!')
-					} else {
-						var filename = document.querySelector("#avatar-name");
-						var texts = document.querySelector("#avatarInput").value;
-						var teststr = texts; //你这里的路径写错了
-						testend = teststr.match(/[^\\]+\.[^\(]+/i); //直接完整文件名的
-						filename.innerHTML = testend;
-					}
-			
-				});
-				//#icon元素的src就是截图后的文件,base64
-				$(".avatar-save").on("click", function() {
-					var img_lg = document.getElementById('imageHead');
-			
-					// 截图小的显示框内的内容
-					html2canvas(img_lg, {
-						allowTaint: true,
-						taintTest: false,
-						onrendered: function(canvas) {
-							// var dataURL = $image.cropper("getCroppedCanvas");//这个可以获得大图
-							// var imgurl = dataURL.toDataURL("image/*", 1);
-							// $('#icon').attr('src', imgurl);
-							canvas.id = "mycanvas";
-							var dataUrl = canvas.toDataURL("image/png"); //这个可以获得压缩图片,适合作为头像
-							$('#icon').attr('src', dataUrl);
-			
-						}
-					});
-				});
-			
-				function imagesAjax(src) {
-					var data = {};
-					data.img = src;
-					$.ajax({
-						url: "../file/upload.do",
-						data: data,
-						type: "POST",
-						dataType: 'json',
-						success: function(data) {
-							if (data.state == 1) {
-								$('#icon').attr('src', data.data);
-								$('#iconPic').val(data.data);
+						});
+					},
+					changePic(){
+						alert(this.pic+"32465ui");
+						this.$http.get('/workblog/user/upadte?&pic='+this.pic).then(result => {
+							var result = result.body;
+							if (result.state != null || result.state === 1) {
+								toastr.success("上传成功");
+							}else{
+								toastr.error("上传失败");
 							}
-							toastr.info(data.message);
-						}
-					});
+						});
+					}
 				}
-			</script>
+			});
+		</script>
+		<script type="text/javascript">
+			//做个下简易的验证  大小 格式
+			$('#avatarInput').on('change', function(e) {
+				var filemaxsize = 1024 * 5; //5M
+				var target = $(e.target);
+				var Size = target[0].files[0].size / 1024;
+				if (Size > filemaxsize) {
+					alert('图片过大，请重新选择!');
+					$(".avatar-wrapper").childre().remove;
+					return false;
+				}
+				if (!this.files[0].type.match(/image.*/)) {
+					alert('请选择正确的图片!')
+				} else {
+					var filename = document.querySelector("#avatar-name");
+					var texts = document.querySelector("#avatarInput").value;
+					var teststr = texts; //你这里的路径写错了
+					testend = teststr.match(/[^\\]+\.[^\(]+/i); //直接完整文件名的
+					filename.innerHTML = testend;
+				}
+
+			});
+			//#icon元素的src就是截图后的文件,base64
+			$(".avatar-save").on("click", function() {
+				var img_lg = document.getElementById('imageHead');
+
+				// 截图小的显示框内的内容
+				html2canvas(img_lg, {
+					allowTaint: true,
+					taintTest: false,
+					onrendered: function(canvas) {
+						// var dataURL = $image.cropper("getCroppedCanvas");//这个可以获得大图
+						// var imgurl = dataURL.toDataURL("image/*", 1);
+						// $('#icon').attr('src', imgurl);
+						canvas.id = "mycanvas";
+						var dataUrl = canvas.toDataURL("image/png"); //这个可以获得压缩图片,适合作为头像
+						$('#icon').attr('src', dataUrl);
+
+					}
+				});
+			});
+
+			function imagesAjax(src) {
+				var data = {};
+				data.img = src;
+				$.ajax({
+					url: "../file/upload.do",
+					data: data,
+					type: "POST",
+					dataType: 'json',
+					success: function(data) {
+						if (data.state == 1) {
+							$('#icon').attr('src', data.data);
+							$('#iconPic').val(data.data);
+						}
+						toastr.info(data.message);
+					}
+				});
+			}
+		</script>
+
 	</body>
 
 </html>

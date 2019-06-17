@@ -22,10 +22,11 @@
 		<!-- ICONS -->
 		<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
+		<link href="css/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
 		<link rel="stylesheet" href="css/index.css">
 		<script type="text/javascript" src="../static/js/vue.js"></script>
 		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
-		
+
 	</head>
 
 	<body>
@@ -66,23 +67,20 @@
 							</ul>
 						</li> -->
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">帮助</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">关于</a></li>
-									<li><a href="#">友链</a></li>
+									<li><a href="../user/about.html">关于</a></li>
+									<li><a href="../user/friend.html">友链</a></li>
 									<!-- <li><a href="#">Security</a></li>
-								<li><a href="#">Troubleshooting</a></li> -->
+										<li><a href="#">Troubleshooting</a></li> -->
 								</ul>
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
-									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+									<span class="spanclass">{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
-									<li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li>
-									<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
-									<!-- <li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li> -->
+									<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
 								</ul>
 							</li>
 							<!-- <li>
@@ -111,8 +109,8 @@
 							<li><a href="createarticle.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
 							<li><a href="index.html" class=""><i class="lnr lnr-book"></i> <span>我的文章</span></a></li>
 							<li><a href="mycommentindex.html" class="active"><i class="lnr lnr-keyboard"></i> <span>我的评论</span></a></li>
-							
-							
+
+
 							<li v-show="role" class="lineheight"></li>
 							<li v-show="role"><a href="useradmin.html" class=""><i class="lnr lnr-users"></i> <span>用户管理</span></a></li>
 							<li v-show="role"><a href="adminindex.html" class=""><i class="lnr lnr-map"></i> <span>文章管理</span></a></li>
@@ -122,8 +120,8 @@
 							<li v-show="role"><a href="tagadmin.html" class=""><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
 							<li v-show="role"><a href="linkadmin.html" class=""><i class="lnr lnr-paperclip"></i> <span>友链管理</span></a></li>
 							<li v-show="role"><a href="logadmin.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
-							
-							
+
+
 						</ul>
 					</nav>
 				</div>
@@ -134,286 +132,44 @@
 				<div class="commentdiv">
 					<div class="tdiv">
 						<div class="panel-heading">
-							<h3 class="panel-title">荷塘月色</h3>
+							<h3 class="panel-title">{{title}}</h3>
 							<!-- <img src="img/user.png" alt="" style="width: 20px;height: 20px;border-radius: 50%;"> -->
 
 						</div>
 						<div class="titlediv">
-							
-							<div class="panel panel-default comment">
+
+							<div v-for="item in list1" :key="item.comment_one_id" class="panel panel-default comment">
 								<div class="panel-heading firstcommentdiv">
 									<h4 class="panel-title">
 										<div class="touxiang">
-											<img src="img/user.png" alt="">
-											<span>Samuel</span>
+											<img :src="item.pic" alt="">
+											<span>{{item.username}}</span>
 										</div>
-										
+
 										<p>
-											点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
+											{{item.content}}
 										</p>
 										<div class="btndiv" style="float: right;">
-											<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-											<a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion" href="#1"
-											 style="display: inline-block;">&nbsp;查看</a>
+											<button class="btn btn-danger lnr lnr-trash commentdelbtn" :onclick="delone(item.comment_one_id)">&nbsp;删除</button><br>
+											<button :onclick="getsecondList(item.comment_one_id)" class="btn btn-success lnr lnr-eye commentreadbtn"
+											 data-toggle="collapse" data-parent="#accordion" href="#1" style="display: inline-block;">&nbsp;查看</button>
 										</div>
 									</h4>
 								</div>
 								<div id="1" class="panel-collapse collapse secondcommentdiv">
 									<div class="panel-body">
-										<div class="panel panel-default secondcommentfirstdiv">
+										<div v-for="item in list2" :key="item.comment_two_id" class="panel panel-default secondcommentfirstdiv">
 											<div class="panel-heading secondfirstcommentdiv">
 												<h4 class="panel-title">
 													<div class="touxiang">
-														<img src="img/user.png" alt="">
-														<span>Samuel</span>
+														<img :src="item.pic" alt="">
+														<span>{{item.usernametwo}}</span>
 													</div>
 													<p>
-														点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
+														{{item.contenttwo}}
 													</p>
 													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-														<!-- <a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
-														 href="#1" style="display: inline-block;">&nbsp;查看</a> -->
-													</div>
-												</h4>
-											</div>
-										</div>
-										<div class="panel panel-default secondcommentfirstdiv">
-											<div class="panel-heading secondfirstcommentdiv">
-												<h4 class="panel-title">
-													<div class="touxiang">
-														<img src="img/user.png" alt="">
-														<span>Samuel</span>
-													</div>
-													<p>
-														点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-													</p>
-													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-														<!-- <a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
-														 href="#1" style="display: inline-block;">&nbsp;查看</a> -->
-													</div>
-												</h4>
-											</div>
-										</div>
-										<div class="panel panel-default secondcommentfirstdiv">
-											<div class="panel-heading secondfirstcommentdiv">
-												<h4 class="panel-title">
-													<div class="touxiang">
-														<img src="img/user.png" alt="">
-														<span>Samuel</span>
-													</div>
-													<p>
-														点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-													</p>
-													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-														<a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
-														 href="#1" style="display: inline-block;">&nbsp;查看</a>
-													</div>
-												</h4>
-											</div>
-										</div>
-										<div class="panel panel-default secondcommentfirstdiv">
-											<div class="panel-heading secondfirstcommentdiv">
-												<h4 class="panel-title">
-													<div class="touxiang">
-														<img src="img/user.png" alt="">
-														<span>Samuel</span>
-													</div>
-													<p>
-														点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-													</p>
-													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-														<!-- <a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
-														 href="#1" style="display: inline-block;">&nbsp;查看</a> -->
-													</div>
-												</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default comment">
-								<div class="panel-heading firstcommentdiv">
-									<h4 class="panel-title">
-										<div class="touxiang">
-											<img src="img/user.png" alt="">
-											<span>Samuel</span>
-										</div>
-										<p>
-											点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-										</p>
-										<div class="btndiv" style="float: right;">
-											<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-											<!-- <a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion" href="#2"
-											 style="display: inline-block;">&nbsp;查看</a> -->
-										</div>
-									</h4>
-								</div>
-								<div id="2" class="panel-collapse collapse secondcommentdiv">
-									<div class="panel-body">
-										<div class="panel panel-default secondcommentfirstdiv">
-											<div class="panel-heading secondfirstcommentdiv">
-												<h4 class="panel-title">
-													<div class="touxiang">
-														<img src="img/user.png" alt="">
-														<span>Samuel</span>
-													</div>
-													<p>
-														点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-													</p>
-													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-														<!-- <a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
-														 href="#1" style="display: inline-block;">&nbsp;查看</a> -->
-													</div>
-												</h4>
-											</div>
-										</div>
-										<div class="panel panel-default secondcommentfirstdiv">
-											<div class="panel-heading secondfirstcommentdiv">
-												<h4 class="panel-title">
-													<div class="touxiang">
-														<img src="img/user.png" alt="">
-														<span>Samuel</span>
-													</div>
-													<p>
-														点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-													</p>
-													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-														<!-- <a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
-														 href="#1" style="display: inline-block;">&nbsp;查看</a> -->
-													</div>
-												</h4>
-											</div>
-										</div>
-										<div class="panel panel-default secondcommentfirstdiv">
-											<div class="panel-heading secondfirstcommentdiv">
-												<h4 class="panel-title">
-													<div class="touxiang">
-														<img src="img/user.png" alt="">
-														<span>Samuel</span>
-													</div>
-													<p>
-														点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-													</p>
-													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-														<!-- <a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
-														 href="#1" style="display: inline-block;">&nbsp;查看</a> -->
-													</div>
-												</h4>
-											</div>
-										</div>
-										<div class="panel panel-default secondcommentfirstdiv">
-											<div class="panel-heading secondfirstcommentdiv">
-												<h4 class="panel-title">
-													<div class="touxiang">
-														<img src="img/user.png" alt="">
-														<span>Samuel</span>
-													</div>
-													<p>
-														点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-													</p>
-													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-														<!-- <a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
-														 href="#1" style="display: inline-block;">&nbsp;查看</a> -->
-													</div>
-												</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default comment">
-								<div class="panel-heading firstcommentdiv">
-									<h4 class="panel-title">
-										<div class="touxiang">
-											<img src="img/user.png" alt="">
-											<span>Samuel</span>
-										</div>
-										<p>
-											点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-										</p>
-										<div class="btndiv" style="float: right;">
-											<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-											<a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion" href="#3"
-											 style="display: inline-block;">&nbsp;查看</a>
-										</div>
-									</h4>
-								</div>
-								<div id="3" class="panel-collapse collapse secondcommentdiv">
-									<div class="panel-body">
-										<div class="panel panel-default secondcommentfirstdiv">
-											<div class="panel-heading secondfirstcommentdiv">
-												<h4 class="panel-title">
-													<div class="touxiang">
-														<img src="img/user.png" alt="">
-														<span>Samuel</span>
-													</div>
-													<p>
-														点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-													</p>
-													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-													<!-- 	<a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
-														 href="#1" style="display: inline-block;">&nbsp;查看</a> -->
-													</div>
-												</h4>
-											</div>
-										</div>
-										<div class="panel panel-default secondcommentfirstdiv">
-											<div class="panel-heading secondfirstcommentdiv">
-												<h4 class="panel-title">
-													<div class="touxiang">
-														<img src="img/user.png" alt="">
-														<span>Samuel</span>
-													</div>
-													<p>
-														点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-													</p>
-													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-														<!-- <a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
-														 href="#1" style="display: inline-block;">&nbsp;查看</a> -->
-													</div>
-												</h4>
-											</div>
-										</div>
-										<div class="panel panel-default secondcommentfirstdiv">
-											<div class="panel-heading secondfirstcommentdiv">
-												<h4 class="panel-title">
-													<div class="touxiang">
-														<img src="img/user.png" alt="">
-														<span>Samuel</span>
-													</div>
-													<p>
-														点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-													</p>
-													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
-														<!-- <a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
-														 href="#1" style="display: inline-block;">&nbsp;查看</a> -->
-													</div>
-												</h4>
-											</div>
-										</div>
-										<div class="panel panel-default secondcommentfirstdiv">
-											<div class="panel-heading secondfirstcommentdiv">
-												<h4 class="panel-title">
-													<div class="touxiang">
-														<img src="img/user.png" alt="">
-														<span>Samuel</span>
-													</div>
-													<p>
-														点击点击我进行展开，再次点击我进行折叠。第 1 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分点击我进行展开，再次点击我进行折叠。第 2 部分部分
-													</p>
-													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" lay-event="">&nbsp;删除</button><br>
+														<button class="btn btn-danger lnr lnr-trash commentdelbtn" :onclick="deltwo(item.comment_one_id)">&nbsp;删除</button><br>
 														<!-- <a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
 														 href="#1" style="display: inline-block;">&nbsp;查看</a> -->
 													</div>
@@ -444,56 +200,57 @@
 		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 		<script src="vendor/chartist/js/chartist.min.js"></script>
 		<script src="js/klorofil-common.js"></script>
+		<script type="text/javascript" src="js/toastr.min.js"></script>
 		<script type="text/javascript">
 			var vm1 = new Vue({
 				el: '#wrapper',
 				data: {
+					id: '',
+					title: '',
+					user: {},
 					role: true,
-					list1: {
-							},
-					formData: {
-					},
+					list1: [],
+					list2: [],
 				},
 				created() {
-					// this.getRequest();
-					// this.getUserList();
+					this.chooserole();
+					this.getfirstList();
 				},
 				methods: {
-					chooserole(){
-					//判断用户的角色	
-					},
-					changeActive(a) {
-						var myInfoActive = $("#myInfoActive");
-						//					alert(myInfoActive)
-						var changeImgActive = $("#changeImgActive");
-						var myInfo = $("#myInfo"); //基本资料内容
-						var changeImg = $("#changeImg"); //内容
-						//					var a = $("#myInfoActive").hasClass('active');//切换功能
-						if (a) {
-							//显示修改头像
-							myInfoActive.removeClass('active'); //基本资料
-							changeImgActive.addClass('active');
-							myInfo.removeClass('active');
-							changeImg.addClass('active');
-		
-						} else {
-							//显示基本资料
-							myInfoActive.addClass('active');
-							changeImgActive.removeClass('active'); //基本资料
-							myInfo.addClass('active');
-							changeImg.removeClass('active');
-						}
-		
-					},
-					getUserList() { /*http://localhost:8080/WMPX/user/showIndustry*/
-						var t = this.getCookie("token");
-						this.$http.get('/wmpx/user/token/'+ t).then(result => {
+					chooserole() {
+						//判断用户的角色
+						this.$http.get('/workblog/user/getme').then(result => {
 							var result = result.body;
-							if (result.status === 200) {
+							if (result.state != null || result.state === 1) {
+								this.user = result.user;
+								for (let i of result.roles) {
+									if (i.roleid === 1) {
+										this.role = true;
+									}
+								}
+							}
+						});
+					},
+					getfirstList() {
+						this.$http.get('/workblog/commentone/getbyarticleall?articleid' + this.id).then(result => {
+							var result = result.body;
+							if (result.state === 1) {
 								this.list1 = result.data;
+								this.title = list1[0].title;
 								console.log(this.list1);
 							} else {
-								alert("数据连接失败");
+								toastr.error("数据连接失败");
+							}
+						});
+					},
+					getsecondList(id) {
+						this.$http.get('/workblog/commenttwo/getcommenttwobyoneall?oneid' + id).then(result => {
+							var result = result.body;
+							if (result.state === 1) {
+								this.list2 = result.data;
+								console.log(this.list2);
+							} else {
+								toastr.error("数据连接失败");
 							}
 						});
 					},
@@ -506,58 +263,55 @@
 						}
 						return theRequest;
 					},
-					getCookie(cookie_name) {
-						var allcookies = document.cookie;
-						//索引长度，开始索引的位置
-						var cookie_pos = allcookies.indexOf(cookie_name);
-						// alert(cookie_pos)
-						// 如果找到了索引，就代表cookie存在,否则不存在
-						if (cookie_pos != -1) {
-							// 把cookie_pos放在值的开始，只要给值加1即可
-							//计算取cookie值得开始索引，加的1为“=”
-							cookie_pos = cookie_pos + cookie_name.length + 1;
-							//计算取cookie值得结束索引
-							var cookie_end = allcookies.indexOf(";", cookie_pos);
-		
-							if (cookie_end == -1) {
-								cookie_end = allcookies.length;
-		
+					delone(id) {
+						this.$http.post('/workblog/commenttwo/getcommenttwobyoneall?_method=delete&id' + id).then(result => {
+							var result = result.body;
+							if (result.state === 1) {
+								toastr.success("删除成功");
+							} else {
+								toastr.error("删除失败");
 							}
-							//得到想要的cookie的值
-							var value = unescape(allcookies.substring(cookie_pos, cookie_end));
-						}
-						// alert(value);
-						return value;
-		
+						});
 					},
+					deltwo(id) {
+						this.$http.post('/workblog/commenttwo/delete?_method=delete&id' + id).then(result => {
+							var result = result.body;
+							if (result.state === 1) {
+								toastr.success("删除成功");
+							} else {
+								toastr.error("删除失败");
+							}
+						});
+					}
 				}
 			});
 		</script>
-		
-			<script src="vendor/layui/layui.js"></script>
-			<script>
-				layui.use('laypage', function() {
-							var laypage = layui.laypage;
-		
-							//执行一个laypage实例
-							laypage.render({
-								elem: 'titlediv' //注意，这里的 test1 是 ID，不用加 # 号
-									,
-								count: 1700 //数据总数，从服务端得到
-									,
-								jump: function(obj, first) {
-									//obj包含了当前分页的所有参数，比如：
-									console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
-									console.log(obj.limit); //得到每页显示的条数
-		
-									//首次不执行
-									if (!first) {
-										//do something
-									}
-								}
-						});
-			
-			});</script>
+
+		<script src="vendor/layui/layui.js"></script>
+		<script>
+			layui.use('laypage', function() {
+				var laypage = layui.laypage;
+
+				//执行一个laypage实例
+				laypage.render({
+					elem: 'titlediv' //注意，这里的 test1 是 ID，不用加 # 号
+						,
+					count: 1700 //数据总数，从服务端得到
+						,
+					jump: function(obj, first) {
+						//obj包含了当前分页的所有参数，比如：
+						console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+						console.log(obj.limit); //得到每页显示的条数
+
+						//首次不执行
+						if (!first) {
+							//do something
+						}
+					}
+				});
+
+			});
+		</script>
 	</body>
 
 </html>
