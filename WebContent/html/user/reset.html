@@ -140,8 +140,6 @@
 		if (!reg.test(email_name)) {
 			    toastr.error("邮箱格式不正确");
 					return;
-			}else if(email_name==null || email_name==""){
-				  toastr.error("邮箱格式不正确");
 			}else{
 				$.ajax({
 					method: "get",
@@ -150,8 +148,10 @@
 						"email": email_name
 					},
 					success: function(result) {
-						toastr.error("请注意查收验证码");
-						return;
+						if(result.state===1){
+							toastr.error("请注意查收验证码");
+							return;
+						}
 					},
 					error: function(result) {
 				      toastr.error("哦吼，出错了~");
