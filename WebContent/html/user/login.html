@@ -19,9 +19,6 @@
 		<!-- //font-awesome-icons -->
 		<link href="css/stylelht.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="css/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
-		
-		<!-- <link href="http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&amp;subset=latin-ext" rel="stylesheet"> -->
-		<!-- <link href="http://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet"> -->
 	</head>
 	<body>
 		<div class="banner1">
@@ -132,6 +129,10 @@
 						"password": password
 					},
 					success: function(result) {
+						if(result.state!==1){
+							toastr.error(result.message);
+							return;
+						}
 						$.ajax({
 							method: "get",
 							url: "/workblog/user/getme",

@@ -79,9 +79,9 @@
 							<div class="agileinfo_social_icons">
 								<ul class="agileits_social_list">
 									<li><input type="text" class="form-control"
-										placeholder="搜索..."></li>
+										placeholder="搜索..."id="searchtext"></li>
 									<li><span class="input-group-btn1">
-											<button class="btn btn-default btn2" type="button">搜索</button>
+											<button class="btn btn-default btn2" type="button" v-on:click="search">搜索</button>
 									</span></li>
 									<li v-show="!role"><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">登录</i></a></li>
 									<li v-show="!role"><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">注册</i></a></li>
@@ -140,7 +140,7 @@
 										<div class="article-title">
 											<h1 style="font-size: 38px;">{{article.title}}</h1>
 											<span class="post-meta"> <i class="fa fa-user"></i>&nbsp;
-												<a :href="'authorarticle.html'+article.author" rel="author">{{author.username}}</a>&nbsp; <i
+												<a :href="'authorarticle.html?authorid='+article.author" rel="author">{{author.username}}</a>&nbsp; <i
 												class="fa fa-calendar"></i> &nbsp; <a href="" rel="bookmark">
 													<time datetime="2017-11-28T15:18:13+00:00">创建时间:{{article.createdate}}</time>
 											</a> <a href=""> <i class="fa fa-comment-o"> </i> {{article.commentnum}}条评论
@@ -148,9 +148,9 @@
 										</div>
 										<div class="article-mainbody">
 											<div class="article-mainbody-content">
-												<p>
+												<span class="article-1">
 													{{article.contentformat}}
-												</p>
+												</span>
 											</div>
 										</div>
 									</div>
@@ -187,7 +187,7 @@
 										</h3>
 									</div>
 									<div class="article-list">
-										<a v-for="item in authorArticle" :href="'article.html?articleid='+item.articleid">
+										<a class="article-3"v-for="item in authorArticle" :href="'article.html?articleid='+item.articleid">
 											<div class="article-author-wai">
 												<div class="article-author-img">
 													<img :src="item.img" :alt="item.title">
@@ -359,6 +359,13 @@
 				this.getCommentOne(1,9);
 			},
 			methods: {
+				search(){
+					var key=$.trim(document.getElementById("searchtext").value);
+					if(key=="" || key.length>10){
+						return false;
+					}
+					window.location.href="searchresult.html?key="+key;			
+				},
 				chooserole() {
 					//判断用户的角色	
 					this.$http.get('/workblog/user/getme').then(result => {

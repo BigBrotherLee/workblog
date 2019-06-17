@@ -69,9 +69,9 @@
 						<div class="agileinfo_social_icons">
 							<ul class="agileits_social_list">
 								<li><input type="text" class="form-control"
-									placeholder="搜索..."></li>
+									placeholder="搜索..."id="searchtext"></li>
 								<li><span class="input-group-btn1">
-										<button class="btn btn-default btn2" type="button">搜索</button>
+										<button class="btn btn-default btn2" type="button" v-on:click="search">搜索</button>
 								</span></li>
 								<li v-show="!role"><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">登录</i></a></li>
 									<li v-show="!role"><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">注册</i></a></li>
@@ -88,7 +88,7 @@
 	<!-- gallery -->
 	<div class="zuida container-fluid">
 		<div class="banxin row">
-				<div class="gallerydetail fl">
+				<div class="gallerydetail fl  ">
 					<div class="gallerymsg">
 						<div class="gallery-name">
 							<h1># {{categoty.categotytitle}}</h1>
@@ -152,6 +152,13 @@
 			this.getAll();
 		},
 		methods: {
+				search(){
+					var key=$.trim(document.getElementById("searchtext").value);
+					if(key=="" || key.length>10){
+						return false;
+					}
+					window.location.href="searchresult.html?key="+key;			
+				},
 			chooserole() {
 				this.$http.get('/workblog/user/getme').then(result => {
 					var result = result.body;
