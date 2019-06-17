@@ -57,6 +57,14 @@
 	    <filter-name>shiroFilter</filter-name>
 	    <url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/html/user/404.html</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/html/user/500.html</location>
+	</error-page>
   <welcome-file-list>
     <welcome-file>/html/user/services.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>

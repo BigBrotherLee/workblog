@@ -9,7 +9,7 @@
 		<!-- //custom-theme -->
 		<link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
 		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-		<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
+		<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen"  />
 		<!-- js -->
 		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="js/jquery.wmuSlider.js"></script><!-- //js -->
@@ -28,5 +28,8 @@
 		<div class="return">
 			<h3>点此<a href="">返回上一页</a></h3>
 		</div>
+		<script type="text/javascript">
+			$("a").attr("href",document.referrer);
+		</script>
 	</body>
 </html>
