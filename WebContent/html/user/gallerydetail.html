@@ -177,7 +177,7 @@
 			},
 			getAll() {
 				var id=this.getQueryString("categotyid");
-				this.$http.get('/workblog/article/getpagebycategoty?index=1&length=10&categotyid='+id).then(result => {
+				this.$http.get('/workblog/article/getpagebycategory?index=1&length=10&categotyid='+id).then(result => {
 					var result = result.body;
 					if(result.state===1){
 						this.articlePage=result.data;

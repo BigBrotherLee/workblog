@@ -146,8 +146,10 @@
 				var vm1 = new Vue({
 					el: '#app',
 					data: {
-						role: true,
-						categotylist: [1,2,3],
+						username:'',
+						role: '',
+						user:{},
+						categotylist: [],
 					},
 					created() {
 						this.chooserole();
@@ -155,7 +157,6 @@
 					},
 					methods: {
 						chooserole() {
-							
 							//判断用户的角色	
 							this.$http.get('/workblog/user/getme').then(result => {
 								var result = result.body;

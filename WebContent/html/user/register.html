@@ -192,7 +192,7 @@
 						return;
 				}else if(email_name==null || email_name==""){
 					  toastr.error("邮箱格式不正确");
-				}else if{
+				}else if(reg.test(email_name)){
 						$.ajax({
 							method:"get",
 							url: "/workblog/user/checkemail",
