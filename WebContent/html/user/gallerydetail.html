@@ -41,7 +41,7 @@
 </head>
 
 <body>
-	
+	<div id="app">
 	<div class="banner1">
 		<div class="container navdiv">
 			<nav class="navbar navbar-default">
@@ -60,7 +60,6 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-right"
 					id="bs-example-navbar-collapse-1">
-					<nav>
 						<ul class="nav navbar-nav link-effect-14" id="link-effect-14">
 							<li><a href="services.html"><span>首页</span></a></li>
 							<li><a href="gallery.html"><span>分类</span></a></li>
@@ -83,19 +82,16 @@
 				</div>
 			</nav>
 		</div>
-		</nav>
-	</div>
 	</div>
 
 	<!-- //banner -->
 	<!-- gallery -->
 	<div class="zuida container-fluid">
 		<div class="banxin row">
-			<div id="app">
 				<div class="gallerydetail fl">
 					<div class="gallerymsg">
 						<div class="gallery-name">
-							<h1>#{{categoty.categotytitle}}</h1>
+							<h1># {{categoty.categotytitle}}</h1>
 						</div>
 						<div class="gallery-jianjie">
 							<p>{{categoty.categotydetail}}</p>
@@ -120,7 +116,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+		</div>
 	<!-- //gallery -->
 	<!-- footer -->
 	<div class="copy-right-grids ">
@@ -161,7 +157,7 @@
 					var result = result.body;
 					if(result.user !==null){
 						this.user = result.user;
-						this.role = true;	
+						this.role = true;
 					}
 				});
 			},
@@ -177,7 +173,7 @@
 			},
 			getAll() {
 				var id=this.getQueryString("categotyid");
-				this.$http.get('/workblog/article/getpagebycategory?index=1&length=10&categotyid='+id).then(result => {
+				this.$http.get('/workblog/article/getpagebycategory?index=1&length=10&categoryid='+id).then(result => {
 					var result = result.body;
 					if(result.state===1){
 						this.articlePage=result.data;

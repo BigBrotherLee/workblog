@@ -146,16 +146,18 @@
 					return;
 				}else{
 					$.ajax({
-						method:"post",
+						method:"get",
 						url:"/workblog/user/checkname",
 						data:{
 							"name":username,
 						},
 						success:function(result){
-							toastr.error("用户名不可用")
+							if(result.state===1){
+								toastr.error("用户名不可用");
+							}
 						},
 						error:function(result){
-							toastr.error("用户名可用")
+							toastr.error("用户名可用");
 						}
 					});
 				}
@@ -200,7 +202,9 @@
 								"email":email_name
 							},
 							success: function(result) {
-								toastr.error("邮箱已注册");
+								if(result.state===1){
+									toastr.error("邮箱已注册");
+								}
 								return;
 							},
 							error: function(result) {

@@ -45,7 +45,7 @@
 	
 	<select id="findByKey" resultType="com.sunshareteam.workblog.web.ArticleVO">
 		select a.img as img ,a.articleid as articleid,a.createdate as createdate,a.author as authorid,a.title as title,a.summary as summary,u.username as authorname,a.categoty as categotyid,c.categotytitle as categotyname
-			from tb_article a,tb_user u,tb_categoty c where a.state=0 and a.author=u.userid and c.categotyid=a.categoty and title like #{title}
+			from tb_article a,tb_user u,tb_categoty c where a.state=0 and a.author=u.userid and c.categotyid=a.categoty and  a.title like #{title}
 	</select>
 
 	
