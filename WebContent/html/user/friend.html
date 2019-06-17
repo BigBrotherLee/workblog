@@ -24,6 +24,7 @@
 	</head>
 
 	<body>
+		<div id="app">
 		<!-- banner -->
 		<div class="banner1">
 			<div class="container navdiv">
@@ -55,8 +56,10 @@
 											<button class="btn btn-default btn2" type="button">搜索</button>
 										</span>
 									</li>
-									<li><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">&nbsp&nbsp&nbsp登录</i></a></li>
-									<li><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">&nbsp&nbsp&nbsp注册</i></a></li>
+									<li v-show="!role"><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">登录</i></a></li>
+									<li v-show="!role"><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">注册</i></a></li>
+									<li v-show="role"><a href="../admin/index.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">{{user.username}}</i></a></li>
+									<li v-show="role"><a href="/workblog/user/logout" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">退出</i></a></li>
 								</ul>
 							</div>
 						</nav>
@@ -67,7 +70,7 @@
 
 		<!-- //banner -->
 		<!-- services -->
-		<div class="friend" id="app">
+		<div class="friend">
 			<div class="row">
 				<div class="friendlink container">
 					<div v-for="item in linklist" :key="item.linkid" class="linkimgdiv col-md-4">
@@ -80,7 +83,7 @@
 			</div>
 
 		</div>
-
+</div>
 
 
 		<div class="copy-right-grids" style="margin-top: 10px;">
@@ -106,10 +109,13 @@
 					},
 					methods: {
 						chooserole() {
-							
 							//判断用户的角色	
 							this.$http.get('/workblog/user/getme').then(result => {
 								var result = result.body;
+								if(typeof result.user !=="undefined"){
+									this.user = result.user;
+									this.role = true;	
+								}
 							});
 						},
 						getAll() {
