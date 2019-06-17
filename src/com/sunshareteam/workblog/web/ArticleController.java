@@ -163,7 +163,7 @@ public class ArticleController {
 	 * @param authorid 作者id
 	 * @return 成功则返回 ResponseResult<PageInfo<Article>> state：1，message：查询成功 data：文章分页信息
 	 */
-	@GetMapping("/getpagebyarthor")
+	@GetMapping("/getpagebyauthor")
 	public ResponseResult<PageInfo<ArticleVO>> getArticlePageByAuthor( int index, int length,Integer authorid){
 		ResponseResult<PageInfo<ArticleVO>> result =new ResponseResult<PageInfo<ArticleVO>>();
 		PageInfo<ArticleVO> data=articleService.getByAuthor(authorid, index, length);

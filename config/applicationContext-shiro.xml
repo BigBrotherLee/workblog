@@ -42,6 +42,7 @@
 				/user/checkemail=anon
 				/user/getemailcode=anon
 				/user/getsmscode/*=anon
+				/user/list=anon
 				/user/validate/*=anon
 				/user/resetpassword=anon
 				/article/get*/**=anon

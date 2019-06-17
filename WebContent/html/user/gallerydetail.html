@@ -41,7 +41,7 @@
 </head>
 
 <body>
-	<!-- banner -->
+	
 	<div class="banner1">
 		<div class="container navdiv">
 			<nav class="navbar navbar-default">
@@ -141,68 +141,65 @@
 	<!-- flexSlider -->
 	<script defer src="js/jquery.flexslider.js"></script>
 	<script type="text/javascript">
-				var vm1 = new Vue({
-					el: '#app',
-					data: {
-						username:'',
-						role: '',
-						user:{},
-						categoty:{},
-						articlePage:{}
-					},
-					created() {
-						this.chooserole();
-						this.getCategoty();
-						this.getAll();
-					},
-					methods: {
-						chooserole() {
-							//判断用户的角色	
-							this.$http.get('/workblog/user/getme').then(result => {
-								var result = result.body;
-								if(result.user !==null){
-									this.user = result.user;
-									this.role = true;	
-								}
-							});
-						},
-						getCategoty(){
-							var id=this.getQueryString("categotyid");
-							//得到分类信息	
-							this.$http.get('/workblog/categoty/get?id='+id).then(result => {
-								var result = result.body;
-								if(result.state===1){
-									this.categoty=result.data;
-								}
-							});
-						},
-						getAll() {
-							var id=this.getQueryString("categotyid");
-							//判断用户的角色	
-							this.$http.get('/workblog/article/getpagebycategory?index=1&length=10&categoryid='+id).then(result => {
-								var result = result.body;
-								if(result.state===1){
-									this.articlePage=result.data;
-								}
-								
-							});
-						},
-						getRequest() {
-							var url = location.search; //获取url中"?"符后的字串
-							var theRequest = new Object();
-							if (url.indexOf("?") != -1) {
-								var strs = url.substr(1);
-								this.id = strs.split("=")[1];
-							}
-							return theRequest;
-						},
-						getQueryString(name){
-						     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-						     var r = window.location.search.substr(1).match(reg);
-						     if(r!=null)return  unescape(r[2]); return null;
-						}
+	var vm1 = new Vue({
+		el: '#app',
+		data: {
+			username:'',
+			role: '',
+			user:{},
+			categoty:{},
+			articlePage:{}
+		},
+		created() {
+			this.chooserole();
+			this.getCategoty();
+			this.getAll();
+		},
+		methods: {
+			chooserole() {
+				this.$http.get('/workblog/user/getme').then(result => {
+					var result = result.body;
+					if(result.user !==null){
+						this.user = result.user;
+						this.role = true;	
 					}
 				});
+			},
+			getCategoty(){
+				var id=this.getQueryString("categotyid");
+				//得到分类信息	
+				this.$http.get('/workblog/categoty/get?id='+id).then(result => {
+					var result = result.body;
+					if(result.state===1){
+						this.categoty=result.data;
+					}
+				});
+			},
+			getAll() {
+				var id=this.getQueryString("categotyid");
+				this.$http.get('/workblog/article/getpagebycategoty?index=1&length=10&categotyid='+id).then(result => {
+					var result = result.body;
+					if(result.state===1){
+						this.articlePage=result.data;
+					}
+				});
+			},
+			getRequest() {
+				var url = location.search; //获取url中"?"符后的字串
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+					var strs = url.substr(1);
+					this.id = strs.split("=")[1];
+				}
+				return theRequest;
+			},
+			getQueryString(name){
+			     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			     var r = window.location.search.substr(1).match(reg);
+			     if(r!=null)return  unescape(r[2]); return null;
+			}
+		}
+	});
 			</script>
 	<!-- //flexSlider -->
 	<!-- for bootstrap working -->
