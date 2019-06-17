@@ -2,7 +2,7 @@
 <html lang="en">
 
 	<head>
-		<title>WokeBlog-管理员首页</title>
+		<title>WorkBlog-管理员首页</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -26,7 +26,7 @@
 		<link rel="stylesheet" href="css/index.css">
 		<script type="text/javascript" src="../static/js/vue.js"></script>
 		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
-
+		<link rel="stylesheet" type="text/css" href="css/toastr.min.css" />
 	</head>
 
 	<body>
@@ -53,17 +53,15 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">关于</a></li>
-									<li><a href="#">友链</a></li>
+									<li><a href="../user/about.html">关于</a></li>
+									<li><a href="../user/friend.html">友链</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
 									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
-									<li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li>
-									<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+									<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
 								</ul>
 							</li>
 						</ul>
@@ -123,114 +121,7 @@
 
 									<table class="layui-hide" id="test" lay-filter="test"></table>
 
-									<script type="text/html" id="toolbarDemo">
-										<div class="layui-btn-container-fluid">
-										<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="">&nbsp;删除</button>
-										<button class="btn btn-success btn-sm lnr lnr-file-add" lay-event="" style="float: right; margin-right: -110px;">&nbsp;新增</button>
-									</div>
-								</script>
-									<script type="text/html" id="barDemo">
-										<button class="btn btn-default btn-xs lnr lnr-pencil articledelbtn" lay-event="edit"></button>
-										<button class="btn btn-danger btn-xs lnr lnr-trash articleedbtn" lay-event="del"></button>
-									</script>
-
-									<script src="vendor/layui/layui.js" charset="utf-8"></script>
-									<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-									<script>
-										layui.use('table', function() {
-											var table = layui.table;
-											table.render({
-												elem: '#test'
-													// method: 'post'
-													,
-												url: 'json/demo1.json',
-												toolbar: '#toolbarDemo',
-												defaultToolbar: [],
-												title: '用户数据表',
-												cols: [
-													[{
-														type: 'checkbox',
-														fixed: 'left'
-													}, {
-														field: 'id',
-														title: 'ID',
-														// width: 80,
-														fixed: 'left',
-														unresize: true,
-														sort: true
-													}, {
-														field: 'username',
-														title: '作者',
-														// width: 120,
-														sort: true
-														// edit: 'text'
-													}, {
-														field: 'title',
-														title: '标题',
-														// width: 200,
-														// edit: 'text',
-													}, {
-														field: 'abstract',
-														title: '摘要',
-														// width: 220,
-														// edit: 'text',
-
-													}, {
-														field: 'classify',
-														title: '分类',
-														// width: 100,
-														sort: true
-													},{
-														fixed: 'right',
-														title: '操作',
-														toolbar: '#barDemo',
-														// width: 120
-													}]
-												],
-												page: true
-											});
-
-											//头工具栏事件
-											table.on('toolbar(test)', function(obj) {
-												var checkStatus = table.checkStatus(obj.config.id);
-												switch (obj.event) {
-													case 'getCheckData':
-														var data = checkStatus.data;
-														layer.alert(JSON.stringify(data));
-														break;
-													case 'getCheckLength':
-														var data = checkStatus.data;
-														layer.msg('选中了：' + data.length + ' 个');
-														break;
-													case 'isAll':
-														layer.msg(checkStatus.isAll ? '全选' : '未全选');
-														break;
-												};
-											});
-
-											//监听行工具事件
-											table.on('tool(test)', function(obj) {
-												var data = obj.data;
-												//console.log(obj)
-												if (obj.event === 'del') {
-													layer.confirm('真的删除行么', function(index) {
-														obj.del();
-														layer.close(index);
-													});
-												} else if (obj.event === 'edit') {
-													layer.prompt({
-														formType: 2,
-														value: data.email
-													}, function(value, index) {
-														obj.update({
-															email: value
-														});
-														layer.close(index);
-													});
-												}
-											});
-										});
-									</script>
+							
 
 								</div>
 								<!-- END RECENT PURCHASES -->
@@ -253,33 +144,207 @@
 		<!-- END WRAPPER -->
 		<!-- Javascript -->
 		<script src="vendor/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="js/toastr.min.js"></script>
 		<script src="../static/js/bootstrap.min.js"></script>
 		<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 		<script src="vendor/chartist/js/chartist.min.js"></script>
 		<script src="js/klorofil-common.js"></script>
-		<script type="text/javascript" src="js/paginathing.js"></script>
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				/* for (var i = 1; i <= 150; i++) {
-					$('.list-group').append('<li class="list-group-item"> Item ' + i + '</li>');
-				} */
-
-				// $('.list-group').paginathing({
-				// 	perPage: 5,
-				// 	limitPagination: 9,
-				// 	containerClass: 'panel-footer',
-				// 	pageNumbers: true
-				// })
-
-				$('.table tbody').paginathing({
-					perPage: 5,
-					limitPagination: 9,
-					insertAfter: '.table',
-					pageNumbers: true
-				});
-			});
+		
+				<script type="text/html" id="toolbarDemo">
+				<div class="layui-btn-container-fluid">
+				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="del">&nbsp;删除</button>
+				<button class="btn btn-success btn-sm lnr lnr-file-add" lay-event="add" style="float: right; margin-right: -110px;">&nbsp;新增</button>
+			</div>
 		</script>
+			<script type="text/html" id="barDemo">
+				<button class="btn btn-default btn-xs lnr lnr-pencil articledelbtn" lay-event="edit"></button>
+				<button class="btn btn-danger btn-xs lnr lnr-trash articleedbtn" lay-event="del"></button>
+			</script>
+		
+			<script src="vendor/layui/layui.js" charset="utf-8"></script>
+			<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+					<script>
+				
+				
+				$(function() {
+							$.ajax({
+									method: "get",
+									url: "/workblog/user/getme",
+									success: function(data) {
+										if (data.state !== 1) {
+											alert(data.message);
+											return;
+										}
+										var user = data.data;
+										var name = $('#userselfname');
+										name.val(user.username);
+									},
+									error:function(data) {
+										
+									}
+									});
+							});
+			
+			
+				layui.use('table', function() {
+					var table = layui.table;
+					table.render({
+						elem: '#test'
+							// method: 'post'
+							,
+						url: 'json/articlegethot19.json',
+						toolbar: '#toolbarDemo',
+						defaultToolbar: [],
+						title: '文章数据表',
+						request: {
+							pageName: "index",
+							limitName: "length"
+						},
+						parseData: function(response) {
+			
+							if (response.state == 1) {
+								return {
+									"code": 0, //解析接口状态
+									"msg": "成功", //解析提示文本
+									"count": response.data.total, //解析数据长度
+									"data": response.data.list, //数据
+								};
+							} else {
+								// return {"code"}
+							}
+			
+			
+						},
+						cols: [
+							[{
+									type: 'checkbox',
+									fixed: 'left'
+								}, {
+									field: 'articleid',
+									title: 'ID',
+									// width: 80,
+									// fixed: 'left',
+									unresize: true,
+									sort: true
+								}
+								, {
+																field: 'authorname',
+																title: '作者',
+																// width: 120,
+																sort: true
+																// edit: 'text'
+															}
+								, {
+									field: 'title',
+									title: '标题',
+									// width: 200,
+									// edit: 'text',
+								}, {
+									field: 'summary',
+									title: '摘要',
+									// width: 220,
+									// edit: 'text',
+			
+								}, {
+									field: 'categotyname',
+									title: '分类',
+									// width: 100,
+									sort: true
+								}, {
+									// fixed: 'right',
+									title: '操作',
+									toolbar: '#barDemo',
+									// width: 120
+								}
+							]
+						],
+						page: true
+					});
+			
+					//头工具栏事件
+					table.on('toolbar(test)', function(obj) {
+						var checkStatus = table.checkStatus(obj.config.id);
+						switch (obj.event) {
+							case 'del':
+								var data = checkStatus.data;
+								var list = [];
+								layer.confirm('真的要删除这' + data.length + '篇文章么？', function(index) {
+									for (let i of data) {
+										var id = i.articleid;
+										$.ajax({
+											method: "post",
+											url: "json/delete.json",
+											/* /workblog/article/delete */
+											data: {
+												"id": id,
+												"_method": "delete"
+											},
+											success: function(result) {
+												if (result.state !== 1) {
+													return;
+												}
+												var str = "id为" + id + "的文章，" + result.message + "\n";
+			
+												layer.close(index);
+											},
+											error: function(result) {
+												var str = "id为" + id + "的文章，删除失败！\n";
+												toastr.error(str);
+												layer.close(index);
+											}
+										});
+									}
+								}
+								
+								);break;
+							case 'add':
+								window.location.href = "createarticle.html";
+								break;
+						}
+					});
+					//监听行工具事件
+					table.on('tool(test)', function(obj) {
+						var data = obj.data;
+						var id = data.articleid;	
+						//console.log(obj)
+						if (obj.event === 'del') {
+							layer.confirm('真的要删除“' + data.title + '”这篇文章么？', function(index) {
+								$.ajax({
+									method: "post",
+									url: "json/delete.json",
+									/* /workblog/article/delete */
+									data: {
+										"id": id,
+										"_method": "delete"
+									},
+									success: function(result) {
+										if (result.state !== 1) {
+											return;
+										}
+										var str = "id为" + id + "的文章，" + result.message + "\n";
+								
+										layer.close(index);
+									},
+									error: function(result) {
+										var str = "id为" + id + "的文章，删除失败！\n";
+										toastr.error(str);
+										layer.close(index);
+									}
+								});
+							});
+						} else if (obj.event === 'edit') {
+								var id = data.articleid;
+								window.location.href="createarticle.html?id="+id;
+								layer.close(index);
+						}
+					});
+			
+				});
+			</script>
+			
+			
+		
 		<script type="text/javascript">
 			var vm1 = new Vue({
 				el: '#wrapper',
@@ -294,7 +359,26 @@
 				},
 				methods: {
 					chooserole() {
-						//判断用户的角色	
+						//判断用户的角色
+						this.$http.get('/workblog/user/getme').then(result => {
+							var result = result.body;
+							if (result.state != null || result.state === 1) {
+								this.user = result.user;
+								this.usesrname = result.user.username;
+								this.email = result.user.email;
+								this.phone = result.user.phone;
+								this.autograph = result.user.autograph;
+								var now = (new Date()).getYear();
+								var pass = (new Date(user.createdate)).getYear();
+								this.year = now - pass;
+								for (let i of result.roles) {
+									if (i.roleid === 1) {
+										this.role = true;
+									}
+								}
+							}
+
+						});
 					},
 					changeActive(a) {
 						var myInfoActive = $("#myInfoActive");

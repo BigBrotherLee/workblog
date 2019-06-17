@@ -18,9 +18,12 @@
 		<link href="http://fonts.googleapis.com/css?family=Shadows+Into+Light+Two&amp;subset=latin-ext" rel="stylesheet">
 		<link href="http://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
 		<link href="css/stylelht.css" rel="stylesheet" type="text/css" media="all" />
+		<script type="text/javascript" src="../static/js/vue.js"></script>
+		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
 	</head>
 
 	<body>
+		<div id="app">
 		<!-- banner -->
 		<div class="banner1">
 			<div class="container navdiv">
@@ -41,7 +44,7 @@
 								<li class="active"><a href="services.html"><span>首页</span></a></li>
 								<li><a href="gallery.html"><span>分类</span></a></li>
 								<li><a href="friend.html"><span>友链</span></a></li>
-								<li><a href="about.html"><span>关于</span></a>
+								<li><a href="about.html"><span>关于</span></a></li>
 							</ul>
 							<div class="agileinfo_social_icons">
 								<ul class="agileits_social_list">
@@ -52,250 +55,64 @@
 											<button class="btn btn-default btn2" type="button">搜索</button>
 										</span>
 									</li>
-									<li><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">&nbsp&nbsp&nbsp登录</i></a></li>
-									<li><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">&nbsp&nbsp&nbsp注册</i></a></li>
+									<li v-show="!role"><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">登录</i></a></li>
+									<li v-show="!role"><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">注册</i></a></li>
+									<li v-show="role"><a href="../admin/index.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">{{user.username}}</i></a></li>
+									<li v-show="role"><a href="/workblog/user/logout" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">退出</i></a></li>
 								</ul>
 							</div>
+						</nav>
 					</div>
 				</nav>
 			</div>
-			</nav>
 		</div>
-		</div>
-
 		<!-- //banner -->
-		<!-- services -->
+
+		<!-- main -->
 		<div class="banner-bottom">
 			<div class="container navdiv">
-				<div class="agileits_heading_section">
-					<label class="wel"></label>
-					<h2 class="w3ls_head">最新</h2>
-				</div>
-				<div class="w3ls_banner_bottom_grids">
-					<div class="col-md-4 agileits_services_grid">
-						<h3>新华社</h3>
-						<p class="p1">中国金融业运行稳健，经得起外部变化冲击.记者问答</p>
-						<div class="w3_agile_services_grid1">
-							<img src="images/g10.jpg" alt=" " class="img-responsive" />
-							<div class="w3_blur"></div>
-						</div>
-						<div class="w3layouts_more">
-							<a href="article.html" data-toggle="modal" data-target="#myModal">了解更多<i class="fa fa-long-arrow-right"
-								 aria-hidden="true"></i></a>
-						</div>
+				<div>
+					<div class="agileits_heading_section">
+						<label class="wel"></label>
+						<h2 class="w3ls_head">最新</h2>
 					</div>
-					<div class="col-md-4 agileits_services_grid">
-						<h3>澎湃新闻</h3>
-						<p class="p1">河北廊坊北三县与北京通州将实现“四统一”规划.</p>
-						<div class="w3_agile_services_grid1">
-							<img src="images/g11.jpg" alt=" " class="img-responsive" />
-							<div class="w3_blur"></div>
-						</div>
-						<div class="w3layouts_more">
-							<a href="article.html" data-toggle="modal" data-target="#myModal">了解更多<i class="fa fa-long-arrow-right"
-								 aria-hidden="true"></i></a>
-						</div>
-					</div>
-					<div class="col-md-4 agileits_services_grid">
-						<h3>人民日报</h3>
-						<p class="p1">硬核！高考加油！维和女警给高三的儿子发了张照片….</p>
-						<div class="w3_agile_services_grid1">
-							<img src="images/g10.jpg" alt=" " class="img-responsive" />
-							<div class="w3_blur"></div>
-						</div>
-						<div class="w3layouts_more">
-							<a href="article.html" data-toggle="modal" data-target="#myModal">了解更多<i class="fa fa-long-arrow-right"
-								 aria-hidden="true"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="w3ls_banner_bottom_grids">
-					<div class="col-md-4 agileits_services_grid">
-						<h3>精选</h3>
-						<p class="p1">全球Top20博物馆榜单发布，访问量持续增长背后的原因为何？.</p>
-						<div class="w3_agile_services_grid1">
-							<img src="images/g12.jpg" alt=" " class="img-responsive" />
-							<div class="w3_blur"></div>
-						</div>
-						<div class="w3layouts_more">
-							<a href="article.html" data-toggle="modal" data-target="#myModal">了解更多<i class="fa fa-long-arrow-right"
-								 aria-hidden="true"></i></a>
-						</div>
-					</div>
-					<div class="col-md-4 agileits_services_grid">
-						<h3>军事</h3>
-						<p class="p1">全球哪国军力被夸大，亚洲大国算半个，还有一个纯属纸老虎.</p>
-						<div class="w3_agile_services_grid1">
-							<img src="images/g10.jpg" alt=" " class="img-responsive" />
-							<div class="w3_blur"></div>
-						</div>
-						<div class="w3layouts_more">
-							<a href="article.html" data-toggle="modal" data-target="#myModal">了解更多<i class="fa fa-long-arrow-right"
-								 aria-hidden="true"></i></a>
-						</div>
-					</div>
-					<div class="col-md-4 agileits_services_grid">
-						<h3>时尚</h3>
-						<p class="p1">男人出门为什么不爱穿西装？你认为怎么穿才能显得更加时尚？.</p>
-						<div class="w3_agile_services_grid1">
-							<img src="images/g10.jpg" alt=" " class="img-responsive" />
-							<div class="w3_blur"></div>
-						</div>
-						<div class="w3layouts_more">
-							<a href="article.html" data-toggle="modal" data-target="#myModal">了解更多<i class="fa fa-long-arrow-right"
-								 aria-hidden="true"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="w3ls_banner_bottom_grids">
-					<div class="col-md-4 agileits_services_grid">
-						<h3>旅游</h3>
-						<p class="p1">中国最值得去的10大景区，去过6个的都很少，每一个都不想错过.</p>
-						<div class="w3_agile_services_grid1">
-							<img src="images/g10.jpg" alt=" " class="img-responsive" />
-							<div class="w3_blur"></div>
-						</div>
-						<div class="w3layouts_more">
-							<a href="article.html" data-toggle="modal" data-target="#myModal">了解更多<i class="fa fa-long-arrow-right"
-								 aria-hidden="true"></i></a>
-						</div>
-					</div>
-					<div class="col-md-4 agileits_services_grid">
-						<h3>情感</h3>
-						<p class="p1">一个人走路，一个人看风景，一个人听陌生的歌</p>
-						<div class="w3_agile_services_grid1">
-							<img src="images/g10.jpg" alt=" " class="img-responsive" />
-							<div class="w3_blur"></div>
-						</div>
-						<div class="w3layouts_more">
-							<a href="article.html" data-toggle="modal" data-target="#myModal">了解更多<i class="fa fa-long-arrow-right"
-								 aria-hidden="true"></i></a>
-						</div>
-					</div>
-					<div class="col-md-4 agileits_services_grid">
-						<h3>美食</h3>
-						<p class="p1">给外国厨师留下阴影的中国菜，做一次就要毁个锅，直呼：别再点了.</p>
-						<div class="w3_agile_services_grid1">
-							<img src="images/g11.jpg" alt=" " class="img-responsive" />
-							<div class="w3_blur"></div>
-						</div>
-						<div class="w3layouts_more">
-							<a href="article.html" data-toggle="modal" data-target="#myModal">了解更多<i class="fa fa-long-arrow-right"
-								 aria-hidden="true"></i></a>
+					<div class="w3ls_banner_bottom_grids">
+						<div v-for="item in newlist" :key="item.articleid" class="col-md-4 agileits_services_grid lht1">
+							<h3>{{item.title}}</h3>
+							<p class="p1">{{item.summary}}</p>
+							<div class="w3_agile_services_grid1">
+								<img :src="item.img" alt=" " class="img-responsive" />
+								<div class="w3_blur"></div>
+							</div>
+							<div class="w3layouts_more">
+								<a :href="'article.html?articleid='+item.articleid">文章详情<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+							</div>
 						</div>
 					</div>
 				</div>
 				<!-- //services -->
 				<!-- offer -->
 				<div class="offer">
-					<div class="container">
+					<div class="container lht3">
 						<div class="agileits_heading_section">
 							<label class="wel"></label>
 							<h3 class="w3ls_head">最热</h3>
 						</div>
-						<div class="w3ls_banner_bottom_grids">
-							<div class="col-md-4 agile_offer_grid">
+						<div class="w3ls_banner_bottom_grids lht4">
+							<div v-for="item in hotlist" :key="item.articleid" class="col-md-4 agile_offer_grid lht2">
+								<a :href="'article.html?articleid='+item.articleid">
 								<div class="agileits_w3layouts_offer_grid">
 									<div class="agile_offer_grid_pos">
-										<p>01.</p>
+										<p>{{item.articleid}}</p>
 									</div>
 								</div>
 								<div class="wthree_offer_grid1">
-									<h4>健康 </h4>
-									<p class="w3_agileits_service_para ">每天要睡够8小时原来是错的，专家：该睡多久，看这张表.</p>
+									<h4>{{item.title}}</h4>
+									<p class="w3_agileits_service_para lht5">{{item.summary}}</p>
 								</div>
+								</a>
 							</div>
-							<div class="col-md-4 agile_offer_grid">
-								<div class="agileits_w3layouts_offer_grid">
-									<div class="agile_offer_grid_pos">
-										<p>02.</p>
-									</div>
-								</div>
-								<div class="wthree_offer_grid1">
-									<h4>历史 </h4>
-									<p class="w3_agileits_service_para">一代名将卫青：从奴隶到当朝驸马.</p>
-								</div>
-							</div>
-							<div class="col-md-4 agile_offer_grid">
-								<div class="agileits_w3layouts_offer_grid">
-									<div class="agile_offer_grid_pos">
-										<p>03.</p>
-									</div>
-								</div>
-								<div class="wthree_offer_grid1">
-									<h4>科技 </h4>
-									<p class="w3_agileits_service_para">鸿蒙OS海外版首次曝光！改名ARK OS，已在欧洲注册.</p>
-								</div>
-							</div>
-							<div class="col-md-4 agile_offer_grid">
-								<div class="agileits_w3layouts_offer_grid">
-									<div class="agile_offer_grid_pos">
-										<p>04.</p>
-									</div>
-								</div>
-								<div class="wthree_offer_grid1">
-									<h4>国际 </h4>
-									<p class="w3_agileits_service_para">马斯克22.84亿美元登顶2018 CEO薪酬榜，特斯拉称实际收入为0.</p>
-								</div>
-							</div>
-							<div class="col-md-4 agile_offer_grid">
-								<div class="agileits_w3layouts_offer_grid">
-									<div class="agile_offer_grid_pos">
-										<p>05.</p>
-									</div>
-								</div>
-								<div class="wthree_offer_grid1">
-									<h4>女性 </h4>
-									<p class="w3_agileits_service_para">女生如何迅速的哄好自己的男朋友？.</p>
-								</div>
-							</div>
-							<div class="col-md-4 agile_offer_grid">
-								<div class="agileits_w3layouts_offer_grid">
-									<div class="agile_offer_grid_pos">
-										<p>06.</p>
-									</div>
-								</div>
-								<div class="wthree_offer_grid1">
-									<h4>幽默 </h4>
-									<p class="w3_agileits_service_para">买车就送“小姐姐”，有你喜欢的那款吗？.</p>
-								</div>
-							</div>
-							<div class="col-md-4 agile_offer_grid">
-								<div class="agileits_w3layouts_offer_grid">
-									<div class="agile_offer_grid_pos">
-										<p>07.</p>
-									</div>
-								</div>
-								<div class="wthree_offer_grid1">
-									<h4>体育 </h4>
-									<p class="w3_agileits_service_para">李可将成首位归化国脚！国足新名单圈定：郑智入选埃尔克森需等待</p>
-								</div>
-							</div>
-
-
-							<div class="col-md-4 agile_offer_grid">
-								<div class="agileits_w3layouts_offer_grid">
-									<div class="agile_offer_grid_pos">
-										<p>08.</p>
-									</div>
-								</div>
-								<div class="wthree_offer_grid1">
-									<h4>哲学 </h4>
-									<p class="w3_agileits_service_para">我们为什么要读哲学？.</p>
-								</div>
-							</div>
-							<div class="col-md-4 agile_offer_grid">
-								<div class="agileits_w3layouts_offer_grid">
-									<div class="agile_offer_grid_pos">
-										<p>09.</p>
-									</div>
-								</div>
-								<div class="wthree_offer_grid1">
-									<h4>国风 </h4>
-									<p class="w3_agileits_service_para">一幅800年前的神秘古画，无论谁看，都会触动内心深处.</p>
-								</div>
-							</div>
-
+						
 							<div class="clearfix"> </div>
 						</div>
 					</div>
@@ -307,52 +124,141 @@
 			<div class="copy-right-grids" style="margin-top: 10px;">
 				<div>
 					<div class="copy-left">
-						<p class="footer-gd">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 浅行博客 模板来自 <a href="http://www.cssmoban.com/"
-							 target="_blank" title="模板之家">模板之家</a><a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+						<p class="footer-gd">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 浅行博客 模板来自 </p>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 			</div>
-
-			<!-- //footer-->
-			<!-- bootstrap-pop-up -->
-			<!-- for bootstrap working -->
-			<script src="js/bootstrap.js"></script>
-			<!-- //for bootstrap working -->
-			<!-- start-smoth-scrolling -->
-			<script type="text/javascript" src="js/move-top.js"></script>
-			<script type="text/javascript" src="js/easing.js"></script>
-			<script type="text/javascript">
-				jQuery(document).ready(function($) {
-					$(".scroll").click(function(event) {
-						event.preventDefault();
-						$('html,body').animate({
-							scrollTop: $(this.hash).offset().top
-						}, 1000);
-						
-					});
-				});
-			</script>
-			<!-- start-smoth-scrolling -->
-			<!-- here stars scrolling icon -->
-			<script type="text/javascript">
-				$(document).ready(function() {
-					/*
-						var defaults = {
-						containerID: 'toTop', // fading element id
-						containerHoverID: 'toTopHover', // fading element hover id
-						scrollSpeed: 1200,
-						easingType: 'linear' 
-						};
-					*/
-
-					$().UItoTop({
-						easingType: 'easeOutQuart'
-					});
-
-				});
-			</script>
-			<!-- //here ends scrolling icon -->
 		</div>
+		<!-- //footer-->
+		</div>
+		<!-- bootstrap-pop-up -->
+		<!-- for bootstrap working -->
+		<script src="../static/js/bootstrap.min.js"></script>
+		<!-- //for bootstrap working -->
+		<!-- start-smoth-scrolling -->
+		<script type="text/javascript" src="js/move-top.js"></script>
+		<script type="text/javascript" src="js/easing.js"></script>
+		<!-- 滚回顶部 -->
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event) {
+					event.preventDefault();
+					$('html,body').animate({
+						scrollTop: $(this.hash).offset().top
+					}, 1000);
+
+				});
+			});
+		</script>
+		<!-- start-smoth-scrolling -->
+		<!-- here stars scrolling icon -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				/*
+					var defaults = {
+					containerID: 'toTop', // fading element id
+					containerHoverID: 'toTopHover', // fading element hover id
+					scrollSpeed: 1200,
+					easingType: 'linear' 
+					};
+				*/
+
+				$().UItoTop({
+					easingType: 'easeOutQuart'
+				});
+
+			});
+		</script>
+		<!-- //here ends scrolling icon -->
+		<!-- vue.js -->
+		<script type="text/javascript">
+			var vm1 = new Vue({
+				el: '#app',
+				data: {
+					role: '',
+					user:{},
+					newlist: [1,2,3],
+					hotlist: [1,2,3],
+				},
+				created() {
+					this.chooserole();
+					this.getNew();
+					this.getHot();
+				},
+				methods: {
+					chooserole() {
+						
+						//判断用户的角色	
+						this.$http.get('/workblog/user/getme').then(result => {
+							var result = result.body;
+							this.user = result.user;
+							this.role = true;
+						});
+					},
+					getNew() {
+						//判断用户的角色	
+						this.$http.get('/workblog/article/getnew?index=1&length=9').then(result => {
+							var result = result.body;
+							this.newlist=result.data.list;
+							
+						});
+					},
+					getHot() {
+						//判断用户的角色	
+						this.$http.get('/workblog/article/gethot?index=1&length=9').then(result => {
+							var result = result.body;
+							// alert(result);
+							this.hotlist=result.data.list;
+							
+						});
+					},
+					changeActive(a) {
+						var myInfoActive = $("#myInfoActive");
+						//					alert(myInfoActive)
+						var changeImgActive = $("#changeImgActive");
+						var myInfo = $("#myInfo"); //基本资料内容
+						var changeImg = $("#changeImg"); //内容
+						//					var a = $("#myInfoActive").hasClass('active');//切换功能
+						if (a) {
+							//显示修改头像
+							myInfoActive.removeClass('active'); //基本资料
+							changeImgActive.addClass('active');
+							myInfo.removeClass('active');
+							changeImg.addClass('active');
+
+						} else {
+							//显示基本资料
+							myInfoActive.addClass('active');
+							changeImgActive.removeClass('active'); //基本资料
+							myInfo.addClass('active');
+							changeImg.removeClass('active');
+						}
+
+					},
+					getUserList() { /*http://localhost:8080/WMPX/user/showIndustry*/
+						var t = this.getCookie("token");
+						this.$http.get('/wmpx/user/token/' + t).then(result => {
+							var result = result.body;
+							if (result.status === 200) {
+								this.list1 = result.data;
+								console.log(this.list1);
+							} else {
+								alert("数据连接失败");
+							}
+						});
+					},
+					getRequest() {
+						var url = location.search; //获取url中"?"符后的字串
+						var theRequest = new Object();
+						if (url.indexOf("?") != -1) {
+							var strs = url.substr(1);
+							this.id = strs.split("=")[1];
+						}
+						return theRequest;
+					},
+				}
+			});
+		</script>
 	</body>
 </html>

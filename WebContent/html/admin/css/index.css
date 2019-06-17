@@ -93,6 +93,11 @@ profile.html
 ======================================= 
 */
 
+.upfile{
+	    margin-left: 40px;
+    margin-top: -10px;
+}
+
 .profilediv .profile-stat .stat-item .userage {
 	display: inline-block;
 	margin-right: 20px;

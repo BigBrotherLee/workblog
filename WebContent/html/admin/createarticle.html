@@ -296,23 +296,29 @@
 
 <!--分类-->
 <script>
-    $(function () {
-        //得到全部分类
-        $.ajax({
-            method:"get",
-            url:"categoty/getall",
-            success:function (data) {
-                $("select[name='categoty']").append("<option value='0'>"+"写作"+"</option>" );
-                $("select[name='categoty']").append("<option value='0'>"+"写作"+"</option>" );
-                $("select[name='categoty']").append("<option value='0'>"+"写作"+"</option>" );
-            },
-            error:function () {
-                $("select[name='categoty']").append("<option value='0'>"+"写作"+"</option>" );
-                $("select[name='categoty']").append("<option value='0'>"+"写作"+"</option>" );
-                $("select[name='categoty']").append("<option value='0'>"+"写作"+"</option>" );
+$(function () {
+    //得到全部分类
+    $.ajax({
+        method:"get",
+        url:"/workblog/categoty/getall",
+        success:function (data) {
+            if(data.state!==1){
+                alert(data.message);
+                return;
             }
-        });
+            var list=data.data;
+            var ele=$("select[name='categoty']");
+            var str="";
+            for(let c of list){
+                str+="<option value='"+c.categotyid+"'>"+c.categotytitle+"</option>";
+            }
+            ele.append(str);
+        },
+        error:function (data) {
+            alert("查询出错");
+        }
     });
+});
 </script>
 <!--标签-->
 <script>
@@ -334,23 +340,47 @@
 
 <!--提交表单-->
 <script>
-    $("save-srticle").click(function () {
-        var img=$("#icon").attr("src");
-        var content=testEditor.getMarkdown();
-        var contentformat=testEditor.getHTML() ||testEditor.getPreviewedHTML();
-        //校验
-        $.ajax({
-            method: "POST",
-            data:{},
-            url: "article/add",
-            success:function () {
-
-            },
-            error:function () {
-                
+$("save-srticle").click(function () {
+    var img=$("#icon").attr("src");
+    var content=testEditor.getMarkdown();
+    var contentformat=testEditor.getHTML() ||testEditor.getPreviewedHTML();
+    var summary=$("input[name='summary']").val();
+    var tags=$("#tags .layui-badge");
+    //校验
+    $.ajax({
+        method: "POST",
+        data:{
+            "img":img,
+            "content":content,
+            "contentgormat":contentformat,
+            "summary":summary
+        },
+        url: "/workblog/article/add",
+        success:function (data) {
+            if(data.state!==1){//保持失败
+                console.log(data.message);
+                return;
             }
-        });
+            console.log(data.message);
+            var formdata=new FormData();
+            for(let t of tags){
+                formdata.append("name",t.innerHTML);
+            }
+            formdata.append("articleid",data.data.articleid);
+            $.ajax({
+                method:"post",
+                url:"/workblog/article/addtagstoarticle",
+                data:formdata,
+                success:function (data) {
+                    console.log("添加tag标签成功");
+                }
+            });
+        },
+        error:function () {
+            
+        }
     });
+});
 </script>
 <!--img cutter-->
 <script>
@@ -376,12 +406,28 @@
 
     });
     //#icon元素的src就是截图后的文件,base64
-
     $(".avatar-save").on("click",function() {
         console.log("==========================================");
         var dataURL = $image.cropper("getCroppedCanvas");//这个可以获得大图
         var imgurl = dataURL.toDataURL("image/*", 1);
-        $('#icon').attr('src', imgurl);
+        $.ajax({
+            method:"post",
+            url:"file/uploadBase64",
+            data:{
+                "img":imgurl
+            },
+            success:function (data) {
+                if(data.state===1){
+                    imgurl=data.data;
+                }else{
+                    console.log(data.message);
+                }
+            },
+            error:function (data) {
+                alert("图片服务器异常");
+            }
+        });
+
     });
 </script>
 
