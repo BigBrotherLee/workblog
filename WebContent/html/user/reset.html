@@ -93,7 +93,9 @@
 							<div class="youxiang-btn fr">
 								<input type="submit" class="submit" value="点击发送验证码">
 							</div>
-							<div class="reset-form fl">
+							
+						</div>
+						<div class="reset-form fl">
 								<dl>
 									<dt>输&nbsp;入&nbsp;验&nbsp;证&nbsp;码：</dt>
 									<dd>
@@ -126,8 +128,7 @@
 							<div class="reset-anniu fl">
 								<input type="submit" class="submit1 confirm" value="确认">
 							</div>
-
-						</div>
+						
 					</div>
 
 				</div>
@@ -144,7 +145,6 @@
 			var email_name = $("input[name='email_name']").val();
 			if (!reg.test(email_name)) {
 				toastr.error("邮箱格式不正确");
-				return;
 			}
 		});
 		$(".submit").click(function() {
@@ -176,17 +176,13 @@
 			var isPasswordFormat = reg1.test(password1);
 			if (!isPasswordFormat) {
 				toastr.error("密码格式不正确");
-				return;
 			}
 		});
 		$(".password2").blur(function() {
 			var password2 = $("input[name='password2']").val();
 			var password1 = $("input[name='password1']").val();
-			var isPasswordFormat = reg1.test(password1);
-			var isPasswordFormat1 = reg1.test(password2);
 			if (password1 != password2) {
 				toastr.error("两次密码不一致");
-				return;
 			}
 		});
 		$(".confirm").click(function() {
@@ -215,7 +211,7 @@
 
 			$.ajax({
 				method : "post",
-				url : "/workblog/user/resetPassword",
+				url : "/workblog/user/resetpassword",
 				data : {
 					"password" : password1,
 					"code" : code_name
@@ -224,7 +220,7 @@
 					if (result.state === 1) {
 						window.location.href = "login.html";
 					} else {
-						toastr.erro("哦吼，出错了~");
+						toastr.error("哦吼，出错了~");
 					}
 				},
 			});

@@ -71,30 +71,57 @@
 		<!-- main -->
 		<div class="banner-bottom">
 			<div class="container navdiv">
-				<div>
-					<div class="agileits_heading_section">
+					<div class="agileits_heading_section row">
 						<label class="wel"></label>
 						<h2 class="w3ls_head">最新</h2>
 					</div>
-					<div class="w3ls_banner_bottom_grids">
-						<div v-for="item in newlist" :key="item.articleid" class="col-md-4 agileits_services_grid lht1">
-							<h3>{{item.title}}</h3>
-							<p class="p1">{{item.summary}}</p>
-							<div class="w3_agile_services_grid1">
-								<img :src="item.img" alt=" " class="img-responsive" />
-								<div class="w3_blur"></div>
+					<div  class="w3ls_banner_bottom_grids">
+						<div v-if="newlist.length>0" class="row">
+							<div v-for="(item, index) in newlist.slice(0, 3)" :key="item.articleid" class="col-md-4 agileits_services_grid lht1">
+								<h3>{{item.title}}</h3>
+								<p class="p1">{{item.summary}}</p>
+								<div class="w3_agile_services_grid1">
+									<img :src="item.img" alt=" " class="img-responsive" />
+									<div class="w3_blur"></div>
+								</div>
+								<div class="w3layouts_more">
+									<a :href="'article.html?articleid='+item.articleid">文章详情<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+								</div>
 							</div>
-							<div class="w3layouts_more">
-								<a :href="'article.html?articleid='+item.articleid">文章详情<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+						</div>
+						
+						<div v-if="newlist.length>3" class="row">
+							<div v-for="(item, index) in newlist.slice(3, 6)" :key="item.articleid" class="col-md-4 agileits_services_grid lht1">
+								<h3>{{item.title}}</h3>
+								<p class="p1">{{item.summary}}</p>
+								<div class="w3_agile_services_grid1">
+									<img :src="item.img" alt=" " class="img-responsive" />
+									<div class="w3_blur"></div>
+								</div>
+								<div class="w3layouts_more">
+									<a :href="'article.html?articleid='+item.articleid">文章详情<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+								</div>
+							</div>
+						</div>
+						<div v-if="newlist.length>6" class="row">
+							<div v-for="(item, index) in newlist.slice(6, 9)" :key="item.articleid" class="col-md-4 agileits_services_grid lht1">
+								<h3>{{item.title}}</h3>
+								<p class="p1">{{item.summary}}</p>
+								<div class="w3_agile_services_grid1">
+									<img :src="item.img" alt=" " class="img-responsive" />
+									<div class="w3_blur"></div>
+								</div>
+								<div class="w3layouts_more">
+									<a :href="'article.html?articleid='+item.articleid">文章详情<i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				<!-- //services -->
 				<!-- offer -->
 				<div class="offer">
 					<div class="container lht3">
-						<div class="agileits_heading_section">
+						<div class="agileits_heading_section row">
 							<label class="wel"></label>
 							<h3 class="w3ls_head">最热</h3>
 						</div>

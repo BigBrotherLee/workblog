@@ -44,6 +44,7 @@
 			<set>
 				<if test="username!=null">username=#{username},</if>
 				<if test="password!=null">password=#{password},</if>
+				<if test="salt!=null">salt=#{salt},</if>
 				<if test="phone!=null">phone=#{phone},</if>
 				<if test="email!=null">email=#{email},</if>
 				<if test="modifydate!=null">modifydate=#{modifydate},</if>
