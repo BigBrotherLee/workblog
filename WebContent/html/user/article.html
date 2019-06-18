@@ -85,7 +85,7 @@
 									</span></li>
 									<li v-show="!role"><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">登录</i></a></li>
 									<li v-show="!role"><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">注册</i></a></li>
-									<li v-show="role"><a href="../admin/index.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">{{user.username}}</i></a></li>
+									<li v-show="role"><a href="../admin/index.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">{{typeof user=="undefined"?"":user.username}}</i></a></li>
 									<li v-show="role"><a href="/workblog/user/logout" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">退出</i></a></li>
 								</ul>
 							</div>
@@ -126,24 +126,24 @@
 						</div>
 					</div>
 				</div>
-				<div class="article-detail">
-					<div class="detail-wai">
-						<div class="article-detail-left-wai">
+				<div class="article-detail container">
+					<div class="detail-wai row">
+						<div class="article-detail-left-wai col-lg-8">
 							<div class="left-wai">
 								<div class="left-image-wai">
 									<div class="left-image">
-										<img :src="article.img">
+										<img :src="article.img" class="img-responsive">
 									</div>
 								</div>
 								<div class="left-article-wai">
 									<div class="left-article">
-										<div class="article-title">
+										<div class="article-title text-center">
 											<h1 style="font-size: 38px;">{{article.title}}</h1>
-											<span class="post-meta"> <i class="fa fa-user"></i>&nbsp;
-												<a :href="'authorarticle.html?authorid='+article.author" rel="author">{{author.username}}</a>&nbsp; <i
-												class="fa fa-calendar"></i> &nbsp; <a href="" rel="bookmark">
-													<time datetime="2017-11-28T15:18:13+00:00">创建时间:{{article.createdate}}</time>
-											</a> <a href=""> <i class="fa fa-comment-o"> </i> {{article.commentnum}}条评论
+											<span class="post-meta"> 
+											<i class="fa fa-user"></i>&nbsp;<a :href="'authorarticle.html?authorid='+article.author" rel="author">{{author.username}}</a>
+											&nbsp; <i class="fa fa-calendar"></i> &nbsp; <a href="" rel="bookmark"><time datetime="2017-11-28">创建时间:{{article.createdate}}</time></a>
+											<a href=""> 
+											<i class="fa fa-comment-o"> </i> {{article.commentnum}}条评论
 											</a></span>
 										</div>
 										<div class="article-mainbody">
@@ -157,7 +157,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="article-detail-right-wai">
+						<div class="article-detail-right-wai col-lg-4">
 							<div class="right-personmsg-wai">
 								<div class="personmsg-wz-wai">
 									<div class="personmsg-wz">
@@ -207,10 +207,10 @@
 					</div>
 				</div>
 				<div class="comment-area">
-					<div class="content-box-wai">
+					<div class="content-box-wai container">
 						<div class="content-box">
 							<div class="content-box-li fr">
-								<div class="content-one-box">
+								<div class="content-one-box row">
 									<a class="contcent-touxiang"> 
 										<img :src="user.img" class="img-circle">
 									</a>
@@ -223,7 +223,7 @@
 												<textarea class="form-control no-border" rows="3"
 													placeholder="你的观点..." style="border-radius: 20px;"></textarea>
 											</form>
-											<div class="panel-footer bg-light lter">
+											<div class="bg-light lter">
 												<button class="btn btn-info pull-right btn-sm">
 													<div style="font-size:20px;">提交</div>
 												</button>
@@ -232,8 +232,8 @@
 										</div>
 									</div>
 								</div>
-
-								<div v-for="item in commentOne"  class="content-one-box">
+							</div>
+								<div v-for="item in commentOne"  class="content-one-box row">
 									<a class="contcent-touxiang"> <img :src="item.pic" class="img-circle">
 									</a>
 									<div class="content-neirong-box fr">
@@ -281,7 +281,6 @@
 														<button class="btn btn-info pull-right btn-sm">
 															<div style="font-size:20px;">提交</div>
 														</button>
-
 													</div>
 												</div>
 											</div>
@@ -290,7 +289,7 @@
 								</div>
 
 							</div>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -382,6 +381,7 @@
 						var result = result.body;
 						if(result.state===1){
 							this.article=result.data;
+							this.article.createdate=new Date(result.data.createdate);
 							this.getAuthor();
 							this.getAuthorArticle();
 						}

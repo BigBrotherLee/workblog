@@ -67,8 +67,8 @@ margin-left: 60px;
 }
 
 .banxin {
+	min-height:800px;
 	width: 80%;
-	height: 1200px;
 	margin: 0 auto;
 	max-width: 1280px;
 	background-color: #F5F5F5;
@@ -97,6 +97,7 @@ margin-left: 60px;
 	overflow: hidden;
 	transition: all .2s ease-in-out;
 	/* margin-left: 20px; */
+	float:right;
 
 
 }
@@ -125,21 +126,17 @@ margin-left: 60px;
 }
 
 .gallerydetail {
+	float:left;
 	height: 84%;
 	width: 25%;
 	background-color: #F5F5F5;
 }
 
 .gallerymsg {
-	height: 40%;
-	width: 90%;
+	float:left;
 	margin: auto;
 	margin-top: 30px;
-	background: url(../images/touxiang.jpg) no-repeat -56px 0;
-	background-size: cover;
-}
-
-.gallerymsg1 {
+	min-height:350px;
 	height: 40%;
 	width: 90%;
 	margin: auto;
@@ -147,22 +144,34 @@ margin-left: 60px;
 	/* 	background:url(../images/touxiang.jpg) no-repeat -56px 0;
 	background-size: cover; */
 	background-color: white;
-	border: 2px solid #55615A
+	border: 2px solid #55615A;
+}
+
+.gallerymsg1 {
+	min-height:350px;
+	height: 40%;
+	width: 90%;
+	margin: auto;
+	margin-top: 30px;
+	/* 	background:url(../images/touxiang.jpg) no-repeat -56px 0;
+	background-size: cover; */
+	background-color: white;
+	border: 2px solid #55615A;
 }
 
 .gallery-name {
 	height: 10%;
 	width: 55%;
-	background: #000000;
+
 	opacity: .8;
-	margin-left: 20px;
+	margin: auto;
 }
 
 .gallery-name h1 {
 	font-family: "宋体";
 	letter-spacing: 2px;
 	font-size: 30px;
-	color: white;
+	color: black;
 
 }
 
@@ -242,9 +251,11 @@ margin-left: 60px;
 .gallery-jianjie p {
 	font-size: 20px;
 	letter-spacing: 3px;
-	color: white;
+	color: black;
 }
-
+.page ul{
+	margin:auto;
+}
 .gallery-jianjie1 p {
 	font-size: 20px;
 	letter-spacing: 3px;
@@ -252,12 +263,14 @@ margin-left: 60px;
 }
 
 .biaoqian {
+	min-height:350px;
 	height: 40%;
 	width: 90%;
 	margin: auto;
-	margin-top: 60px;
-	background: url(../images/touxiang.jpg) no-repeat -56px 0;
-	background-size: cover;
+	background-color: white;
+	border: 2px solid #55615A;
+	margin-top: 30px;
+	
 }
 
 .biaoqian-list {
@@ -275,14 +288,19 @@ margin-left: 60px;
 }
 
 .biaoqian1 {
+	float:left;
+	min-height:350px;
 	height: 40%;
-	width: 90%;
+	width: 25%;
 	margin: auto;
+	background-color: white;
+	border: 2px solid #55615A;
 	margin-top: 30px;
-	background: url(../images/touxiang.jpg) no-repeat -56px 0;
-	background-size: cover;
 }
-
+.gallery-name h1{
+	margin:auto;
+	padding-top:20px;
+}
 .author-name {}
 
 .post-title {
@@ -473,31 +491,31 @@ text-align: center;
 }
 
 .dlzuida {
-	height: 800px;
 	width: 100%;
-	background:
-		/* #FAFAFA; */
-		url(../images/beijing3.jpg) no-repeat 0px 0px;
-	background-size: cover;
-}
+	background:	url(../images/file0002.jpg) no-repeat 0px 0px;
+	background-size: 100% 100%;
+	margin:0px;
+	min-height:839px;
+	}
 
 .dlleft {
 	margin-top: 90px;
 	margin-left: 200px;
 	height: 450px;
 	width: 800px;
-	background: url(../images/book.jpg) no-repeat 0px 0px;
+	/* background: url(../images/abtop.jpg) no-repeat 0px 0px; */
 	background-size: cover;
 
 }
 
 .dl {
+	float:right;
 	height: 500px;
 	width: 450px;
 	margin-top: 60px;
-	margin-right: 150px;
+	margin-right: 200px;
 	/* background-color: white; */
-	background: url(../images/book.jpg) no-repeat 0px 0px;
+	
 	background-size: cover;
 	opacity: .9;
 	border: 1px solid #E6E6E6;
@@ -631,20 +649,15 @@ input {
 }
 
 .zczuida {
-	height: 900px;
+	min-height:838px;
 	width: 100%;
-	background:
-		/* #FAFAFA; */
-		url(../images/beijing3.jpg) no-repeat -180px 0px;
-	background-size: cover;
-	padding-top: 60px;
-
+	background:url(../images/banner.jpg) no-repeat 0px 0px;
+	background-size: 100% 100%;
 }
 
 .register-box {
 	height: 90%;
 	width: 40%;
-	background: url(../images/book.jpg) no-repeat -240px 0px;
 	opacity: .9;
 	background-size: cover;
 	margin: auto;
@@ -668,7 +681,6 @@ input {
 	height: 600px;
 	width: 100%;
 	margin-top: 40px;
-	/* background-color: red; */
 }
 
 .register-neirong {
@@ -676,7 +688,6 @@ input {
 	height: 80%;
 	width: 90%;
 	margin-top: 20px;
-	/* background-color: beige; */
 	border-radius: 4px;
 }
 
@@ -716,13 +727,11 @@ input {
 }
 
 .article-zuida {
-	height: 4400px;
 	width: 100%;
-	/* background-color: black; */
+	min-height: 1000px;
 }
 
 .article-zhong {
-	height: 4400px;
 	width: 90%;
 	margin: auto;
 	background-color: white;
@@ -801,55 +810,32 @@ input {
 }
 
 .article-detail {
-	height: 2750px;
 	width: 100%;
 	background-color: #F5F5F5;
 	padding-top: 40px;
 }
 
 .detail-wai {
-	height: 2750px;
 	width: 100%;
-	/* background-color: red; */
-	margin-left:60px;
-
 }
 
 .article-detail-left-wai {
-	height: 2000px;
-	width: 71%;
-	/* background-color: green; */
-
 }
 
-.article-detail-right-wai {
-	height: 2000px;
-	width: 30%;
-	/* background-color: wheat; */
-	margin-top: -2000px;
-	margin-left: 1060px;
+.article-detail-right-wai {	
 }
 
 .left-wai {
-	height: 2000px;
-	width: 83%;
-	/* 			background-color: #000088; */
 	border: 1px solid #e7e7e7;
-
 }
 
 .left-image-wai {
-	height: 600px;
-	width: 100%;
-	/* background-color: #000000; */
+	
 }
 
 .left-image {
-	height: 600px;
-	width:100%;
 	background: url(../images/articltu.jpg) no-repeat 0px 0px;
 	background-size: cover;
-	/* 			background-color: red; */
 }
 
 .left-article-wai {
@@ -862,21 +848,15 @@ input {
 .left-article {
 	height: 95%;
 	width: 90%;
-	margin: auto;
-	/* background-color: #000000; */
+	margin: auto;/
 }
 
 .article-title {
-	height: 200px;
 	width: 100%;
-	/* background-color: white; */
-
 }
 
 .post-meta {
-	margin-left: 270px;
-	/* 		text-align: center; */
-	margin-left: 320px;
+	text-align: center;
 }
 
 .post-meta a {
@@ -893,22 +873,17 @@ input {
 }
 
 .article-mainbody {
-	height: 1640px;
 	width: 100%;
-	/* background-color: #000000 */
 }
 
 .article-mainbody-content {
-	height: 1150px;
 	width: 100%;
 	margin-top: 80px;
-	/* background-color: red; */
 }
 
 .article-mainbodyimage {
-	height: 400px;
+	max-height: 400px;
 	width: 100%;
-	/* 	background: url(../images/articltu.jpg) no-repeat 0px 0px; */
 	background-size: cover;
 }
 
@@ -927,7 +902,6 @@ input {
 	border: 1px solid #e7e7e7;
 	margin-top: 30px;
 	padding-bottom:20px;
-
 }
 
 .article-1{
@@ -940,7 +914,6 @@ input {
 .personmsg-wz-wai {
 	height: 95%;
 	width: 90%;
-	/* background-color: black; */
 	margin: auto;
 
 }
@@ -979,23 +952,19 @@ input {
 
 .personmsg-image-wai {
 	margin-top: 30px;
-	height: 300px;
 	width: 100%;
-	/* background-color: white; */
 }
 
 .personmsg-image {
-	height: 300px;
 	width: 100%;
-	/* background: url(../images/articltu.jpg) no-repeat 0px 0px; */
+	max-height: 300px;
 	background-size: cover;
 }
 
 .geqian-wai {
-	margin-top: 100px;
-	height: 200px;
+	margin-top: 50px;
+	height: 100px;
 	width: 100%;
-	/* background-color: #000000; */
 	text-align: center;
 }
 
@@ -1014,47 +983,38 @@ input {
 }
 
 .comment-area {
-	height: 1350px;
+	margin-top:10px;
+	padding-top:10px;
+	padding-bottom:10px;
 	width: 100%;
 	background-color: #F5F5F5;
 }
 
 .content-box-wai {
-	height: 1350px;
-	width: 100%;
-	margin: auto;
-	background-color: #F5F5F5;
-	/* border: 1px solid #e7e7e7; */
+	width: 95%;
+	background-color: white;
+	padding-bottom: 10px;
 }
 
 .content-box {
-	height: 100%;
-	width: 95%;
 	background-color: white;
-	margin: auto;
-	border: 1px solid #e7e7e7;
-
 }
 
 .content-box-li {
 	height: 97.7%;
 	width: 95%;
-	/* background-color: #000000; */
 	border-left: 2px solid #eead31;
+	background-color: white;
 }
 
 .content-one-box {
 	height: 15%;
 	width: 95%;
-	/* background-color: #000000;  */
-	margin-top: 40px;
-
 }
 
 .contcent-touxiang {
 	display: inline-block;
 	width: 90px;
-	/* 		border-radius: 500px; */
 }
 
 .img-circle {
@@ -1064,15 +1024,14 @@ input {
 
 .content-neirong-box {
 	width: 94%;
-	/* background-color: red; */
 	background-color: #F5F5F5;
+	border: 1px solid #e7e7e7;
 	border-radius: 10px;
 }
 
 .content-id-box {
 	height: 40px;
 	width: 100%;
-	/* background-color: #005BE2; */
 }
 
 .content-id-box a {
@@ -1103,9 +1062,6 @@ input {
 	width: 100%;
 	height: 20%;
 	float: left;
-	/* background-color: white; */
-	border: 1px solid #e7e7e7;
-	border-radius: 10px;
 	margin-top: 10px;
 }
 
@@ -1118,7 +1074,6 @@ input {
 .content-yours {
 	width: 100%;
 	height: 50%;
-	/* background-color: yellow; */
 	margin-top: 0px;
 }
 
@@ -1131,7 +1086,6 @@ input {
 .zhankai {
 	height: 100%;
 	width: 10%;
-	/* background-color: #000000; */
 }
 
 .zhankai a {

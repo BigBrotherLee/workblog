@@ -89,7 +89,7 @@
 									</span></li>
 									<li v-show="!role"><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">登录</i></a></li>
 									<li v-show="!role"><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">注册</i></a></li>
-									<li v-show="role"><a href="../admin/index.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">{{user.username}}</i></a></li>
+									<li v-show="role"><a href="../admin/index.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">{{typeof user=="undefined"?"":user.username}}</i></a></li>
 									<li v-show="role"><a href="/workblog/user/logout" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">退出</i></a></li>
 								</ul>
 							</div>
@@ -149,7 +149,15 @@
 							</div>
 						</a>
 					</div>
-		
+		             <div class="page">
+						<div class="page-nei text-center">
+							<ul class="pagination pagination-lg">
+								<li v-show="articlePage.hasPreviousPage"><a v-on:click="slipPage" :href="'/workblog/article/getpagebyauthor?length=9&authorid='+author.userid+'&index='+articlePage.prePage">&laquo;</a></li>
+								<li><a v-on:click="slipPage" :href="'/workblog/article/getpagebyauthor?length=9&authorid='+author.userid+'&index='+articlePage.pageNum">{{articlePage.pageNum}}</a></li>
+								<li v-show="articlePage.hasNextPage"><a v-on:click="slipPage" :href="'/workblog/article/getpagebyauthor?length=9&authorid='+author.userid+'&index='+articlePage.nextPage">&raquo;</a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -208,19 +216,31 @@
 			this.getAll();
 		},
 		methods: {
+			slipPage() {
+				var ele = event.target;
+				if (ele.href === "") {
+
+				} else {
+					this.$http.get(ele.href).then(result => {
+						var result = result.body;
+						if (result.state === 1) {
+							this.articlePage = result.data;
+						}
+					});
+				}
+				event.preventDefault();  
+			},
+			search(){
+				var key=$.trim(document.getElementById("searchtext").value);
+				if(key=="" || key.length>10){
+					return false;
+				}
+				window.location.href="searchresult.html?key="+key;			
+			},
 			chooserole() {
-				search(){
-					var key=$.trim(document.getElementById("searchtext").value);
-					if(key=="" || key.length>10){
-						return false;
-					}
-					window.location.href="searchresult.html?key="+key;			
-				},
-				
-				//判断用户的角色	
 				this.$http.get('/workblog/user/getme').then(result => {
 					var result = result.body;
-					if(result.user !==null){
+					if(typeof result.user !=="undefined"){
 						this.user = result.user;
 						this.role = true;	
 					}

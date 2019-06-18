@@ -51,7 +51,7 @@
 											<button class="btn btn-default btn2" type="button">搜索</button>
 										</span>
 									</li>
-									<li><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">&nbsp&nbsp&nbsp退出</i></a></li>
+									<li><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">注册</i></a></li>
 								</ul>
 							</div>
 						</nav>
@@ -59,11 +59,11 @@
 				</nav>
 			</div>
 		</div>
-		<div class="dlzuida">
-			<div class="dlleft fl">
-				<img src="images/book.jpg">
+		<div class="dlzuida row">
+			<div class="dlleft fl col-md-6">
+				
 			</div>
-			<div class="dl fr">
+			<div class="dl fr col-md-6">
 				<div class="login-li">
 					<div class="login-top">用户登录</div>
 					<div class="login-z">
@@ -128,20 +128,24 @@
 						"username": username,
 						"password": password
 					},
-					success: function(result) {
-						if(result.state!==1){
-							toastr.error(result.message);
+					success: function(result,d,t) {
+						if(typeof t.responseJSON!="undefined"){
+							toastr.error("用户名或密码错误！！");
 							return;
 						}
 						$.ajax({
 							method: "get",
 							url: "/workblog/user/getme",
 							success: function(result) {
+								if(typeof result.user == "undefined"){
+									toastr.error("用户信息获取失败！！");
+									return;
+								}
 								for(let i of result.roles){
 									if(i.roleid==1 || i.roleid==2){
 										window.location.href="services.html";
 									}else if(i.roleid==3){
-										window.location.href="../aadmin/superadmin.html";
+										window.location.href="/workblog/html/admin/superadmin.html";
 									}else{
 										toastr.error("哦吼，出错了~");
 									}

@@ -75,7 +75,7 @@
 								</span></li>
 								<li v-show="!role"><a href="login.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">登录</i></a></li>
 									<li v-show="!role"><a href="register.html" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">注册</i></a></li>
-									<li v-show="role"><a href="../admin/index.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">{{user.username}}</i></a></li>
+									<li v-show="role"><a href="../admin/index.html" class="w3_agile_facebook"><i class="fa fa-user-o" aria-hidden="true">{{typeof user=="undefined"?"":user.username}}</i></a></li>
 									<li v-show="role"><a href="/workblog/user/logout" class="agile_twitter"><i class="fa fa-sign-in" aria-hidden="true">退出</i></a></li>
 							</ul>
 						</div>
@@ -88,10 +88,10 @@
 	<!-- gallery -->
 	<div class="zuida container-fluid">
 		<div class="banxin row">
-				<div class="gallerydetail fl  ">
+				<div class="gallerydetail fl text-center">
 					<div class="gallerymsg">
 						<div class="gallery-name">
-							<h1># {{categoty.categotytitle}}</h1>
+							<h1>{{categoty.categotytitle}}</h1>
 						</div>
 						<div class="gallery-jianjie">
 							<p>{{categoty.categotydetail}}</p>
@@ -112,6 +112,15 @@
 								<img class="img-responsive" :src="item.img">
 							</div>
 						</a>
+					</div>
+					<div class="page">
+						<div class="page-nei text-center">
+							<ul class="pagination pagination-lg">
+								<li v-show="articlePage.hasPreviousPage"><a v-on:click="slipPage" :href="'/workblog/article/getpagebycategory?length=9&categoryid='+categoty.categotyid+'&index='+articlePage.prePage">&laquo;</a></li>
+								<li><a v-on:click="slipPage" :href="'/workblog/article/getpagebycategory?length=9&categoryid='+categoty.categotyid+'&index='+articlePage.pageNum">{{articlePage.pageNum}}</a></li>
+								<li v-show="articlePage.hasNextPage"><a v-on:click="slipPage" :href="'/workblog/article/getpagebycategory?length=9&categoryid='+categoty.categotyid+'&index='+articlePage.nextPage">&raquo;</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -152,6 +161,20 @@
 			this.getAll();
 		},
 		methods: {
+			slipPage() {
+				var ele = event.target;
+				if (ele.href === "") {
+
+				} else {
+					this.$http.get(ele.href).then(result => {
+						var result = result.body;
+						if (result.state === 1) {
+							this.articlePage = result.data;
+						}
+					});
+				}
+				event.preventDefault();  
+			},
 				search(){
 					var key=$.trim(document.getElementById("searchtext").value);
 					if(key=="" || key.length>10){
