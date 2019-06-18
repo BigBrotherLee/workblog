@@ -152,11 +152,11 @@
 										<div class="btndiv" style="float: right;">
 											<button class="btn btn-danger lnr lnr-trash commentdelbtn" :onclick="delone(item.comment_one_id)">&nbsp;删除</button><br>
 											<button :onclick="getsecondList(item.comment_one_id)" class="btn btn-success lnr lnr-eye commentreadbtn"
-											 data-toggle="collapse" data-parent="#accordion" href="#1" style="display: inline-block;">&nbsp;查看</button>
+											 data-toggle="collapse" data-parent="#accordion" :href="'#'+item.comment_one_id" style="display: inline-block;">&nbsp;查看</button>
 										</div>
 									</h4>
 								</div>
-								<div id="1" class="panel-collapse collapse secondcommentdiv">
+								<div :id="item.comment_one_id" class="panel-collapse collapse secondcommentdiv">
 									<div class="panel-body">
 										<div v-for="item in list2" :key="item.comment_two_id" class="panel panel-default secondcommentfirstdiv">
 											<div class="panel-heading secondfirstcommentdiv">
@@ -202,13 +202,35 @@
 		<script src="js/klorofil-common.js"></script>
 		<script type="text/javascript" src="js/toastr.min.js"></script>
 		<script type="text/javascript">
+			$('.secondcommentdiv').on('show.bs.collapse', function() {
+				// 执行一些动作...
+				var el = event.target
+				var id = el.getAttribute("href").split("#")[1];
+				$.ajax({
+					method:"get",
+					url:"/workblog/commenttwo/getcommenttwobyoneall?oneid="+id,
+					success:function(data){
+						if (data.state === 1) {
+							window.vm1.list2 = result.data;
+						} else {
+							toastr.error("数据连接失败");
+						}
+					},
+					error:function(data){
+						toastr.error(data.message);
+					},
+				});
+				
+			})
+		</script>
+		<script type="text/javascript">
 			var vm1 = new Vue({
 				el: '#wrapper',
 				data: {
 					id: '',
 					title: '',
 					user: {},
-					role: true,
+					role: false,
 					list1: [],
 					list2: [],
 				},
@@ -232,23 +254,12 @@
 						});
 					},
 					getfirstList() {
-						this.$http.get('/workblog/commentone/getbyarticleall?articleid' + this.id).then(result => {
+						this.$http.get('/workblog/commentone/getbyarticleall?index=1&length=10&articleid' + this.id).then(result => {
 							var result = result.body;
 							if (result.state === 1) {
 								this.list1 = result.data;
 								this.title = list1[0].title;
 								console.log(this.list1);
-							} else {
-								toastr.error("数据连接失败");
-							}
-						});
-					},
-					getsecondList(id) {
-						this.$http.get('/workblog/commenttwo/getcommenttwobyoneall?oneid' + id).then(result => {
-							var result = result.body;
-							if (result.state === 1) {
-								this.list2 = result.data;
-								console.log(this.list2);
 							} else {
 								toastr.error("数据连接失败");
 							}
@@ -289,28 +300,53 @@
 
 		<script src="vendor/layui/layui.js"></script>
 		<script>
-			layui.use('laypage', function() {
-				var laypage = layui.laypage;
-
-				//执行一个laypage实例
-				laypage.render({
-					elem: 'titlediv' //注意，这里的 test1 是 ID，不用加 # 号
-						,
-					count: 1700 //数据总数，从服务端得到
-						,
-					jump: function(obj, first) {
-						//obj包含了当前分页的所有参数，比如：
-						console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
-						console.log(obj.limit); //得到每页显示的条数
-
-						//首次不执行
-						if (!first) {
-							//do something
-						}
+			id = '';
+			window.onload = function() {
+					var url = location.search; //获取url中"?"符后的字串
+					var theRequest = new Object();
+					if (url.indexOf("?") != -1) {
+						var strs = url.substr(1);
+						id = strs.split("=")[1];
 					}
-				});
+					return theRequest;
+				},
 
-			});
+				layui.use('laypage', function() {
+					var laypage = layui.laypage;
+
+					//执行一个laypage实例
+					laypage.render({
+						elem: 'titlediv' //注意，这里的 test1 是 ID，不用加 # 号
+							,
+						count: 1700 //数据总数，从服务端得到
+							,
+						jump: function(obj, first) {
+							//obj包含了当前分页的所有参数，比如：
+							$.ajax({
+								method: "get",
+								url: "/workblog/commentone/getbyarticleall",
+								data: {
+									"articleid": id,
+									"index": obj.curr,
+									"length": obj.limit
+								},
+								success: function(data) {
+									alert("jll");
+									console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+									console.log(obj.limit); //得到每页显示的条数
+								},
+								error: function(data) {
+
+								}
+							});
+							//首次不执行
+							if (!first) {
+								//do something
+							}
+						}
+					});
+
+				});
 		</script>
 	</body>
 
