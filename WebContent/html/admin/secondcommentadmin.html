@@ -2,7 +2,7 @@
 <html lang="en">
 
 	<head>
-		<title>WokeBlog-二级评论管理</title>
+		<title>WorkBlog-二级评论管理</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -53,17 +53,15 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">关于</a></li>
-									<li><a href="#">友链</a></li>
+									<li><a href="../user/about.html">关于</a></li>
+									<li><a href="../user/friend.html">友链</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
-									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+									<span class="spanclass">{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
-									<li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li>
-									<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+									<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
 								</ul>
 							</li>
 						</ul>
@@ -100,7 +98,7 @@
 							<li v-show="role"><a href="tagadmin.html" class=""><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
 							<li v-show="role"><a href="linkadmin.html" class=""><i class="lnr lnr-paperclip"></i> <span>友链管理</span></a></li>
 							<li v-show="role"><a href="logadmin.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
-							
+
 
 						</ul>
 					</nav>
@@ -123,7 +121,7 @@
 
 									<table class="layui-hide" id="test" lay-filter="test"></table>
 
-									
+
 
 								</div>
 								<!-- END RECENT PURCHASES -->
@@ -146,149 +144,183 @@
 		<!-- END WRAPPER -->
 		<!-- Javascript -->
 		<script type="text/html" id="toolbarDemo">
-				<div class="layui-btn-container-fluid">
-				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="">&nbsp;删除</button>
+			<div class="layui-btn-container-fluid">
+				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="del">&nbsp;删除</button>
 			</div>
 		</script>
-			<script type="text/html" id="barDemo">
-				<button class="btn btn-danger btn-xs lnr lnr-trash" lay-event="del"></button>
+		<script type="text/html" id="barDemo">
+			<button class="btn btn-danger btn-xs lnr lnr-trash" lay-event="del"></button>
 			</script>
-		
-			<script src="vendor/layui/layui.js" charset="utf-8"></script>
-			<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-			<script>
-				layui.use('table', function() {
-					var table = layui.table;
-					table.render({
-						elem: '#test'
-							// method: 'post'
-							,
-						url: 'json/demo1.json',
-						toolbar: '#toolbarDemo',
-						defaultToolbar: [],
-						title: '二级评论数据表',
-						cols: [
-							[{
-								type: 'checkbox',
-								fixed: 'left'
-							}, {
-								field: 'id',
-								title: 'ID',
-								// width: 80,
-								fixed: 'left',
-								unresize: true,
-								sort: true
-							}, {
-								field: 'username',
-								title: '一级评论者',
-								// width: 120,
-								sort: true
-								// edit: 'text'
-							}, {
-								field: 'firstcontent',
-								title: '一级评论',
-								// width: 200,
-								// edit: 'text',
-							}, {
-								field: 'author',
-								title: '二级评论者',
-								// width: 120,
-								// edit: 'text',
-		
-							}, {
-								field: 'content',
-								title: '二级评论内容',
-								// width: 250,
-								sort: true
-							}, {
-								field: 'createdate',
-								title: '评论时间',
-								// width: 140,
-								sort: true
-							}, {
-								fixed: 'right',
-								title: '操作',
-								toolbar: '#barDemo',
-								// width: 70
-							}]
-						],
-						page: true
-					});
-		
-					//头工具栏事件
-					table.on('toolbar(test)', function(obj) {
-						var checkStatus = table.checkStatus(obj.config.id);
-						switch (obj.event) {
-							case 'getCheckData':
-								var data = checkStatus.data;
-								layer.alert(JSON.stringify(data));
-								break;
-							case 'getCheckLength':
-								var data = checkStatus.data;
-								layer.msg('选中了：' + data.length + ' 个');
-								break;
-							case 'isAll':
-								layer.msg(checkStatus.isAll ? '全选' : '未全选');
-								break;
-						};
-					});
-		
-					//监听行工具事件
-					table.on('tool(test)', function(obj) {
-						var data = obj.data;
-						//console.log(obj)
-						if (obj.event === 'del') {
-							layer.confirm('真的删除行么', function(index) {
-								obj.del();
-								layer.close(index);
-							});
-						} else if (obj.event === 'edit') {
-							layer.prompt({
-								formType: 2,
-								value: data.email
-							}, function(value, index) {
-								obj.update({
-									email: value
-								});
-								layer.close(index);
-							});
+
+		<script src="vendor/layui/layui.js" charset="utf-8"></script>
+		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+		<script>
+			layui.use('table', function() {
+				var table = layui.table;
+				table.render({
+					elem: '#test'
+						// method: 'post'
+						,
+					url: 'json/demo1.json',
+					toolbar: '#toolbarDemo',
+					defaultToolbar: [],
+					title: '二级评论数据表',
+					request: {
+						pageName: "index",
+						limitName: "length"
+					},
+					parseData: function(response) {
+
+						if (response.state == 1) {
+							return {
+								"code": 0, //解析接口状态
+								"msg": "成功", //解析提示文本
+								"count": response.data.total, //解析数据长度
+								"data": response.data.list, //数据
+							};
+						} else {
+							// return {"code"}
 						}
-					});
+					},
+					cols: [
+						[{
+							type: 'checkbox',
+							fixed: 'left'
+						}, {
+							field: 'comment_two_id',
+							title: 'ID',
+							// width: 80,
+							fixed: 'left',
+							unresize: true,
+							sort: true
+						}, {
+							field: 'usernameone',
+							title: '一级评论者',
+							// width: 120,
+							sort: true
+							// edit: 'text'
+						}, {
+							field: 'contentone',
+							title: '一级评论',
+							// width: 200,
+							// edit: 'text',
+						}, {
+							field: 'usernametwo',
+							title: '二级评论者',
+							// width: 120,
+							// edit: 'text',
+
+						}, {
+							field: 'contenttwo',
+							title: '二级评论内容',
+							// width: 250,
+							sort: true
+						}, {
+							field: 'createdate',
+							title: '评论时间',
+							// width: 140,
+							sort: true
+						}, {
+							fixed: 'right',
+							title: '操作',
+							toolbar: '#barDemo',
+							// width: 70
+						}]
+					],
+					page: true
 				});
-			</script>
+
+				//头工具栏事件
+				table.on('toolbar(test)', function(obj) {
+					var checkStatus = table.checkStatus(obj.config.id);
+					switch (obj.event) {
+						case 'del':
+							var data = checkStatus.data;
+							var list = [];
+							layer.confirm('真的要删除这' + data.length + '条评论么？', function(index) {
+									for (let i of data) {
+										var id = i.comment_two_id;
+										$.ajax({
+											method: "post",
+											url: "/workblog/commentone/delete",
+											/* /workblog/article/delete */
+											data: {
+												"id": id,
+												"_method": "delete"
+											},
+											success: function(result) {
+												if (result.state !== 1) {
+													return;
+												}
+												layer.close(index);
+											},
+											error: function(result) {
+												var str = "id为" + id + "的评论，删除失败！\n";
+												toastr.error(str);
+												layer.close(index);
+											}
+										});
+									}
+								}
+							);
+							break;
+					}
+				});
+
+				//监听行工具事件
+				table.on('tool(test)', function(obj) {
+					var data = obj.data;
+					var id = obj.comment_two_id;
+					if (obj.event === 'del') {
+						layer.confirm('真的删除id为' + id + '的评论么', function(index) {
+							$.ajax({
+								method: "post",
+								url: "/workblog/commentone/delete",
+								data: {
+									"id": id,
+									"_method": "delete"
+								},
+								success: function(result) {
+									if (result.state !== 1) {
+										return;
+									}
+									layer.close(index);
+								},
+								error: function(result) {
+									var str = "id为" + id + "的二级评论，删除失败！\n";
+									toastr.error(str);
+									layer.close(index);
+								}
+							});
+							layer.close(index);
+						});
+					} else if (obj.event === 'edit') {
+						layer.prompt({
+							formType: 2,
+							value: data.email
+						}, function(value, index) {
+							obj.update({
+								email: value
+							});
+							layer.close(index);
+						});
+					}
+				});
+			});
+		</script>
 		<script src="vendor/jquery/jquery.min.js"></script>
 		<script src="../static/js/bootstrap.min.js"></script>
 		<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 		<script src="vendor/chartist/js/chartist.min.js"></script>
 		<script src="js/klorofil-common.js"></script>
-		<script type="text/javascript" src="js/paginathing.js"></script>
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				/* for (var i = 1; i <= 150; i++) {
-					$('.list-group').append('<li class="list-group-item"> Item ' + i + '</li>');
-				} */
-
-				// $('.list-group').paginathing({
-				// 	perPage: 5,
-				// 	limitPagination: 9,
-				// 	containerClass: 'panel-footer',
-				// 	pageNumbers: true
-				// })
-
-				$('.table tbody').paginathing({
-					perPage: 5,
-					limitPagination: 9,
-					insertAfter: '.table',
-					pageNumbers: true
-				});
-			});
-		</script>
+		<script type="text/javascript" src="js/toastr.min.js"></script>
 		<script type="text/javascript">
 			var vm1 = new Vue({
 				el: '#wrapper',
 				data: {
 					role: true,
+					user: {},
 					list1: {},
 					formData: {},
 				},
@@ -298,7 +330,19 @@
 				},
 				methods: {
 					chooserole() {
-						//判断用户的角色	
+						//判断用户的角色
+						this.$http.get('/workblog/user/getme').then(result => {
+							var result = result.body;
+							if (result.state != null || result.state === 1) {
+								this.user = result.user;
+								for (let i of result.roles) {
+									if (i.roleid === 1) {
+										this.role = true;
+									}
+								}
+							}
+
+						});
 					},
 					changeActive(a) {
 						var myInfoActive = $("#myInfoActive");

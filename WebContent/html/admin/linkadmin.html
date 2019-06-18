@@ -31,6 +31,7 @@
 		<!-- ICONS -->
 		<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
+		<link href="css/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
 		<link rel="stylesheet" href="css/index.css">
 		<script type="text/javascript" src="../static/js/vue.js"></script>
 		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
@@ -61,18 +62,18 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">关于</a></li>
-									<li><a href="#">友链</a></li>
+									<li><a href="../user/about.html">关于</a></li>
+									<li><a href="../user/friend.html">友链</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
-									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+									<span class="spanclass">{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
-									<li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li>
-									<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+									<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
 								</ul>
+
+
 							</li>
 						</ul>
 					</div>
@@ -235,21 +236,22 @@
 		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 		<script src="vendor/chartist/js/chartist.min.js"></script>
 		<script src="js/klorofil-common.js"></script>
+		<script type="text/javascript" src="js/toastr.min.js"></script>
 
 		<script type="text/html" id="toolbarDemo">
 			<div class="layui-btn-container-fluid">
-				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="">&nbsp;删除</button>
+				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="del">&nbsp;删除</button>
 				
 				<form class="layui-form addclassify" action="">
 							<label class="confirmpassword layui-form-label">友链名称</label>
-							<input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+							<input type="text" name="linktitle" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
 							<label class="confirmpassword layui-form-label">友链地址</label>
-							<input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？"
+							<input type="text" name="linkaddress" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？"
 							 placeholder="请输入" autocomplete="off" class="layui-input">
 							<label class="confirmpassword layui-form-label">友链图片</label>
-							<button class="btn btn-primary btn-group-lg" data-toggle="modal" data-target="#avatar-modal">上传图片</button>
-							<!-- <img id="icon" src="img/touxiang.jpg" alt="裁剪后"> -->
-							<button class="btn btn-danger" lay-submit="" lay-filter="demo1">新增友链</button>
+							<a class="btn btn-primary btn-group-lg" data-toggle="modal" data-target="#avatar-modal">上传图片</a>
+							<img class="hidden" id="icon" src="img/touxiang.jpg" alt="裁剪后">
+							<button :onclick="addlink()" class="btn btn-danger" lay-submit="" lay-filter="demo1">新增友链</button>
 							<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
 				
 				
@@ -276,9 +278,28 @@
 						data = obj.data //得到所在行所有键值
 						,
 						field = obj.field; //得到字段
-					layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+
+					$.ajax({
+						method: "post",
+						url: "/workblog/link/update?_method=put&id=" + data.id + "&" + field + "=" + value,
+						success: function(data) {
+							if (data.state !== 1) {
+								toastr.error(data.message);
+								return;
+							}
+							layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+						},
+						error: function(data) {
+							toastr.error("更改失败");
+						}
+					});
 				});
 			});
+		</script>
+		<script id="imgtem" type="text/javascript">
+			<div class="layer-photos-demo" onclick="img_click()" style="cursor:pointer;">
+			    <img class="classifyimg" style="height:35px; width:100px; max-width: 300px;" layer-pid="d.img"  layer-src="d.img" src="d.img" alt="图片名">
+			</div>
 		</script>
 		<script>
 			layui.use('table', function() {
@@ -291,46 +312,60 @@
 					toolbar: '#toolbarDemo',
 					defaultToolbar: [],
 					title: '友链数据表',
+					request: {
+						pageName: "index",
+						limitName: "length"
+					},
+					parseData: function(response) {
+						if (response.state == 1) {
+							return {
+								"code": 0, //解析接口状态
+								"msg": "成功", //解析提示文本
+								"count": response.data.total, //解析数据长度
+								"data": response.data.list, //数据
+							};
+						} else {
+							// return {"code"}
+						}
+					},
+
 					cols: [
 						[{
-							type: 'checkbox',
-							// fixed: 'left'
-						}, {
-							field: 'id',
-							title: 'ID',
-							// width: 80,
-							// fixed: 'left',
-							// unresize: true,
-							sort: true
-						}, {
-							field: 'linktitle',
-							title: '友链名称',
-							// width: 120,
-							sort: true,
-							edit: 'text'
-						}, {
-							field: 'linkaddress',
-							title: '友链地址',
-							// width: 200,
-							edit: 'text'
-						},
+								type: 'checkbox',
+								// fixed: 'left'
+							}, {
+								field: 'linkid',
+								title: 'ID',
+								// width: 80,
+								// fixed: 'left',
+								// unresize: true,
+								sort: true
+							}, {
+								field: 'linktitle',
+								title: '友链名称',
+								// width: 120,
+								sort: true,
+								edit: 'text'
+							}, {
+								field: 'linkaddress',
+								title: '友链地址',
+								// width: 200,
+								edit: 'text'
+							},
 							{
 								field: 'linkimg',
 								title: '友链图片',
 								unresize: true,
 								sort: false,
 								//style:'height:100px;',
-								templet: function(d) {
-									return `<div class="layer-photos-demo" onclick="img_click()" style="cursor:pointer;">
-                                      <img class="classifyimg" style="height:35px; width:100px;    max-width: 300px;" layer-pid="图片id，可以不写"  layer-src="img/touxiang.jpg" src="img/touxiang.jpg" alt="图片名">
-                                    </div>`;
-								}
+								templet: "#imgtem"
 							}, {
-							fixed: 'right',
-							title: '操作',
-							toolbar: '#barDemo',
-							// width: 70
-						}]
+								fixed: 'right',
+								title: '操作',
+								toolbar: '#barDemo',
+								// width: 70
+							}
+						]
 					],
 					page: true
 				});
@@ -339,41 +374,75 @@
 				table.on('toolbar(test)', function(obj) {
 					var checkStatus = table.checkStatus(obj.config.id);
 					switch (obj.event) {
-						case 'getCheckData':
+						case 'del':
 							var data = checkStatus.data;
-							layer.alert(JSON.stringify(data));
+							var list = [];
+							layer.confirm('真的要删除这' + data.length + '个友链么？', function(index) {
+								for (let i of data) {
+									var id = i.articleid;
+									$.ajax({
+										method: "post",
+										url: "/workblog/link/delete",
+										/* /workblog/article/delete */
+										data: {
+											"id": id,
+											"_method": "delete"
+										},
+										success: function(result) {
+											if (result.state !== 1) {
+												return;
+											}
+											var str = "id为" + id + "的友链，" + result.message + "\n";
+											layer.close(index);
+										},
+										error: function(result) {
+											var str = "id为" + id + "的友链，删除失败！\n";
+											toastr.error(str);
+											layer.close(index);
+										}
+									});
+								}
+							});
 							break;
-						case 'getCheckLength':
-							var data = checkStatus.data;
-							layer.msg('选中了：' + data.length + ' 个');
-							break;
-						case 'isAll':
-							layer.msg(checkStatus.isAll ? '全选' : '未全选');
-							break;
-					};
+					}
 				});
+
 
 				//监听行工具事件
 				table.on('tool(test)', function(obj) {
 					var data = obj.data;
+					var id = data.articleid;
 					//console.log(obj)
 					if (obj.event === 'del') {
-						layer.confirm('真的删除行么', function(index) {
-							obj.del();
-							layer.close(index);
-						});
-					} else if (obj.event === 'edit') {
-						layer.prompt({
-							formType: 2,
-							value: data.email
-						}, function(value, index) {
-							obj.update({
-								email: value
+						layer.confirm('真的要删除“' + data.linktitle + '”这个友链么？', function(index) {
+							$.ajax({
+								method: "post",
+								url: "/workblog/link/delete",
+								/* /workblog/article/delete */
+								data: {
+									"id": id,
+									"_method": "delete"
+								},
+								success: function(result) {
+									if (result.state !== 1) {
+										return;
+									}
+									var str = "id为" + id + "的友链，" + result.message + "\n";
+
+									layer.close(index);
+								},
+								error: function(result) {
+									var str = "id为" + id + "的友链，删除失败！\n";
+									toastr.error(str);
+									layer.close(index);
+								}
 							});
-							layer.close(index);
 						});
 					}
 				});
+
+
+
 			});
 		</script>
 
@@ -437,6 +506,57 @@
 				});
 			}
 		</script>
+
+		<!-- vuejs -->
+		<script type="text/javascript">
+			var vm1 = new Vue({
+				el: '#wrapper',
+				data: {
+					role: true,
+					user: {},
+					list1: {},
+					formData: {},
+				},
+				created() {
+					this.chooserole();
+					// this.getUserList();
+				},
+				methods: {
+					chooserole() {
+						//判断用户的角色
+						this.$http.get('/workblog/user/getme').then(result => {
+							var result = result.body;
+							if (result.state != null || result.state === 1) {
+								this.user = result.user;
+								for (let i of result.roles) {
+									if (i.roleid === 1) {
+										this.role = true;
+									}
+								}
+							}
+						});
+					},
+					addlink() {
+						var title = $("input[name='linktitle']").val();
+						var address = $("input[name='linkaddress']").val();
+						var linkimg = $('#icon').attr("src");
+						this.$http.post('/workblog/link/add?tagtitle=' + title+'&linkaddress='+address+'&linkimg'+linkimg)
+							.then(result => {
+								var result = result.body;
+								if (result.state != null || result.state === 1) {
+									toastr.success("添加成功");
+								} else {
+									toastr.error("添加失败");
+								}
+							});
+					},
+
+				}
+			});
+		</script>
+
+
+
 	</body>
 
 </html>

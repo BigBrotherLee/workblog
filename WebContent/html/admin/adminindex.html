@@ -59,7 +59,7 @@
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
-									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+									<span class="spanclass">{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
 								</ul>
@@ -350,6 +350,7 @@
 				el: '#wrapper',
 				data: {
 					role: true,
+					user:{},
 					list1: {},
 					formData: {},
 				},
@@ -364,13 +365,6 @@
 							var result = result.body;
 							if (result.state != null || result.state === 1) {
 								this.user = result.user;
-								this.usesrname = result.user.username;
-								this.email = result.user.email;
-								this.phone = result.user.phone;
-								this.autograph = result.user.autograph;
-								var now = (new Date()).getYear();
-								var pass = (new Date(user.createdate)).getYear();
-								this.year = now - pass;
 								for (let i of result.roles) {
 									if (i.roleid === 1) {
 										this.role = true;
@@ -380,74 +374,8 @@
 
 						});
 					},
-					changeActive(a) {
-						var myInfoActive = $("#myInfoActive");
-						//					alert(myInfoActive)
-						var changeImgActive = $("#changeImgActive");
-						var myInfo = $("#myInfo"); //基本资料内容
-						var changeImg = $("#changeImg"); //内容
-						//					var a = $("#myInfoActive").hasClass('active');//切换功能
-						if (a) {
-							//显示修改头像
-							myInfoActive.removeClass('active'); //基本资料
-							changeImgActive.addClass('active');
-							myInfo.removeClass('active');
-							changeImg.addClass('active');
-
-						} else {
-							//显示基本资料
-							myInfoActive.addClass('active');
-							changeImgActive.removeClass('active'); //基本资料
-							myInfo.addClass('active');
-							changeImg.removeClass('active');
-						}
-
-					},
-					getUserList() { /*http://localhost:8080/WMPX/user/showIndustry*/
-						var t = this.getCookie("token");
-						this.$http.get('/wmpx/user/token/' + t).then(result => {
-							var result = result.body;
-							if (result.status === 200) {
-								this.list1 = result.data;
-								console.log(this.list1);
-							} else {
-								alert("数据连接失败");
-							}
-						});
-					},
-					getRequest() {
-						var url = location.search; //获取url中"?"符后的字串
-						var theRequest = new Object();
-						if (url.indexOf("?") != -1) {
-							var strs = url.substr(1);
-							this.id = strs.split("=")[1];
-						}
-						return theRequest;
-					},
-					getCookie(cookie_name) {
-						var allcookies = document.cookie;
-						//索引长度，开始索引的位置
-						var cookie_pos = allcookies.indexOf(cookie_name);
-						// alert(cookie_pos)
-						// 如果找到了索引，就代表cookie存在,否则不存在
-						if (cookie_pos != -1) {
-							// 把cookie_pos放在值的开始，只要给值加1即可
-							//计算取cookie值得开始索引，加的1为“=”
-							cookie_pos = cookie_pos + cookie_name.length + 1;
-							//计算取cookie值得结束索引
-							var cookie_end = allcookies.indexOf(";", cookie_pos);
-
-							if (cookie_end == -1) {
-								cookie_end = allcookies.length;
-
-							}
-							//得到想要的cookie的值
-							var value = unescape(allcookies.substring(cookie_pos, cookie_end));
-						}
-						// alert(value);
-						return value;
-
-					},
+					
+					
 				}
 			});
 		</script>

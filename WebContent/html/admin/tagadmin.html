@@ -31,6 +31,7 @@
 		<!-- ICONS -->
 		<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
+		<link href="css/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
 		<link rel="stylesheet" href="css/index.css">
 		<script type="text/javascript" src="../static/js/vue.js"></script>
 		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
@@ -61,18 +62,17 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">关于</a></li>
-									<li><a href="#">友链</a></li>
-								</ul>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
-									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-								<ul class="dropdown-menu">
-									<li><a href="#"><i class="lnr lnr-user"></i> <span>修改个人信息</span></a></li>
-									<li><a href="#"><i class="lnr lnr-eye"></i> <span>修改密码</span></a></li>
-									<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
-								</ul>
+									<li><a href="../user/about.html">关于</a></li>
+											<li><a href="../user/friend.html">友链</a></li>
+										</ul>
+									</li>
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
+											<span class="spanclass">{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+										<ul class="dropdown-menu">
+											<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+										</ul>
+
 							</li>
 						</ul>
 					</div>
@@ -154,15 +154,17 @@
 		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 		<script src="vendor/chartist/js/chartist.min.js"></script>
 		<script src="js/klorofil-common.js"></script>
+		<script type="text/javascript" src="js/toastr.min.js"></script>
+
 
 		<script type="text/html" id="toolbarDemo">
 			<div class="layui-btn-container-fluid">
-				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="">&nbsp;删除</button>
+				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="del">&nbsp;删除</button>
 				
 				<form class="layui-form addclassify" action="">
 							<label class="confirmpassword layui-form-label">标签名称</label>
-							<input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
-							<button class="btn btn-danger addtag" lay-submit="" lay-filter="demo1">新增标签</button>
+							<input type="text" name="tagtitle" lay-verify="required" lay-reqtext="标签名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
+							<button :onclick="adddtag()" class="btn btn-danger addtag" lay-submit="" lay-filter="demo1">新增标签</button>
 							<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
 				
 				
@@ -189,7 +191,21 @@
 						data = obj.data //得到所在行所有键值
 						,
 						field = obj.field; //得到字段
-					layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+
+					$.ajax({
+						method: "post",
+						url: "/workblog/tag/update?_method=put&id=" + data.id + "&" + field + "=" + value,
+						success: function(data) {
+							if (data.state !== 1) {
+								toastr.error(data.message);
+								return;
+							}
+							layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+						},
+						error: function(data) {
+							toastr.error("更改失败");
+						}
+					});
 				});
 			});
 		</script>
@@ -203,36 +219,51 @@
 					url: 'json/demo3.json',
 					toolbar: '#toolbarDemo',
 					defaultToolbar: [],
-					title: '分类数据表',
+					title: '标签数据表',
+					request: {
+						pageName: "index",
+						limitName: "length"
+					},
+					parseData: function(response) {
+						if (response.state == 1) {
+							return {
+								"code": 0, //解析接口状态
+								"msg": "成功", //解析提示文本
+								"count": response.data.total, //解析数据长度
+								"data": response.data.list, //数据
+							};
+						} else {
+							// return {"code"}
+						}
+					},
 					cols: [
 						[{
-								type: 'checkbox',
-								fixed: 'left'
-							}, {
-								field: 'id',
-								title: 'ID',
-								width: 80,
-								fixed: 'left',
-								unresize: true,
-								sort: true
-							}, {
-								field: 'tagtitle',
-								title: '标签名称',
-								// width: 120,
-								sort: true,
-								edit: 'text'
-							}, {
-								field: 'createuser',
-								title: '标签创建人',
-								// width: 200,
-								edit: 'text'
-							}, {
-								fixed: 'right',
-								title: '操作',
-								toolbar: '#barDemo',
-								// width: 70
-							}
-						]
+							type: 'checkbox',
+							fixed: 'left'
+						}, {
+							field: 'tagid',
+							title: 'ID',
+							width: 80,
+							fixed: 'left',
+							unresize: true,
+							sort: true
+						}, {
+							field: 'tagtitle',
+							title: '标签名称',
+							// width: 120,
+							sort: true,
+							edit: 'text'
+						}, {
+							field: 'username',
+							title: '标签创建人',
+							// width: 200,
+							edit: 'text'
+						}, {
+							fixed: 'right',
+							title: '操作',
+							toolbar: '#barDemo',
+							// width: 70
+						}]
 					],
 					page: true
 				});
@@ -241,104 +272,124 @@
 				table.on('toolbar(test)', function(obj) {
 					var checkStatus = table.checkStatus(obj.config.id);
 					switch (obj.event) {
-						case 'getCheckData':
+						case 'del':
 							var data = checkStatus.data;
-							layer.alert(JSON.stringify(data));
+							var list = [];
+							layer.confirm('真的要删除这' + data.length + '个标签么？', function(index) {
+								for (let i of data) {
+									var id = i.articleid;
+									$.ajax({
+										method: "post",
+										url: "/workblog/tag/delete",
+										/* /workblog/article/delete */
+										data: {
+											"id": id,
+											"_method": "delete"
+										},
+										success: function(result) {
+											if (result.state !== 1) {
+												return;
+											}
+											var str = "id为" + id + "的标签，" + result.message + "\n";
+											layer.close(index);
+										},
+										error: function(result) {
+											var str = "id为" + id + "的标签，删除失败！\n";
+											toastr.error(str);
+											layer.close(index);
+										}
+									});
+								}
+							});
 							break;
-						case 'getCheckLength':
-							var data = checkStatus.data;
-							layer.msg('选中了：' + data.length + ' 个');
-							break;
-						case 'isAll':
-							layer.msg(checkStatus.isAll ? '全选' : '未全选');
-							break;
-					};
+					}
 				});
+
 
 				//监听行工具事件
 				table.on('tool(test)', function(obj) {
 					var data = obj.data;
+					var id = data.articleid;
 					//console.log(obj)
 					if (obj.event === 'del') {
-						layer.confirm('真的删除行么', function(index) {
-							obj.del();
-							layer.close(index);
-						});
-					} else if (obj.event === 'edit') {
-						layer.prompt({
-							formType: 2,
-							value: data.email
-						}, function(value, index) {
-							obj.update({
-								email: value
+						layer.confirm('真的要删除“' + data.tagtitle + '”这个标签么？', function(index) {
+							$.ajax({
+								method: "post",
+								url: "/workblog/tag/delete",
+								/* /workblog/article/delete */
+								data: {
+									"id": id,
+									"_method": "delete"
+								},
+								success: function(result) {
+									if (result.state !== 1) {
+										return;
+									}
+									var str = "id为" + id + "的标签，" + result.message + "\n";
+
+									layer.close(index);
+								},
+								error: function(result) {
+									var str = "id为" + id + "的标签，删除失败！\n";
+									toastr.error(str);
+									layer.close(index);
+								}
 							});
-							layer.close(index);
 						});
 					}
 				});
 			});
 		</script>
 
+
+		<!-- vuejs -->
 		<script type="text/javascript">
-			//做个下简易的验证  大小 格式
-			$('#avatarInput').on('change', function(e) {
-				var filemaxsize = 1024 * 5; //5M
-				var target = $(e.target);
-				var Size = target[0].files[0].size / 1024;
-				if (Size > filemaxsize) {
-					alert('图片过大，请重新选择!');
-					$(".avatar-wrapper").childre().remove;
-					return false;
+			var vm1 = new Vue({
+				el: '#wrapper',
+				data: {
+					role: true,
+					user: {},
+					list1: {},
+					formData: {},
+				},
+				created() {
+					this.chooserole();
+					// this.getUserList();
+				},
+				methods: {
+					chooserole() {
+						//判断用户的角色
+						this.$http.get('/workblog/user/getme').then(result => {
+							var result = result.body;
+							if (result.state != null || result.state === 1) {
+								this.user = result.user;
+								for (let i of result.roles) {
+									if (i.roleid === 1) {
+										this.role = true;
+									}
+								}
+							}
+						});
+					},
+					addtag() {
+						var title = $("input[name='tagtitle']").val();
+						var pic = $('#icon').attr("src");
+						this.$http.post('/workblog/tag/add?tagtitle=' + title )
+							.then(result => {
+								var result = result.body;
+								if (result.state != null || result.state === 1) {
+									toastr.success("添加成功");
+								} else {
+									toastr.error("添加失败");
+								}
+							});
+					},
+
 				}
-				if (!this.files[0].type.match(/image.*/)) {
-					alert('请选择正确的图片!')
-				} else {
-					var filename = document.querySelector("#avatar-name");
-					var texts = document.querySelector("#avatarInput").value;
-					var teststr = texts; //你这里的路径写错了
-					testend = teststr.match(/[^\\]+\.[^\(]+/i); //直接完整文件名的
-					filename.innerHTML = testend;
-				}
-
 			});
-			//#icon元素的src就是截图后的文件,base64
-			$(".avatar-save").on("click", function() {
-				var img_lg = document.getElementById('imageHead');
-
-				// 截图小的显示框内的内容
-				html2canvas(img_lg, {
-					allowTaint: true,
-					taintTest: false,
-					onrendered: function(canvas) {
-						// var dataURL = $image.cropper("getCroppedCanvas");//这个可以获得大图
-						// var imgurl = dataURL.toDataURL("image/*", 1);
-						// $('#icon').attr('src', imgurl);
-						canvas.id = "mycanvas";
-						var dataUrl = canvas.toDataURL("image/png"); //这个可以获得压缩图片,适合作为头像
-						$('#icon').attr('src', dataUrl);
-
-					}
-				});
-			});
-
-			function imagesAjax(src) {
-				var data = {};
-				data.img = src;
-				$.ajax({
-					url: "../file/upload.do",
-					data: data,
-					type: "POST",
-					dataType: 'json',
-					success: function(data) {
-						if (data.state == 1) {
-							$('#icon').attr('src', data.data);
-							$('#iconPic').val(data.data);
-						}
-						toastr.info(data.message);
-					}
-				});
-			}
 		</script>
+
+
 	</body>
 
 </html>

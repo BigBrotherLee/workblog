@@ -24,10 +24,11 @@
 		<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
 		<link href="css/toastr.min.css" rel="stylesheet" type="text/css" media="all" />
+		<link rel="stylesheet" type="text/css" href="css/toastr.min.css" />
 		<link rel="stylesheet" href="css/index.css">
 		<script type="text/javascript" src="../static/js/vue.js"></script>
 		<script type="text/javascript" src="../static/js/vue-resource.min.js"></script>
-		
+
 	</head>
 
 	<body>
@@ -51,7 +52,7 @@
 					<div id="navbar-menu">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">帮助</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="../user/about.html">关于</a></li>
@@ -60,7 +61,7 @@
 							</li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
-									<span class="spanclass">Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+									<span class="spanclass">{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
 								</ul>
@@ -88,8 +89,8 @@
 							<li><a href="createarticle.html" class=""><i class="lnr lnr-file-add"></i> <span>发布文章</span></a></li>
 							<li><a href="index.html" class=""><i class="lnr lnr-book"></i> <span>我的文章</span></a></li>
 							<li><a href="mycommentindex.html" class=""><i class="lnr lnr-keyboard"></i> <span>我的评论</span></a></li>
-							
-							
+
+
 							<li v-show="role" class="lineheight"></li>
 							<li v-show="role"><a href="useradmin.html" class="active"><i class="lnr lnr-users"></i> <span>用户管理</span></a></li>
 							<li v-show="role"><a href="adminindex.html" class=""><i class="lnr lnr-map"></i> <span>文章管理</span></a></li>
@@ -99,8 +100,8 @@
 							<li v-show="role"><a href="tagadmin.html" class=""><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
 							<li v-show="role"><a href="linkadmin.html" class=""><i class="lnr lnr-paperclip"></i> <span>友链管理</span></a></li>
 							<li v-show="role"><a href="logadmin.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
-							
-							
+
+
 						</ul>
 					</nav>
 				</div>
@@ -128,34 +129,34 @@
 													<h4 class="modal-title" id="myModalLabel">添加新用户</h4>
 												</div>
 												<div class="modal-body">
-														<form class="layui-form adduser adduserform" action="">
-															<div class="layui-form-item"><label class="layui-form-label">用户名</label>
-																<div class="layui-input-inline"><input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？"
-																	 placeholder="请输入" autocomplete="off" class="layui-input"> </div>
+													<form class="layui-form adduser adduserform" action="">
+														<div class="layui-form-item"><label class="layui-form-label">用户名</label>
+															<div class="layui-input-inline"><input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？"
+																 placeholder="请输入" autocomplete="off" class="layui-input"> </div>
+														</div>
+														<div class="layui-form-item"><label class="layui-form-label">邮箱</label>
+															<div class="layui-input-inline"><input type="text" name="email" lay-verify="email" placeholder="请输入邮箱"
+																 autocomplete="off" class="layui-input"></div>
+														</div>
+														<div class="layui-form-item"><label class="layui-form-label">密码</label>
+															<div class="layui-input-inline"><input type="password" name="password" lay-verify="pass" placeholder="请输入密码"
+																 autocomplete="off" class="layui-input"></div>
+															<!-- <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div> -->
+														</div>
+														<div class="layui-form-item"><label class="layui-form-label confirmpassword">确认密码</label>
+															<div class="layui-input-inline"><input type="password" name="confirmpassword" lay-verify="pass"
+																 placeholder="请输入密码" autocomplete="off" class="layui-input"></div>
+															<!-- <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div> -->
+														</div>
+														<div class="layui-form-item">
+															<div class="adduserbtn">
+																<button class="btn btn-danger" lay-submit="" onclick="adduser()" lay-filter="demo1">立即提交</button>
+																<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 															</div>
-															<div class="layui-form-item"><label class="layui-form-label">邮箱</label>
-																<div class="layui-input-inline"><input type="text" name="email" lay-verify="email" placeholder="请输入邮箱"
-																	 autocomplete="off" class="layui-input"></div>
-															</div>
-															<div class="layui-form-item"><label class="layui-form-label">密码</label>
-																<div class="layui-input-inline"><input type="password" name="password" lay-verify="pass" placeholder="请输入密码"
-																	 autocomplete="off" class="layui-input"></div>
-																<!-- <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div> -->
-															</div>
-															<div class="layui-form-item"><label class="layui-form-label confirmpassword">确认密码</label>
-																<div class="layui-input-inline"><input type="password" name="password" lay-verify="pass" placeholder="请输入密码"
-																	 autocomplete="off" class="layui-input"></div>
-																<!-- <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div> -->
-															</div>
-															<div class="layui-form-item">
-																<div class="adduserbtn">
-																	<button class="btn btn-danger" lay-submit="" lay-filter="demo1">立即提交</button>
-																	<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-																	</div>
-																
-															</div>
-															
-														</form>
+
+														</div>
+
+													</form>
 												</div>
 												<!-- <div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -168,7 +169,7 @@
 
 									<table class="layui-hide" id="test" lay-filter="test"></table>
 
-									
+
 
 								</div>
 								<!-- END RECENT PURCHASES -->
@@ -197,102 +198,177 @@
 		<script src="vendor/chartist/js/chartist.min.js"></script>
 		<script src="js/klorofil-common.js"></script>
 		<script type="text/html" id="toolbarDemo">
-				<div class="layui-btn-container-fluid">
+			<div class="layui-btn-container-fluid">
 				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="del">&nbsp;删除</button>
 				<button class="btn btn-success btn-sm lnr lnr-file-add" data-toggle="modal" data-target="#myModal" style="float: right; margin-right: -110px;">&nbsp;新增</button>
 			</div>
 			
 		</script>
-			<script type="text/html" id="barDemo">
-				<!-- <button class="btn btn-default btn-xs lnr lnr-pencil articledelbtn" lay-event="edit"></button> -->
+		<script type="text/html" id="barDemo">
+			<!-- <button class="btn btn-default btn-xs lnr lnr-pencil articledelbtn" lay-event="edit"></button> -->
 				<button class="btn btn-danger btn-xs lnr lnr-trash articleedbtn" lay-event="del"></button>
 			</script>
-		
-			<script src="vendor/layui/layui.js" charset="utf-8"></script>
-			<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-			<script>
-				layui.use('table', function() {
-					var table = layui.table;
-		
-					//监听单元格编辑
-					table.on('edit(test)', function(obj) {
-						var value = obj.value //得到修改后的值
-							,
-							data = obj.data //得到所在行所有键值
-							,
-							field = obj.field; //得到字段
-						layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+
+		<script src="vendor/layui/layui.js" charset="utf-8"></script>
+		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+		<script>
+			function adduser() {
+				var username = $("input[name='username']").val();
+				var email = $("input[name='email']").val();
+				var password = $("input[name='password']").val();
+				var confirmpassword = $("input[name='confirmpassword']").val();
+				$.ajax({
+					method: "get",
+					url: "/workblog/user/checkname?name=" + username,
+					success: function(data) {
+						if (data.state !== 1) {
+							toastr.error("该用户名不可用");
+							return;
+						} else {
+							if (password != confirmpassword) {
+								toastr.error("两次密码不一致");
+							} else {
+								$.ajax({
+									method: "post",
+									url: "/workblog/user/adduser",
+									data: {
+										"username": username,
+										"password": password,
+										"email": email,
+										"phone": phone
+									},
+									success: function(data) {
+										if (data.state != 1) {
+											toastr.error(date.message);
+										} else {
+											toastr.success("添加成功");
+										}
+									},
+									error: function(data) {
+										toastr.error(data.message);
+									}
+								});
+							}
+						}
+
+					},
+					error: function(data) {
+						toastr.error("添加失败");
+					}
+				});
+			}
+			layui.use('table', function() {
+				var table = layui.table;
+
+				//监听单元格编辑
+				table.on('edit(test)', function(obj) {
+					var value = obj.value //得到修改后的值
+						,
+						data = obj.data //得到所在行所有键值
+						,
+						field = obj.field; //得到字段
+
+					$.ajax({
+						method: "post",
+						url: "/workblog/user/update?_method=put&id=" + data.id + "&" + field + "=" + value,
+						success: function(data) {
+							if (data.state !== 1) {
+								toastr.error(data.message);
+								return;
+							}
+							layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+						},
+						error: function(data) {
+							toastr.error("更改失败");
+						}
 					});
 				});
-			</script>
-			<script>
-				layui.use('table', function() {
-					var table = layui.table;
-					table.render({
-						elem: '#test'
-							// method: 'post'
-							,
-						url: 'json/demo3.json',
-						toolbar: '#toolbarDemo',
-						defaultToolbar: [],
-						title: '用户数据表',
-						cols: [
-							[{
-								type: 'checkbox',
-								fixed: 'left'
-							}, {
-								field: 'id',
-								title: 'ID',
-								// width: 80,
-								fixed: 'left',
-								unresize: true,
-								sort: true
-							}, {
-								field: 'username',
-								title: '用户名',
-								// width: 120,
-								sort: true,
-								// edit: 'text'
-							}, {
-								field: 'email',
-								title: '邮箱',
-								// width: 200,
-								edit: 'text'
-							}, {
-								field: 'phone',
-								title: '手机号码',
-								// width: 130,
-								edit: 'text'
-		
-							}, {
-								field: 'autograph',
-								title: '个性签名',
-								// width: 398,
-								sort: true,
-								edit: 'text'
-							}, {
-								fixed: 'right',
-								title: '操作',
-								toolbar: '#barDemo',
-								// width: 70
-							}]
-						],
-						page: true
-					});
-		
-					//头工具栏事件
-					table.on('toolbar(test)', function(obj) {
-						var checkStatus = table.checkStatus(obj.config.id);
-						switch (obj.event) {
-							case 'del':
-								var data = checkStatus.data;
-								var list = [];
-								layer.confirm('真的要删除这' + data.length + '个用户么？', function(index) {
+			});
+		</script>
+		<script>
+			layui.use('table', function() {
+				var table = layui.table;
+				table.render({
+					elem: '#test'
+						// method: 'post'
+						,
+					url: 'json/demo3.json',
+					toolbar: '#toolbarDemo',
+					defaultToolbar: [],
+					title: '用户数据表',
+					request: {
+						pageName: "index",
+						limitName: "length"
+					},
+					parseData: function(response) {
+						if (response.state == 1) {
+							return {
+								"code": 0, //解析接口状态
+								"msg": "成功", //解析提示文本
+								"count": response.data.total, //解析数据长度
+								"data": response.data.list, //数据
+							};
+						} else {
+							// return {"code"}
+						}
+					},
+					cols: [
+						[{
+							type: 'checkbox',
+							fixed: 'left'
+						}, {
+							field: 'id',
+							title: 'ID',
+							// width: 80,
+							fixed: 'left',
+							unresize: true,
+							sort: true
+						}, {
+							field: 'username',
+							title: '用户名',
+							// width: 120,
+							sort: true,
+							// edit: 'text'
+						}, {
+							field: 'email',
+							title: '邮箱',
+							// width: 200,
+							edit: 'text'
+						}, {
+							field: 'phone',
+							title: '手机号码',
+							// width: 130,
+							edit: 'text'
+
+						}, {
+							field: 'autograph',
+							title: '个性签名',
+							// width: 398,
+							sort: true,
+							edit: 'text'
+						}, {
+							fixed: 'right',
+							title: '操作',
+							toolbar: '#barDemo',
+							// width: 70
+						}]
+					],
+					page: true
+				});
+
+				//头工具栏事件
+				table.on('toolbar(test)', function(obj) {
+					var checkStatus = table.checkStatus(obj.config.id);
+					switch (obj.event) {
+						case 'del':
+							var data = checkStatus.data;
+							var list = [];
+							layer.confirm('真的要删除这' + data.length + '个用户么？', function(index) {
 									for (let i of data) {
 										var id = i.articleid;
 										$.ajax({
 											method: "post",
-											url: "json/delete.json",
+											url: "/workblog/user/delete",
 											/* /workblog/article/delete */
 											data: {
 												"id": id,
@@ -303,7 +379,7 @@
 													return;
 												}
 												var str = "id为" + id + "的文章，" + result.message + "\n";
-								
+
 												layer.close(index);
 											},
 											error: function(result) {
@@ -314,63 +390,63 @@
 										});
 									}
 								}
-								
-								);break;
-							
-						}
-					});
-					
-					//监听行工具事件
-					table.on('tool(test)', function(obj) {
-						var data = obj.data;
-						var id = data.articleid;	
-						//console.log(obj)
-						if (obj.event === 'del') {
-							layer.confirm('真的要删除“' + data.username + '”这个用户么？', function(index) {
-								$.ajax({
-									method: "post",
-									url: "json/delete.json",
-									/* /workblog/article/delete */
-									data: {
-										"id": id,
-										"_method": "delete"
-									},
-									success: function(result) {
-										if (result.state !== 1) {
-											return;
-										}
-										var str = "id为" + id + "的文章，" + result.message + "\n";
-								
-										layer.close(index);
-									},
-									error: function(result) {
-										var str = "id为" + id + "的文章，删除失败！\n";
-										toastr.error(str);
-										layer.close(index);
-									}
-								});
-							});
-						}
-					});
+
+							);
+							break;
+
+					}
 				});
-			</script>
-		
+
+				//监听行工具事件
+				table.on('tool(test)', function(obj) {
+					var data = obj.data;
+					var id = data.articleid;
+					//console.log(obj)
+					if (obj.event === 'del') {
+						layer.confirm('真的要删除“' + data.username + '”这个用户么？', function(index) {
+							$.ajax({
+								method: "post",
+								url: "/workblog/user/delete",
+								/* /workblog/article/delete */
+								data: {
+									"id": id,
+									"_method": "delete"
+								},
+								success: function(result) {
+									if (result.state !== 1) {
+										return;
+									}
+									var str = "id为" + id + "的文章，" + result.message + "\n";
+
+									layer.close(index);
+								},
+								error: function(result) {
+									var str = "id为" + id + "的文章，删除失败！\n";
+									toastr.error(str);
+									layer.close(index);
+								}
+							});
+						});
+					}
+				});
+			});
+		</script>
+
 		<script type="text/javascript">
 			var vm1 = new Vue({
 				el: '#wrapper',
 				data: {
 					role: true,
-					list1: {
-							},
-					formData: {
-					},
+					user: {},
+					list1: {},
+					formData: {},
 				},
 				created() {
 					// this.getRequest();
 					// this.getUserList();
 				},
 				methods: {
-					chooserole(){
+					chooserole() {
 						//判断用户的角色
 						this.$http.get('/workblog/user/getme').then(result => {
 							var result = result.body;
@@ -405,7 +481,7 @@
 							changeImgActive.addClass('active');
 							myInfo.removeClass('active');
 							changeImg.addClass('active');
-		
+
 						} else {
 							//显示基本资料
 							myInfoActive.addClass('active');
@@ -413,11 +489,11 @@
 							myInfo.addClass('active');
 							changeImg.removeClass('active');
 						}
-		
+
 					},
 					getUserList() { /*http://localhost:8080/WMPX/user/showIndustry*/
 						var t = this.getCookie("token");
-						this.$http.get('/wmpx/user/token/'+ t).then(result => {
+						this.$http.get('/wmpx/user/token/' + t).then(result => {
 							var result = result.body;
 							if (result.status === 200) {
 								this.list1 = result.data;
@@ -448,22 +524,22 @@
 							cookie_pos = cookie_pos + cookie_name.length + 1;
 							//计算取cookie值得结束索引
 							var cookie_end = allcookies.indexOf(";", cookie_pos);
-		
+
 							if (cookie_end == -1) {
 								cookie_end = allcookies.length;
-		
+
 							}
 							//得到想要的cookie的值
 							var value = unescape(allcookies.substring(cookie_pos, cookie_end));
 						}
 						// alert(value);
 						return value;
-		
+
 					},
 				}
 			});
 		</script>
-		
+
 	</body>
 
 </html>
