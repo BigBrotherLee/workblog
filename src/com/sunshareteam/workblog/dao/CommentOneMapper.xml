@@ -29,7 +29,7 @@
 	<select id="findByArticleAll" resultType="com.sunshareteam.workblog.web.CommentOneVO">
 		select u1.username,u1.pic,o.content,o.comment_one_id,a.title,u2.username author,o.createdate 
 			from tb_comment_one o,tb_user u1,tb_user u2,tb_article a 
-				u1.userid=o.createuser and a.articleid =o.articleid and u2.userid=a.author and o.articleid=#{articleid}
+				where u1.userid=o.createuser and a.articleid =o.articleid and u2.userid=a.author and o.articleid=#{articleid}
 	</select>	
 	<select id="findByUserAll" resultType="com.sunshareteam.workblog.entity.CommentOne">
 		select comment_one_id,author,content from tb_comment_one where createuser=#{userid}
