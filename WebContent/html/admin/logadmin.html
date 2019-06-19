@@ -217,7 +217,7 @@
 				var vm1 = new Vue({
 					el: '#wrapper',
 					data: {
-						role: true,
+						role: false,
 						user:{},
 						list1: {
 								},
@@ -225,24 +225,24 @@
 						},
 					},
 					created() {
-						// this.getRequest();
+						this.chooserole();
 						// this.getUserList();
 					},
 					methods: {
 						chooserole() {
-						//判断用户的角色
-						this.$http.get('/workblog/user/getme').then(result => {
-							var result = result.body;
-							if (result.state != null || result.state === 1) {
-								this.user = result.user;
-								for (let i of result.roles) {
-									if (i.roleid === 1) {
-										this.role = true;
+							//判断用户的角色
+							this.$http.get('/workblog/user/getme').then(result => {
+								var result = result.body;
+								if (typeof result.user != 'undefined') {
+									this.user = result.user;
+									for (let i of result.roles) {
+										if (i.roleid === 1) {
+											this.role = true;
+										}
 									}
 								}
-							}
-						});
-					},
+							});
+						},
 
 						getUserList() { /*http://localhost:8080/WMPX/user/showIndustry*/
 							var t = this.getCookie("token");

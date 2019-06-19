@@ -287,6 +287,7 @@
 													var str = "id为" + id + "的文章，" + result.message + "\n";
 
 													layer.close(index);
+													window.location.href=window.location.href;
 												},
 												error: function(result) {
 													var str = "id为" + id + "的文章，删除失败！\n";
@@ -322,8 +323,9 @@
 												return;
 											}
 											var str = "id为" + id + "的文章，" + result.message + "\n";
-
+											
 											layer.close(index);
+											window.location.href=window.location.href;
 										},
 										error: function(result) {
 											var str = "id为" + id + "的文章，删除失败！\n";
@@ -346,7 +348,7 @@
 			var vm1 = new Vue({
 				el: '#wrapper',
 				data: {
-					role: true,
+					role: false,
 					user: {},
 					list1: {},
 					formData: {},

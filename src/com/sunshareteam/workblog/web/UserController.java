@@ -539,9 +539,9 @@ public class UserController {
 	 * @param roleid 角色id
 	 * @return 添加成功则返回responseresult<String>，state：1，message：添加成功，data
 	 */
-	@RequiresRoles("admin")
+	@RequiresRoles("adminsu")
 	@PostMapping("/addusertorole")
-	public ResponseResult<String> addUserToRole(int userid,int roleid){
+	public ResponseResult<String> addUserToRole(Integer userid,Integer roleid){
 		ResponseResult<String> result=new ResponseResult<String>();
 		try {
 			userService.addRoleToUser(roleid, userid);

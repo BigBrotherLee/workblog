@@ -135,8 +135,7 @@
 			<div class="clearfix"></div>
 			<footer>
 				<div class="container-fluid">
-					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WOrkBlog <a href="http://www.cssmoban.com/"
-						 target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WorkBlog </p>
 
 				</div>
 			</footer>
@@ -346,13 +345,13 @@
 			var vm1 = new Vue({
 				el: '#wrapper',
 				data: {
-					role: true,
+					role: false,
 					user:{},
 					list1: {},
 					formData: {},
 				},
 				created() {
-					// this.getRequest();
+					this.chooserole();
 					// this.getUserList();
 				},
 				methods: {
@@ -360,15 +359,15 @@
 						//判断用户的角色
 						this.$http.get('/workblog/user/getme').then(result => {
 							var result = result.body;
-							if (result.state != null || result.state === 1) {
+							if (typeof result.user != 'undefined') {
 								this.user = result.user;
 								for (let i of result.roles) {
 									if (i.roleid === 1) {
+										alert("--------------------");
 										this.role = true;
 									}
 								}
 							}
-
 						});
 					},
 					

@@ -136,7 +136,7 @@
 							<!-- <img src="img/user.png" alt="" style="width: 20px;height: 20px;border-radius: 50%;"> -->
 
 						</div>
-						<div class="titlediv">
+						<div class="titlediv panel-group" id="accordion">
 
 							<div v-for="item in list1" :key="item.comment_one_id" class="panel panel-default comment">
 								<div class="panel-heading firstcommentdiv">
@@ -145,13 +145,12 @@
 											<img :src="item.pic" alt="">
 											<span>{{item.username}}</span>
 										</div>
-
 										<p>
 											{{item.content}}
 										</p>
 										<div class="btndiv" style="float: right;">
 											<button class="btn btn-danger lnr lnr-trash commentdelbtn" v-on:click="delone(item.comment_one_id)">&nbsp;删除</button><br>
-											<button class="btn btn-success lnr lnr-eye commentreadbtn"
+											<button v-on:click="getsecondList" class="btn btn-success lnr lnr-eye commentreadbtn"
 											 data-toggle="collapse" data-parent="#accordion" :href="'#'+item.comment_one_id" style="display: inline-block;">&nbsp;查看</button>
 										</div>
 									</h4>
@@ -202,7 +201,7 @@
 		<script src="js/klorofil-common.js"></script>
 		<script type="text/javascript" src="js/toastr.min.js"></script>
 		<script type="text/javascript">
-			$('.secondcommentdiv').on('show.bs.collapse', function() {
+			/* $('.secondcommentdiv').on('show.bs.collapse', function() {
 				// 执行一些动作...
 				alert("1234556757----------------------");
 				var el = event.target
@@ -223,7 +222,7 @@
 					},
 				});
 				
-			})
+			}) */
 		</script>
 		<script type="text/javascript">
 			var vm1 = new Vue({
@@ -268,6 +267,20 @@
 							}
 						});
 					},
+					getsecondList() {
+						var id=$(event.target).attr("href").split("#")[1];
+						if($(".secondcommentdiv").hasClass("collapse in")){
+							
+						}else{
+						this.$http.get('/workblog/commenttwo/getcommenttwobyoneall?oneid='+id).then(result => {
+							var result = result.body;
+							if (result.state === 1) {
+								this.list2 = result.data;
+							} else {
+								toastr.error("数据连接失败");
+							}
+						});}
+					},
 					getRequest() {
 						var url = location.search; //获取url中"?"符后的字串
 						var theRequest = new Object();
@@ -303,8 +316,8 @@
 
 		<script src="vendor/layui/layui.js"></script>
 		<script>
-			id = '';
-			window.onload = function() {
+			var id = window.vm1._data.id;
+			/* window.onload = function() {
 					var url = location.search; //获取url中"?"符后的字串
 					var theRequest = new Object();
 					if (url.indexOf("?") != -1) {
@@ -312,8 +325,10 @@
 						id = strs.split("=")[1];
 					}
 					return theRequest;
-				},
+				}, */
 
+				
+				
 				layui.use('laypage', function() {
 					var laypage = layui.laypage;
 

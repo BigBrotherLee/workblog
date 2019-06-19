@@ -52,27 +52,26 @@
 					</div>
 					<form class="navbar-form navbar-left">
 						<div class="input-group">
-							<input type="text" value="" class="form-control" placeholder="Search dashboard...">
+							<input type="text" value="" class="form-control" placeholder="输入关键字...">
 							<span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
 						</div>
 					</form>
 					<div id="navbar-menu">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">相关</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="../user/about.html">关于</a></li>
-											<li><a href="../user/friend.html">友链</a></li>
-										</ul>
-									</li>
-									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
-											<span class="spanclass">{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-										<ul class="dropdown-menu">
-											<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
-										</ul>
-
+									<li><a href="../user/friend.html">友链</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
+									<span class="spanclass">{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+								</ul>
 							</li>
 						</ul>
 					</div>
@@ -141,14 +140,12 @@
 			<div class="clearfix"></div>
 			<footer>
 				<div class="container-fluid">
-					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WOrkBlog <a href="http://www.cssmoban.com/"
-						 target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WOrkBlog </p>
 				</div>
 			</footer>
 		</div>
 		<!-- END WRAPPER -->
 		<!-- Javascript -->
-		<script src="vendor/jquery/jquery.min.js"></script>
 		<script src="../static/js/bootstrap.min.js"></script>
 		<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
@@ -164,7 +161,7 @@
 				<form class="layui-form addclassify" action="">
 							<label class="confirmpassword layui-form-label">标签名称</label>
 							<input type="text" name="tagtitle" lay-verify="required" lay-reqtext="标签名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
-							<button :onclick="adddtag()" class="btn btn-danger addtag" lay-submit="" lay-filter="demo1">新增标签</button>
+							<button onclick="window.vm1.adddtag()" class="btn btn-danger addtag" lay-submit="" lay-filter="demo1">新增标签</button>
 							<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
 				
 				
@@ -347,7 +344,7 @@
 			var vm1 = new Vue({
 				el: '#wrapper',
 				data: {
-					role: true,
+					role: false,
 					user: {},
 					list1: {},
 					formData: {},
@@ -361,7 +358,7 @@
 						//判断用户的角色
 						this.$http.get('/workblog/user/getme').then(result => {
 							var result = result.body;
-							if (result.state != null || result.state === 1) {
+							if (typeof result.user != 'undefined') {
 								this.user = result.user;
 								for (let i of result.roles) {
 									if (i.roleid === 1) {

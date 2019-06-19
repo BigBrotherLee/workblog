@@ -29,12 +29,12 @@
 			values(#{permissionname},#{permissiondetail},#{createdate},#{modifyuser},#{permissioncode},#{resource},#{menu})
 		</insert>
 	
-	<insert id="addRoleToUser">
+	<insert id="addRoleToUser" parameterType="com.sunshareteam.workblog.entity.UserRole">
 		insert into tb_user_role(userid,roleid)
 			values(#{userid},#{roleid}) 
 		</insert>
 	
-	<insert id="addPermissionToRole">
+	<insert id="addPermissionToRole" parameterType="com.sunshareteam.workblog.entity.RolePermission">
 		insert into tb_role_permission(roleid,permissionid)
 			values(#{roleid},#{permissionid})
 		</insert>

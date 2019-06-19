@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -70,7 +71,6 @@ public class CategotyController {
 		}
 		return result;
 	}
-	
 	/**
 	 * 添加分类
 	 * @param categoty 你要添加的分类信息
@@ -78,7 +78,7 @@ public class CategotyController {
 	 */
 	@RequiresPermissions("categoty:insert:*")
 	@PostMapping("/add")
-	public ResponseResult<Categoty> addCategoty(Categoty categoty){
+	public ResponseResult<Categoty> addCategoty(@RequestBody Categoty categoty){
 		ResponseResult<Categoty> result =new ResponseResult<Categoty>();
 		User user =(User) SecurityUtils.getSubject().getPrincipal();
 		categoty.setModifyuser(user.getUserid());
