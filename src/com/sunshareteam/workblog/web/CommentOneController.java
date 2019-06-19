@@ -25,7 +25,6 @@ import com.sunshareteam.workblog.service.CommentOneService;
 public class CommentOneController {
 	@Autowired
 	private CommentOneService commentoneService;
-	
 	/**
 	 * 查询一级评论
 	 * @param index 第几页
@@ -122,6 +121,7 @@ public class CommentOneController {
 	 * @param length 一页几条
 	 * @return 成功则返回ResponseResult<List<Categoty>> state：1，message：查询成功 ，data：所有一级评论的列表json
 	 */
+	@RequiresPermissions("commentone:select:*")
 	@GetMapping("/getall")
 	public ResponseResult<PageInfo<CommentOneVO>> getAll(int index,int length){
 		ResponseResult<PageInfo<CommentOneVO>> result=new ResponseResult<PageInfo<CommentOneVO>>();

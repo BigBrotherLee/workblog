@@ -1,12 +1,16 @@
 package com.sunshareteam.workblog.dao;
 
 import java.util.List;
+
+import com.sunshareteam.workblog.entity.CommentOne;
 import com.sunshareteam.workblog.entity.CommentTwo;
+import com.sunshareteam.workblog.entity.Commentnum;
 import com.sunshareteam.workblog.web.CommentTwoVO;
 
 public interface CommentTwoMapper {
-
-	   CommentTwo findById(Integer commenttwo); //根据ID查询
+	   CommentOne findArticleId(Integer oneid);
+	   Commentnum findArticle(Integer articleid);
+	   CommentTwo findById(Integer commenttwoid); //根据ID查询
 	   List<CommentTwoVO> findAll();
 	   List<CommentTwo> findByKey(String key);
 	   void insertCommentTwo(CommentTwo commenttwo);

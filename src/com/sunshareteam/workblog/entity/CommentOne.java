@@ -11,7 +11,6 @@ public class CommentOne {
     private Date modifydate;
     private Integer modifyuser;
     private Integer articleid;
-
 	public Integer getAuthor() {
 		return author;
 	}

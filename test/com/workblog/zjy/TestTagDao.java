@@ -9,15 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.sunshareteam.workblog.dao.ArticleMapper;
 import com.sunshareteam.workblog.dao.CategotyMapper;
 import com.sunshareteam.workblog.dao.CommentOneMapper;
 import com.sunshareteam.workblog.dao.CommentTwoMapper;
 import com.sunshareteam.workblog.dao.LinkMapper;
 import com.sunshareteam.workblog.dao.TagMapper;
+import com.sunshareteam.workblog.entity.Article;
 import com.sunshareteam.workblog.entity.ArticleTag;
 import com.sunshareteam.workblog.entity.Categoty;
 import com.sunshareteam.workblog.entity.CommentOne;
 import com.sunshareteam.workblog.entity.CommentTwo;
+import com.sunshareteam.workblog.entity.Commentnum;
+import com.sunshareteam.workblog.entity.CommentnumAll;
 import com.sunshareteam.workblog.entity.Link;
 import com.sunshareteam.workblog.entity.Tag;
 import com.sunshareteam.workblog.web.CommentOneVO;
@@ -36,12 +40,8 @@ public class TestTagDao {
 	private CommentTwoMapper commenttwoMapper;
 	@Autowired
 	private LinkMapper linkMapper;
-	  @Test
-		public void test2() {
-			List<TagVO> list=tagMapper.findAll();
-			System.out.println(list);  
-		} 
-	
+	@Autowired
+	private ArticleMapper articleMapper;
 //  测试标签
 	 /*  @Test
 	public void test1() {
@@ -95,8 +95,11 @@ public class TestTagDao {
 	List<Tag> list=tagMapper.findByArticle(1);
 	System.out.println(list);
 }*/
-	
-	
+	/*@Test
+	public void test1() {
+	Commentnum commentone=commentoneMapper.findCount(3);
+	System.out.println(commentone);  
+	}*/
 	//测试一级评论
 /*	 @Test
 	public void test1() {
@@ -149,7 +152,11 @@ public class TestTagDao {
 		System.out.println(list);
 	}
 	*/
-	
+	@Test
+	public void test1() {
+	CommentOne commenttwo=commenttwoMapper.findArticleId(5);
+	System.out.println(commenttwo);  
+	}
 	
 	//测试二级评论
 /*	@Test

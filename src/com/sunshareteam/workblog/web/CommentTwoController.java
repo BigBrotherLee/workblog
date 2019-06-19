@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.bigbrotherlee.utils.LeeConstant;
+import com.bigbrotherlee.utils.LeeException;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.CommentTwo;
@@ -97,6 +98,9 @@ public class CommentTwoController {
 	@RequiresPermissions("commenttwo:insert:*")
 	@PostMapping("/add")
 	public ResponseResult<CommentTwo> addCommentTwo(CommentTwo commenttwo){
+		if(!ObjectUtils.allNotNull(commenttwo.getOneid())) {
+			throw new LeeException("一级评论id为空");
+		}
 		ResponseResult<CommentTwo> result =new ResponseResult<CommentTwo>();
 		User user =(User) SecurityUtils.getSubject().getPrincipal();
 		commenttwo.setCreateuser(user.getUserid());
