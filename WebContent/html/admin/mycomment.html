@@ -150,8 +150,8 @@
 											{{item.content}}
 										</p>
 										<div class="btndiv" style="float: right;">
-											<button class="btn btn-danger lnr lnr-trash commentdelbtn" :onclick="delone(item.comment_one_id)">&nbsp;删除</button><br>
-											<button :onclick="getsecondList(item.comment_one_id)" class="btn btn-success lnr lnr-eye commentreadbtn"
+											<button class="btn btn-danger lnr lnr-trash commentdelbtn" v-on:click="delone(item.comment_one_id)">&nbsp;删除</button><br>
+											<button class="btn btn-success lnr lnr-eye commentreadbtn"
 											 data-toggle="collapse" data-parent="#accordion" :href="'#'+item.comment_one_id" style="display: inline-block;">&nbsp;查看</button>
 										</div>
 									</h4>
@@ -169,7 +169,7 @@
 														{{item.contenttwo}}
 													</p>
 													<div class="btndiv" style="float: right;">
-														<button class="btn btn-danger lnr lnr-trash commentdelbtn" :onclick="deltwo(item.comment_one_id)">&nbsp;删除</button><br>
+														<button class="btn btn-danger lnr lnr-trash commentdelbtn" v-on:click="deltwo(item.comment_one_id)">&nbsp;删除</button><br>
 														<!-- <a class="btn btn-success lnr lnr-eye commentreadbtn" data-toggle="collapse" data-parent="#accordion"
 														 href="#1" style="display: inline-block;">&nbsp;查看</a> -->
 													</div>
@@ -204,6 +204,7 @@
 		<script type="text/javascript">
 			$('.secondcommentdiv').on('show.bs.collapse', function() {
 				// 执行一些动作...
+				alert("1234556757----------------------");
 				var el = event.target
 				var id = el.getAttribute("href").split("#")[1];
 				$.ajax({
@@ -211,7 +212,8 @@
 					url:"/workblog/commenttwo/getcommenttwobyoneall?oneid="+id,
 					success:function(data){
 						if (data.state === 1) {
-							window.vm1.list2 = result.data;
+							window.vm1._data.list2 = result.data;
+							alert(window.vm1.data.list2)
 						} else {
 							toastr.error("数据连接失败");
 						}
@@ -243,7 +245,7 @@
 						//判断用户的角色
 						this.$http.get('/workblog/user/getme').then(result => {
 							var result = result.body;
-							if (result.state != null || result.state === 1) {
+							if(typeof result.user !=="undefined"){
 								this.user = result.user;
 								for (let i of result.roles) {
 									if (i.roleid === 1) {
@@ -251,15 +253,16 @@
 									}
 								}
 							}
+
 						});
 					},
 					getfirstList() {
-						this.$http.get('/workblog/commentone/getbyarticleall?index=1&length=10&articleid' + this.id).then(result => {
+						this.getRequest();
+						this.$http.get('/workblog/commentone/getbyarticleall?index=1&length=10&articleid=' + this.id).then(result => {
 							var result = result.body;
 							if (result.state === 1) {
-								this.list1 = result.data;
-								this.title = list1[0].title;
-								console.log(this.list1);
+								this.list1 = result.data.list;
+								this.title = this.list1[0].title;
 							} else {
 								toastr.error("数据连接失败");
 							}
@@ -275,7 +278,7 @@
 						return theRequest;
 					},
 					delone(id) {
-						this.$http.post('/workblog/commenttwo/getcommenttwobyoneall?_method=delete&id' + id).then(result => {
+						this.$http.post('/workblog/commenttwo/getcommenttwobyoneall?_method=delete&id=' + id).then(result => {
 							var result = result.body;
 							if (result.state === 1) {
 								toastr.success("删除成功");
@@ -331,7 +334,6 @@
 									"length": obj.limit
 								},
 								success: function(data) {
-									alert("jll");
 									console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
 									console.log(obj.limit); //得到每页显示的条数
 								},

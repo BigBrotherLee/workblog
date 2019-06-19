@@ -153,7 +153,7 @@
 				var table = layui.table;
 				table.render({
 					elem: '#test',
-					url: 'json/demo2.json',
+					url: '/workblog/article/getmyarticle',
 					// toolbar: '#toolbarDemo',
 					// defaultToolbar: [],
 					title: '评论数据表',
@@ -176,10 +176,6 @@
 					},
 					cols: [
 						[
-							/* {
-															type: 'checkbox',
-															fixed: 'left'
-														}, */
 							{
 								field: 'articleid',
 								title: 'ID',
@@ -237,7 +233,6 @@
 							layer.close(index);
 						});
 					} else if (obj.event === 'read') {
-						alert("read");
 						window.location.href = "mycomment.html?articleid=" + obj.data.articleid;
 					}
 				});
@@ -254,7 +249,7 @@
 			var vm1 = new Vue({
 				el: '#wrapper',
 				data: {
-					role: true,
+					role: false,
 					article: {},
 					user: {},
 				},
@@ -267,7 +262,7 @@
 						//判断用户的角色
 						this.$http.get('/workblog/user/getme').then(result => {
 							var result = result.body;
-							if (result.state != null || result.state === 1) {
+							if(typeof result.user !=="undefined"){
 								this.user = result.user;
 								for (let i of result.roles) {
 									if (i.roleid === 1) {
@@ -275,53 +270,8 @@
 									}
 								}
 							}
+
 						});
-					},
-
-					getUserList() { /*http://localhost:8080/WMPX/user/showIndustry*/
-						var t = this.getCookie("token");
-						this.$http.get('/wmpx/user/token/' + t).then(result => {
-							var result = result.body;
-							if (result.status === 200) {
-								this.list1 = result.data;
-								console.log(this.list1);
-							} else {
-								alert("数据连接失败");
-							}
-						});
-					},
-					getRequest() {
-						var url = location.search; //获取url中"?"符后的字串
-						var theRequest = new Object();
-						if (url.indexOf("?") != -1) {
-							var strs = url.substr(1);
-							this.id = strs.split("=")[1];
-						}
-						return theRequest;
-					},
-					getCookie(cookie_name) {
-						var allcookies = document.cookie;
-						//索引长度，开始索引的位置
-						var cookie_pos = allcookies.indexOf(cookie_name);
-						// alert(cookie_pos)
-						// 如果找到了索引，就代表cookie存在,否则不存在
-						if (cookie_pos != -1) {
-							// 把cookie_pos放在值的开始，只要给值加1即可
-							//计算取cookie值得开始索引，加的1为“=”
-							cookie_pos = cookie_pos + cookie_name.length + 1;
-							//计算取cookie值得结束索引
-							var cookie_end = allcookies.indexOf(";", cookie_pos);
-
-							if (cookie_end == -1) {
-								cookie_end = allcookies.length;
-
-							}
-							//得到想要的cookie的值
-							var value = unescape(allcookies.substring(cookie_pos, cookie_end));
-						}
-						// alert(value);
-						return value;
-
 					},
 				}
 			});

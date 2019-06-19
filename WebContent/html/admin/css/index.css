@@ -255,11 +255,13 @@ mycomment.html
 */
 .comment {
 	border: none;
+	    min-height: 100px;
 }
 
 .comment .firstcommentdiv {
 	border: none;
 	box-shadow: 0 6px 8px rgba(0, 0, 0, 0.14);
+	    min-height: 100px;
 	background: none;
 	/* height: 120px; */
 }

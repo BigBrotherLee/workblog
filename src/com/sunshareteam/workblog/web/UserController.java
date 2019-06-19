@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -395,9 +396,9 @@ public class UserController {
 	 * @param session
 	 * @return 更改成功则返回responseresult<User>，state：1，message：修改成功，data：更改后的用户信息json，失败抛出异常
 	 */
-	@RequiresRoles("user")
+	@RequiresPermissions("user:update")
 	@PutMapping("/update")
-	public ResponseResult<User> updateUser(User user,HttpSession session){
+	public ResponseResult<User> updateUser(@RequestBody User user,HttpSession session){
 		ResponseResult<User> result=new ResponseResult<User>();
 		User realUser=(User) SecurityUtils.getSubject().getPrincipal();
 		boolean hasPermission=realUser.getUserid().equals(user.getUserid()) || SecurityUtils.getSubject().hasRole("admin");
