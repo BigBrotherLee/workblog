@@ -140,10 +140,7 @@ public class TestService {
 	PageInfo<CommentOneVO> list=commentoneService.getByArticleAndUser(0, 1000);
 	System.out.println(list);  
 }*/
-	@Test
-	public void test4() {
-	commenttwoService.deleteCommentTwo(10);;
-	}	
+	
 	//测试二评
 	/*@Test
     public void test1() {
@@ -191,6 +188,10 @@ public class TestService {
 	PageInfo<CommentTwoVO> list=commenttwoService.getByCommentOneAndUser(0, 1000);
 	System.out.println(list);  
 }*/
+	@Test
+	public void test5() {
+	commenttwoService.deleteCommentTwo(3);
+    }
 	
 	//测试友链
 	/*@Test

@@ -3,6 +3,18 @@ package com.sunshareteam.workblog.web;
 import java.util.Date;
 
 public class CommentOneVO {
+	@Override
+	public String toString() {
+		return "CommentOneVO [comment_one_id=" + comment_one_id + ", pic=" + pic + ", author=" + author + ", title="
+				+ title + ", username=" + username + ", content=" + content + ", createdate=" + createdate
+				+ ", articleid=" + articleid + "]";
+	}
+	public Integer getArticleid() {
+		return articleid;
+	}
+	public void setArticleid(Integer articleid) {
+		this.articleid = articleid;
+	}
 	private Integer comment_one_id;
     private String pic;
 	private String author;
@@ -10,6 +22,7 @@ public class CommentOneVO {
     private String username;
 	private String content;
 	private Date createdate;
+	private Integer articleid;
 	public Integer getComment_one_id() {
 		return comment_one_id;
 	}
@@ -52,10 +65,4 @@ public class CommentOneVO {
 	public void setPic(String pic) {
 		this.pic = pic;
 	}	
-	@Override
-	public String toString() {
-		return "CommentOneVO [comment_one_id=" + comment_one_id + ", pic=" + pic + ", author=" + author + ", title="
-				+ title + ", username=" + username + ", content=" + content + ", createdate=" + createdate
-				+ "]";
-	}
 }

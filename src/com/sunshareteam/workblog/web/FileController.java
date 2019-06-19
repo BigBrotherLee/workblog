@@ -1,3 +1,4 @@
+
 package com.sunshareteam.workblog.web;
 
 import java.io.File;
@@ -60,6 +61,7 @@ public class FileController {
 	 * @param file 你要上传的文件
 	 * @return
 	 */
+
 	@RequiresPermissions("file:insert:*")
 	@PostMapping(value="/uploadBase64",produces="text/html; charset=UTF-8")
 	public ResponseResult<String> uploadBase64(String img){
