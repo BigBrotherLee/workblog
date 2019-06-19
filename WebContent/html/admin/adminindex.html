@@ -165,15 +165,12 @@
 			<script src="vendor/layui/layui.js" charset="utf-8"></script>
 			<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 					<script>
-				
-				
 				$(function() {
 							$.ajax({
 									method: "get",
 									url: "/workblog/user/getme",
 									success: function(data) {
 										if (data.state !== 1) {
-											alert(data.message);
 											return;
 										}
 										var user = data.data;
@@ -193,7 +190,7 @@
 						elem: '#test'
 							// method: 'post'
 							,
-						url: 'json/articlegethot19.json',
+						url: '/workblog/article/getpageall',
 						toolbar: '#toolbarDemo',
 						defaultToolbar: [],
 						title: '文章数据表',
@@ -274,7 +271,7 @@
 										var id = i.articleid;
 										$.ajax({
 											method: "post",
-											url: "json/delete.json",
+											url: "/workblog/article/delete",
 											/* /workblog/article/delete */
 											data: {
 												"id": id,
