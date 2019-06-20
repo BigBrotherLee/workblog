@@ -2,7 +2,7 @@
 <html lang="en">
 
 	<head>
-		<title>WokeBlog-我的评论</title>
+		<title>WorkBlog-我的评论</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -136,7 +136,7 @@
 							<!-- <img src="img/user.png" alt="" style="width: 20px;height: 20px;border-radius: 50%;"> -->
 
 						</div>
-						<div class="titlediv panel-group" id="accordion">
+						<div class="titlediv panel-group"  id="accordion">
 
 							<div v-for="item in list1" :key="item.comment_one_id" class="panel panel-default comment">
 								<div class="panel-heading firstcommentdiv">
@@ -150,12 +150,12 @@
 										</p>
 										<div class="btndiv" style="float: right;">
 											<button class="btn btn-danger lnr lnr-trash commentdelbtn" v-on:click="delone(item.comment_one_id)">&nbsp;删除</button><br>
-											<button v-on:click="getsecondList" class="btn btn-success lnr lnr-eye commentreadbtn"
+											<button class="btn btn-success lnr lnr-eye commentreadbtn"
 											 data-toggle="collapse" data-parent="#accordion" :href="'#'+item.comment_one_id" style="display: inline-block;">&nbsp;查看</button>
 										</div>
 									</h4>
 								</div>
-								<div :id="item.comment_one_id" class="panel-collapse collapse secondcommentdiv">
+								<div :id="item.comment_one_id" class="panel-collapse collapse secondcommentdiv" >
 									<div class="panel-body">
 										<div v-for="item in list2" :key="item.comment_two_id" class="panel panel-default secondcommentfirstdiv">
 											<div class="panel-heading secondfirstcommentdiv">
@@ -178,7 +178,7 @@
 									</div>
 								</div>
 							</div>
-							<div id="titlediv" style="padding: 0 100px;"></div>
+							<div id="titlediv" style="padding: 0 200px;"></div>
 						</div>
 					</div>
 				</div>
@@ -186,8 +186,7 @@
 			</div>
 			<footer>
 				<div class="container-fluid">
-					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WOrkBlog <a href="http://www.cssmoban.com/"
-						 target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WorkBlog </p>
 
 				</div>
 			</footer>
@@ -201,34 +200,11 @@
 		<script src="js/klorofil-common.js"></script>
 		<script type="text/javascript" src="js/toastr.min.js"></script>
 		<script type="text/javascript">
-			/* $('.secondcommentdiv').on('show.bs.collapse', function() {
-				// 执行一些动作...
-				alert("1234556757----------------------");
-				var el = event.target
-				var id = el.getAttribute("href").split("#")[1];
-				$.ajax({
-					method:"get",
-					url:"/workblog/commenttwo/getcommenttwobyoneall?oneid="+id,
-					success:function(data){
-						if (data.state === 1) {
-							window.vm1._data.list2 = result.data;
-							alert(window.vm1.data.list2)
-						} else {
-							toastr.error("数据连接失败");
-						}
-					},
-					error:function(data){
-						toastr.error(data.message);
-					},
-				});
-				
-			}) */
-		</script>
-		<script type="text/javascript">
 			var vm1 = new Vue({
 				el: '#wrapper',
 				data: {
 					id: '',
+					total:'',
 					title: '',
 					user: {},
 					role: false,
@@ -237,7 +213,10 @@
 				},
 				created() {
 					this.chooserole();
-					this.getfirstList();
+					this.getfirstList(); 
+				},
+				updated(){
+					$(".secondcommentdiv").off("show.bs.collapse").on("show.bs.collapse",window.vm1.getsecondList);
 				},
 				methods: {
 					chooserole() {
@@ -257,11 +236,13 @@
 					},
 					getfirstList() {
 						this.getRequest();
-						this.$http.get('/workblog/commentone/getbyarticleall?index=1&length=10&articleid=' + this.id).then(result => {
+						this.$http.get('/workblog/commentone/getbyarticleall?index=1&length=5&articleid=' + this.id).then(result => {
 							var result = result.body;
 							if (result.state === 1) {
 								this.list1 = result.data.list;
 								this.title = this.list1[0].title;
+								this.total = result.data.total;
+								slip();
 							} else {
 								toastr.error("数据连接失败");
 							}
@@ -269,17 +250,15 @@
 					},
 					getsecondList() {
 						var id=$(event.target).attr("href").split("#")[1];
-						if($(".secondcommentdiv").hasClass("collapse in")){
-							
-						}else{
 						this.$http.get('/workblog/commenttwo/getcommenttwobyoneall?oneid='+id).then(result => {
 							var result = result.body;
 							if (result.state === 1) {
 								this.list2 = result.data;
 							} else {
-								toastr.error("数据连接失败");
+								this.list2 = [];
+								toastr.error("该评论没有二级评论哦～");
 							}
-						});}
+						});
 					},
 					getRequest() {
 						var url = location.search; //获取url中"?"符后的字串
@@ -312,58 +291,43 @@
 					}
 				}
 			});
-		</script>
-
-		<script src="vendor/layui/layui.js"></script>
-		<script>
-			var id = window.vm1._data.id;
-			/* window.onload = function() {
-					var url = location.search; //获取url中"?"符后的字串
-					var theRequest = new Object();
-					if (url.indexOf("?") != -1) {
-						var strs = url.substr(1);
-						id = strs.split("=")[1];
-					}
-					return theRequest;
-				}, */
-
-				
-				
+			function slip(){
 				layui.use('laypage', function() {
 					var laypage = layui.laypage;
-
-					//执行一个laypage实例
 					laypage.render({
 						elem: 'titlediv' //注意，这里的 test1 是 ID，不用加 # 号
 							,
-						count: 1700 //数据总数，从服务端得到
+						count: window.vm1.total //数据总数，从服务端得到
 							,
+						limit:5,
 						jump: function(obj, first) {
+							if (first) {
+								return;
+							}
 							//obj包含了当前分页的所有参数，比如：
 							$.ajax({
 								method: "get",
 								url: "/workblog/commentone/getbyarticleall",
 								data: {
-									"articleid": id,
+									"articleid": window.vm1.id,
 									"index": obj.curr,
-									"length": obj.limit
+									"length": 5
 								},
 								success: function(data) {
 									console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
 									console.log(obj.limit); //得到每页显示的条数
+									window.vm1._data.list1=data.data.list;
 								},
 								error: function(data) {
 
 								}
 							});
-							//首次不执行
-							if (!first) {
-								//do something
-							}
+							
 						}
 					});
 
 				});
+			}
 		</script>
 	</body>
 

@@ -7,11 +7,15 @@ import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,15 +60,36 @@ public class FileController {
 		
 		return result;
 	}
+	@RequiresPermissions("file:insert:*")
+	@PostMapping(value="/imageUpload")
+	public ResultDemo  imageUpload(@RequestParam(value = "editormd-image-file")  MultipartFile file) {
+		ResultDemo result=new ResultDemo();
+		Calendar calendar= Calendar.getInstance();
+		String filename="/"+UUID.randomUUID().toString()+file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
+		String uri="/"+calendar.get(Calendar.YEAR)+"/"+(calendar.get(Calendar.MONTH)+1)+"/"+calendar.get(Calendar.DAY_OF_MONTH);
+		File savedir=new File(BASE_D,uri);
+		savedir.mkdirs();
+		File savefile=new File(savedir,filename);
+		try {
+			file.transferTo(savefile);
+			result.setUrl(BASE_URL+uri+filename);
+			result.setMessage("保存成功！");
+			result.setSuccess(LeeConstant.STATE_SUCCESS);
+		} catch (Exception e) {
+			result.setSuccess(LeeConstant.STATE_ERROR);
+			result.setMessage("保存出错");
+		}
+		
+		return result;
+	}
 	/**
 	 * base64图片上传
 	 * @param file 你要上传的文件
 	 * @return
 	 */
-
 	@RequiresPermissions("file:insert:*")
-	@PostMapping(value="/uploadBase64",produces="text/html; charset=UTF-8")
-	public ResponseResult<String> uploadBase64(String img){
+	@PostMapping(value="/uploadBase64")
+	public ResponseResult<String> uploadBase64(String img,HttpSession session){
 		ResponseResult<String> result=new ResponseResult<>();
 		String slip=img.substring(img.indexOf(",")+1, img.length());
 		byte [] b=Base64Utils.decodeFromString(slip);//base64图片转化

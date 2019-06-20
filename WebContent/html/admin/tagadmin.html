@@ -2,19 +2,16 @@
 <html lang="en">
 
 	<head>
-		<title>WokeBlog-标签管理</title>
+		<title>WorkBlog-标签管理</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<!-- VENDOR CSS -->
+		
 		<link rel="stylesheet" href="css/cropper.min.css">
 		<link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/sitelogo.css">
-		<script src="vendor/jquery/jquery.min.js"></script>
-		<script src="js/cropper.js"></script>
-		<script src="js/html2canvas.min.js"></script>
-		<script src="../static/js/bootstrap.min.js"></script>
-		<script src="js/sitelogo.js"></script>
+		
 		<link rel="stylesheet" type="text/css" href="vendor/layui/css/layui.css" />
 		<script type="text/javascript" src="vendor/layui/layui.js"></script>
 		<link rel="stylesheet" href="../static/css/bootstrap.min.css">
@@ -59,7 +56,7 @@
 					<div id="navbar-menu">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">相关</span>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">帮助</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="../user/about.html">关于</a></li>
@@ -104,7 +101,7 @@
 							<li v-show="role"><a href="firstcommentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>一级评论管理</span></a></li>
 							<li v-show="role"><a href="secondcommentadmin.html" class=""><i class="lnr lnr-keyboard"></i> <span>二级评论管理</span></a></li>
 							<li v-show="role"><a href="classifyadmin.html" class=""><i class="lnr lnr-dice"></i> <span>分类管理</span></a></li>
-							<li v-show="role"><a href="signadmin.html" class="active"><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
+							<li v-show="role"><a href="tagadmin.html" class="active"><i class="lnr lnr-tag"></i> <span>标签管理</span></a></li>
 							<li v-show="role"><a href="linkadmin.html" class=""><i class="lnr lnr-paperclip"></i> <span>友链管理</span></a></li>
 							<li v-show="role"><a href="readtime.html" class=""><i class="lnr lnr-layers"></i> <span>查看日志</span></a></li>
 
@@ -146,7 +143,13 @@
 		</div>
 		<!-- END WRAPPER -->
 		<!-- Javascript -->
+		
+		<script src="vendor/jquery/jquery.min.js"></script>
 		<script src="../static/js/bootstrap.min.js"></script>
+		<script src="js/cropper.js"></script>
+		<script src="js/html2canvas.min.js"></script>
+		<script src="../static/js/bootstrap.min.js"></script>
+		<script src="js/sitelogo.js"></script>
 		<script src="vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 		<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 		<script src="vendor/chartist/js/chartist.min.js"></script>
@@ -161,7 +164,7 @@
 				<form class="layui-form addclassify" action="">
 							<label class="confirmpassword layui-form-label">标签名称</label>
 							<input type="text" name="tagtitle" lay-verify="required" lay-reqtext="标签名是必填项，岂能为空？" placeholder="请输入" autocomplete="off" class="layui-input">
-							<button onclick="window.vm1.adddtag()" class="btn btn-danger addtag" lay-submit="" lay-filter="demo1">新增标签</button>
+							<button onclick="window.vm1.addtag()" class="btn btn-danger addtag" lay-submit="" lay-filter="demo1">新增标签</button>
 							<!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> -->
 				
 				
@@ -209,7 +212,7 @@
 		<script>
 			layui.use('table', function() {
 				var table = layui.table;
-				table.render({
+				tab=table.render({
 					elem: '#test'
 						// method: 'post'
 						,
@@ -249,12 +252,10 @@
 							title: '标签名称',
 							// width: 120,
 							sort: true,
-							edit: 'text'
 						}, {
 							field: 'username',
 							title: '标签创建人',
 							// width: 200,
-							edit: 'text'
 						}, {
 							fixed: 'right',
 							title: '操作',
@@ -274,7 +275,7 @@
 							var list = [];
 							layer.confirm('真的要删除这' + data.length + '个标签么？', function(index) {
 								for (let i of data) {
-									var id = i.articleid;
+									var id = i.tagid;
 									$.ajax({
 										method: "post",
 										url: "/workblog/tag/delete",
@@ -288,6 +289,7 @@
 												return;
 											}
 											var str = "id为" + id + "的标签，" + result.message + "\n";
+											tab.reload();
 											layer.close(index);
 										},
 										error: function(result) {
@@ -306,7 +308,7 @@
 				//监听行工具事件
 				table.on('tool(test)', function(obj) {
 					var data = obj.data;
-					var id = data.articleid;
+					var id = data.tagid;
 					//console.log(obj)
 					if (obj.event === 'del') {
 						layer.confirm('真的要删除“' + data.tagtitle + '”这个标签么？', function(index) {
@@ -323,7 +325,7 @@
 										return;
 									}
 									var str = "id为" + id + "的标签，" + result.message + "\n";
-
+									tab.reload();
 									layer.close(index);
 								},
 								error: function(result) {
@@ -370,12 +372,12 @@
 					},
 					addtag() {
 						var title = $("input[name='tagtitle']").val();
-						var pic = $('#icon').attr("src");
 						this.$http.post('/workblog/tag/add?tagtitle=' + title )
 							.then(result => {
 								var result = result.body;
 								if (result.state != null || result.state === 1) {
 									toastr.success("添加成功");
+									tab.reload();
 								} else {
 									toastr.error("添加失败");
 								}

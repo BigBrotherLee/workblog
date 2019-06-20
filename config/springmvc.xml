@@ -36,9 +36,7 @@
 	<!-- 多部件视图解析器 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize">
-			<value>5242800</value>
-		</property>
+		 <property name="maxUploadSize" value="5242880" />
 	</bean>
 	<mvc:annotation-driven />
 </beans>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sunshareteam.workblog.dao.ArticleMapper">
 	<select id="findById" resultType="com.sunshareteam.workblog.entity.Article">
-		select articleid,createdate,author,modifydate,img,content,commentnum,categoty,title,contentformat from tb_article where state=0 and articleid=#{id}
+		select * from tb_article where state=0 and articleid=#{id}
 	</select>
 	
 	<update id="updateArticle" parameterType="com.sunshareteam.workblog.entity.Article">
@@ -15,8 +15,8 @@
 				<if test="commentnum!=null">commentnum=#{commentnum},</if>
 				<if test="categoty!=null">categoty=#{categoty},</if>
 				<if test="title!=null">title=#{title},</if>
-				<if test="summary!=null">summary=#{summary}</if>
-				<if test="state!=null">state=#{state}</if>
+				<if test="summary!=null">summary=#{summary},</if>
+				<if test="state!=null">state=#{state},</if>
 				<if test="contentformat!=null">contentformat=#{contentformat}</if>
 			</set>
 			where articleid=#{articleid}
@@ -39,8 +39,8 @@
 	</delete>
 	
 	<insert id="insertArticle" parameterType="com.sunshareteam.workblog.entity.Article" useGeneratedKeys="true" keyProperty="articleid">
-			insert into tb_article(createdate,img,content,author,commentnum,categoty,title,summary,state)
-				values(#{createdate},#{img},#{content},#{author},#{commentnum},#{categoty},#{title},#{summary},0)
+			insert into tb_article(createdate,img,content,author,commentnum,categoty,title,summary,state,contentformat)
+				values(#{createdate},#{img},#{content},#{author},#{commentnum},#{categoty},#{title},#{summary},0,#{contentformat})
 	</insert>
 	
 	<select id="findByKey" resultType="com.sunshareteam.workblog.web.ArticleVO">
@@ -93,7 +93,7 @@
 		select tagid from tb_tag where tagtitle=#{name}
 	</select>
 	<insert id="insertTag" parameterType="com.sunshareteam.workblog.entity.Tag" useGeneratedKeys="true" keyProperty="tagid">
-		insert into tb_tag(createdate,tagtitle) values(#{createdate},#{tagtitle})
+		insert into tb_tag(createdate,tagtitle,createuser) values(#{createdate},#{tagtitle},#{createuser})
 	</insert>
 	
 </mapper>  

@@ -61,11 +61,11 @@
 	
 	
 	<select id="findUserByKey" resultType="com.sunshareteam.workblog.entity.User">
-		select userid,username,phone,email,pic,autograph,createdate from tb_user where username like #{username}
+		select userid,username,phone,email,pic,autograph,createdate,deleted from tb_user where username like #{username}
 	</select>
 	
 	<select id="findAdmin" resultType="com.sunshareteam.workblog.entity.User">
-		select u.userid,u.username,u.phone,u.email,u.pic,u.autograph,u.createdate from tb_user u,tb_user_role ur where u.userid=ur.userid and ur.roleid=1 and username like #{username}
+		select u.deleted,u.userid,u.username,u.phone,u.email,u.pic,u.autograph,u.createdate from tb_user u,tb_user_role ur where u.userid=ur.userid and ur.roleid=1 and username like #{username}
 	</select>
 	
 	<select id="findUserByName" resultType="com.sunshareteam.workblog.entity.User">

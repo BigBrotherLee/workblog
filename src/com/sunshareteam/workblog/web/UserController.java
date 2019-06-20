@@ -21,6 +21,7 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.util.ObjectUtils;
@@ -371,7 +372,6 @@ public class UserController {
 	 * @param id 用户id
 	 * @return 删除成功则返回responseresult<String>，state：1，message禁用成功，失败抛出异常
 	 */
-	@RequiresRoles("admin")
 	@RequiresPermissions("user:delete:*")
 	@DeleteMapping("/delete")
 	public ResponseResult<String> deleteUser(Integer id){
@@ -401,7 +401,7 @@ public class UserController {
 	public ResponseResult<User> updateUser(@RequestBody User user,HttpSession session){
 		ResponseResult<User> result=new ResponseResult<User>();
 		User realUser=(User) SecurityUtils.getSubject().getPrincipal();
-		boolean hasPermission=realUser.getUserid().equals(user.getUserid()) || SecurityUtils.getSubject().hasRole("admin");
+		boolean hasPermission=realUser.getUserid().equals(user.getUserid()) ||SecurityUtils.getSubject().hasRole("adminsu")|| SecurityUtils.getSubject().hasRole("admin");
 		if(hasPermission) {
 			user.setModifydate(new Date());
 			user.setModifyuser(realUser.getUserid());
@@ -448,7 +448,7 @@ public class UserController {
 	 * @param user
 	 * @return 添加成功则返回responseresult<User>，state：1，message：添加成功，data：添加的用户信息json，失败抛出异常
 	 */
-	@RequiresRoles("admin")
+	@RequiresPermissions("user:insert")
 	@PostMapping("/adduser")
 	public ResponseResult<User> addUser(User user ,HttpSession session){
 		ResponseResult<User> result=new ResponseResult<User>();

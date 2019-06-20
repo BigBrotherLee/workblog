@@ -274,6 +274,7 @@ mycomment.html
 
 .secondcommentdiv .secondcommentfirstdiv {
 	box-shadow: none;
+	    min-height: 100px;
 }
 
 .comment .firstcommentdiv .commentdelbtn {
@@ -325,7 +326,7 @@ mycomment.html
 }
 
 .firstcommentdiv .touxiang span {
-	margin-right: 20px;
+	margin-left: -14px;
 	display: block;
 }
 
@@ -350,7 +351,7 @@ mycomment.html
 }
 
 .secondcommentdiv .touxiang span {
-	margin-right: 20px;
+	margin-left: -14px;
 	display: block;
 }
 

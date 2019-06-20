@@ -1,12 +1,16 @@
 package com.sunshareteam.workblog.service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bigbrotherlee.utils.LeeException;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.dao.ArticleMapper;
@@ -111,12 +115,19 @@ public class ArticleServiceImpl implements ArticleService {
 	public void addTags(Integer articleid, String[] tags) {
 		ArticleTag articleTag=new ArticleTag();
 		articleTag.setArticleid(articleid);
+		Integer userid=null;
+		try {
+			userid=Integer.parseInt(BeanUtils.getProperty(SecurityUtils.getSubject().getPrincipal(), "userid"));
+		} catch (Exception e) {
+			throw new LeeException("请登录");
+		}
 		for(String tagname:tags) {
 			Tag tag=articleMapper.findTagByName(tagname);
 			if(tag==null) {
 				tag=new Tag();
 				tag.setCreatedate(new Date());
 				tag.setTagtitle(tagname);
+				tag.setCreateuser(userid);
 				articleMapper.insertTag(tag);
 			}
 			articleTag.setTagid(tag.getTagid());
@@ -131,6 +142,29 @@ public class ArticleServiceImpl implements ArticleService {
 		articleTag.setArticleid(articleid);
 		articleTag.setTagid(tagid);
 		articleMapper.deleteArtilceTag(articleTag);
+	}
+
+	@Override
+	public Tag addTag(Integer articleid, String tagname) {
+		ArticleTag articleTag=new ArticleTag();
+		articleTag.setArticleid(articleid);
+		Integer userid=null;
+		try {
+			userid=Integer.parseInt(BeanUtils.getProperty(SecurityUtils.getSubject().getPrincipal(), "userid"));
+		} catch (Exception e) {
+			throw new LeeException("请登录");
+		}
+		Tag tag=articleMapper.findTagByName(tagname);
+		if(tag==null) {
+			tag=new Tag();
+			tag.setCreatedate(new Date());
+			tag.setTagtitle(tagname);
+			tag.setCreateuser(userid);
+			articleMapper.insertTag(tag);
+		}
+		articleTag.setTagid(tag.getTagid());
+		articleMapper.insertArticleTag(articleTag);
+		return tag;
 	}
 	
 }

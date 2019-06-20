@@ -2,6 +2,7 @@ package com.sunshareteam.workblog.service;
 
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.Article;
+import com.sunshareteam.workblog.entity.Tag;
 import com.sunshareteam.workblog.web.ArticleVO;
 
 public interface ArticleService {
@@ -10,6 +11,7 @@ public interface ArticleService {
 	void delete(Integer id);
 	void insertArticle(Article article);
 	void addTags(Integer articleid,String[] tags);
+	Tag addTag(Integer articleid,String tag);
 	void removeTag(Integer articleid, Integer tagid);
 	PageInfo<ArticleVO> getByKey(String key,int start,int size);
 	PageInfo<ArticleVO> getHot(int start,int size);

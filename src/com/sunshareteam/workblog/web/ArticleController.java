@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ import com.bigbrotherlee.utils.LeeException;
 import com.bigbrotherlee.utils.ResponseResult;
 import com.github.pagehelper.PageInfo;
 import com.sunshareteam.workblog.entity.Article;
+import com.sunshareteam.workblog.entity.Tag;
 import com.sunshareteam.workblog.service.ArticleService;
 
 @RestController
@@ -338,6 +340,18 @@ public class ArticleController {
 		return result;
 	}
 	
+	@PostMapping("/addTagToArticle")
+	public ResponseResult<Tag> addTagToArticle(Integer articleid,String tag){
+		ResponseResult<Tag> result=new ResponseResult<Tag>();
+		if(StringUtils.isAnyBlank(tag)||StringUtils.isAnyEmpty(tag)) {
+			throw new LeeException("标签不能为不可见字符,也不能为空");
+		}
+		Tag t=articleService.addTag(articleid,tag);
+		result.setData(t);
+		result.setState(LeeConstant.STATE_SUCCESS);
+		result.setMessage("设置成功");
+		return result;
+	}
 	@DeleteMapping("/romovetag")
 	public ResponseResult<String> removeTag(Integer articleid,Integer tagid){
 		ResponseResult<String> result=new ResponseResult<String>();

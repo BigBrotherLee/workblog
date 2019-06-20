@@ -2,7 +2,7 @@
 <html lang="en">
 
 	<head>
-		<title>WokeBlog-用户管理</title>
+		<title>WorkBlog-用户管理</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -57,6 +57,8 @@
 								<ul class="dropdown-menu">
 									<li><a href="../user/about.html">关于</a></li>
 									<li><a href="../user/friend.html">友链</a></li>
+									<!-- <li><a href="#">Security</a></li>
+										<li><a href="#">Troubleshooting</a></li> -->
 								</ul>
 							</li>
 							<li class="dropdown">
@@ -150,7 +152,7 @@
 														</div>
 														<div class="layui-form-item">
 															<div class="adduserbtn">
-																<button class="btn btn-danger" lay-submit="" onclick="adduser()" lay-filter="demo1">立即提交</button>
+																<button class="btn btn-danger" lay-submit="" type="button" onclick="adduser()" lay-filter="demo1">立即提交</button>
 																<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 															</div>
 
@@ -183,8 +185,7 @@
 			<div class="clearfix"></div>
 			<footer>
 				<div class="container-fluid">
-					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WOrkBlog <a href="http://www.cssmoban.com/"
-						 target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WorkBlog </p>
 				</div>
 			</footer>
 		</div>
@@ -199,7 +200,7 @@
 		<script src="js/klorofil-common.js"></script>
 		<script type="text/html" id="toolbarDemo">
 			<div class="layui-btn-container-fluid">
-				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="del">&nbsp;删除</button>
+				<button class="btn btn-danger btn-sm lnr lnr-trash" lay-event="del">&nbsp;禁用</button>
 				<button class="btn btn-success btn-sm lnr lnr-file-add" data-toggle="modal" data-target="#myModal" style="float: right; margin-right: -110px;">&nbsp;新增</button>
 			</div>
 			
@@ -212,77 +213,94 @@
 		<script src="vendor/layui/layui.js" charset="utf-8"></script>
 		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 		<script>
-			function adduser() {
-				var username = $("input[name='username']").val();
-				var email = $("input[name='email']").val();
-				var password = $("input[name='password']").val();
-				var confirmpassword = $("input[name='confirmpassword']").val();
-				$.ajax({
-					method: "get",
-					url: "/workblog/user/checkname?name=" + username,
-					success: function(data) {
-						if (data.state !== 1) {
-							toastr.error("该用户名不可用");
-							return;
+		function adduser() {
+			var username = $("input[name='username']").val();
+			var email = $("input[name='email']").val();
+			var password = $("input[name='password']").val();
+			var confirmpassword = $("input[name='confirmpassword']").val();
+			$.ajax({
+				method: "get",
+				url: "/workblog/user/checkname?name=" + username,
+				success: function(data) {
+					if (data.state == 1) {
+						toastr.error("该用户名不可用");
+						return;
+					} else {
+						if (password != confirmpassword) {
+							toastr.error("两次密码不一致");
 						} else {
-							if (password != confirmpassword) {
-								toastr.error("两次密码不一致");
-							} else {
-								$.ajax({
-									method: "post",
-									url: "/workblog/user/adduser",
-									data: {
-										"username": username,
-										"password": password,
-										"email": email,
-										"phone": phone
-									},
-									success: function(data) {
-										if (data.state != 1) {
-											toastr.error(date.message);
-										} else {
-											toastr.success("添加成功");
-										}
-									},
-									error: function(data) {
-										toastr.error(data.message);
+							$.ajax({
+								method: "get",
+								url: "/workblog/user/checkemail?email="+email,
+								success: function(data){
+									if(data.state == 1){
+										toastr.error("该邮箱已注册");
+										return;
+									}else{
+										$.ajax({
+											method: "post",
+											url: "/workblog/user/adduser",
+											data: {
+												"username": username,
+												"password": password,
+												"email": email
+											},
+											success: function(data) {
+												if (data.state != 1) {
+													toastr.error(data.message);
+												} else {
+													toastr.success("添加成功");
+													tab.reload();
+												}
+											},
+											error: function(data) {
+												toastr.error(data.message);
+											}
+										});
 									}
-								});
-							}
+								}
+							});
+							
 						}
-
-					},
-					error: function(data) {
-						toastr.error("添加失败");
 					}
-				});
-			}
+		
+				},
+				error: function(data) {
+					toastr.error("添加失败");
+				}
+			});
+		}
 			layui.use('table', function() {
 				var table = layui.table;
 
 				//监听单元格编辑
 				table.on('edit(test)', function(obj) {
-					var value = obj.value //得到修改后的值
-						,
-						data = obj.data //得到所在行所有键值
-						,
-						field = obj.field; //得到字段
-
-					$.ajax({
-						method: "post",
-						url: "/workblog/user/update?_method=put&id=" + data.id + "&" + field + "=" + value,
-						success: function(data) {
-							if (data.state !== 1) {
-								toastr.error(data.message);
-								return;
+				var value = obj.value //得到修改后的值
+					,
+					data = obj.data //得到所在行所有键值
+					,
+					field = obj.field; //得到字段
+					var  objData={};
+					objData["userid"] = data.userid;
+					objData[field] = value;
+					 $.ajax({
+							method: "post",
+							url: "/workblog/user/update?_method=put",
+							contentType:"application/json;charset=UTF-8",
+							data:JSON.stringify(objData),
+							success: function(data1) {
+								if (data1.state !== 1) {
+									toastr.error(data1.message);
+									return;
+								}
+								layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
+							},
+							error: function(data) {
+								toastr.error("更改失败");
 							}
-							layer.msg('[ID: ' + data.id + '] ' + field + ' 字段更改为：' + value);
-						},
-						error: function(data) {
-							toastr.error("更改失败");
-						}
-					});
-				});
+						});
+				
+			});
 			});
 		</script>
 		<script>
@@ -330,10 +348,16 @@
 							sort: true,
 							// edit: 'text'
 						}, {
+							field: 'deleted',
+							title: '未禁用',
+							// width: 120,
+							sort: true,
+							// edit: 'text'
+						},{
 							field: 'email',
 							title: '邮箱',
 							// width: 200,
-							edit: 'text'
+
 						}, {
 							field: 'phone',
 							title: '手机号码',
@@ -363,9 +387,9 @@
 						case 'del':
 							var data = checkStatus.data;
 							var list = [];
-							layer.confirm('真的要删除这' + data.length + '个用户么？', function(index) {
+							layer.confirm('真的要禁用这' + data.length + '个用户么？', function(index) {
 									for (let i of data) {
-										var id = i.articleid;
+										var id = i.userid;
 										$.ajax({
 											method: "post",
 											url: "/workblog/user/delete",
@@ -382,12 +406,13 @@
 												if (result.state !== 1) {
 													return;
 												}
-												var str = "id为" + id + "的文章，" + result.message + "\n";
+												var str = "id为" + id + "的用户，" + result.message + "\n";
 
 												layer.close(index);
+												toastr.success(str);
 											},
 											error: function(result) {
-												var str = "id为" + id + "的文章，删除失败！\n";
+												var str = "id为" + id + "的用户，禁用失败！\n";
 												toastr.error(str);
 												layer.close(index);
 											}
@@ -404,10 +429,10 @@
 				//监听行工具事件
 				table.on('tool(test)', function(obj) {
 					var data = obj.data;
-					var id = data.articleid;
+					var id = data.userid;
 					//console.log(obj)
 					if (obj.event === 'del') {
-						layer.confirm('真的要删除“' + data.username + '”这个用户么？', function(index) {
+						layer.confirm('真的要禁用“' + data.username + '”这个用户么？', function(index) {
 							$.ajax({
 								method: "post",
 								url: "/workblog/user/delete",
@@ -424,12 +449,12 @@
 									if (result.state !== 1) {
 										return;
 									}
-									var str = "id为" + id + "的文章，" + result.message + "\n";
-
+									var str = "id为" + id + "的用户，" + result.message + "\n";
+									toastr.success(str);
 									layer.close(index);
 								},
 								error: function(result) {
-									var str = "id为" + id + "的文章，删除失败！\n";
+									var str = "id为" + id + "的用户，禁用失败！\n";
 									toastr.error(str);
 									layer.close(index);
 								}

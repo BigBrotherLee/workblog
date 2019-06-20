@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional
 	public void addUser(User user) {
+		user.setPic("/workblog/html/admin/img/user.png");
 		String salt=UUIDUtils.getUUIDNoConnect().substring(0, 6);
 		String pwd=new SimpleHash("MD5",user.getPassword(),ByteSource.Util.bytes(salt),2).toString();
 		user.setSalt(salt);

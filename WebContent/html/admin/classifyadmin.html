@@ -53,19 +53,21 @@
 					<div id="navbar-menu">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">帮助</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="../user/about.html">关于</a></li>
-											<li><a href="../user/friend.html">友链</a></li>
-										</ul>
-									</li>
-									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
-											<span class="spanclass">{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-										<ul class="dropdown-menu">
-											<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
-										</ul>
+									<li><a href="../user/friend.html">友链</a></li>
+									<!-- <li><a href="#">Security</a></li>
+										<li><a href="#">Troubleshooting</a></li> -->
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="img/user.png" class="img-circle" alt="Avatar">
+									<span class="spanclass">{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="/workblog/user/logout"><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+								</ul>
 							</li>
 						</ul>
 					</div>
@@ -291,7 +293,7 @@
 			});
 		</script>
 		<script id="imgtem" type="text/javascript">
-			<div class="layer-photos-demo" onclick="img_click()" style="cursor:pointer;">
+			<div class="layer-photos-demo"  style="cursor:pointer;">
 			    <img class="classifyimg" style="height:35px; width:100px; max-width: 300px;" layer-pid="{{d.img}}"  layer-src="{{d.img}}" src="{{d.img}}" alt="图片名">
 			</div>
 		</script>
@@ -300,7 +302,7 @@
 			
 			layui.use('table', function() {
 				var table = layui.table;
-				table.render({
+				tab = table.render({
 					elem: '#test'
 						// method: 'post'
 						,
@@ -527,6 +529,7 @@
 							var result = result.body;
 							if (result.state != null || result.state === 1) {
 								toastr.success("添加成功");
+								tab.reload();
 							}else{
 								toastr.error("添加失败");
 							}

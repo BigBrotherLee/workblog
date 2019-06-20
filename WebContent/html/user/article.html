@@ -148,8 +148,7 @@
 										</div>
 										<div class="article-mainbody">
 											<div class="article-mainbody-content">
-												<span class="article-1">
-													{{article.contentformat}}
+												<span v-html="article.contentformat" class="article-1">
 												</span>
 											</div>
 										</div>
@@ -166,7 +165,7 @@
 										</h3>
 										<div class="personmsg-image-wai">
 											<div class="personmsg-image">
-												<img :src="author.pic">
+												<img class="img-rounded" :src="author.pic">
 											</div>
 										</div>
 										<div class="geqian-wai">
@@ -208,11 +207,11 @@
 				</div>
 				<div class="comment-area">
 					<div class="content-box-wai container">
-						<div class="content-box">
+						<div class="content-box" >
 							<div class="content-box-li fr">
 								<div class="content-one-box row">
 									<a class="contcent-touxiang"> 
-										<img :src="user.img" class="img-circle">
+										<img :src="user.pic" class="img-circle">
 									</a>
 									<div class="content-neirong-box fr">
 										<div class="content-id-box">
@@ -220,22 +219,20 @@
 										</div>
 										<div class="content-two">
 											<form>
-												<textarea class="form-control no-border" rows="3"
+												<textarea class="form-control no-border" rows="3" id="myview"
 													placeholder="你的观点..." style="border-radius: 20px;"></textarea>
 											</form>
 											<div class="bg-light lter">
 												<button class="btn btn-info pull-right btn-sm">
-													<div style="font-size:20px;">提交</div>
+													<div v-on:click="addonecomment" style="font-size:20px;">提交</div>
 												</button>
 
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-								<div v-for="item in commentOne"  class="content-one-box row">
-									<a class="contcent-touxiang"> <img :src="item.pic" class="img-circle">
-									</a>
+								<div v-for="item in commentOne" class=" content-one-box row" id="accordion">
+									<a class="contcent-touxiang"> <img :src="item.pic" class="img-circle"></a>
 									<div class="content-neirong-box fr">
 										<div class="content-id-box">
 											<a  class="contend-id">{{item.username}}</a>
@@ -244,31 +241,26 @@
 											<div class="content-first">
 												<a>{{item.content}}</a>
 											</div>
-											<div class="panel-group" id="accordion">
+											<div class="panel-group">
 												<div class="panel panel-default">
 													<div class="panel-heading">
 														<h4 class="panel-title">
 															<a data-toggle="collapse" data-parent="#accordion"
-																href="#collapseOne"
+																:href="'#'+item.comment_one_id"
 																class="col-lg-offset-10 content-two-wenzi">
 																点击行展开其他评论 </a>
 														</h4>
 													</div>
-													<div id="collapseOne" class="panel-collapse collapse">
+													<div class="panel-collapse collapse secondcommentdiv" :id="'#'+item.comment_one_id">
+														
 														<div class="panel-body">
-															<div class="content-touxiang2 fl">
-																<img src="images/1.png" alt="">
-															</div>
-															<div class="lht6 text-left">
-																<a href="">李四：</a>二级评论二级评论二级评论二级评论二级评论二
-															</div>
-														</div>
-														<div class="panel-body">
-															<div class="content-touxiang2 fl">
-																<img src="images/1.png" alt="">
-															</div>
-															<div class="lht6 text-left">
-																<a href="">李四：</a>二级评论二级评论二级评论二级评论二级评论二
+															<div v-for="item in list2" :key="item.comment_two_id" class="panel panel-default">
+																<div class="content-touxiang2 fl">
+																	<img src="images/1.png" alt="">
+																</div>
+																<div class="lht6 text-left">
+																	<a href="">李四：</a>二级评论二级评论二级评论二级评论二级评论二
+																</div>
 															</div>
 														</div>
 													</div>
@@ -287,10 +279,14 @@
 										</div>
 									</div>
 								</div>
-
-							</div>
 						
-					</div>
+				
+							</div>
+									</div>
+					
+					
+									</div>
+					
 				</div>
 			</div>
 		</div>
@@ -344,6 +340,7 @@
 			data: {
 				role: '',
 				user:{},
+				list2:[],
 				categoty:{},
 				article:{},
 				author:{},
@@ -357,7 +354,32 @@
 				this.getCategoty();
 				this.getCommentOne(1,9);
 			},
+			updated(){
+				$(".secondcommentdiv").off("show.bs.collapse").on("show.bs.collapse",window.vm1.getCommentTwo);
+			},
 			methods: {
+				addonecomment(){
+					var content =  $("#myview").val();
+					this.$http.post("/workblog/commentone/add?articleid="+ this.article.articleid+"&content="+content).then(result => {
+					
+						var result = result.body;
+						if(typeof result.user !=="undefined"){
+							this.user = result.user;
+							this.role = true;	
+						}
+					});
+				},
+				addtwocomment(){
+					var content =  $("#myview").val();
+					this.$http.post("/workblog/commentone/add?id="+ this.article.articleid+"&content="+content).then(result => {
+					
+						var result = result.body;
+						if(typeof result.user !=="undefined"){
+							this.user = result.user;
+							this.role = true;	
+						}
+					});
+				},
 				search(){
 					var key=$.trim(document.getElementById("searchtext").value);
 					if(key=="" || key.length>10){
@@ -414,11 +436,16 @@
 						}
 					});
 				},
-				getCommentTwo(index,length,oneid){
-					this.$http.get('/workblog/commenttwo/getcommenttwobyoneall?oneid='+oneid).then(result => {
+				getCommentTwo(){
+					alert("-------------================");
+					var id=$(event.target).attr("href").split("#")[1];
+					this.$http.get('/workblog/commenttwo/getcommenttwobyoneall?oneid='+id).then(result => {
 						var result = result.body;
-						if(result.state===1){
-							console.log(result);
+						if (result.state === 1) {
+							this.list2 = result.data;
+						} else {
+							this.list2 = [];
+							toastr.error("该评论没有二级评论哦～");
 						}
 					});
 				},

@@ -50,11 +50,13 @@
 					<div id="navbar-menu">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">帮助</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="../user/about.html">关于</a></li>
 									<li><a href="../user/friend.html">友链</a></li>
+									<!-- <li><a href="#">Security</a></li>
+										<li><a href="#">Troubleshooting</a></li> -->
 								</ul>
 							</li>
 							<li class="dropdown">
@@ -308,7 +310,7 @@
 							layer.confirm('真的要删除“' + data.title + '”这篇文章么？', function(index) {
 								$.ajax({
 									method: "post",
-									url: "json/delete.json",
+									url: "/workblog/article/delete",
 									/* /workblog/article/delete */
 									data: {
 										"id": id,
@@ -319,8 +321,8 @@
 											return;
 										}
 										var str = "id为" + id + "的文章，" + result.message + "\n";
-								
 										layer.close(index);
+										location=location;
 									},
 									error: function(result) {
 										var str = "id为" + id + "的文章，删除失败！\n";
@@ -363,7 +365,6 @@
 								this.user = result.user;
 								for (let i of result.roles) {
 									if (i.roleid === 1) {
-										alert("--------------------");
 										this.role = true;
 									}
 								}

@@ -294,8 +294,10 @@
 <script type="text/javascript" src="js/cropper.js"></script>
 <script type="text/javascript" src="js/sitelogo-createarticle.js"></script>
 <script src="js/toastr.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- 获取文章详情 -->
 <!--分类-->
 <script>
+
 $(function () {
     $.ajax({
         method:"get",
@@ -317,22 +319,107 @@ $(function () {
             toastr.error("查询出错");
         }
     });
+    var reg = new RegExp("(^|&)id=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null){
+   	 id = unescape(r[2]); 
+  	 }else{
+  		return null;
+  	 }
+    	 
+    $.ajax({
+        method:"get",
+        url:"/workblog/tag/gettagbyarticle?articleid="+id,
+        success:function (data) {
+        	if(data.state===1){
+				var tag=data.data;
+				for(let i of tag){
+					$("#tags").append('<span class="layui-badge layui-bg-black" data-id="'+i.tagid+'">'+i.tagtitle+'</span>');
+				}
+        	}
+        },error:function (data){}
+    });
+   
+	    $.ajax({
+	        method:"get",
+	        url:"/workblog/article/get?id="+id,
+	        success:function (data) {
+	        	if(data.state===1){
+					var article=data.data;
+					article.createdate=new Date(data.data.createdate);
+					$("input[name='title']").val(article.title);
+					$("select[name='categoty'] option[value='"+article.categoty+"']").attr("selected",true);
+					$("input[name='summary']").val(article.summary);
+					$('#icon').attr('src', article.img);
+					
+					config.markdown=article.content;
+					testEditor = editormd("test-editormd", config);
+					
+					
+					
+					
+					layui.use(['form', 'layedit'], function(){
+				        var form = layui.form
+				            ,layer = layui.layer
+				            ,layedit = layui.layedit;
+						
+				        //自定义验证规则
+				        form.verify({
+				            title: function(value){
+				                if(value.length < 5){
+				                    return '标题至少得5个字符啊';
+				                }
+				            }
+				            ,content: function(value){
+				                layedit.sync(editIndex);
+				            }
+				        });
+				    });
+					
+				}
+	        },
+	        error:function (data) {
+	            toastr.error("查询出错");
+	        }
+	    });
+    
 });
 </script>
 <!--标签-->
 <script>
     $("#tags").click(function (e) {
         if($(e.target).hasClass("layui-badge")){
-            $(e.target).remove()
+            $(e.target).remove();
+            var tagid=$(e.target).attr("data-id");
+            var articleid=id;
+            $.ajax({
+            	method:"POST",
+            	url:"/worlblog/article/romovetag",
+            	data:{
+            		"_method":"delete",
+            		"articleid":artilceid,
+            		"tagid":tagid
+            	},
+            	success:function(data){
+            		console.log(data.message);
+            	}
+            });
         };
-    });
-    $("input[name='tags']").change(function () {
-        console.log("后台查询数据");
     });
     $("input[name='tags']").keypress(function (e) {
         if(e.which === 13){
-            $("#tags").append('<span class="layui-badge layui-bg-black">'+e.target.value+'</span>');
-            e.target.value=null;
+        	
+        	$.ajax({
+        		method:"post",
+                    url:"/workblog/article/addTagToArticle",
+                    data:{
+                    	articleid:id,
+                    	tag:e.target.value
+                  	},
+            	success:function(data){
+            		$("#tags").append('<span class="layui-badge layui-bg-black" data-id="'+data.data.tagid+'">'+e.target.value+'</span>');
+            	}	
+            });
         }
     });
 </script>
@@ -340,81 +427,59 @@ $(function () {
 <!--提交表单-->
 <script>
 $(".save-article").click(function () {
-	var formdata=new FormData();
     var img=$("#icon").attr("src");
 	if($.trim(img)==""){
 		toastr.error("请选择的文章的封面");
 		return;
 	}
-	formdata.append("img",img);
     var content=testEditor.getMarkdown();
     if($.trim(content)==""){
     	toastr.error("请书写你的文章");
     	return;
     }
-	formdata.append("content",content);
 	var contentformat=testEditor.getHTML() ||testEditor.getPreviewedHTML();
 	if($.trim(contentformat)==""){
 		toastr.error("请书写你的文章");
 		return;
 	}
-	formdata.append("contentformat",contentformat);
     var summary=$("input[name='summary']").val();
 	if($.trim(summary)==""){
 		toastr.error("请书写你文章的摘要");
 		return;
 	}
-	formdata.append("summary",summary);
 	var title=$("input[name='title']").val();
 	if($.trim(title)==""){
 		toastr.error("请填写你的文章标题");
 		return;
 	}
-	formdata.append("title",title);
 	var categoty=$("select[name='categoty']").val();
 	if(categoty==""||typeof categoty=="undefined"){
 		toastr.error("请选择文章分类");
 		return;
 	}
-	formdata.append("categoty",categoty);
     //校验
     $.ajax({
         method: "POST",
-        data:formdata,
-        processData : false,         // 告诉jQuery不要去处理发送的数据  
-        contentType:false,
-        url: "/workblog/article/add",
+        data:{
+        	"_method":"put",
+        	"articleid":id,
+        	"img":img,
+        	"content":content,
+        	"contentformat":contentformat,
+        	"summary":summary,
+        	"categoty":categoty,
+        	"title":title
+        },        
+        url: "/workblog/article/update",
         success:function (data) {
             if(data.state!==1){//保持失败
             	toastr.error(data.message);
                 return;
             }
             toastr.success(data.message);
-            var formdata=new FormData();
-            var tags=document.getElementsByClassName("layui-badge");
-        	if(tags.length>=1){
-        		for(let i of tags){
-        			if($.trim(i.innerHTML)!=""){
-        				formdata.append("tags",$.trim(i.innerHTML))
-        			}
-        		}
-        	}
-        	formdata.append("articleid",data.data.articleid);
-            $.ajax({
-                method:"post",
-                url:"/workblog/article/addtagstoarticle",
-                processData : false,         // 告诉jQuery不要去处理发送的数据  
-                contentType:false,
-                data:formdata,
-                success:function (data) {
-                	if(data.state===1){
-                		toastr.success("添加tag标签成功");
-                	}
-                }
-            });
         },
         error:function () {
-            
+        	toastr.error("更新失败");
         }
     });
 });
@@ -466,9 +531,7 @@ $(".save-article").click(function () {
         });
     });
     function convertBase64UrlToBlob(urlData){  
-
         var bytes=window.atob(urlData.split(',')[1]);        //去掉url的头，并转换为byte  
-
         //处理异常,将ascii码小于0的转换为大于0  
         var ab = new ArrayBuffer(bytes.length);  
         var ia = new Uint8Array(ab);  
@@ -482,72 +545,57 @@ $(".save-article").click(function () {
 
 <!--layui-->
 <script>
-    layui.use(['form', 'layedit'], function(){
-        var form = layui.form
-            ,layer = layui.layer
-            ,layedit = layui.layedit;
-
-        //自定义验证规则
-        form.verify({
-            title: function(value){
-                if(value.length < 5){
-                    return '标题至少得5个字符啊';
-                }
-            }
-            ,content: function(value){
-                layedit.sync(editIndex);
-            }
-        });
-    });
+    
 </script>
 <!--editor-->
 <script>
     
 </script>
 <script type="text/javascript">
+config={
+	    toolbarIcons: function() {
+	        // Or return editormd.toolbarModes[name]; // full, simple, mini
+	        // Using "||" set icons align right.
+	        return ["undo", "redo", "|", "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", "h1",
+	            "h2", "h3", "h4", "h5", "h6", "|", "list-ul", "list-ol", "hr", "|", "link", "reference-link", "image", "code",
+	            "preformatted-text", "code-block", "table", "datetime", "emoji", "html-entities", "pagebreak", "|",
+	            "goto-line", "watch", "preview", "fullscreen", "clear", "search", "|", "help", "info"
+	        ]
+	    },
+	    placeholder: '本编辑器支持Markdown编辑，左边编写，右边预览', //默认显示的文字，这里就不解释了
+	    width: "100%",
+	    height: 600,
+	    syncScrolling: "single",
+	    path: "vendor/editor/lib/", //你的path路径（原资源文件中lib包在我们项目中所放的位置）
+	    imageUpload: true, //图片上传功能
+	    imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+	    imageUploadURL: "/workblog/file/imageUpload",
+	    // theme: "dark", //工具栏主题
+	    // previewTheme: "dark", //预览主题
+	    // editorTheme: "pastel-on-dark", //编辑主题
+	    saveHTMLToTextarea: true,
+	    emoji: true,
+	    taskList: true,
+	    tocm: true, // Using [TOCM]
+	    tex: true, // 开启科学公式TeX语言支持，默认关闭
+	    flowChart: true, // 开启流程图支持，默认关闭
+	    sequenceDiagram: true, // 开启时序/序列图支持，默认关闭,
+	    //这个配置在simple.html中并没有，但是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单。
+	    saveHTMLToTextarea : true,
+	    toolbarIcons : function() {
+	        // Or return editormd.toolbarModes[name]; // full, simple, mini
+	        // Using "||" set icons align right.
+	        return ["undo","redo","bold","del","italic","quote","ucwords","uppercase","lowercase","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","hr","link","reference-link","image","code","preformatted-text","code-block","table","datetime","pagebreak","goto-line","watch","preview","clear","search"]
+	    },
+	};
 //得到全部分类
-testEditor = editormd("test-editormd", {
-    toolbarIcons: function() {
-        // Or return editormd.toolbarModes[name]; // full, simple, mini
-        // Using "||" set icons align right.
-        return ["undo", "redo", "|", "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|", "h1",
-            "h2", "h3", "h4", "h5", "h6", "|", "list-ul", "list-ol", "hr", "|", "link", "reference-link", "image", "code",
-            "preformatted-text", "code-block", "table", "datetime", "emoji", "html-entities", "pagebreak", "|",
-            "goto-line", "watch", "preview", "fullscreen", "clear", "search", "|", "help", "info"
-        ]
-    },
-    placeholder: '本编辑器支持Markdown编辑，左边编写，右边预览', //默认显示的文字，这里就不解释了
-    width: "100%",
-    height: 600,
-    syncScrolling: "single",
-    path: "vendor/editor/lib/", //你的path路径（原资源文件中lib包在我们项目中所放的位置）
-    imageUpload: true, //图片上传功能
-    imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-    imageUploadURL: "/workblog/file/imageUpload",
-    // theme: "dark", //工具栏主题
-    // previewTheme: "dark", //预览主题
-    // editorTheme: "pastel-on-dark", //编辑主题
-    saveHTMLToTextarea: true,
-    emoji: true,
-    taskList: true,
-    tocm: true, // Using [TOCM]
-    tex: true, // 开启科学公式TeX语言支持，默认关闭
-    flowChart: true, // 开启流程图支持，默认关闭
-    sequenceDiagram: true, // 开启时序/序列图支持，默认关闭,
-    //这个配置在simple.html中并没有，但是为了能够提交表单，使用这个配置可以让构造出来的HTML代码直接在第二个隐藏的textarea域中，方便post提交表单。
-    saveHTMLToTextarea : true,
-    toolbarIcons : function() {
-        // Or return editormd.toolbarModes[name]; // full, simple, mini
-        // Using "||" set icons align right.
-        return ["undo","redo","bold","del","italic","quote","ucwords","uppercase","lowercase","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","hr","link","reference-link","image","code","preformatted-text","code-block","table","datetime","pagebreak","goto-line","watch","preview","clear","search"]
-    },
-});
 			var vm1 = new Vue({
 				el: '#menu',
 				data: {
 					role: false,
 					user: {},
 					list1: {},
+					id:'',
 					formData: {},
 				},
 				created() {
@@ -583,16 +631,6 @@ testEditor = editormd("test-editormd", {
 				}
 			});
 		</script>
-
-
-
-
-
-		
-
-
-
-
 </body>
 
 </html>

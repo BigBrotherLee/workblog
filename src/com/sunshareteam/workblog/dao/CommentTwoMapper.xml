@@ -5,7 +5,7 @@
 		select commentnum,articleid from tb_article where articleid=#{articleid}
 	</select>
 	 <select id="findArticleId" resultType="com.sunshareteam.workblog.entity.CommentOne">
-		select o.articleid from tb_comment_one o,tb_comment_two t where o.comment_one_id=t.oneid and t.oneid=#{oneid}
+		select o.articleid from tb_comment_one o where comment_one_id=#{oneid}
 	</select>
 	<select id="findById" resultType="com.sunshareteam.workblog.entity.CommentTwo">
 		select comment_two_id,author,content,createuser,createdate,modifydate,modifyuser,oneid from tb_comment_two where comment_two_id=#{id}

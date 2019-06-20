@@ -51,13 +51,13 @@
 					<div id="navbar-menu">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">Help</span>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span class="spanclass">帮助</span>
 									<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 								<ul class="dropdown-menu">
 									<li><a href="../user/about.html">关于</a></li>
 									<li><a href="../user/friend.html">友链</a></li>
 									<!-- <li><a href="#">Security</a></li>
-												<li><a href="#">Troubleshooting</a></li> -->
+										<li><a href="#">Troubleshooting</a></li> -->
 								</ul>
 							</li>
 							<li class="dropdown">
@@ -138,8 +138,7 @@
 			<div class="clearfix"></div>
 			<footer>
 				<div class="container-fluid">
-					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WOrkBlog <a href="http://www.cssmoban.com/"
-						 target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+					<p class="copyright">Copyright &copy; 2019.5 软件工程1601班 第二小组 李园祥 周金勇 戴同吉 钟珊珊 刘华涛 王小杰 WorkBlog </p>
 
 				</div>
 			</footer>
@@ -267,6 +266,7 @@
 												// var str = "id为" + id + "的文章，" + result.message + "\n";
 
 												layer.close(index);
+												location=location;
 											},
 											error: function(result) {
 												var str = "id为" + id + "的评论，删除失败！\n";
@@ -286,7 +286,7 @@
 				//监听行工具事件
 				table.on('tool(test)', function(obj) {
 					var data = obj.data;
-					var id = obj.comment_one_id;
+					var id = data.comment_one_id;
 					if (obj.event === 'del') {
 						layer.confirm('真的删除id为' + id + '的评论么', function(index) {
 							$.ajax({
@@ -303,6 +303,7 @@
 									// var str = "id为" + id + "的一级评论，" + result.message + "\n";
 
 									layer.close(index);
+									location=location;
 								},
 								error: function(result) {
 									var str = "id为" + id + "的一级评论，删除失败！\n";
@@ -338,7 +339,7 @@
 					formData: {},
 				},
 				created() {
-					// this.getRequest();
+					this.chooserole();
 					// this.getUserList();
 				},
 				methods: {
@@ -346,7 +347,7 @@
 						//判断用户的角色
 						this.$http.get('/workblog/user/getme').then(result => {
 							var result = result.body;
-							if (result.state != null || result.state === 1) {
+							if (typeof result.user != 'undefined') {
 								this.user = result.user;
 								for (let i of result.roles) {
 									if (i.roleid === 1) {
@@ -354,7 +355,6 @@
 									}
 								}
 							}
-
 						});
 					},
 					changeActive(a) {
